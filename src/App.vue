@@ -1,32 +1,55 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <v-app class="custom-font" v-title data-title="Regaferi">
+    <Header/>
     <router-view/>
-  </div>
+    <Footer/>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  name: 'App',
+  components : {
+    Header,
+    Footer,
+  },
+  data: () => ({
+  }),
+  created() {
+    // 自适配夜间模式
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches){
+      this.$vuetify.theme.dark = true;
+    }else {
+      this.$vuetify.theme.dark = false;
     }
-  }
+  },
+}
+</script>
+
+<style lang="scss">
+@font-face {
+  font-family: 'webfont';
+  font-display: swap;
+  src: url('//at.alicdn.com/t/webfont_z2hp7dww0td.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/webfont_z2hp7dww0td.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/webfont_z2hp7dww0td.woff2') format('woff2'),
+  url('//at.alicdn.com/t/webfont_z2hp7dww0td.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/webfont_z2hp7dww0td.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/webfont_z2hp7dww0td.svg#Alibaba-PuHuiTi-Regular') format('svg'); /* iOS 4.1- */
+}
+.custom-font {
+  font-family:"webfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+#map {
+  height: 100%;
 }
 </style>
