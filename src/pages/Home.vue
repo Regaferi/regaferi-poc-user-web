@@ -34,27 +34,30 @@
     <!-- 引导菜单开始 -->
     <v-row style="width: 60%; margin: auto; left: 0; right: 0;">
       <v-col cols="4">
-        <v-card width="220px" height="80px">
-          <v-row style="width: 180px; margin: auto; left: 0; right: 0;">
-            <v-col cols="4" style="margin: auto; top: 15%"><v-icon size="35">mdi-dialpad</v-icon></v-col>
+        <v-card :width="category.cardWidth" :height="category.cardHeight">
+          <v-row :style="category.rowStyle" v-show="!isMobile">
+            <v-col cols="4" style="margin: auto; top: 15%"><v-icon :size="35">mdi-dialpad</v-icon></v-col>
             <v-col cols="8"><v-card-subtitle>餐厅分类</v-card-subtitle></v-col>
           </v-row>
+          <v-icon style="margin: auto; top: 20%; left: 20%" :size="30" v-show="isMobile">mdi-dialpad</v-icon>
         </v-card>
       </v-col>
       <v-col cols="4">
-        <v-card width="220px" height="80px">
-          <v-row style="width: 180px; margin: auto; left: 0; right: 0;">
-            <v-col cols="4" style="margin: auto; top: 15%"><v-icon size="35">mdi-dialpad</v-icon></v-col>
+        <v-card :width="category.cardWidth" :height="category.cardHeight">
+          <v-row :style="category.rowStyle" v-show="!isMobile">
+            <v-col cols="4" style="margin: auto; top: 15%"><v-icon :size="35">mdi-dialpad</v-icon></v-col>
             <v-col cols="8"><v-card-subtitle>餐厅分类</v-card-subtitle></v-col>
           </v-row>
+          <v-icon style="margin: auto; top: 20%; left: 20%" :size="30" v-show="isMobile">mdi-dialpad</v-icon>
         </v-card>
       </v-col>
       <v-col cols="4">
-        <v-card width="220px" height="80px">
-          <v-row style="width: 180px; margin: auto; left: 0; right: 0;">
-            <v-col cols="4" style="margin: auto; top: 15%"><v-icon size="35">mdi-dialpad</v-icon></v-col>
+        <v-card :width="category.cardWidth" :height="category.cardHeight">
+          <v-row :style="category.rowStyle" v-show="!isMobile">
+            <v-col cols="4" style="margin: auto; top: 15%"><v-icon :size="35">mdi-dialpad</v-icon></v-col>
             <v-col cols="8"><v-card-subtitle>餐厅分类</v-card-subtitle></v-col>
           </v-row>
+          <v-icon style="margin: auto; top: 20%; left: 20%" :size="30" v-show="isMobile">mdi-dialpad</v-icon>
         </v-card>
       </v-col>
     </v-row>
@@ -75,6 +78,12 @@ export default {
   name: "Home",
   data () {
     return {
+      isMobile : false,
+      category : {
+        cardWidth: '220px',
+        cardHeight: '80px',
+        rowStyle: '180px',
+      },
       colors: [
         'indigo',
         'warning',
@@ -95,9 +104,26 @@ export default {
     GoogleMap
   },
   created() {
+    this.onResize();
   },
-  mounted() {
+  mounted () {
+    this.onResize()
+    window.addEventListener('resize', this.onResize, { passive: true })
   },
+  methods : {
+    onResize () {
+      this.isMobile = window.innerWidth < 600
+      if (this.isMobile){
+        this.category.cardWidth = '50px'
+        this.category.cardHeight = '50px'
+        this.category.rowStyle =  'width: 80px; margin: auto; left: 0; right: 0;'
+      }else {
+        this.category.cardWidth = '220px'
+        this.category.cardHeight = '80px'
+        this.category.rowStyle =  'width: 180px; margin: auto; left: 0; right: 0;'
+      }
+    },
+  }
 
 }
 </script>
