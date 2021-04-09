@@ -6,18 +6,7 @@
     <!--  PC 模式  -->
     <v-container class="py-0 fill-height" v-show="!isMobile">
       <img class="pl-8 pr-12" style="height: 45px; height: 45px;" src="../assets/logo.png">
-
-<!--      <v-btn-->
-<!--          v-for="link in links"-->
-<!--          :key="link.id"-->
-<!--          text-->
-<!--          @click="navigateTo(link.name, isMobile)"-->
-<!--      >-->
-<!--        {{ link.title.pc }}-->
-<!--      </v-btn>-->
-
       <v-spacer></v-spacer>
-
       <div class="header-right">
         <div class="header-right-search">
           <v-responsive max-width="260">
@@ -30,27 +19,14 @@
           ></v-text-field>
         </v-responsive>
         </div>
-
         <div class="header-right-account"><Account/></div>
       </div>
-
-
-
     </v-container>
     <!--  Mobile 模式  -->
-    <v-container class="py-0 fill-height" v-show="isMobile">
+    <v-container class="text-center align-center" v-show="isMobile">
+      <v-icon style="position:fixed; margin:auto; left: 5%; top:28%;">mdi-magnify</v-icon>
       <img style="height: 30px; height: 30px;" src="../assets/logo.png">
-
-<!--      <div style="position: fixed; right: 8%">-->
-<!--        <v-btn-->
-<!--            class="brown&#45;&#45;text"-->
-<!--            v-for="link in links"-->
-<!--            :key="link.id"-->
-<!--            text-->
-<!--            @click="navigateTo(link.name, isMobile)"-->
-<!--        >-->
-<!--        </v-btn>-->
-<!--      </div>-->
+      <v-icon style="position:fixed; margin:auto; right: 5%; top:28%;">mdi-account</v-icon>
     </v-container>
   </v-app-bar>
 </template>
@@ -66,41 +42,6 @@ export default {
   },
   data: () => ({
     isMobile: Boolean,
-    links: [
-      {
-        id:1,
-        title : {
-          pc : 'PC分类',
-          mobile : 'MB分类'
-        },
-        router : {
-          name : '',
-          url : '/',
-        },
-      },
-      {
-        id:2,
-        title : {
-          pc : 'PC分类',
-          mobile : 'MB分类'
-        },
-        router : {
-          name : '',
-          url : '/',
-        },
-      },
-      {
-        id:3,
-        title : {
-          pc : 'PC分类',
-          mobile : 'MB分类'
-        },
-        router : {
-          name : '',
-          url : '/',
-        },
-      },
-    ],
   }),
   beforeDestroy () {
     if (typeof window === 'undefined') return
@@ -139,5 +80,10 @@ export default {
     position: relative;
     float: right;
     top: 10px;
+  }
+  .header-right-account-mob {
+    position: relative;
+    float: right;
+    top: 8%;
   }
 </style>
