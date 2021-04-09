@@ -62,31 +62,17 @@
     <!-- Store Locator -->
     <v-card class="text-center" style="text-align: center">
       <v-card-title>查找附近的餐厅</v-card-title>
-      <gmap-map :center="centers" :zoom="11" style="width: 100%; height: 500px">
-        <gmap-marker :position="position" :draggable="true"/>
-      </gmap-map>
+      <GoogleMap/>
     </v-card>
-
 
   </v-main>
 </template>
 
 <script>
 
-
+import GoogleMap from "@/components/GoogleMap";
 export default {
   name: "Home",
-  props: {
-    position: {
-      type: Object,
-      default: () => {
-        return {
-          lat: 43.648509660046656,
-          lng: -79.3789402652274
-        }
-      }
-    }
-  },
   data () {
     return {
       colors: [
@@ -103,24 +89,16 @@ export default {
         'Fourth',
         'Fifth',
       ],
-      place: null
     }
   },
   components : {
+    GoogleMap
   },
   created() {
   },
-  computed: {
-    centers() {
-      return {
-        lat: this.position.lat,
-        lng: this.position.lng
-      }
-    }
+  mounted() {
   },
-  methods : {
 
-  }
 }
 </script>
 
