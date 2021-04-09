@@ -1,8 +1,5 @@
 <template>
-  <v-app-bar
-      app
-      color="white"
-  >
+  <v-app-bar app>
     <!--  PC 模式  -->
     <v-container class="py-0 fill-height" v-show="!isMobile">
       <img class="pl-8 pr-12" style="height: 45px; height: 45px;" src="../assets/logo.png">
