@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Maintain from "@/components/Maintain";
 import Home from "@/pages/Home";
+import ProductList from "@/pages/ProductList";
+import ProductDetail from "@/pages/ProductDetail";
 
 Vue.use(VueRouter)
 
@@ -14,18 +15,23 @@ const routes = [
     props: route => ({ isMobile: route.query.isMobile })
   },
   {
-    path: '/explore',
-    name: 'explore',
-    component: Maintain,
+    path: '/list',
+    name: 'product-list',
+    component: ProductList,
     children : [],
-    props: route => ({ isMobile: route.query.isMobile })
+    props: route => ({
+      category: route.query.category,
+      property: route.query.property
+    })
   },
   {
-    path: '/about',
-    name: 'about',
-    component: Maintain,
+    path: '/detail',
+    name: 'product-detail',
+    component: ProductDetail,
     children : [],
-    props: route => ({ isMobile: route.query.isMobile })
+    props: route => ({
+      code: route.query.code
+    })
   },
 ]
 

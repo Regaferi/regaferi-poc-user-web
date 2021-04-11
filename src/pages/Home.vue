@@ -33,31 +33,17 @@
     <!-- CMS 轮播结束 -->
     <!-- 引导菜单开始 -->
     <v-row style="width: 60%; margin: auto; left: 0; right: 0;">
-      <v-col cols="4">
-        <v-card :width="category.cardWidth" :height="category.cardHeight">
-          <v-row :style="category.rowStyle" v-show="!isMobile">
-            <v-col cols="4" style="margin: auto; top: 15%"><v-icon :size="35">mdi-dialpad</v-icon></v-col>
-            <v-col cols="8"><v-card-subtitle>餐厅分类</v-card-subtitle></v-col>
+      <v-col cols="4"
+             v-for="(navigator, i) in navigators"
+             :key="i"
+             @click="navigateTo(navigator.navigator.name, navigator.navigator.category, navigator.navigator.property)"
+      >
+        <v-card :width="isMobile?'50px':'220px'" :height="isMobile?'50px':'80px'">
+          <v-row class="navigator-row" v-show="!isMobile">
+            <v-col cols="4" style="margin: auto; top: 15%"><v-icon :size="35">{{navigator.icon}}</v-icon></v-col>
+            <v-col cols="8"><v-card-subtitle>{{navigator.title}}</v-card-subtitle></v-col>
           </v-row>
-          <v-icon style="margin: auto; top: 20%; left: 20%" :size="30" v-show="isMobile">mdi-dialpad</v-icon>
-        </v-card>
-      </v-col>
-      <v-col cols="4">
-        <v-card :width="category.cardWidth" :height="category.cardHeight">
-          <v-row :style="category.rowStyle" v-show="!isMobile">
-            <v-col cols="4" style="margin: auto; top: 15%"><v-icon :size="35">mdi-dialpad</v-icon></v-col>
-            <v-col cols="8"><v-card-subtitle>餐厅分类</v-card-subtitle></v-col>
-          </v-row>
-          <v-icon style="margin: auto; top: 20%; left: 20%" :size="30" v-show="isMobile">mdi-dialpad</v-icon>
-        </v-card>
-      </v-col>
-      <v-col cols="4">
-        <v-card :width="category.cardWidth" :height="category.cardHeight">
-          <v-row :style="category.rowStyle" v-show="!isMobile">
-            <v-col cols="4" style="margin: auto; top: 15%"><v-icon :size="35">mdi-dialpad</v-icon></v-col>
-            <v-col cols="8"><v-card-subtitle>餐厅分类</v-card-subtitle></v-col>
-          </v-row>
-          <v-icon style="margin: auto; top: 20%; left: 20%" :size="30" v-show="isMobile">mdi-dialpad</v-icon>
+          <v-icon class="navigator-row-mb" :size="30" v-show="isMobile">{{navigator.icon}}</v-icon>
         </v-card>
       </v-col>
     </v-row>
@@ -78,12 +64,35 @@ export default {
   name: "Home",
   data () {
     return {
+      navigators : [
+        {
+          title : '推荐',
+          icon: 'mdi-dialpad',
+          navigator : {
+            name: 'product-list',
+            url: '/list',
+            category : 'recommend',
+            property : ''
+          }
+        },
+        {
+          title : '美食',
+          icon: 'mdi-dialpad',
+          navigator : {
+            name: 'product-list',
+            url: '/list'
+          }
+        },
+        {
+          title : '饮品',
+          icon: 'mdi-dialpad',
+          navigator : {
+            name: 'product-list',
+            url: '/list'
+          }
+        },
+      ],
       isMobile : false,
-      category : {
-        cardWidth: '220px',
-        cardHeight: '80px',
-        rowStyle: '180px',
-      },
       colors: [
         'indigo',
         'warning',
@@ -113,21 +122,25 @@ export default {
   methods : {
     onResize () {
       this.isMobile = window.innerWidth < 600
-      if (this.isMobile){
-        this.category.cardWidth = '50px'
-        this.category.cardHeight = '50px'
-        this.category.rowStyle =  'width: 80px; margin: auto; left: 0; right: 0;'
-      }else {
-        this.category.cardWidth = '220px'
-        this.category.cardHeight = '80px'
-        this.category.rowStyle =  'width: 180px; margin: auto; left: 0; right: 0;'
-      }
     },
+    navigateTo : function (name, category, property){
+      this.$router.push({name : name, params: {'category': category, 'property' : property}})
+    }
   }
 
 }
 </script>
 
 <style scoped>
-
+.navigator-row {
+  width:180px;
+  margin: auto;
+  left: 0;
+  right: 0;
+}
+.navigator-row-mb {
+  margin: auto;
+  top: 20%;
+  left: 20%
+}
 </style>

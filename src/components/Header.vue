@@ -2,7 +2,7 @@
   <v-app-bar app>
     <!--  PC 模式  -->
     <v-container class="py-0 fill-height" v-show="!isMobile">
-      <img class="pl-8 pr-12" style="height: 45px; height: 45px;" src="../assets/logo.png">
+      <h3 class="pl-8 pr-12" style="height: 45px; height: 45px;">Regaferi</h3>
       <v-spacer></v-spacer>
       <div class="header-right">
         <div class="header-right-search">
@@ -22,7 +22,7 @@
     <!--  Mobile 模式  -->
     <v-container class="text-center align-center" v-show="isMobile">
       <v-icon style="position:fixed; margin:auto; left: 5%; top:28%;">mdi-magnify</v-icon>
-      <img style="height: 30px; height: 30px;" src="../assets/logo.png">
+      <h3 style="height: 30px; height: 30px;">Regaferi</h3>
       <v-icon style="position:fixed; margin:auto; right: 5%; top:28%;">mdi-account</v-icon>
     </v-container>
   </v-app-bar>
