@@ -1,7 +1,18 @@
 export const i18n ={
     account : {
         basic : {
-            title : '基本信息'
+            title : 'Basic Info'
+        }
+    },
+    product: {
+        list: {
+            filter: {
+                options : {
+                    area : 'Area',
+                    type : 'Type',
+                    sort : 'Sort',
+                }
+            }
         }
     }
 };
