@@ -69,7 +69,7 @@
     </v-row>
     <!--  List Detail  -->
     <v-row class="pl-2 pr-2">
-      <v-col cols="6" v-for="(product, key) in products" :key="key">
+      <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product.code)">
           <v-card>
             <v-img height="180" :src="product.image"/>
             <v-card-title>{{ product.title }}</v-card-title>
@@ -78,7 +78,6 @@
                 <v-rating :value="product.rating" color="amber" dense half-increments readonly size="14"/>
               </v-row>
               <h6>{{ product.subTitle }}</h6>
-              <h6>{{ product.descriptions }}</h6>
             </v-card-text>
           </v-card>
       </v-col>
@@ -140,6 +139,7 @@ export default {
     products : [
       {
         title: '例示商品タイトル',
+        code: '1234',
         subTitle: '例示商品副題',
         description: '例示的な商品記述',
         rating: 4.5,
@@ -147,6 +147,7 @@ export default {
       },
       {
         title: '例示商品タイトル',
+        code: '1234',
         subTitle: '例示商品副題',
         description: '例示的な商品記述',
         rating: 4.5,
@@ -154,6 +155,7 @@ export default {
       },
       {
         title: '例示商品タイトル',
+        code: '1234',
         subTitle: '例示商品副題',
         description: '例示的な商品記述',
         rating: 4.5,
@@ -161,6 +163,7 @@ export default {
       },
       {
         title: '例示商品タイトル',
+        code: '1234',
         subTitle: '例示商品副題',
         description: '例示的な商品記述',
         rating: 4.5,
@@ -168,6 +171,7 @@ export default {
       },
       {
         title: '例示商品タイトル',
+        code: '1234',
         subTitle: '例示商品副題',
         description: '例示的な商品記述',
         rating: 4.5,
@@ -175,6 +179,7 @@ export default {
       },
       {
         title: '例示商品タイトル',
+        code: '1234',
         subTitle: '例示商品副題',
         description: '例示的な商品記述',
         rating: 4.5,
@@ -188,6 +193,9 @@ export default {
       this.loading = true
       setTimeout(() => (this.loading = false), 2000)
     },
+    navigateToPDP (itemCode) {
+      this.$router.push({name : 'product-detail', params: {'code': itemCode}})
+    }
   },
 }
 </script>
