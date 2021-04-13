@@ -1,10 +1,10 @@
 <template>
-
+  <v-main></v-main>
 </template>
 
 <script>
 export default {
-name: "MemberCenter"
+  name: "MemberCenter"
 }
 </script>
 

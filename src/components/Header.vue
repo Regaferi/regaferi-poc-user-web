@@ -60,7 +60,7 @@ export default {
       this.$router.push({name : name, params: {'isMobile': isMobile}})
     },
     backToHome : function (){
-      this.$router.push('/')
+      this.$router.push({name: 'home'})
     }
 
   }
