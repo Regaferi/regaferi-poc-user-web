@@ -4,7 +4,7 @@ import VueI18n from 'vue-i18n'
 Vue.use(VueI18n);
 
 const i18n = new VueI18n({
-    locale: 'zh-CN',
+    locale: 'japan',
     messages: {
         'zh-CN': require('./lang/i18n-zh'),
         'en-US': require('./lang/i18n-en'),
