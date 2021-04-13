@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from "@/pages/Home";
 import ProductList from "@/pages/ProductList";
 import ProductDetail from "@/pages/ProductDetail";
+import OrderConfirm from "@/pages/order/OrderConfirm";
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,15 @@ const routes = [
     path: '/detail',
     name: 'product-detail',
     component: ProductDetail,
+    children : [],
+    props: route => ({
+      code: route.query.code
+    })
+  },
+  {
+    path: '/order-confirm',
+    name: 'order-confirm',
+    component: OrderConfirm,
     children : [],
     props: route => ({
       code: route.query.code

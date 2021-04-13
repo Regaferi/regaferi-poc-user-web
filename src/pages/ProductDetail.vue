@@ -144,11 +144,11 @@
         <span>Service</span>
         <v-icon>mdi-face-agent</v-icon>
       </v-btn>
-      <v-btn>
-        <span>ShopCart</span>
-        <v-icon>mdi-cart</v-icon>
-      </v-btn>
-      <v-btn>
+      <v-divider
+          class="mx-4"
+          vertical
+      ></v-divider>
+      <v-btn @click="navigateTo(product.code)">
         <span>Buy Now</span>
         <v-icon>mdi-check-outline</v-icon>
       </v-btn>
@@ -185,6 +185,11 @@ export default {
       ],
     }
   },
+  methods : {
+    navigateTo : function (code){
+      this.$router.push({name : 'order-confirm', params: {'code': code}})
+    }
+  }
 }
 </script>
 
