@@ -79,89 +79,80 @@
       <v-avatar><v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"/></v-avatar>
       <!--   基本信息   -->
       <v-card-subtitle>
-        <h3>顾客昵称</h3>
+        <h3>顧客ニックネーム</h3>
         <p class="pt-2">28319SJX929318282ZA</p>
       </v-card-subtitle>
       <v-divider/>
       <v-card-text>
-        <h4 class="pb-3">我的卡券</h4>
+        <h4 class="pb-3">私のカード券</h4>
         <v-list height="450" class="overflow-y-auto">
           <v-card outlined>
             <v-list-item>
-              <v-list-item-title>会员卡 A</v-list-item-title>
+              <v-list-item-title>会員カード A</v-list-item-title>
               <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-              <v-list-item-subtitle>限定期限使用</v-list-item-subtitle>
+              <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
               <v-list-item-content>
-                使用详情
+                使用詳細
               </v-list-item-content>
             </v-list-item>
           </v-card>
           <div class="pt-2"/>
           <v-card outlined>
             <v-list-item>
-              <v-list-item-title>会员卡 A</v-list-item-title>
+              <v-list-item-title>会員カード A</v-list-item-title>
               <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-              <v-list-item-subtitle>限定期限使用</v-list-item-subtitle>
+              <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
               <v-list-item-content>
-                使用详情
+                使用詳細
               </v-list-item-content>
             </v-list-item>
           </v-card>
           <div class="pt-2"/>
           <v-card outlined>
             <v-list-item>
-              <v-list-item-title>会员卡 A</v-list-item-title>
+              <v-list-item-title>会員カード A</v-list-item-title>
               <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-              <v-list-item-subtitle>限定期限使用</v-list-item-subtitle>
+              <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
               <v-list-item-content>
-                使用详情
+                使用詳細
               </v-list-item-content>
             </v-list-item>
           </v-card>
           <div class="pt-2"/>
           <v-card outlined>
             <v-list-item>
-              <v-list-item-title>会员卡 A</v-list-item-title>
+              <v-list-item-title>会員カード A</v-list-item-title>
               <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-              <v-list-item-subtitle>限定期限使用</v-list-item-subtitle>
+              <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
               <v-list-item-content>
-                使用详情
+                使用詳細
               </v-list-item-content>
             </v-list-item>
           </v-card>
           <div class="pt-2"/>
           <v-card outlined>
             <v-list-item>
-              <v-list-item-title>会员卡 A</v-list-item-title>
+              <v-list-item-title>会員カード A</v-list-item-title>
               <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-              <v-list-item-subtitle>限定期限使用</v-list-item-subtitle>
+              <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
               <v-list-item-content>
-                使用详情
+                使用詳細
               </v-list-item-content>
             </v-list-item>
           </v-card>
           <div class="pt-2"/>
           <v-card outlined>
             <v-list-item>
-              <v-list-item-title>会员卡 A</v-list-item-title>
+              <v-list-item-title>会員カード A</v-list-item-title>
               <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-              <v-list-item-subtitle>限定期限使用</v-list-item-subtitle>
+              <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
               <v-list-item-content>
-                使用详情
+                使用詳細
               </v-list-item-content>
             </v-list-item>
           </v-card>
           <div class="pt-2"/>
-          <v-card outlined>
-            <v-list-item>
-              <v-list-item-title>会员卡 A</v-list-item-title>
-              <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-              <v-list-item-subtitle>限定期限使用</v-list-item-subtitle>
-              <v-list-item-content>
-                使用详情
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
+
 
         </v-list>
       </v-card-text>

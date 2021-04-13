@@ -95,7 +95,7 @@ export default {
     fields : {
       area : [
         {
-          key : '东京',
+          key : '東京',
           value : 1
         },
         {
@@ -103,35 +103,35 @@ export default {
           value : 2
         },
         {
-          key : '京西',
+          key : '京西.',
           value : 3
         },
       ],
       type : [
         {
-          key : '烤肉',
+          key : '焼肉を焼く',
           value : 1
         },
         {
-          key : '饮酒',
+          key : '飲み物.飲み物',
           value : 2
         },
         {
-          key : '咖啡',
+          key : 'コーヒー.コーヒー',
           value : 3
         },
       ],
       sort : [
         {
-          key : '按销量',
+          key : '売り上げごとに',
           value : 1
         },
         {
-          key : '按价格',
+          key : '値段によって.',
           value : 2
         },
         {
-          key : '按距离',
+          key : '距離を押す',
           value : 3
         },
       ]

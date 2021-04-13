@@ -19,7 +19,7 @@
           </v-btn>
         </template>
         <v-card v-show="!isLogin">
-          <v-card-title>个人中心</v-card-title>
+          <v-card-title>個人センター.</v-card-title>
           <v-card
               class="mx-auto"
               max-width="344"
@@ -28,10 +28,8 @@
           >
             <v-card-text>
               <p class="display-1 text--primary">
-                尚未登录
+                まだ登録されていない
               </p>
-              <p>辨识 ID：XJASUD23311</p>
-              <p class="text--primary">* 辨识 ID 仅用于在游客身份下匿名化处理数据</p>
             </v-card-text>
             <v-card-actions>
               <v-btn
@@ -40,7 +38,7 @@
                   outlined
                   @click="reveal = true"
               >
-                邮箱快捷登录
+                E Mail
               </v-btn>
               <v-btn
                   color="brown"
@@ -48,7 +46,7 @@
                   outlined
                   @click="reveal = true"
               >
-                LINE 登录
+                LINE
               </v-btn>
             </v-card-actions>
 
@@ -60,7 +58,7 @@
                   style="height: 100%;"
               >
                 <v-card-text class="pb-0">
-                  <p class="text--primary">快捷注册/登录
+                  <p class="text--primary">迅速な登録/登録
                     <v-btn
                         text
                         x-small
@@ -95,7 +93,7 @@
                       color="teal accent-4"
                       @click="login"
                   >
-                    注册/登录 |
+                    登録/登録 |
                     <v-icon small class="pl-1">mdi-check-underline</v-icon>
                   </v-btn>
                   <v-btn
@@ -104,7 +102,7 @@
                       color="orange accent-4"
                       @click="reveal = false"
                   >
-                    发送验证码 |
+                    検証コードを送る |
                     <v-icon small class="pl-1">mdi-send</v-icon>
                   </v-btn>
                 </v-card-actions>
@@ -131,14 +129,14 @@
             height="800px"
         >
           <v-card outlined height="100%" v-show="!isLogin">
-            <v-card-title>个人中心</v-card-title>
+            <v-card-title>個人センター.</v-card-title>
             <div class="pt-12">
               <v-card-text>
                 <p class="display-1 text--primary">
-                  尚未登录
+                  まだ登録されていない
                 </p>
-                <p>欢迎使用 Regaferi</p>
-                <p class="text--primary">注册会员即代表您同意本站相关服务协议</p>
+                <p>ようこそご利用ください Regaferi</p>
+                <p class="text--primary">会員登録は当ステーション関連サービス契約にご同意いただきます</p>
               </v-card-text>
               <v-card-actions style="display: block">
                 <v-btn
@@ -147,7 +145,7 @@
                     outlined
                     @click="reveal = true"
                 >
-                  邮箱快捷登录
+                  E-Mail
                 </v-btn>
                 <v-btn
                     color="brown"
@@ -156,7 +154,7 @@
                     @click="reveal = true"
                     class="text-center align-center"
                 >
-                  LINE 登录
+                  LINE
                 </v-btn>
               </v-card-actions>
               <v-expand-transition>
@@ -166,7 +164,7 @@
                     style="height: 100%;"
                 >
                   <v-card-text class="pb-0">
-                    <p class="text--primary">快捷注册/登录
+                    <p class="text--primary">迅速な登録/登録
                       <v-btn
                           text
                           x-small
@@ -189,7 +187,7 @@
                       <v-text-field
                           v-model="code"
                           :rules="codeRules"
-                          label="验证码"
+                          label="検証コード."
                           required
                       ></v-text-field>
                     </v-form>
@@ -201,7 +199,7 @@
                         color="teal accent-4"
                         @click="login"
                     >
-                      注册/登录 |
+                      登録/登録 |
                       <v-icon small class="pl-1">mdi-check-underline</v-icon>
                     </v-btn>
                     <v-btn
@@ -210,7 +208,7 @@
                         color="orange accent-4"
                         @click="reveal = false"
                     >
-                      发送验证码 |
+                      検証コードを送る |
                       <v-icon small class="pl-1">mdi-send</v-icon>
                     </v-btn>
                   </v-card-actions>

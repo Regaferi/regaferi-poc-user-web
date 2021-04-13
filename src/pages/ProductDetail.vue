@@ -44,7 +44,7 @@
         <h6>{{ product.subTitle }}</h6>
       </v-card-text>
       <v-divider/>
-      <v-card-subtitle>营业时间</v-card-subtitle>
+      <v-card-subtitle>営業時間.</v-card-subtitle>
       <v-chip-group column class="pl-5 pb-3">
         <v-chip x-small>5:30PM</v-chip>
         <v-chip x-small>7:30PM</v-chip>
@@ -53,16 +53,16 @@
       </v-chip-group>
       <v-divider/>
       <!--  售卖规格   -->
-      <v-card-subtitle>售卖规格</v-card-subtitle>
+      <v-card-subtitle>販売仕様.</v-card-subtitle>
       <v-card-text>
         <v-card outlined>
           <v-row>
             <v-col cols="8">
               <v-list-item two-line>
                 <v-list-item-content>
-                  <v-list-item-title>套餐 A</v-list-item-title>
+                  <v-list-item-title>セットメニュー. A</v-list-item-title>
                   <v-list-item-subtitle>
-                    包含 ABCDE
+                    ABCDE
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -78,9 +78,9 @@
             <v-col cols="8">
               <v-list-item two-line>
                 <v-list-item-content>
-                  <v-list-item-title>套餐 A</v-list-item-title>
+                  <v-list-item-title>セットメニュー. A</v-list-item-title>
                   <v-list-item-subtitle>
-                    包含 ABCDE
+                    ABCDE
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -94,13 +94,13 @@
 
       <v-divider/>
       <!--  商品评价   -->
-      <v-card-subtitle>商品评价</v-card-subtitle>
+      <v-card-subtitle>商品評価</v-card-subtitle>
       <v-list-item>
         <v-list-item-avatar>
           <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"/>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title>顾客 A</v-list-item-title>
+          <v-list-item-title>客.客 A</v-list-item-title>
           <v-list-item-subtitle>
             Good!
           </v-list-item-subtitle>
@@ -111,7 +111,7 @@
           <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"/>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title>顾客 A</v-list-item-title>
+          <v-list-item-title>客.客 A</v-list-item-title>
           <v-list-item-subtitle>
             Good!
           </v-list-item-subtitle>
@@ -122,13 +122,13 @@
           <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"/>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title>顾客 A</v-list-item-title>
+          <v-list-item-title>客.客 A</v-list-item-title>
           <v-list-item-subtitle>
             Good!
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
-      <v-card-text style="color: blue">查看更多</v-card-text>
+      <v-card-text style="color: blue">もっと見る</v-card-text>
       <v-divider/>
       <!--  商品描述   -->
       <v-card-text>

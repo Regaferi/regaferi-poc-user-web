@@ -50,7 +50,7 @@
     <!-- 引导菜单结束 -->
     <!-- Store Locator -->
     <v-card class="text-center" style="text-align: center">
-      <v-card-title>查找附近的餐厅</v-card-title>
+      <v-card-title>近くのレストランを探す</v-card-title>
       <GoogleMap/>
     </v-card>
 
@@ -64,34 +64,6 @@ export default {
   name: "Home",
   data () {
     return {
-      navigators : [
-        {
-          title : '推荐',
-          icon: 'mdi-dialpad',
-          navigator : {
-            name: 'product-list',
-            url: '/list',
-            category : 'recommend',
-            property : ''
-          }
-        },
-        {
-          title : '美食',
-          icon: 'mdi-dialpad',
-          navigator : {
-            name: 'product-list',
-            url: '/list'
-          }
-        },
-        {
-          title : '饮品',
-          icon: 'mdi-dialpad',
-          navigator : {
-            name: 'product-list',
-            url: '/list'
-          }
-        },
-      ],
       isMobile : false,
       colors: [
         'indigo',
