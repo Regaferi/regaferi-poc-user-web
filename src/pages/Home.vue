@@ -64,6 +64,34 @@ export default {
   name: "Home",
   data () {
     return {
+      navigators : [
+        {
+          title : '推荐',
+          icon: 'mdi-dialpad',
+          navigator : {
+            name: 'product-list',
+            url: '/list',
+            category : 'recommend',
+            property : ''
+          }
+        },
+        {
+          title : '美食',
+          icon: 'mdi-dialpad',
+          navigator : {
+            name: 'product-list',
+            url: '/list'
+          }
+        },
+        {
+          title : '饮品',
+          icon: 'mdi-dialpad',
+          navigator : {
+            name: 'product-list',
+            url: '/list'
+          }
+        },
+      ],
       isMobile : false,
       colors: [
         'indigo',
