@@ -29,8 +29,8 @@ export default {
     onResize () {
       this.isMobile = window.innerWidth < 600
     },
-    navigateTo : function (name, isMobile){
-      this.$router.push({name : name, params: {'isMobile': isMobile}})
+    navigateTo : function (name){
+      this.$router.push({name : name})
     },
   }
 }

@@ -20,6 +20,9 @@ export default {
   },
   data: () => ({
   }),
+  beforeCreate() {
+    this.$store.commit('isMobile')
+  },
   created() {
     // 自适配夜间模式
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches){
@@ -28,6 +31,15 @@ export default {
       this.$vuetify.theme.dark = false;
     }
   },
+  mounted () {
+    window.addEventListener('resize', this.onResize, { passive: true })
+  },
+  methods : {
+    onResize () {
+      // vuex 持久化存储客户端类型
+      this.$store.commit('isMobile')
+    },
+  }
 }
 </script>
 

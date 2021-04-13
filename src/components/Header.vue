@@ -23,7 +23,7 @@
     <v-container class="text-center align-center" v-show="isMobile">
       <v-icon style="position:fixed; margin:auto; left: 5%; top:28%;">mdi-magnify</v-icon>
       <h3 style="height: 30px; height: 30px;" @click="backToHome()">Regaferi</h3>
-      <v-icon style="position:fixed; margin:auto; right: 5%; top:28%;">mdi-account</v-icon>
+      <Account/>
     </v-container>
   </v-app-bar>
 </template>
@@ -38,26 +38,16 @@ export default {
     Account,
   },
   data: () => ({
-    isMobile: Boolean,
+    isMobile: false,
   }),
-  beforeDestroy () {
-    if (typeof window === 'undefined') return
-    window.removeEventListener('resize', this.onResize, { passive: true })
-  },
   created() {
-    this.$data.isMobile = this.$route.params.isMobile
-    this.onResize();
   },
   mounted () {
-    this.onResize()
-    window.addEventListener('resize', this.onResize, { passive: true })
+    this.isMobile = this.$store.state.isMobile
   },
   methods : {
-    onResize () {
-      this.isMobile = window.innerWidth < 600
-    },
-    navigateTo : function (name, isMobile){
-      this.$router.push({name : name, params: {'isMobile': isMobile}})
+    navigateTo : function (name){
+      this.$router.push({name : name})
     },
     backToHome : function (){
       this.$router.push({name: 'home'})

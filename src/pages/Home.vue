@@ -113,16 +113,12 @@ export default {
     GoogleMap
   },
   created() {
-    this.onResize();
+
   },
   mounted () {
-    this.onResize()
-    window.addEventListener('resize', this.onResize, { passive: true })
+    this.isMobile = this.$store.state.isMobile
   },
   methods : {
-    onResize () {
-      this.isMobile = window.innerWidth < 600
-    },
     navigateTo : function (name, category, property){
       this.$router.push({name : name, params: {'category': category, 'property' : property}})
     }

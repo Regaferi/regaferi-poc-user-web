@@ -8,8 +8,12 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     googleMapLoader : new Loader('AIzaSyB9E3oa8d364apiXxwe3vYa7kfaIq1ww1A', {}),
+    isMobile: false,
   },
   mutations: {
+    isMobile(state){
+      state.isMobile = window.innerWidth < 600;
+    }
   },
   actions: {
   },
