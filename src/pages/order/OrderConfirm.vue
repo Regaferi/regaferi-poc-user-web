@@ -90,7 +90,7 @@
             class="mx-4"
             vertical
         ></v-divider>
-        <v-btn>
+        <v-btn class="custom-button">
           <v-icon style="padding-left: 12px">mdi-arrow-right</v-icon>
           <span>Pay Now</span>
         </v-btn>
@@ -100,10 +100,12 @@
 </template>
 
 <script>
+
 export default {
   name: "OrderConfirm",
   data () {
     return {
+      payToken :null,
       form : {
         creditVerify : null,
         creditNum : null
@@ -128,6 +130,8 @@ export default {
         }
       ]
     }
+  },
+  methods : {
   }
 }
 </script>

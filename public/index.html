@@ -8,6 +8,8 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+    <script src="https://multipay.komoju.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
   </head>
   <body>
     <noscript>
@@ -17,3 +19,24 @@
     <!-- built files will be auto injected -->
   </body>
 </html>
+
+<script>
+    var handler = Komoju.multipay.configure({
+        key: "pk_9e17c1ee95a8ca65eafbca819189907a6d0ebd0c",
+        token: function(token) {
+            $(".token").text("token: " + token.id)
+        }
+    });
+    let productName = $(".product-name").val();
+    let orderAmount =  parseInt($(".order-amount").val());
+    $(".custom-button").on("click", function(e) {
+        handler.open({
+            amount:       orderAmount,
+            title:        productName,
+            description:  "Regaferi Store",
+            methods:      ["credit_card", "konbini", "bank_transfer", "pay_easy", "web_money", "bit_cash", "net_cash"]
+        });
+        e.preventDefault();
+    });
+
+</script>

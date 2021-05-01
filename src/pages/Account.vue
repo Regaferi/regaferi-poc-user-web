@@ -4,50 +4,23 @@
     <v-row v-show="!isMobile">
       <v-dialog v-model="dialog" max-width="45%">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn
-              class="mx-2"
-              small
-              fab
-              outlined
-              color="primary"
-              v-bind="attrs"
-              v-on="on"
-          >
+          <v-btn class="mx-2" small fab outlined color="primary" v-bind="attrs" v-on="on">
             <v-icon>
               mdi-account
             </v-icon>
           </v-btn>
         </template>
         <v-card v-show="!isLogin">
-          <v-card-title>個人センター.</v-card-title>
-          <v-card
-              class="mx-auto"
-              max-width="344"
-              height="350"
-              flat
-          >
+          <v-card-title>{{ $t('i18n.member.basic.title') }}</v-card-title>
+          <v-card class="mx-auto" max-width="344" height="350" flat>
             <v-card-text>
               <p class="display-1 text--primary">
                 まだ登録されていない
               </p>
             </v-card-text>
             <v-card-actions>
-              <v-btn
-                  color="red"
-                  small
-                  outlined
-                  @click="reveal = true"
-              >
-                E Mail
-              </v-btn>
-              <v-btn
-                  color="brown"
-                  small
-                  outlined
-                  @click="reveal = true"
-              >
-                LINE
-              </v-btn>
+              <v-btn color="red" small outlined @click="reveal = true">E Mail</v-btn>
+              <v-btn color="brown" small outlined @click="reveal = true">LINE</v-btn>
             </v-card-actions>
 
             <v-expand-transition>
@@ -206,7 +179,7 @@
                         outlined
                         small
                         color="orange accent-4"
-                        @click="reveal = false"
+                        @click="sendVerifyCode"
                     >
                       検証コードを送る |
                       <v-icon small class="pl-1">mdi-send</v-icon>
@@ -226,6 +199,8 @@
 <script>
 
 import MemberCenter from "@/pages/MemberCenter";
+import axios from "axios";
+
 export default {
 
   name: "Account",
@@ -256,9 +231,40 @@ export default {
   },
   methods: {
     login (){
-      this.reveal = false;
-      this.isLogin = true;
-      this.$store.commit('isLogin', true);
+      axios.post('http://frontend-api.regaferi.jp/member/login', {
+        "source": 200,
+        "email": this.account,
+        "verifyCode": this.code
+      })
+      .then(function (response) {
+        if (response.data.isSuccess){
+          this.reveal = false;
+          this.isLogin = true;
+          this.$store.commit('isLogin', true);
+        }else{
+          alert(response.data.message)
+        }
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    },
+    sendVerifyCode (){
+      axios.post('http://frontend-api.regaferi.jp/member/verify', {
+        'email' : this.account,
+        'mobile' : null
+      })
+      .then(function (response) {
+        if (response.data.isSuccess){
+          console.log("success")
+        }
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   },
 }
