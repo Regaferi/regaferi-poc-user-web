@@ -163,6 +163,7 @@
 </template>
 
 <script>
+
 export default {
   name: "MemberCenter",
   data () {
@@ -172,6 +173,8 @@ export default {
   },
   mounted() {
     this.isMobile = this.$store.state.isMobile;
+  },
+  methods : {
   }
 }
 </script>

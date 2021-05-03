@@ -120,15 +120,15 @@
                 >
                   E-Mail
                 </v-btn>
-                <v-btn
-                    color="brown"
-                    small
-                    outlined
-                    @click="reveal = true"
-                    class="text-center align-center"
-                >
-                  LINE
-                </v-btn>
+<!--                <v-btn-->
+<!--                    color="brown"-->
+<!--                    small-->
+<!--                    outlined-->
+<!--                    @click="reveal = true"-->
+<!--                    class="text-center align-center"-->
+<!--                >-->
+<!--                  LINE-->
+<!--                </v-btn>-->
               </v-card-actions>
               <v-expand-transition>
                 <v-card
@@ -154,7 +154,7 @@
                       <v-text-field
                           v-model="account"
                           :rules="accountRules"
-                          label="Email/Mobile"
+                          label="Email"
                           required
                       ></v-text-field>
                       <v-text-field
@@ -231,16 +231,28 @@ export default {
   },
   methods: {
     login (){
-      axios.post('http://frontend-api.regaferi.jp/member/login', {
+      let that = this;
+      // http://frontend-api.regaferi.jp/member/login
+      axios.post('http://localhost:8080/member/login', {
         "source": 200,
         "email": this.account,
         "verifyCode": this.code
       })
       .then(function (response) {
         if (response.data.isSuccess){
-          this.reveal = false;
-          this.isLogin = true;
-          this.$store.commit('isLogin', true);
+          that.reveal = false;
+          that.isLogin = true;
+          that.$store.commit('isLogin', true);
+
+          // 请求用户详情
+          // http://frontend-api.regaferi.jp/member/detail
+          axios.post('http://localhost:8080/member/detail', {})
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
         }else{
           alert(response.data.message)
         }
@@ -252,7 +264,7 @@ export default {
 
     },
     sendVerifyCode (){
-      axios.post('http://frontend-api.regaferi.jp/member/verify', {
+      axios.post('http://localhost:8080/member/verify', {
         'email' : this.account,
         'mobile' : null
       })

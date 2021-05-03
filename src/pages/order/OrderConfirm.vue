@@ -25,61 +25,8 @@
         </v-card>
       </div>
       <div class="pt-5"/>
-      <!--   选择支付方式   -->
-      <div style="padding-left: 6%">
-        <v-card width="96%" style="padding-left: 3%">
-          <v-card-title>支払情報</v-card-title>
-          <v-row>
-            <v-spacer/>
-            <v-col
-                class="d-flex"
-                cols="8"
-                sm="6"
-            >
-              <v-select
-                  prepend-icon="mdi-map"
-                  height="35"
-                  :items="payMethods"
-                  item-text="name"
-                  item-value="value"
-                  label="お支払い方法をお選びください"
-              ></v-select>
-            </v-col>
-            <v-spacer/>
-          </v-row>
-          <v-row>
-            <v-spacer/>
-            <v-col
-                class="d-flex"
-                cols="8"
-                sm="6"
-            >
-              <v-text-field
-                  :value = "form.creditNum"
-                  messages="Credit Card No."
-                  prepend-icon="mdi-credit-card-check-outline"
-              />
-            </v-col>
-            <v-spacer/>
-          </v-row>
-          <v-row>
-            <v-spacer/>
-            <v-col
-                class="d-flex"
-                cols="8"
-                sm="6"
-            >
-              <v-text-field
-                  :value = "form.creditVerify"
-                  messages="CVV Code"
-                  prepend-icon="mdi-credit-card-check-outline"
-              />
-            </v-col>
-            <v-spacer/>
-          </v-row>
-          <div class="pb-8"/>
-        </v-card>
-      </div>
+      <input type="hidden" class="product-name" :value="product.productName">
+      <input type="hidden" class="order-amount" :value="product.orderAmount ">
       <!--   支付按钮   -->
       <v-bottom-navigation color="primary" horizontal app>
         <v-btn>
@@ -110,25 +57,10 @@ export default {
         creditVerify : null,
         creditNum : null
       },
-      payMethods : [
-        {
-          name : 'クレジットカード.',
-          value : 1,
-          icon : 'mdi-credit-card-check-outline'
-        }
-      ],
-      renewalMethods : [
-        {
-          name : '単回注文',
-          value : 1,
-          icon : 'mdi-credit-card-check-outline'
-        },
-        {
-          name : '自動更新料',
-          value : 2,
-          icon : 'mdi-credit-card-check-outline'
-        }
-      ]
+      product: {
+        productName : "今日のバーベキュー屋",
+        orderAmount : 1000
+      }
     }
   },
   methods : {

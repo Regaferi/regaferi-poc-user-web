@@ -32,6 +32,8 @@
     $(".custom-button").on("click", function(e) {
         handler.open({
             amount:       orderAmount,
+            locale:       "ja",
+            currency:     "JPY",
             title:        productName,
             description:  "Regaferi Store",
             methods:      ["credit_card", "konbini", "bank_transfer", "pay_easy", "web_money", "bit_cash", "net_cash"]
