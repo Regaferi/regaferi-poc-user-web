@@ -233,7 +233,7 @@ export default {
     login (){
       let that = this;
       // http://frontend-api.regaferi.jp/member/login
-      axios.post('http://localhost:8080/member/login', {
+      axios.post('http://frontend-api.regaferi.jp/member/login', {
         "source": 200,
         "email": this.account,
         "verifyCode": this.code
@@ -246,7 +246,7 @@ export default {
 
           // 请求用户详情
           // http://frontend-api.regaferi.jp/member/detail
-          axios.post('http://localhost:8080/member/detail', {})
+          axios.post('http://frontend-api.regaferi.jp/member/detail', {})
               .then(function (response) {
                 console.log(response);
               })
@@ -264,7 +264,7 @@ export default {
 
     },
     sendVerifyCode (){
-      axios.post('http://localhost:8080/member/verify', {
+      axios.post('http://frontend-api.regaferi.jp/member/verify', {
         'email' : this.account,
         'mobile' : null
       })
