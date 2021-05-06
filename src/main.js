@@ -5,7 +5,8 @@ import router from './router'
 import i18n from './i18n/vue-i18n'
 import store from './store'
 
-Vue.config.productionTip = false
+import message from './components/message/message.js'
+Vue.prototype.$message = message
 
 Vue.directive('title', {
   inserted: function (el) {

@@ -270,6 +270,7 @@ export default {
 
     },
     sendVerifyCode (){
+     this.$message.success(`邮件发送成功`)
       const TIME_COUNT = 60;
       if (!this.timer) {
         this.show = true;
