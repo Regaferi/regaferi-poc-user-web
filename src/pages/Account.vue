@@ -73,12 +73,15 @@
                       outlined
                       small
                       color="orange accent-4"
-                      @click="reveal = false"
-                  >
-                    検証コードを送る |
+                      @click="reveal = false" 
+                      :disabled="show"                    
+                  >                  
+                    検証コードを送る |{{count}}
                     <v-icon small class="pl-1">mdi-send</v-icon>
                   </v-btn>
+                 
                 </v-card-actions>
+
               </v-card>
             </v-expand-transition>
           </v-card>
@@ -180,8 +183,9 @@
                         small
                         color="orange accent-4"
                         @click="sendVerifyCode"
+                        :disabled="show"
                     >
-                      検証コードを送る |
+                      検証コードを送る |{{count}}
                       <v-icon small class="pl-1">mdi-send</v-icon>
                     </v-btn>
                   </v-card-actions>
@@ -200,9 +204,8 @@
 
 import MemberCenter from "@/pages/MemberCenter";
 import axios from "axios";
-
 export default {
-
+ 
   name: "Account",
   components: {
     MemberCenter
@@ -217,6 +220,9 @@ export default {
       valid: true,
       account: '',
       code:'',
+      show: false,
+      count: '',
+      timer: null,
       accountRules: [
         v => !!v || '请输入邮箱/手机号',
       ],
@@ -264,6 +270,21 @@ export default {
 
     },
     sendVerifyCode (){
+      const TIME_COUNT = 60;
+      if (!this.timer) {
+        this.show = true;
+        this.count = TIME_COUNT;  
+        this.timer = setInterval(() => {
+        if (this.count > 0 && this.count <= TIME_COUNT) {
+          this.count--;
+         } else {
+          this.show = false;
+          clearInterval(this.timer);
+          this.timer = null;
+          this.count = "";
+         }
+        }, 1000)
+       }
       axios.post('http://frontend-api.regaferi.jp/member/verify', {
         'email' : this.account,
         'mobile' : null
@@ -279,6 +300,8 @@ export default {
       });
     }
   },
+
+    
 }
 
 </script>
