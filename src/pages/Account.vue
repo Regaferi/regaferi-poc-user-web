@@ -3,9 +3,9 @@
     <!--  PC 弹窗  -->
     <v-row v-show="!isMobile">
       <v-dialog v-model="dialog" max-width="45%">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn class="mx-2" small fab outlined color="primary" v-bind="attrs" v-on="on">
-            <v-icon>
+        <template v-slot:activator="{ on, attrs }" >
+          <v-btn  class="mx-2" small fab outlined color="primary" v-bind="attrs" v-on="on">
+            <v-icon style="color: #FFFFFF">
               mdi-account
             </v-icon>
           </v-btn>
@@ -73,13 +73,13 @@
                       outlined
                       small
                       color="orange accent-4"
-                      @click="reveal = false" 
-                      :disabled="show"                    
-                  >                  
+                      @click="reveal = false"
+                      :disabled="show"
+                  >
                     検証コードを送る |{{count}}
                     <v-icon small class="pl-1">mdi-send</v-icon>
                   </v-btn>
-                 
+
                 </v-card-actions>
 
               </v-card>
@@ -97,7 +97,7 @@
               v-bind="attrs"
               v-on="on"
           >
-            <v-icon style="position:fixed; margin:auto; right: 5%; top:28%;">mdi-account</v-icon>
+            <v-icon style="position:fixed; margin:auto; right: 5%; top:28%;color: #FFF">mdi-account</v-icon>
           </div>
         </template>
         <v-sheet
@@ -205,7 +205,7 @@
 import MemberCenter from "@/pages/MemberCenter";
 import axios from "axios";
 export default {
- 
+
   name: "Account",
   components: {
     MemberCenter
@@ -274,7 +274,7 @@ export default {
       const TIME_COUNT = 60;
       if (!this.timer) {
         this.show = true;
-        this.count = TIME_COUNT;  
+        this.count = TIME_COUNT;
         this.timer = setInterval(() => {
         if (this.count > 0 && this.count <= TIME_COUNT) {
           this.count--;
@@ -302,7 +302,7 @@ export default {
     }
   },
 
-    
+
 }
 
 </script>

@@ -1,7 +1,15 @@
 <template>
-  <v-main>
+  <v-main style="padding: 0">
     <!--  Banner  -->
-    <v-img max-height="200px" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
+    <div style="position: relative;top: 0" ref="piediv">
+      <!--      <div style="-->
+      <!--      height: 300px;-->
+      <!--      background-image: url('https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg')-->
+      <!--      background-size: 100%;"-->
+      <!--      />-->
+      <!--          <img style="width: 100%;height: 250px" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" alt="">-->
+      <v-img max-height="200px" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
+    </div>
     <!--  Filter  -->
     <v-divider class="mx-4"></v-divider>
     <v-row class="pt-5 pl-2 pr-2">
