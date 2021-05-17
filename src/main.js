@@ -9,11 +9,11 @@ import message from './components/message/message.js'
 Vue.prototype.$message = message
 
 //vant组件
-import Vant from 'vant';
+import Vant,{Lazyload} from 'vant';
 import 'vant/lib/index.css';
 
 Vue.use(Vant);
-
+Vue.use(Lazyload);
 
 Vue.directive('title', {
   inserted: function (el) {

@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main style="overflow: hidden">
     <div>
       <!--  商品轮播图   -->
       <v-carousel

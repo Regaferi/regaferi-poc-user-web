@@ -1,6 +1,6 @@
 <template>
   <v-app class="custom-font" v-title data-title="Regaferi">
-    <Header style="background-color:rgba(255,255,255,0);"/>
+    <Header/>
     <router-view/>
     <Footer/>
   </v-app>

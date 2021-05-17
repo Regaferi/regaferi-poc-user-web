@@ -1,6 +1,6 @@
 <template>
-  <v-main style="padding: 0">
-      <div style="position: relative;top: 0" ref="piediv">
+  <v-main>
+      <div style="position: relative" ref="piediv">
           <!--      <div style="-->
           <!--      height: 300px;-->
           <!--      background-image: url('https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg')-->
@@ -9,8 +9,39 @@
 <!--          <img style="width: 100%;height: 250px" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" alt="">-->
           <v-img max-height="200px" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
 
-          <div v-show="isMobile" style="position: absolute;bottom: -8%;;left: 2%;width: 95%">
-              <van-search background="none" v-model="value" placeholder="搜索商品" />
+          <div v-show="isMobile" style="position: absolute;bottom: -13%;;left: 2%;width: 96%;border-radius: 6px;">
+            <div style="    z-index: 1;
+    padding: 10px;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 1px 5px 0 rgb(0 0 0 / 25%);
+    background: #fff;">
+                <ul style="    display: flex;
+    position: relative;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 10px;
+    background-color: #f4f4f4;">
+                    <li class="rsttop-container__search-area">
+                        <div class="rsttop-container__search-area-inner">
+                            <van-icon style="font-size: 20px;" name="search" />
+                            <input placeholder="エリア・駅" style="padding-left: 10px;width:90%" type="text">
+                        </div>
+                    </li>
+                    <li class="rsttop-container__search-area">
+                        <div class="rsttop-container__search-area-inner" style="border-left: dotted 1px #d2d2d2;">
+                            <input placeholder="店名・ジャンル" style="padding-left: 10px;width:90%" type="text">
+
+                        </div>
+
+                    </li>
+                    <li>
+                            <span @click="searchStore" style="color: #1989fa;    margin-top: 36%;display: block">搜索</span>
+                    </li>
+                </ul>
+            </div>
 
           </div>
       </div>
@@ -49,7 +80,7 @@
         </v-banner>-->
     <!-- CMS 轮播结束 -->
 
-      <v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
+      <!--<v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
           <v-col>热门商品</v-col>
       </v-row>
       <v-row class="pl-2 pr-2" v-show="isMobile">
@@ -68,27 +99,10 @@
                   </v-card-text>
               </v-card>
           </v-col>
-      </v-row>
+      </v-row>-->
       <!-- 引导菜单开始 -->
-      <v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-          <v-col>热门主题</v-col>
-      </v-row>
-      <v-row v-show="isMobile" style="width: 100%; margin: auto; left: 0; right: 0;">
-          <v-col :cols="isMobile?'6':'2'"
-                 v-for="(navigator, i) in navigators"
-                 :key="i"
-                 @click="navigateTo(navigator.navigator.name, navigator.navigator.category, navigator.navigator.property)"
-          >
-              <v-banner elevation="3" style="margin:auto;padding: auto; background: #f3f0e9;">
-                  <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'300px'"  >
-                      <v-img :lazy-src="navigator.imageurl" max-height=100% max-width=100% :src="navigator.imageurl" ></v-img>
-                      <v-row class="navigator-row"  >
-                          <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; ">{{navigator.title}}</v-card-subtitle>
-                      </v-row>
-                  </v-card>
-              </v-banner>
-          </v-col>
-      </v-row>
+
+
       <v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
           <v-col>热门店铺</v-col>
       </v-row>
@@ -107,6 +121,25 @@
                       <div><van-icon name="location-o" />东京</div>
                   </div>
               </v-card>
+          </v-col>
+      </v-row>
+      <v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
+          <v-col>热门主题</v-col>
+      </v-row>
+      <v-row v-show="isMobile" style="width: 100%; margin: auto; left: 0; right: 0;">
+          <v-col :cols="isMobile?'6':'2'"
+                 v-for="(navigator, i) in navigators"
+                 :key="i"
+                 @click="navigateTo(navigator.navigator.name, navigator.navigator.category, navigator.navigator.property)"
+          >
+              <v-banner elevation="3" style="margin:auto;padding: auto; background: #f3f0e9;">
+                  <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'300px'"  >
+                      <v-img :lazy-src="navigator.imageurl" max-height=100% max-width=100% :src="navigator.imageurl" ></v-img>
+                      <v-row class="navigator-row"  >
+                          <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; ">{{navigator.title}}</v-card-subtitle>
+                      </v-row>
+                  </v-card>
+              </v-banner>
           </v-col>
       </v-row>
 <!--      pc页面-->
@@ -371,7 +404,11 @@ export default {
     this.isMobile = this.$store.state.isMobile;
   },
   methods : {
+      searchStore(){
+          this.$router.push({name : 'storeList'})
+      },
     navigateTo : function (name, category, property){
+          console.log(name)
       this.$router.push({name : name, params: {'category': category, 'property' : property}})
     },
   }
@@ -435,5 +472,18 @@ export default {
     .PcMindOne{
         width:85%;
         /*background-color:red;*/
+    }
+    .rsttop-container__search-area{
+        display: flex;
+        position: relative;
+        padding-left: 10px;
+        border-right: none;
+        border-radius: 6px 0 0 6px;
+        width: 45%;
+    }
+    .rsttop-container__search-area-inner{
+        display: flex;
+        margin: 10px 0 10px;
+        align-items: center;
     }
 </style>

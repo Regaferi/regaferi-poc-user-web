@@ -5,7 +5,7 @@
       <v-dialog v-model="dialog" max-width="45%">
         <template v-slot:activator="{ on, attrs }" >
           <v-btn  class="mx-2" small fab outlined color="primary" v-bind="attrs" v-on="on">
-            <v-icon style="color: #FFFFFF">
+            <v-icon>
               mdi-account
             </v-icon>
           </v-btn>
@@ -97,7 +97,7 @@
               v-bind="attrs"
               v-on="on"
           >
-            <v-icon style="position:fixed; margin:auto; right: 5%; top:28%;color: #FFF">mdi-account</v-icon>
+            <v-icon style="position:fixed; margin:auto; right: 5%; top:28%">mdi-account</v-icon>
           </div>
         </template>
         <v-sheet

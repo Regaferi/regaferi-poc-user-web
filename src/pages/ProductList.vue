@@ -1,7 +1,7 @@
 <template>
-  <v-main style="padding: 0">
+  <v-main style="padding: 0;overflow: hidden;">
     <!--  Banner  -->
-    <div style="position: relative;top: 0" ref="piediv">
+    <div style="position: relative" ref="piediv">
       <!--      <div style="-->
       <!--      height: 300px;-->
       <!--      background-image: url('https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg')-->
