@@ -90,7 +90,7 @@
                 </v-card>
             </v-col>
         </v-row>-->
-        <div @click="ClickStore(product)" v-for="(product, key) in products" :key="key" style="margin-bottom: 5%">
+        <div @click="ClickStore(product)" v-for="(product, key) in products" :key="key" style="margin-top: 5%">
             <van-card
                     desc="￥170/人"
                     :title="product.title"

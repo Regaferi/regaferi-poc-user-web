@@ -6,10 +6,10 @@
         </div>
         <!--  商铺详情  -->
         <v-divider class="mx-4"></v-divider>
-        <div style="position: absolute;margin:0 auto;width:95%;top: 75px;left: 2%">
-            <div style="border-radius: 10px;position: relative;background:#F5F5F5;padding: 10px">
+        <div style="position: absolute;margin:0 auto;width:95%;top: 75px;left: 2%;">
+            <div style="border-radius: 10px;position: relative;background:#F5F5F5;padding: 10px;box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);">
                 <div style="width: 70%;height: 41%;margin-bottom: 2%;border-bottom: 2px solid #676a6c;display: flex">
-                    <h2 style="font-size: 25px;width: 65%;letter-spacing:5px;">{{StoreEllipsis('タイトル料理')}}</h2>
+                    <h2 style="font-size: 25px;width: 65%;letter-spacing:5px;">{{StoreEllipsis('トマトスクランブル')}}</h2>
                     <span style="width: 35%;">
                     <span>8.8</span>
                     <van-rate size="10" color="#ffd21e" readonly  v-model="value" />
@@ -24,10 +24,10 @@
 
                 <div style="width: 100%;height: 59%">
                     <div style="font-size: 2%;display: flex;margin-bottom: 2%">
-                        <div style="width: 20%;font-size: 15px">
+                        <div style="width: 17%;font-size: 15px">
                             店铺介绍
                         </div>
-                        <div style="width: 85%;height: 55px;">
+                        <div style="width: 50%;height: 55px;">
                             {{ellipsis(title)}}
                         </div>
                     </div>
@@ -45,8 +45,8 @@
             </div>
         </div>
         <!--轮播图-->
-        <div style="margin-top: 30%">
-            <van-swipe height="150" class="my-swipe" :autoplay="3000" indicator-color="white">
+        <div style="margin-top: 140px">
+            <van-swipe height="150" class="my-swipe" style="border-radius: 10px;width: 95%;margin-left: 2%" :autoplay="3000" indicator-color="white">
                 <van-swipe-item v-for="(img ,index) in images" :key="index">
                     <img style="height: 100%" v-lazy="img" />
                 </van-swipe-item>
@@ -56,22 +56,24 @@
         <div style="margin-top: 0">
             <van-tabs v-model="active">
                 <van-tab title="服务">
-                    <div :class=" divider == true ? '' : 'divader'">
-                        <van-card
-                                v-for="(item, dex) in 5"
-                                :key="dex"
-                                price="271.00"
-                                desc="描述信息"
-                                title="商品标题"
-                                thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"
-                        >
-                            <template #desc>
-                                <div>描述信息描述信息</div>
-                                <div>描述信息描述信息</div>
-                            </template>
-                        </van-card>
+                        <div :class=" divider == true ? '' : 'divader'" style="margin-bottom: 3%;">
+                            <van-card
+                                    style="border-radius: 10px;box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);width: 95%;margin-left: 2%"
+                                    @click="navigateToPDP"
+                                    v-for="(item, dex) in 5"
+                                    :key="dex"
+                                    price="271.00"
+                                    desc="描述信息"
+                                    title="商品标题"
+                                    thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"
+                            >
+                                <template #desc>
+                                    <div>描述信息描述信息</div>
+                                    <div>描述信息描述信息</div>
+                                </template>
+                            </van-card>
 
-                    </div>
+                        </div>
                     <div>
                         <van-divider v-show="divider" @click="divider = false"><van-icon name="arrow-up" />折叠</van-divider>
                         <van-divider v-show="!divider" @click="divider = true"><van-icon name="arrow-down" />展开</van-divider>
@@ -153,17 +155,20 @@
         mounted() {
         },
         methods: {
+            navigateToPDP () {
+                this.$router.push({name : 'product-detail'})
+            },
             ellipsis (value) {
                 if (!value) return ''
-                if (value.length >65) {
-                    return value.slice(0,65) + '...'
+                if (value.length >40) {
+                    return value.slice(0,40) + '...'
                 }
                 return value
             },
             StoreEllipsis (value) {
                 if (!value) return ''
-                if (value.length >7) {
-                    return value.slice(0,7) + '...'
+                if (value.length >9) {
+                    return value.slice(0,9) + '...'
                 }
                 return value
             },

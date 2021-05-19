@@ -1,5 +1,5 @@
 <template>
-  <v-main style="padding: 0;overflow: hidden;">
+  <v-main style="overflow: hidden;">
     <!--  Banner  -->
     <div style="position: relative" ref="piediv">
       <!--      <div style="-->
@@ -76,7 +76,7 @@
       </v-col>
     </v-row>
     <!--  List Detail  -->
-    <v-row class="pl-2 pr-2">
+    <!--<v-row class="pl-2 pr-2">
       <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product.code)">
           <v-card>
             <v-img height="180" :src="product.image"/>
@@ -89,7 +89,26 @@
             </v-card-text>
           </v-card>
       </v-col>
-    </v-row>
+    </v-row>-->
+    <div style="padding-left: 4%;margin-top: 10px" v-for="(item, index) in products" :key="index"  @click="navigateToPDP()">
+      <v-card width="96%">
+        <v-card-text>
+          <v-row>
+            <v-col cols="6">
+              <v-img class="pt-3" height="180" src="../image/image-plp-recommend.jpg"></v-img>
+            </v-col>
+            <v-col cols="6" style="font-size: xx-small">
+              <h4 class="pt-3">今日のバーベキュー屋</h4>
+              <h5 style="color: red">$500 / Monthly</h5>
+              <v-divider class="pt-3 pb-5"/>
+              <h6>回数制限.：2 Times / Per Day</h6>
+              <h6>利用可能な時間：2021.01.01 - 2021.04.15</h6>
+
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </div>
   </v-main>
 </template>
 
@@ -201,8 +220,8 @@ export default {
       this.loading = true
       setTimeout(() => (this.loading = false), 2000)
     },
-    navigateToPDP (itemCode) {
-      this.$router.push({name : 'product-detail', params: {'code': itemCode}})
+    navigateToPDP () {
+      this.$router.push({name : 'product-detail'})
     }
   },
 }
