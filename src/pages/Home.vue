@@ -11,34 +11,43 @@
 
           <div v-show="isMobile" style="position: absolute;bottom: -13%;;left: 2%;width: 96%;border-radius: 6px;">
             <div style="    z-index: 1;
-    padding: 10px;
     border-radius: 6px;
     width: 100%;
     box-sizing: border-box;
     box-shadow: 0 1px 5px 0 rgb(0 0 0 / 25%);
     background: #fff;">
-                <ul style="    display: flex;
+                <ul style="
+                    height: 90px;
     position: relative;
     border-radius: 6px;
     width: 100%;
     box-sizing: border-box;
     font-size: 10px;
     background-color: #f4f4f4;">
-                    <li class="rsttop-container__search-area">
+                    <li class="rsttop-container__search-area" style="height: 47px">
+                        <div class="rsttop-container__search-area-inner" style="    width: 91%;">
+<!--                            <van-icon style="font-size: 20px;" name="search" />-->
+                            <el-input placeholder="エリア・駅" style="padding-left: 10px;width:90%" v-model="input1"></el-input>
+<!--                            <input placeholder="エリア・駅" type="text">-->
+                        </div>
+                    </li>
+                    <li class="rsttop-container__search-area" style="height: 40px">
                         <div class="rsttop-container__search-area-inner">
-                            <van-icon style="font-size: 20px;" name="search" />
-                            <input placeholder="エリア・駅" style="padding-left: 10px;width:90%" type="text">
+<!--                            <input placeholder="店名・ジャンル" style="padding-left: 10px;width:90%" type="text">-->
+                            <el-input :placeholder=" '请输入' + value1 + '名称' " v-model="input" class="input-with-select">
+                                <el-select v-model="value1" slot="prepend" placeholder="请选择">
+                                    <el-option  v-for="item in valueLabel"
+                                                :key="item.value1"
+                                                :label="item.label"
+                                                :value="item.value1"></el-option>
+                                </el-select>
+                            </el-input>
                         </div>
-                    </li>
-                    <li class="rsttop-container__search-area">
-                        <div class="rsttop-container__search-area-inner" style="border-left: dotted 1px #d2d2d2;">
-                            <input placeholder="店名・ジャンル" style="padding-left: 10px;width:90%" type="text">
-
-                        </div>
 
                     </li>
-                    <li>
-                            <span @click="searchStore" style="color: #1989fa;    margin-top: 36%;display: block">搜索</span>
+                    <li style="position: absolute;top: 30%;right: 2%;">
+                        <van-button type="info" size="small" @click="searchStore">搜索</van-button>
+<!--                            <span @click="searchStore" style="color: #1989fa;    margin-top: 36%;display: block">搜索</span>-->
                     </li>
                 </ul>
             </div>
@@ -146,10 +155,10 @@
       <div   v-show="!isMobile" class="PcMind">
           <div class="PcMindOne">
               <v-row style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-                  <v-col>热门商品</v-col>
+                  <v-col>热门服务</v-col>
               </v-row>
               <div style="width: 100%;padding: 12px;display: flex;flex-wrap: wrap">
-              <div style="width: 25%;padding: 12px;" v-for="(product, key) in 6" :key="key">
+              <div style="width: 25%;padding: 12px;" v-for="(product, key) in 6" :key="key" @click="serveWeb">
                   <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'100%'"  >
                       <v-img lazy-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" max-height=80% max-width=100% src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" ></v-img>
                       <v-row class="navigator-row"  >
@@ -177,7 +186,7 @@
                   <v-col>推荐店铺</v-col>
               </v-row>
               <div style="width: 100%;padding: 12px;display: flex;flex-wrap: wrap;">
-                  <div style="width: 25%;padding: 12px;" v-for="(product, key) in 6" :key="key">
+                  <div style="width: 25%;padding: 12px;" v-for="(product, key) in 6" :key="key" @click="navigateToPDP(product.code)">
                       <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'100%'"  >
                           <v-img lazy-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" max-height=80% max-width=100% src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" ></v-img>
                           <v-row class="navigator-row"  >
@@ -199,7 +208,7 @@
 
           </div>
       </div>
-      <div  v-show="!isMobile" class="PcMind">
+      <!--<div  v-show="!isMobile" class="PcMind">
           <div class="PcMindOne">
               <v-row style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
                   <v-col>热门商品</v-col>
@@ -222,7 +231,7 @@
               </v-row>
 
           </div>
-      </div>
+      </div>-->
 
 
     <!-- 引导菜单结束 -->
@@ -252,6 +261,16 @@ export default {
   name: "Home",
   data () {
     return {
+        input1:'',
+        input:'',
+        valueLabel: [{
+            value1: '店铺',
+            label: '店铺'
+        }, {
+            value1: '服务',
+            label: '服务'
+        }],
+        value1:'店铺',
         topWidth:'',
         products : [
             {
@@ -404,8 +423,24 @@ export default {
     this.isMobile = this.$store.state.isMobile;
   },
   methods : {
+      serveWeb(){
+          this.$router.push({name : 'product-detail'})
+      },
+      navigateToPDP(){
+          this.$router.push({name : 'ShopDetails'})
+      },
       searchStore(){
-          this.$router.push({name : 'storeList'})
+          console.log(this.$route.path)
+          if(this.value1 == '店铺'){
+              if (this.$route.path !== '/storeList') { //判断当前路由和跳转路由是否一致（防止路由复用产生的报错）
+                  this.$router.push({name : 'storeList'})
+              }
+          }else{
+              if (this.$route.path !== '/product-list') { //判断当前路由和跳转路由是否一致（防止路由复用产生的报错）
+                  this.$router.push({name : 'product-list'})
+              }
+          }
+
       },
     navigateTo : function (name, category, property){
           console.log(name)
@@ -479,11 +514,42 @@ export default {
         padding-left: 10px;
         border-right: none;
         border-radius: 6px 0 0 6px;
-        width: 45%;
+        width: 100%;
     }
     .rsttop-container__search-area-inner{
         display: flex;
         margin: 10px 0 10px;
         align-items: center;
+    }
+/deep/.el-input-group__prepend {
+    border-right: 0;
+    width: 30%;
+    border: none;
+    background-color: rgb(244, 244, 244);
+}
+    /deep/.el-input-group--prepend .el-input__inner, .el-input-group__append {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        width: 80%;
+
+    }
+    /deep/.el-input__inner {
+        -webkit-appearance: none;
+        background-color: #FFF;
+        background-image: none;
+        border-radius: 4px;
+        border: 1px solid #DCDFE6;
+        box-sizing: border-box;
+        color: #606266;
+        display: inline-block;
+        font-size: inherit;
+        height: 40px;
+        line-height: 40px;
+        outline: 0;
+        padding: 0 15px;
+        transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+        width: 100%;
+        border: none;
+        background-color: rgb(244, 244, 244);
     }
 </style>

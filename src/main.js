@@ -7,6 +7,11 @@ import store from './store'
 
 import message from './components/message/message.js'
 Vue.prototype.$message = message
+//element
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.use(ElementUI);
 
 //vant组件
 import Vant,{Lazyload} from 'vant';
