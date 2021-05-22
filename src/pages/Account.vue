@@ -301,7 +301,7 @@ export default {
       });
     },
     lineLogin() {
-      window.location.href = 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1656015883&redirect_uri=http://frontend-api.regaferi.jp/login/callback&state='+this.randomRange(10,12)+'&scope=profile%20openid&nonce='+this.randomRange(10,12)
+      window.location.href = 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1656015883&redirect_uri=http://regaferi.jp/login/callback&state='+this.randomRange(10,12)+'&scope=profile%20openid&nonce='+this.randomRange(10,12)
     },
     randomRange(min, max, charStr){
       let returnStr = "",

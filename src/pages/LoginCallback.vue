@@ -24,7 +24,7 @@ export default {
     axios.post('https://api.line.me/v2/oauth/accessToken', qs.stringify({
       grant_type: 'authorization_code',
       code : _this.code,
-      redirect_uri: 'http://frontend-api.regaferi.jp/login/callback',
+      redirect_uri: 'http://regaferi.jp/login/callback',
       client_id: '1656015883',
       client_secret: '7002c8b2d9d81f392746dc85936319c6'
     }), {
