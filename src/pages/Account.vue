@@ -123,15 +123,15 @@
                 >
                   E-Mail
                 </v-btn>
-<!--                <v-btn-->
-<!--                    color="brown"-->
-<!--                    small-->
-<!--                    outlined-->
-<!--                    @click="reveal = true"-->
-<!--                    class="text-center align-center"-->
-<!--                >-->
-<!--                  LINE-->
-<!--                </v-btn>-->
+                <v-btn
+                    color="brown"
+                    small
+                    outlined
+                    @click="lineLogin"
+                    class="text-center align-center"
+                >
+                  LINE
+                </v-btn>
               </v-card-actions>
               <v-expand-transition>
                 <v-card
@@ -299,8 +299,26 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
+    },
+    lineLogin() {
+      window.location.href = 'https://access.line.me/dialog/oauth/weblogin?response_type=code&client_id=1656015883&redirect_uri=http://frontend-api.regaferi.jp/login/callback&state='+this.randomRange(10,12)+'&scope=profile%20openid&nonce='+this.randomRange(10,12)
+    },
+    randomRange(min, max, charStr){
+      let returnStr = "",
+          range;
+      if(typeof max == 'string'){
+        charStr = max;
+      }
+      range = ((max && typeof max == 'number') ? Math.round(Math.random() * (max-min)) + min : min);
+      charStr = charStr || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      for(let i=0; i<range; i++){
+        let index = Math.round(Math.random() * (charStr.length-1));
+        returnStr += charStr.substring(index,index+1);
+      }
+      return returnStr;
     }
   },
+
 
 
 }
