@@ -10,6 +10,7 @@ export default new Vuex.Store({
     googleMapLoader : new Loader('AIzaSyB9E3oa8d364apiXxwe3vYa7kfaIq1ww1A', {}),
     isMobile: false,
     isLogin: false,
+    memberId: null,
   },
   mutations: {
     isMobile(state){
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     isLogin(state, login){
       state.isLogin = login;
+    },
+    isMemberId (state, memberId){
+      state.memberId = memberId;
     }
   },
   actions: {

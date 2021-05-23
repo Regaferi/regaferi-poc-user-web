@@ -7,6 +7,7 @@ import ProductDetail from "@/pages/ProductDetail";
 import OrderConfirm from "@/pages/order/OrderConfirm";
 import ShopDetails from '@/pages/ShopDetails';
 import LoginCallback from "../pages/LoginCallback";
+import OrderDetail from "../pages/order/OrderDetail";
 
 Vue.use(VueRouter)
 
@@ -74,6 +75,15 @@ const routes = [
     props: route => ({
       code: route.query.code,
       state: route.query.state
+    })
+  },
+  {
+    path: '/order/orderDetail',
+    name: 'OrderDetail',
+    component: OrderDetail,
+    children : [],
+    props: route => ({
+      sessionId: route.query.id,
     })
   },
 ]

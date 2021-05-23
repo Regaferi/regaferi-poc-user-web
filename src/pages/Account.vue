@@ -249,6 +249,7 @@ export default {
           that.reveal = false;
           that.isLogin = true;
           that.$store.commit('isLogin', true);
+          that.$store.commit('isMemberId', response.data.data.memberId);
 
           // 请求用户详情
           // http://frontend-api.regaferi.jp/member/detail
