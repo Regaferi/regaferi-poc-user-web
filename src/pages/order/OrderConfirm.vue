@@ -78,39 +78,39 @@ export default {
       })
       .then(function (res){
         _this.orderCode = res.data.data.orderCode
-      })
 
-      let querystring = require('querystring');
-      let https = require('https');
-      let secret_key = 'sk_test_2u2m1usd757y38rmar9cqsxi'
-      let auth = 'Basic ' + Buffer.from(secret_key + ':').toString('base64');
-      let post_data = querystring.stringify({
-        'default_locale': 'ja',
-        'email': 'support@regaferi.jp',
-        'amount': '8888',
-        'currency': 'JPY',
-        'payment_data[external_order_num]': this.orderCode,
-        'return_url': 'https://regaferi.jp/orderDetail'
-      });
-      let post_options = {
-        host: 'komoju.com',
-        port: '443',
-        path: '/api/v1/sessions',
-        method: 'POST',
-        headers: {
-          'Authorization': auth,
-          'Content-Length': Buffer.byteLength(post_data)
-        }
-      };
-      let post_req = https.request(post_options, function(res) {
-        res.setEncoding('utf8');
-        res.on('data', function (chunk) {
-          console.log(chunk);
+        let querystring = require('querystring');
+        let https = require('https');
+        let secret_key = 'sk_test_2u2m1usd757y38rmar9cqsxi'
+        let auth = 'Basic ' + Buffer.from(secret_key + ':').toString('base64');
+        let post_data = querystring.stringify({
+          'default_locale': 'ja',
+          'email': 'support@regaferi.jp',
+          'amount': '8888',
+          'currency': 'JPY',
+          'payment_data[external_order_num]': this.orderCode,
+          'return_url': 'https://regaferi.jp/orderDetail'
         });
-      });
-      post_req.write(post_data);
-      post_req.end();
-      window.location.href = post_data['session_url'];
+        let post_options = {
+          host: 'komoju.com',
+          port: '443',
+          path: '/api/v1/sessions',
+          method: 'POST',
+          headers: {
+            'Authorization': auth,
+            'Content-Length': Buffer.byteLength(post_data)
+          }
+        };
+        let post_req = https.request(post_options, function(res) {
+          res.setEncoding('utf8');
+          res.on('data', function (chunk) {
+            console.log(chunk);
+          });
+        });
+        post_req.write(post_data);
+        post_req.end();
+        window.location.href = post_data['session_url'];
+      })
     }
   }
 }
