@@ -257,7 +257,7 @@
 
 // import GoogleMap from "@/components/GoogleMap";
 // import Introduction from "@/pages/Introduction";
-import { memberBase } from "@/api/api.js";
+// import { memberBase } from "@/api/api.js";
 export default {
   name: "Home",
   data () {
@@ -419,11 +419,11 @@ export default {
     // Introduction
   },
   created() {
-      memberBase().then(res => {
+      /*memberBase().then(res => {
           console.log(res)
       }).catch(err => {
-          console.log(err.data,'失败')
-      });
+          console.log(err,'失败')
+      });*/
   },
   mounted () {
     this.isMobile = this.$store.state.isMobile;

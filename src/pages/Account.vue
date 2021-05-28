@@ -123,15 +123,15 @@
                 >
                   E-Mail
                 </v-btn>
-<!--                <v-btn-->
-<!--                    color="brown"-->
-<!--                    small-->
-<!--                    outlined-->
-<!--                    @click="reveal = true"-->
-<!--                    class="text-center align-center"-->
-<!--                >-->
-<!--                  LINE-->
-<!--                </v-btn>-->
+                <v-btn
+                    color="brown"
+                    small
+                    outlined
+                    @click="reveal = true"
+                    class="text-center align-center"
+                >
+                  LINE
+                </v-btn>
               </v-card-actions>
               <v-expand-transition>
                 <v-card
@@ -204,6 +204,7 @@
 
 import MemberCenter from "@/pages/MemberCenter";
 import axios from "axios";
+import { login } from "@api";
 export default {
 
   name: "Account",
@@ -238,8 +239,17 @@ export default {
   methods: {
     login (){
       let that = this;
+      /*login({
+        "source": 200,
+        "email": this.account,
+        "verifyCode": this.code
+      }).then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err.data,'失败')
+      });*/
       // http://frontend-api.regaferi.jp/member/login
-      axios.post('http://frontend-api.regaferi.jp/member/login', {
+      login({
         "source": 200,
         "email": this.account,
         "verifyCode": this.code
