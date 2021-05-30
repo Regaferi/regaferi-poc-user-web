@@ -6,28 +6,16 @@
         </div>
         <!--  商铺详情  -->
         <v-divider class="mx-4"></v-divider>
-        <div style="position: absolute;margin:0 auto;width:95%;top: 75px;left: 2%;">
+        <div style="position: absolute;margin:0 auto;width:95%;top: 150px;left: 2%;">
             <div style="border-radius: 10px;position: relative;background:#F5F5F5;padding: 10px;box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);">
-                <div style="width: 70%;height: 41%;margin-bottom: 2%;border-bottom: 2px solid #676a6c;display: flex">
-                    <h2 style="font-size: 25px;width: 65%;letter-spacing:5px;">{{StoreEllipsis('トマトスクランブル')}}</h2>
-                    <span style="width: 35%;">
-                    <span>8.8</span>
-                    <van-rate size="10" color="#ffd21e" readonly  v-model="value" />
-                    <h6 style="font-size: 2%">观众评分230人</h6>
-                </span>
-                    <van-image
-                            round
-                            style="border-radius: 10px;position: absolute;top: -17%;right: 2%;width: 28%;height: 53%"
-                            src="https://img01.yzcdn.cn/vant/cat.jpeg"
-                    />
+                <div style="width: 100%;height: 100%;margin-bottom: 2%;border-bottom: 2px solid #676a6c;display: flex">
+                    <h2 style="font-size: 25px;width: 100%;letter-spacing:5px;">{{StoreEllipsis('トマトスクランブル')}}</h2>
                 </div>
 
                 <div style="width: 100%;height: 59%">
                     <div style="font-size: 2%;display: flex;margin-bottom: 2%">
-                        <div style="width: 17%;font-size: 15px">
-                            店铺介绍
-                        </div>
-                        <div style="width: 50%;height: 55px;">
+ 
+                        <div style="width: 100%;height: 55px;">
                             {{ellipsis(title)}}
                         </div>
                     </div>
@@ -46,7 +34,7 @@
         </div>
         <!--轮播图-->
         <div style="margin-top: 140px">
-            <van-swipe height="150" class="my-swipe" style="border-radius: 10px;width: 95%;margin-left: 2%" :autoplay="3000" indicator-color="white">
+            <van-swipe height="250" class="my-swipe" style="border-radius: 10px;width: 95%;margin-left: 2%" :autoplay="3000" indicator-color="white">
                 <van-swipe-item v-for="(img ,index) in images" :key="index">
                     <img style="height: 100%" v-lazy="img" />
                 </van-swipe-item>

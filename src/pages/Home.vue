@@ -420,11 +420,20 @@ export default {
     // Introduction
   },
   created() {
-      /*memberBase().then(res => {
-          console.log(res)
-      }).catch(err => {
-          console.log(err,'失败')
-      });*/
+
+     product({
+            pageSize:10,
+            pageIndex:1,
+        }).then(res => {
+                this.tableData = res.data
+            this.loading = false
+            this.total = res.totalCount
+            })
+            .catch(err => {
+                console.log(err.data,'失败')
+            });
+   
+  
   },
   mounted () {
     this.isMobile = this.$store.state.isMobile;

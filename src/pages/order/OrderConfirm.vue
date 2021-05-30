@@ -70,27 +70,28 @@ export default {
   methods : {
     payNow(){
       let _this = this;
-      axios.post('http://frontend-api.regaferi.jp/order/create', {
+      axios.post('http://127.0.0.1:8051/order/create', {
         "memberId": _this.$store.memberId,
         "serviceId" : _this.product.serviceId,
         "orderType" : 100,
         "payType" : 100
       })
       .then(function (res){
-        _this.orderCode = res.data.data.orderCode
-
+         console.log(res.data.orderCode);
+        _this.orderCode = res.data.orderCode;
         let querystring = require('querystring');
         let https = require('https');
-        let secret_key = 'sk_test_2u2m1usd757y38rmar9cqsxi'
+        let secret_key = 'sk_test_4ojcudizab8oes13yqzuer6a'
         let auth = 'Basic ' + Buffer.from(secret_key + ':').toString('base64');
         let post_data = querystring.stringify({
           'default_locale': 'ja',
-          'email': 'support@regaferi.jp',
+          'email': 'regaferi@2021gmail.com',
           'amount': '8888',
           'currency': 'JPY',
-          'payment_data[external_order_num]': this.orderCode,
-          'return_url': 'https://regaferi.jp/orderDetail'
+          'payment_data[external_order_num]': _this.orderCode,
+          'return_url': 'https://regaferi-api.cn.utools.club/orderDetail'
         });
+       
         let post_options = {
           host: 'komoju.com',
           port: '443',
@@ -98,6 +99,7 @@ export default {
           method: 'POST',
           headers: {
             'Authorization': auth,
+            'Access-Control-Allow-Origin':'*',
             'Content-Length': Buffer.byteLength(post_data)
           }
         };
@@ -107,9 +109,10 @@ export default {
             console.log(chunk);
           });
         });
+         console.log(post_data);
         post_req.write(post_data);
         post_req.end();
-        window.location.href = post_data['session_url'];
+      // window.location.href = post_data['session_url'];
       })
     }
   }
