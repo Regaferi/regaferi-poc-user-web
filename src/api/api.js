@@ -22,5 +22,8 @@ export const  service=(service)=>get(`/service?id=${service.id}`)
 
 //评论查询
 export const  comment=(comment)=>get(`/comment?serviceId=${comment.serviceId}`)
+
+//创单
+export const  order= (order)=>post('/order',order)
 //服务补偿
 export const  compensation=(compensation)=>put('/service-order/compensation',compensation)

@@ -5,8 +5,8 @@
       <!--   确认商品详情   -->
       <div class="pt-5"/>
       <div style="padding-left: 6%">
-        <v-card width="96%" style="padding-left: 3%">
-          <v-card-title>商品情報</v-card-title>
+        <v-card width="96%" style="padding-left: 3%" >
+          <v-card-title>{{product.total}}</v-card-title>
           <v-card-text>
             <v-row>
               <v-col cols="6">
@@ -14,7 +14,7 @@
               </v-col>
               <v-col cols="6" style="font-size: xx-small">
                 <h4 class="pt-3">今日のバーベキュー屋</h4>
-                <h5 style="color: red">$500 / Monthly</h5>
+                <h5 style="color: red">${{product.payment}} / Monthly</h5>
                 <v-divider class="pt-3 pb-5"/>
                 <h6>回数制限.：2 Times / Per Day</h6>
                 <h6>利用可能な時間：2021.01.01 - 2021.04.15</h6>
@@ -29,7 +29,7 @@
       <input type="hidden" class="order-amount" :value="product.orderAmount ">
       <!--   支付按钮   -->
       <v-bottom-navigation color="primary" horizontal app>
-        <v-btn>
+        <v-btn @click="fanHui">
           <span>Back</span>
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
@@ -43,17 +43,23 @@
         </v-btn>
       </v-bottom-navigation>
     </div>
+    <van-overlay :show="show">
+      <div class="wrapper">
+        <van-loading color="#1989fa" />
+      </div>
+    </van-overlay>
   </v-main>
 </template>
 
 <script>
 
 import axios from "axios";
-
+import {order} from '@api'
 export default {
   name: "OrderConfirm",
   data () {
     return {
+      show:true,
       payToken :null,
       orderCode: null,
       form : {
@@ -67,7 +73,24 @@ export default {
       }
     }
   },
+  created() {
+    var that = this
+    order({
+      serviceId:that.$route.query.code,
+    })
+            .then((res)=> {
+
+              that.product = res.data
+              that.show = false
+            })
+            .catch(function (error) {
+              that.$notify({ type: 'warning', message: error.errMessage });
+            });
+  },
   methods : {
+    fanHui(){
+      this.$router.go(-1)
+    },
     payNow(){
       let _this = this;
       axios.post('http://127.0.0.1:8051/order/create', {
@@ -91,7 +114,7 @@ export default {
           'payment_data[external_order_num]': _this.orderCode,
           'return_url': 'https://regaferi-api.cn.utools.club/orderDetail'
         });
-       
+
         let post_options = {
           host: 'komoju.com',
           port: '443',
@@ -120,4 +143,10 @@ export default {
 </script>
 
 <style scoped>
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
 </style>

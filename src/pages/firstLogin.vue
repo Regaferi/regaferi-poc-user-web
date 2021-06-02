@@ -117,10 +117,10 @@
                         </v-card-text>
                         <v-divider class="mt-12"></v-divider>
                         <v-card-actions>
-<!--                            <v-btn text>-->
-<!--                                取消-->
-<!--                            </v-btn>-->
-<!--                            <v-spacer></v-spacer>-->
+                            <!--<v-btn text>
+                                取消
+                            </v-btn>
+                            <v-spacer></v-spacer>-->
                             <v-slide-x-reverse-transition>
                                 <v-tooltip
                                         v-if="formHasErrors"

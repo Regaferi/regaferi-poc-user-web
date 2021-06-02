@@ -93,37 +93,18 @@
             <v-divider/>
             <!--  商品评价   -->
             <v-card-subtitle>商品評価</v-card-subtitle>
-            <v-list-item>
+            <v-list-item v-for="(item , index) in commentJson" :key="index">
                 <v-list-item-avatar>
                     <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"/>
                 </v-list-item-avatar>
                 <v-list-item-content>
                     <v-list-item-title>客.客 A</v-list-item-title>
                     <v-list-item-subtitle>
-                        Good!
+                        {{item.comment}}
                     </v-list-item-subtitle>
-                </v-list-item-content>
-            </v-list-item>
-            <v-list-item>
-                <v-list-item-avatar>
-                    <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"/>
-                </v-list-item-avatar>
-                <v-list-item-content>
-                    <v-list-item-title>客.客 A</v-list-item-title>
-                    <v-list-item-subtitle>
-                        Good!
-                    </v-list-item-subtitle>
-                </v-list-item-content>
-            </v-list-item>
-            <v-list-item>
-                <v-list-item-avatar>
-                    <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"/>
-                </v-list-item-avatar>
-                <v-list-item-content>
-                    <v-list-item-title>客.客 A</v-list-item-title>
-                    <v-list-item-subtitle>
-                        Good!
-                    </v-list-item-subtitle>
+                    <span style="width: 100%;border: thin solid rgba(0, 0, 0, 0.12);border-radius: 4px;padding: 5px;height: 10%">
+                        {{item.reply}}
+                    </span>
                 </v-list-item-content>
             </v-list-item>
             <v-card-text style="color: blue">もっと見る</v-card-text>
@@ -138,16 +119,16 @@
         </div>
 
         <v-bottom-navigation color="primary" horizontal app>
-            <v-btn>
+           <!-- <v-btn>
                 <span>Service</span>
                 <v-icon>mdi-face-agent</v-icon>
             </v-btn>
             <v-divider
                     class="mx-4"
                     vertical
-            ></v-divider>
-            <v-btn @click="navigateTo(product.code)">
-                <span>Buy Now</span>
+            ></v-divider>-->
+            <v-btn @click="navigateTo()">
+                <span>下单</span>
                 <v-icon>mdi-check-outline</v-icon>
             </v-btn>
         </v-bottom-navigation>
@@ -181,6 +162,7 @@
                     'Fourth',
                     'Fifth',
                 ],
+                commentJson:[],
             }
         },
         mounted() {
@@ -198,6 +180,7 @@
                 })
                     .then((res)=> {
                         console.log(res)
+                        that.commentJson = res.data
                     })
                     .catch(function (error) {
                         that.$notify({ type: 'warning', message: error.errMessage });
@@ -216,8 +199,10 @@
                         that.$notify({ type: 'warning', message: error.errMessage });
                     });
             },
-            navigateTo : function (code){
-                this.$router.push({name : 'order-confirm', params: {'code': code}})
+            navigateTo : function (){
+                this.$router.push({name : 'order-confirm', query: {'code': this.$route.query.id}})
+
+
             }
         }
     }
