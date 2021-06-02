@@ -257,7 +257,7 @@
 
 // import GoogleMap from "@/components/GoogleMap";
 // import Introduction from "@/pages/Introduction";
-// import { memberBase } from "@/api/api.js";
+// import { shopIndex } from "@api";
 export default {
   name: "Home",
   data () {
@@ -421,7 +421,7 @@ export default {
   },
   created() {
 
-     product({
+     /*product({
             pageSize:10,
             pageIndex:1,
         }).then(res => {
@@ -431,16 +431,17 @@ export default {
             })
             .catch(err => {
                 console.log(err.data,'失败')
-            });
-   
-  
+            });*/
+
+
   },
   mounted () {
     this.isMobile = this.$store.state.isMobile;
+
   },
   methods : {
       serveWeb(){
-          this.$router.push({name : 'product-detail'})
+          this.$router.push({name : 'product'})
       },
       navigateToPDP(){
           this.$router.push({name : 'ShopDetails'})
@@ -449,11 +450,11 @@ export default {
           console.log(this.$route.path)
           if(this.value1 == '店铺'){
               if (this.$route.path !== '/storeList') { //判断当前路由和跳转路由是否一致（防止路由复用产生的报错）
-                  this.$router.push({name : 'storeList'})
+                  this.$router.push({name : 'storeList',query:{input:this.input}})
               }
           }else{
               if (this.$route.path !== '/product-list') { //判断当前路由和跳转路由是否一致（防止路由复用产生的报错）
-                  this.$router.push({name : 'product-list'})
+                  this.$router.push({name : 'product-list',query:{input:this.input}})
               }
           }
 

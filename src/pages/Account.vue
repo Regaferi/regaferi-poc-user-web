@@ -11,7 +11,8 @@
           </v-btn>
         </template>
         <v-card v-show="!isLogin">
-          <v-card-title>{{ $t('i18n.member.basic.title') }}</v-card-title>
+<!--          <v-card-title>{{ $t('i18n.member.basic.title') }}</v-card-title>-->
+          <v-card-title>個人センター.</v-card-title>
           <v-card class="mx-auto" max-width="344" height="350" flat>
             <v-card-text>
               <p class="display-1 text--primary">
@@ -73,7 +74,7 @@
                       outlined
                       small
                       color="orange accent-4"
-                      @click="reveal = false"
+                      @click="sendVerifyCode"
                       :disabled="show"
                   >
                     検証コードを送る |{{count}}
@@ -193,7 +194,6 @@
               </v-expand-transition>
             </div>
           </v-card>
-          <MemberCenter v-show="isLogin"/>
         </v-sheet>
       </v-bottom-sheet>
     </div>
@@ -202,14 +202,11 @@
 
 <script>
 
-import MemberCenter from "@/pages/MemberCenter";
-import axios from "axios";
-import { login } from "@api";
+import { verify,login} from "@api";
 export default {
 
   name: "Account",
   components: {
-    MemberCenter
   },
   data() {
     return {
@@ -238,6 +235,7 @@ export default {
   },
   methods: {
     login (){
+
       let that = this;
       /*login({
         "source": 200,
@@ -249,54 +247,64 @@ export default {
         console.log(err.data,'失败')
       });*/
       // http://frontend-api.regaferi.jp/member/login
-      login({
-        "source": 200,
-        "email": this.account,
-        "verifyCode": this.code
-      })
-      .then(function (response) {
-        if (response.data.isSuccess){
-          that.reveal = false;
-          that.isLogin = true;
-          that.$store.commit('isLogin', true);
+      if(this.code){
+        login({
+          "source": 200,
+          "email": this.account,
+          "verifyCode": this.code
+        })
+                .then(function (response) {
+                  if(response.data.firstLogin == false){
+                    that.$router.push({name:'firstLogin'})
+                  }else {
+                    that.$router.push({name:'resume'})
+                  }
+                  that.$store.commit("COMMIT_TOKEN", response.data);
+                })
+                .catch(function (error) {
+                  that.$notify({ type: 'warning', message: error.errMessage });
+                });
 
-          // 请求用户详情
-          // http://frontend-api.regaferi.jp/member/detail
-          axios.post('http://frontend-api.regaferi.jp/member/detail', {})
-              .then(function (response) {
-                console.log(response);
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-        }else{
-          alert(response.data.message)
-        }
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      }
 
     },
     sendVerifyCode (){
-     this.$message.success(`邮件发送成功`)
       const TIME_COUNT = 60;
       if (!this.timer) {
-        this.show = true;
-        this.count = TIME_COUNT;
-        this.timer = setInterval(() => {
-        if (this.count > 0 && this.count <= TIME_COUNT) {
-          this.count--;
-         } else {
-          this.show = false;
-          clearInterval(this.timer);
-          this.timer = null;
-          this.count = "";
-         }
-        }, 1000)
-       }
-      axios.post('http://frontend-api.regaferi.jp/member/verify', {
+        if(this.account){
+          this.show = true;
+          this.count = TIME_COUNT;
+          this.timer = setInterval(() => {
+            if (this.count > 0 && this.count <= TIME_COUNT) {
+              this.count--;
+            } else {
+              this.show = false;
+              clearInterval(this.timer);
+              this.timer = null;
+              this.count = "";
+            }
+          }, 1000)
+        }
+      }
+      var thas = this
+      if(thas.account){
+        verify({
+          "email": thas.account,
+        })
+                .then(function (response) {
+                  thas.$notify({ type: 'success', message: '邮件发送成功' });
+                  console.log(response);
+
+                })
+                .catch(function (error) {
+                  clearInterval(thas.timer);
+                  thas.timer = null;
+                  thas.count = "";
+                  thas.show = false;
+                  thas.$notify({ type: 'warning', message: error.errMessage });
+                });
+      }
+      /*axios.post('http://frontend-api.regaferi.jp/member/verify', {
         'email' : this.account,
         'mobile' : null
       })
@@ -308,7 +316,7 @@ export default {
       })
       .catch(function (error) {
         console.log(error);
-      });
+      });*/
     }
   },
 

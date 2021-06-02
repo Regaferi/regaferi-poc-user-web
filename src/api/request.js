@@ -4,7 +4,7 @@ import store from '../store/index'
 import { Notify } from 'vant';
 
 axios.defaults.timeout = 60000;
-axios.defaults.baseURL = process.env.VUE_APP_LOGOUT_URL;
+axios.defaults.baseURL = '/apis';
 axios.defaults.headers.post["Content-Type"] =
     "application/x-www-form-urlencoded;charset=UTF-8";
 let loading = null;

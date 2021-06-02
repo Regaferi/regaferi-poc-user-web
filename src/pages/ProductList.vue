@@ -90,7 +90,13 @@
           </v-card>
       </v-col>
     </v-row>-->
-    <div style="padding-left: 4%;margin-top: 10px" v-for="(item, index) in products" :key="index"  @click="navigateToPDP()">
+    <van-list
+            v-model="loading"
+            :finished="finished"
+            finished-text="没有更多了"
+            @load="load_more"
+    >
+    <div style="padding-left: 4%;margin-top: 10px" v-for="(item, index) in products" :key="index"  @click="naviga(item)">
       <v-card width="96%">
         <v-card-text>
           <v-row>
@@ -98,7 +104,7 @@
               <v-img class="pt-3" height="180" src="../image/image-plp-recommend.jpg"></v-img>
             </v-col>
             <v-col cols="6" style="font-size: xx-small">
-              <h4 class="pt-3">今日のバーベキュー屋</h4>
+              <h4 class="pt-3">{{item.title}}</h4>
               <h5 style="color: red">$500 / Monthly</h5>
               <v-divider class="pt-3 pb-5"/>
               <h6>回数制限.：2 Times / Per Day</h6>
@@ -109,13 +115,25 @@
         </v-card-text>
       </v-card>
     </div>
+    </van-list>
+    <van-overlay :show="show">
+      <div class="wrapper">
+        <van-loading color="#1989fa" />
+      </div>
+    </van-overlay>
   </v-main>
 </template>
 
 <script>
+  import {shopIndex} from "@api"
 export default {
   name: "ProductList",
   data: () => ({
+    loading: false,
+    finished: false,
+    page: 1,//页数
+    limit: 15,//条数
+    show : true,
     areaFilter : false,
     typeFilter : false,
     sortFilter : false,
@@ -164,69 +182,67 @@ export default {
       ]
     },
     products : [
-      {
-        title: '例示商品タイトル',
-        code: '1234',
-        subTitle: '例示商品副題',
-        description: '例示的な商品記述',
-        rating: 4.5,
-        image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-      },
-      {
-        title: '例示商品タイトル',
-        code: '1234',
-        subTitle: '例示商品副題',
-        description: '例示的な商品記述',
-        rating: 4.5,
-        image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-      },
-      {
-        title: '例示商品タイトル',
-        code: '1234',
-        subTitle: '例示商品副題',
-        description: '例示的な商品記述',
-        rating: 4.5,
-        image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-      },
-      {
-        title: '例示商品タイトル',
-        code: '1234',
-        subTitle: '例示商品副題',
-        description: '例示的な商品記述',
-        rating: 4.5,
-        image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-      },
-      {
-        title: '例示商品タイトル',
-        code: '1234',
-        subTitle: '例示商品副題',
-        description: '例示的な商品記述',
-        rating: 4.5,
-        image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-      },
-      {
-        title: '例示商品タイトル',
-        code: '1234',
-        subTitle: '例示商品副題',
-        description: '例示的な商品記述',
-        rating: 4.5,
-        image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-      }
     ],
     radioGroup: 1,
   }),
+  created() {
+    var that = this
+    shopIndex({
+      keyword:that.$route.query.input,
+      type:1,
+      pageIndex:0,
+      pageSize:10
+    })
+            .then(function (response) {
+              that.products = response.data
+              that.show = false
+            })
+            .catch(function (error) {
+              that.$notify({ type: 'warning', message: error.errMessage });
+            });
+  },
   methods: {
+    load_more: function() {
+      this.page += 1;//页数+1
+      this.onLoad();
+    },
+    onLoad() {
+      var that = this
+
+      shopIndex({
+        keyword:that.$route.query.input,
+        type:2,
+        pageIndex:that.page,
+        pageSize:that.limit
+      })
+              .then(function (response){
+                that.show = false
+                // 加载状态结束
+                that.loading = false;
+                that.products = that.products.concat(response.data);//追加数据
+                if (response.data.length == 0) {  //数据全部加载完成
+                  that.finished = true;
+                }else{
+                  that.finished = false;
+                }
+              })
+    },
     reserve () {
       this.loading = true
       setTimeout(() => (this.loading = false), 2000)
     },
-    navigateToPDP () {
-      this.$router.push({name : 'product-detail'})
+    naviga (val) {
+      this.$router.push({name : 'product',query:{id:val.id}})
     }
   },
 }
 </script>
 
 <style scoped>
-
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
 </style>

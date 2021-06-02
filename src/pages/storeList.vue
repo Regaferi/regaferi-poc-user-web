@@ -90,6 +90,12 @@
                 </v-card>
             </v-col>
         </v-row>-->
+        <van-list
+                v-model="loading"
+                :finished="finished"
+                finished-text="没有更多了"
+                @load="load_more"
+        >
         <div @click="ClickStore(product)" v-for="(product, key) in products" :key="key" style="margin-top: 5%">
             <van-card
                     desc="￥170/人"
@@ -101,7 +107,7 @@
                     <van-tag plain type="danger">曹家渡</van-tag>
                 </template>
                 <template #num>
-                    <span style="position: absolute;    right: 2%;top: 21%;">上海</span>
+                    <span style="position: absolute;    right: 2%;top: 21%;">{{product.location}}</span>
                 </template>
                 <template #footer>
                     <div style="width: 100%;height: 100px;display: flex;">
@@ -119,13 +125,25 @@
             </van-card>
 
         </div>
+        </van-list>
+        <van-overlay :show="show">
+            <div class="wrapper">
+                <van-loading color="#1989fa" />
+            </div>
+        </van-overlay>
     </v-main>
 </template>
 
 <script>
+    import { shopIndex } from "@api";
     export default {
         name: "ProductList",
         data: () => ({
+            loading: false,
+            finished: false,
+            page: 1,//页数
+            limit: 15,//条数
+            show : true,
             areaFilter : false,
             typeFilter : false,
             sortFilter : false,
@@ -173,74 +191,72 @@
                     },
                 ]
             },
-            products : [
-                {
-                    title: '例示商品タイトル',
-                    code: '1234',
-                    subTitle: '例示商品副題',
-                    description: '例示的な商品記述',
-                    rating: 4.5,
-                    image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-                },
-                {
-                    title: '例示商品タイトル',
-                    code: '1234',
-                    subTitle: '例示商品副題',
-                    description: '例示的な商品記述',
-                    rating: 4.5,
-                    image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-                },
-                {
-                    title: '例示商品タイトル',
-                    code: '1234',
-                    subTitle: '例示商品副題',
-                    description: '例示的な商品記述',
-                    rating: 4.5,
-                    image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-                },
-                {
-                    title: '例示商品タイトル',
-                    code: '1234',
-                    subTitle: '例示商品副題',
-                    description: '例示的な商品記述',
-                    rating: 4.5,
-                    image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-                },
-                {
-                    title: '例示商品タイトル',
-                    code: '1234',
-                    subTitle: '例示商品副題',
-                    description: '例示的な商品記述',
-                    rating: 4.5,
-                    image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-                },
-                {
-                    title: '例示商品タイトル',
-                    code: '1234',
-                    subTitle: '例示商品副題',
-                    description: '例示的な商品記述',
-                    rating: 4.5,
-                    image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-                }
-            ],
+            products : [],
             radioGroup: 1,
         }),
+        created() {
+            var that = this
+            console.log(that.$route.query.input)
+            shopIndex({
+                keyword:that.$route.query.input,
+                type:2,
+                pageIndex:0,
+                pageSize:10
+            })
+                .then(function (response) {
+                    that.products = response.data
+                    that.show = false
+                })
+                .catch(function (error) {
+                    that.$notify({ type: 'warning', message: error.errMessage });
+                });
+        },
         methods: {
+            load_more: function() {
+                this.page += 1;//页数+1
+                this.onLoad();
+            },
+                onLoad() {
+                    var that = this
+
+                    shopIndex({
+                        keyword:that.$route.query.input,
+                        type:2,
+                        pageIndex:that.page,
+                        pageSize:that.limit
+                    })
+                        .then(function (response){
+                            that.show = false
+                                // 加载状态结束
+                                that.loading = false;
+                                that.products = that.products.concat(response.data);//追加数据
+                                if (response.data.length == 0) {  //数据全部加载完成
+                                    that.finished = true;
+                                }else{
+                                    that.finished = false;
+                                }
+                        })
+            },
             ClickStore(val){
                 console.log(val)
-                this.$router.push({name : 'ShopDetails'})
+                this.$router.push({name : 'ShopDetails',query:{id:val.id}})
             },
             reserve () {
                 this.loading = true
                 setTimeout(() => (this.loading = false), 2000)
             },
             navigateToPDP (itemCode) {
-                this.$router.push({name : 'product-detail', params: {'code': itemCode}})
+                this.$router.push({name : 'product', params: {'code': itemCode}})
             }
         },
     }
 </script>
 
 <style scoped>
-
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
 </style>

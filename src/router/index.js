@@ -3,12 +3,13 @@ import VueRouter from 'vue-router';
 import Home from "@/pages/Home";
 import ProductList from "@/pages/ProductList";
 import StoreList from "@/pages/storeList";
-import ProductDetail from "@/pages/ProductDetail";
+import product from "@/pages/product";
 import OrderConfirm from "@/pages/order/OrderConfirm";
 import ShopDetails from '@/pages/ShopDetails';
-import LoginCallback from "../pages/LoginCallback";
-import OrderDetail from "../pages/order/OrderDetail";
-
+import LoginCallback from "@/pages/LoginCallback";
+import OrderDetail from "@/pages/order/OrderDetail";
+import resume from "@/pages/resume";
+import firstLogin from "@/pages/firstLogin";
 Vue.use(VueRouter)
 
 const routes = [
@@ -29,15 +30,7 @@ const routes = [
       property: route.query.property
     })
   },
-  {
-    path: '/detail',
-    name: 'product-detail',
-    component: ProductDetail,
-    children : [],
-    props: route => ({
-      code: route.query.code
-    })
-  },
+
   {
     path: '/order-confirm',
     name: 'order-confirm',
@@ -45,6 +38,35 @@ const routes = [
     children : [],
     props: route => ({
       code: route.query.code
+    })
+  }
+  ,{
+    path: '/firstLogin',
+    name: 'firstLogin',
+    component: firstLogin,
+    children : [],
+    props: route => ({
+      category: route.query.category,
+      property: route.query.property
+    })
+  },{
+    path: '/resume',
+    name: 'resume',
+    component: resume,
+    children : [],
+    props: route => ({
+      category: route.query.category,
+      property: route.query.property
+    })
+  },
+  {
+    path: '/product',
+    name: 'product',
+    component: product,
+    children : [],
+    props: route => ({
+      category: route.query.category,
+      property: route.query.property
     })
   },
   {

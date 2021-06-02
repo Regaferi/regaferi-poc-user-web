@@ -37,7 +37,9 @@
     <v-container class="text-center align-center" v-show="isMobile">
       <!--      <v-icon style="position:fixed; margin:auto; left: 5%; top:28%;">mdi-magnify</v-icon>-->
       <h3 style="height: 30px; position: absolute;top:13px;color: rgba(0, 0, 0, 0.54)" @click="backToHome()">Regaferi</h3>
-      <Account/>
+      <Account v-if="!this.$store.state.token"/>
+
+        <van-icon @click="resume" style="float: right" size="25" v-if="this.$store.state.token" name="manager-o" />
     </v-container>
   </v-app-bar>
 </template>
@@ -45,7 +47,6 @@
 <script>
 
 import Account from "@/pages/Account";
-
 export default {
   name: "Header",
   components : {
@@ -73,6 +74,12 @@ export default {
     this.isMobile = this.$store.state.isMobile;
   },
   methods : {
+      resume(){
+          if (this.$route.path !== '/resume') {
+              this.$router.push({name:'resume'})
+          }
+
+      },
       searchStore(){
           this.input = ''
           if(this.value1 == '店铺'){
