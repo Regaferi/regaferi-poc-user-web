@@ -87,72 +87,22 @@
             <v-card-text>
                 <h4 class="pb-3">私のカード券</h4>
                 <v-list height="450" class="overflow-y-auto">
-                    <v-card outlined>
-                        <v-list-item>
-                            <v-list-item-title>会員カード A</v-list-item-title>
-                            <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-                            <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
-                            <v-list-item-content>
-                                使用詳細
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-card>
-                    <div class="pt-2"/>
-                    <v-card outlined>
-                        <v-list-item>
-                            <v-list-item-title>会員カード A</v-list-item-title>
-                            <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-                            <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
-                            <v-list-item-content>
-                                使用詳細
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-card>
-                    <div class="pt-2"/>
-                    <v-card outlined>
-                        <v-list-item>
-                            <v-list-item-title>会員カード A</v-list-item-title>
-                            <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-                            <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
-                            <v-list-item-content>
-                                使用詳細
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-card>
-                    <div class="pt-2"/>
-                    <v-card outlined>
-                        <v-list-item>
-                            <v-list-item-title>会員カード A</v-list-item-title>
-                            <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-                            <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
-                            <v-list-item-content>
-                                使用詳細
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-card>
-                    <div class="pt-2"/>
-                    <v-card outlined>
-                        <v-list-item>
-                            <v-list-item-title>会員カード A</v-list-item-title>
-                            <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-                            <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
-                            <v-list-item-content>
-                                使用詳細
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-card>
-                    <div class="pt-2"/>
-                    <v-card outlined>
-                        <v-list-item>
-                            <v-list-item-title>会員カード A</v-list-item-title>
-                            <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
-                            <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
-                            <v-list-item-content>
-                                使用詳細
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-card>
-                    <div class="pt-2"/>
+                    <div v-for="(item,index) in orderList" :key="index">
+                        <v-card outlined>
+                            <v-list-item>
+                                <v-list-item-title>会員カード A</v-list-item-title>
+                                <v-list-item-title>订单号：{{item.code}}</v-list-item-title>
+                                <v-list-item-subtitle>2021.01.01-2021.06.30</v-list-item-subtitle>
+                                <v-list-item-subtitle>￥{{item.payment}}</v-list-item-subtitle>
+                                <v-list-item-subtitle>期限を限定して使用する</v-list-item-subtitle>
+                                <v-list-item-content>
+                                    使用詳細
+                                </v-list-item-content>
+                            </v-list-item>
+                        </v-card>
+                        <div class="pt-2"/>
+                    </div>
+
 
 
                 </v-list>
@@ -164,22 +114,37 @@
 </template>
 
 <script>
-import {memberDetail} from "@api";
+import {memberDetail,orderList} from "@api";
     export default {
         name: "MemberCenter",
         data () {
             return {
                 userName: {},
                 isMobile : false,
+                orderList:[],
             }
+        },
+        created() {
+
         },
         mounted() {
             this.isMobile = this.$store.state.isMobile;
             var that = this
+            orderList({
+            })
+                .then(function (response) {
+
+                    that.orderList = response.data
+                    console.log(that.orderList,9999)
+                })
+                .catch(function (error) {
+                    // this.$notify({ type: 'warning', message: '查询失败' });
+                    console.log(error)
+                });
             memberDetail({
             })
                 .then(function (response) {
-                    console.log(response)
+
                     that.userName = response.data
                 })
                 .catch(function (error) {
@@ -193,5 +158,15 @@ import {memberDetail} from "@api";
 </script>
 
 <style scoped>
-
+/deep/.v-list-item{
+    align-items: center;
+     display: block;
+    flex: 1 1 100%;
+    letter-spacing: normal;
+    min-height: 48px;
+    outline: none;
+    padding: 0 16px;
+    position: relative;
+    text-decoration: none;
+}
 </style>

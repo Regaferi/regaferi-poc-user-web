@@ -92,7 +92,8 @@
 
             <v-divider/>
             <!--  商品评价   -->
-            <v-card-subtitle>商品評価</v-card-subtitle>
+            <v-card-subtitle>服务評価</v-card-subtitle>
+
             <v-list-item v-for="(item , index) in commentJson" :key="index">
                 <v-list-item-avatar>
                     <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"/>
@@ -107,26 +108,34 @@
                     </span>
                 </v-list-item-content>
             </v-list-item>
+            <van-field
+                    v-model="message"
+                    rows="2"
+                    autosize
+                    label="评论"
+                    type="textarea"
+                    maxlength="50"
+                    placeholder="请输入评论"
+                    show-word-limit
+            />
+            <van-button @click="pinLun" round type="info">发送</van-button>
             <v-card-text style="color: blue">もっと見る</v-card-text>
             <v-divider/>
             <!--  商品描述   -->
             <v-card-text>
                 <h6>{{ product.description }}</h6>
-                <h6>{{ product.description }}</h6>
-                <h6>{{ product.description }}</h6>
-                <h6>{{ product.description }}</h6>
             </v-card-text>
         </div>
 
         <v-bottom-navigation color="primary" horizontal app>
-           <!-- <v-btn>
-                <span>Service</span>
-                <v-icon>mdi-face-agent</v-icon>
+            <v-btn @click="naviTo()">
+                <span>返回</span>
+<!--                <v-icon>mdi-face-agent</v-icon>-->
             </v-btn>
             <v-divider
                     class="mx-4"
                     vertical
-            ></v-divider>-->
+            ></v-divider>
             <v-btn @click="navigateTo()">
                 <span>下单</span>
                 <v-icon>mdi-check-outline</v-icon>
@@ -141,11 +150,12 @@
 </template>
 
 <script>
-    import {service,comment} from "@api"
+    import {service,comment,commentPinlun} from "@api"
     export default {
         name: "PDP",
         data() {
             return {
+                message:'',
                 show:true,
                 product : '',
                 colors: [
@@ -173,6 +183,24 @@
 
         },
         methods : {
+            pinLun(){
+                var that = this
+                commentPinlun({
+                    serviceId:that.$route.query.id,
+                    star:5,
+                    comment:that.message
+                })
+                    .then((res)=> {
+                        console.log(res)
+                        that.commentAdd()
+                    })
+                    .catch(function (error) {
+                        that.$notify({ type: 'warning', message: error.errMessage });
+                    });
+            },
+            naviTo(){
+                this.$router.go(-1)
+            },
             commentAdd(){
                 var that = this
                 comment({

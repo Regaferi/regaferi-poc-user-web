@@ -43,6 +43,7 @@
         <div style="margin-top: 0">
             <van-tabs v-model="active">
                 <van-tab title="服务">
+                    <van-empty v-if="products.length < 0" image="error" description="暂无数据" />
                         <div :class=" divider == true ? '' : 'divader'" style="margin-bottom: 3%;">
                             <van-card
                                     style="border-radius: 10px;box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);width: 95%;margin-left: 2%"
@@ -61,12 +62,13 @@
                             </van-card>
 
                         </div>
-                    <div>
+                    <div v-if="products.length > 4">
                         <van-divider v-show="divider" @click="divider = false"><van-icon name="arrow-up" />折叠</van-divider>
                         <van-divider v-show="!divider" @click="divider = true"><van-icon name="arrow-down" />展开</van-divider>
                     </div>
                 </van-tab>
                 <van-tab title="评论">
+                    <van-empty v-if="items.length < 0 " image="error" description="暂无数据" />
                     <v-row>
                         <v-col
                                 cols="12"
@@ -75,7 +77,7 @@
                         >
                             <v-card>
                                 <v-list two-line>
-                                    <template v-for="(item, index) in items.slice(0, 6)">
+                                    <template v-for="(item, index) in items">
                                         <v-subheader
                                                 v-if="item.header"
                                                 :key="item.header"
@@ -91,9 +93,9 @@
                                                 v-else
                                                 :key="item.title"
                                         >
-                                            <v-list-item-avatar>
-                                                <img :src="item.avatar">
-                                            </v-list-item-avatar>
+<!--                                            <v-list-item-avatar>-->
+<!--                                                <img :src="item.avatar">-->
+<!--                                            </v-list-item-avatar>-->
                                             <v-list-item-content>
                                                 <v-list-item-title v-html="item.title"></v-list-item-title>
                                                 <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
@@ -104,6 +106,17 @@
                             </v-card>
                         </v-col>
                     </v-row>
+                    <van-field
+                            v-model="message"
+                            rows="2"
+                            autosize
+                            label="评论"
+                            type="textarea"
+                            maxlength="50"
+                            placeholder="请输入评论"
+                            show-word-limit
+                    />
+                    <van-button @click="pinLun" round type="info">发送</van-button>
                 </van-tab>
             </van-tabs>
         </div>
@@ -116,10 +129,11 @@
 </template>
 
 <script>
-    import {shopId,serviceShop} from "@api"
+    import {shopId,serviceShop,comment,commentPinlun} from "@api"
     export default {
         name: "ProductList",
         data: () => ({
+            message:'',
             show:true,
             divider:false,
             ifOver: false, // 文本是否超出三行，默认否
@@ -130,14 +144,7 @@
                 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
                 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
             ],
-            items: [
-                { header: 'Today' },
-                { avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg', title: 'Brunch this weekend?', subtitle: `<span class="font-weight-bold">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?` },
-                { divider: true, inset: true },
-                { avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg', title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>', subtitle: `<span class="font-weight-bold">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.` },
-                { divider: true, inset: true },
-                { avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg', title: 'Oui oui', subtitle: '<span class="font-weight-bold">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?' },
-            ],
+            items: [],
             products : [],
             details:{},
         }),
@@ -145,6 +152,16 @@
         },
         created() {
             var that = this
+            comment({
+                serviceId:that.$route.query.id,
+            })
+                .then(function (response) {
+                    that.items = response.data
+                    that.show = false
+                })
+                .catch(function (error) {
+                    that.$notify({ type: 'warning', message: error.errMessage });
+                });
             serviceShop({
                 shopId:that.$route.query.id,
             })
@@ -167,6 +184,29 @@
                 });
         },
         methods: {
+            pinLun(){
+                var that = this
+                commentPinlun({
+                    serviceId:that.$route.query.id,
+                    star:5,
+                    comment:that.message
+                })
+                    .then((res)=> {
+                        console.log(res)
+                        comment({
+                            serviceId:that.$route.query.id,
+                        })
+                            .then(function (response) {
+                                that.items = response.data
+                            })
+                            .catch(function (error) {
+                                that.$notify({ type: 'warning', message: error.errMessage });
+                            });
+                    })
+                    .catch(function (error) {
+                        that.$notify({ type: 'warning', message: error.errMessage });
+                    });
+            },
             navigateToPDP (val) {
                 this.$router.push({name : 'product',query:{id:val.id}})
             },
@@ -179,8 +219,8 @@
             },
             StoreEllipsis (value) {
                 if (!value) return ''
-                if (value.length >9) {
-                    return value.slice(0,9) + '...'
+                if (value.length >12) {
+                    return value.slice(0,12) + '...'
                 }
                 return value
             },

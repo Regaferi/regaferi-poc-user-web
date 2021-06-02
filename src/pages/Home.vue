@@ -116,7 +116,7 @@
           <v-col>热门店铺</v-col>
       </v-row>
       <v-row v-show="isMobile" class="pl-2 pr-2">
-          <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product.code)">
+          <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product)">
               <v-card>
                   <v-img height="130" :src="product.image"/>
                   <v-card-title style="font-size: 13px;padding-top: 0px;padding-bottom: 0px">{{ product.title }}</v-card-title>
@@ -250,6 +250,11 @@
               <Introduction/>
           </v-card>
       </v-banner>-->
+      <van-overlay :show="show">
+          <div class="wrapper">
+              <van-loading color="#1989fa" />
+          </div>
+      </van-overlay>
   </v-main>
 </template>
 
@@ -257,11 +262,12 @@
 
 // import GoogleMap from "@/components/GoogleMap";
 // import Introduction from "@/pages/Introduction";
-// import { shopIndex } from "@api";
+import { shopIndex } from "@api";
 export default {
   name: "Home",
   data () {
     return {
+        show:true,
         input1:'',
         input:'',
         valueLabel: [{
@@ -273,72 +279,7 @@ export default {
         }],
         value1:'店铺',
         topWidth:'',
-        products : [
-            {
-                title: '例示商品タイトル',
-                code: '1234',
-                subTitle: '例示商品副題',
-                description: '例示的な商品記述',
-                rating: 4.5,
-                image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-            },
-            {
-                title: '例示商品タイトル',
-                code: '1234',
-                subTitle: '例示商品副題',
-                description: '例示的な商品記述',
-                rating: 4.5,
-                image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-            },
-            {
-                title: '例示商品タイトル',
-                code: '1234',
-                subTitle: '例示商品副題',
-                description: '例示的な商品記述',
-                rating: 4.5,
-                image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-            },
-            {
-                title: '例示商品タイトル',
-                code: '1234',
-                subTitle: '例示商品副題',
-                description: '例示的な商品記述',
-                rating: 4.5,
-                image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-            },
-            {
-                title: '例示商品タイトル',
-                code: '1234',
-                subTitle: '例示商品副題',
-                description: '例示的な商品記述',
-                rating: 4.5,
-                image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-            },
-            {
-                title: '例示商品タイトル',
-                code: '1234',
-                subTitle: '例示商品副題',
-                description: '例示的な商品記述',
-                rating: 4.5,
-                image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-            },
-            {
-                title: '例示商品タイトル',
-                code: '1234',
-                subTitle: '例示商品副題',
-                description: '例示的な商品記述',
-                rating: 4.5,
-                image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-            },
-            {
-                title: '例示商品タイトル',
-                code: '1234',
-                subTitle: '例示商品副題',
-                description: '例示的な商品記述',
-                rating: 4.5,
-                image: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-            }
-        ],
+        products : [],
       navigators : [
         {
           title : '推荐',
@@ -437,14 +378,27 @@ export default {
   },
   mounted () {
     this.isMobile = this.$store.state.isMobile;
-
+      var that = this
+      shopIndex({
+          keyword:'',
+          type:2,
+          pageIndex:0,
+          pageSize:6
+      })
+          .then(function (response) {
+              that.products = response.data
+              that.show = false
+          })
+          .catch(function (error) {
+              that.$notify({ type: 'warning', message: error.errMessage });
+          });
   },
   methods : {
       serveWeb(){
           this.$router.push({name : 'product'})
       },
-      navigateToPDP(){
-          this.$router.push({name : 'ShopDetails'})
+      navigateToPDP(val){
+          this.$router.push({name : 'ShopDetails',query:{id:val.id}})
       },
       searchStore(){
           console.log(this.$route.path)
@@ -569,4 +523,10 @@ export default {
         border: none;
         background-color: rgb(244, 244, 244);
     }
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
 </style>

@@ -77,8 +77,7 @@ export default {
     var that = this
     order({
       serviceId:that.$route.query.code,
-    })
-            .then((res)=> {
+    }).then((res)=> {
 
               that.product = res.data
               that.show = false
