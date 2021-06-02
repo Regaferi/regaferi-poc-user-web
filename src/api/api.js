@@ -18,7 +18,9 @@ export const  shopId=(shopId)=>get(`/shop?id=${shopId.id}`)
 export const  serviceShop=(serviceShop)=>get(`/service/shop?shopId=${serviceShop.shopId}`)
 //服务详情
 export const  service=(service)=>get(`/service?id=${service.id}`)
-//订单详情
-export const  order=(order)=>get('/order/'+order)
+
+
+//评论查询
+export const  comment=(comment)=>get(`/comment?serviceId=${comment.serviceId}`)
 //服务补偿
 export const  compensation=(compensation)=>put('/service-order/compensation',compensation)

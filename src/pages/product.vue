@@ -151,15 +151,21 @@
                 <v-icon>mdi-check-outline</v-icon>
             </v-btn>
         </v-bottom-navigation>
+        <van-overlay :show="show">
+            <div class="wrapper">
+                <van-loading color="#1989fa" />
+            </div>
+        </van-overlay>
     </v-main>
 </template>
 
 <script>
-    import {service} from "@api"
+    import {service,comment} from "@api"
     export default {
         name: "PDP",
         data() {
             return {
+                show:true,
                 product : '',
                 colors: [
                     'indigo',
@@ -179,11 +185,24 @@
         },
         mounted() {
             this.add()
+            this.commentAdd()
         },
         created() {
 
         },
         methods : {
+            commentAdd(){
+                var that = this
+                comment({
+                    serviceId:that.$route.query.id,
+                })
+                    .then((res)=> {
+                        console.log(res)
+                    })
+                    .catch(function (error) {
+                        that.$notify({ type: 'warning', message: error.errMessage });
+                    });
+            },
             add(){
                 var that = this
                 service({
@@ -191,15 +210,11 @@
                 })
                     .then((res)=> {
                         that.show = false
-                        that.products = res.data
-                        // eslint-disable-next-line no-debugger
-                        debugger;
-                        console.log(that.products)
+                        that.product = res.data
                     })
                     .catch(function (error) {
                         that.$notify({ type: 'warning', message: error.errMessage });
                     });
-                console.log(that.products)
             },
             navigateTo : function (code){
                 this.$router.push({name : 'order-confirm', params: {'code': code}})
@@ -209,5 +224,10 @@
 </script>
 
 <style scoped>
-
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
 </style>

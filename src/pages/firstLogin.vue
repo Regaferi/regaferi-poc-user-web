@@ -117,10 +117,10 @@
                         </v-card-text>
                         <v-divider class="mt-12"></v-divider>
                         <v-card-actions>
-                            <v-btn text>
-                                取消
-                            </v-btn>
-                            <v-spacer></v-spacer>
+<!--                            <v-btn text>-->
+<!--                                取消-->
+<!--                            </v-btn>-->
+<!--                            <v-spacer></v-spacer>-->
                             <v-slide-x-reverse-transition>
                                 <v-tooltip
                                         v-if="formHasErrors"
@@ -204,23 +204,24 @@ import {signUp} from '@api';
                 })
             },
             submit () {
-                this.formHasErrors = false
+                var that = this
+                that.formHasErrors = false
 
-                Object.keys(this.form).forEach(f => {
-                    if (!this.form[f]) this.formHasErrors = true
+                Object.keys(that.form).forEach(f => {
+                    if (!that.form[f]) that.formHasErrors = true
 
-                    this.$refs[f].validate(true)
+                    that.$refs[f].validate(true)
                 })
                 signUp({
-                    "mobile": this.address,
-                    "name": this.name,
+                    "mobile": that.address,
+                    "name": that.name,
                 })
                     .then(function (response) {
                         console.log(response)
-                        this.$router.push({name:'home'})
+                        that.$router.push({name:'home'})
                     })
                     .catch(function (error) {
-                        this.$notify({ type: 'warning', message: error.errMessage });
+                        that.$notify({ type: 'warning', message: error.errMessage });
                     });
             },
 
