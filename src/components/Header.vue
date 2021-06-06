@@ -1,40 +1,15 @@
 <template>
   <v-app-bar app>
     <!--  PC 模式  -->
-    <v-container ref="backTop" class="py-0 fill-height" v-show="!isMobile">
+    <!--<v-container ref="backTop" class="py-0 fill-height" v-show="!isMobile">
       <h3 class="pl-8 pr-12" ref="gaoBian" style="height: 30px;color: rgba(0, 0, 0, 0.54)" @click="backToHome()">Regaferiβ</h3>
       <v-spacer></v-spacer>
       <div class="header-right">
-        <div class="header-right-search">
-<!--          <v-responsive max-width="260" >-->
-<!--            <v-text-field-->
-<!--                    label="Prepend"-->
-<!--                    prepend-icon="mdi-map-marker"-->
-<!--            ></v-text-field>-->
-<!--        </v-responsive>-->
-<!--          <v-responsive max-width="260" >-->
-<!--            <v-text-field-->
-<!--                    label="Prepend"-->
-<!--                    prepend-icon="mdi-map-marker"-->
-<!--            ></v-text-field>-->
-<!--          </v-responsive>-->
-          <v-responsive max-width="300" >
-            <el-input @change="searchStore" placeholder="请输入内容" v-model="input" class="input-with-select">
-              <el-select v-model="value1" slot="prepend" placeholder="请选择">
-                <el-option  v-for="item in valueLabel"
-                            :key="item.value1"
-                            :label="item.label"
-                            :value="item.value1"></el-option>
-              </el-select>
-            </el-input>
-          </v-responsive>
-        </div>
-
         <div class="header-right-account"><Account/></div>
       </div>
-    </v-container>
+    </v-container>-->
     <!--  Mobile 模式  -->
-    <v-container class="text-center align-center" v-show="isMobile">
+    <v-container class="text-center align-center">
       <!--      <v-icon style="position:fixed; margin:auto; left: 5%; top:28%;">mdi-magnify</v-icon>-->
       <h3 style="height: 30px; position: absolute;top:13px;color: rgba(0, 0, 0, 0.54)" @click="backToHome()">Regaferiβ</h3>
       <Account v-if="!this.$store.state.token"/>
@@ -67,6 +42,7 @@ export default {
       label: '服务'
     }],
     isMobile: false,
+      input1:''
   }),
   created() {
   },

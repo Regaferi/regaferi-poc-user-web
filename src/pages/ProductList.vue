@@ -12,7 +12,7 @@
     </div>
     <!--  Filter  -->
     <v-divider class="mx-4"></v-divider>
- 
+
     <!--  List Detail  -->
     <!--<v-row class="pl-2 pr-2">
       <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product.code)">
@@ -39,14 +39,17 @@
         <v-card-text>
           <v-row>
             <v-col cols="6">
-              <v-img class="pt-3" height="180" src="../image/image-plp-recommend.jpg"></v-img>
+              <v-img v-if="item.logoImage" height="130" :src="item.logoImage.target"/>
+              <van-image v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
+                <template v-slot:error>加载失败</template>
+              </van-image>
             </v-col>
             <v-col cols="6" style="font-size: xx-small">
               <h4 class="pt-3">{{item.title}}</h4>
               <h5 style="color: red">$500 / Monthly</h5>
               <v-divider class="pt-3 pb-5"/>
               <h6>回数制限.：2 Times / Per Day</h6>
-              <h6>利用可能な時間：2021.01.01 - 2021.04.15</h6>
+              <h6>利用可能な時間：{{item.createTime}} - {{item.updateTime}}</h6>
 
             </v-col>
           </v-row>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--  PC 弹窗  -->
-    <v-row v-show="!isMobile">
+    <!--<v-row v-show="!isMobile">
       <v-dialog v-model="dialog" max-width="45%">
         <template v-slot:activator="{ on, attrs }" >
           <v-btn  class="mx-2" small fab outlined color="primary" v-bind="attrs" v-on="on">
@@ -11,11 +11,11 @@
           </v-btn>
         </template>
         <v-card v-show="!isLogin">
-<!--          <v-card-title>{{ $t('i18n.member.basic.title') }}</v-card-title>-->
+&lt;!&ndash;          <v-card-title>{{ $t('i18n.member.basic.title') }}</v-card-title>&ndash;&gt;
           <v-card-title>個人センター.</v-card-title>
           <v-card class="mx-auto" max-width="344" height="350" flat>
             <v-card-text>
-              <p class="display-1 text--primary">
+              <p class="display-1 text&#45;&#45;primary">
                 まだ登録されていない
               </p>
             </v-card-text>
@@ -28,11 +28,11 @@
               <v-card
                   outlined
                   v-if="reveal"
-                  class="transition-fast-in-fast-out v-card--reveal"
+                  class="transition-fast-in-fast-out v-card&#45;&#45;reveal"
                   style="height: 100%;"
               >
                 <v-card-text class="pb-0">
-                  <p class="text--primary">迅速な登録/登録
+                  <p class="text&#45;&#45;primary">迅速な登録/登録
                     <v-btn
                         text
                         x-small
@@ -89,9 +89,9 @@
         </v-card>
         <MemberCenter v-show="isLogin"/>
       </v-dialog>
-    </v-row>
+    </v-row>-->
     <!--  Mobile 页面  -->
-    <div class="text-center" v-show="isMobile">
+    <div class="text-center">
       <v-bottom-sheet v-model="sheet" inset>
         <template v-slot:activator="{ on, attrs }">
           <div

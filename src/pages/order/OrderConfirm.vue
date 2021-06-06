@@ -9,14 +9,17 @@
           <v-card-text>
             <v-row>
               <v-col cols="6">
-                <v-img class="pt-3" height="180" src="../../image/image-plp-recommend.jpg"></v-img>
+                <v-img v-if="products.logoImage" height="130" :src="products.logoImage.target"/>
+                <van-image v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
+                  <template v-slot:error>加载失败</template>
+                </van-image>
               </v-col>
               <v-col cols="6" style="font-size: xx-small">
-                <h4 class="pt-3">今日のバーベキュー屋</h4>
-                <h5 style="color: red">${{product.total}} / JPY</h5>
+                <h4 class="pt-3">{{products.title}}</h4>
+                <h5 style="color: red">$500 / Monthly</h5>
                 <v-divider class="pt-3 pb-5"/>
                 <h6>回数制限.：2 Times / Per Day</h6>
-                <h6>利用可能な時間：2021.01.01 - 2021.04.15</h6>
+                <h6>利用可能な時間：{{products.createTime}} - {{products.updateTime}}</h6>
 
               </v-col>
             </v-row>
@@ -65,15 +68,14 @@ export default {
         creditVerify : null,
         creditNum : null
       },
-      product: {
-        serviceName : "今日のバーベキュー屋",
-        serviceId: 1,
-        orderAmount : 1000
-      }
+      product: {},
+      products:{}
     }
   },
   created() {
     var that = this
+    let data = JSON.parse(this.$route.query.data)
+    that.products = Object.assign({}, data)
     order({
       serviceId:that.$route.query.code,
     }).then((res)=> {

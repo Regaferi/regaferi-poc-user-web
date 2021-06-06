@@ -4,11 +4,11 @@
             <a-descriptions-item label="orderCode">
                 {{orderList.code}}
             </a-descriptions-item>
-            <a-descriptions-item label="Billing Mode">
-                Prepaid
+            <a-descriptions-item label="有效期开始时间">
+                {{orderList.effectiveTime}}
             </a-descriptions-item>
-            <a-descriptions-item label="Automatic Renewal">
-                YES
+            <a-descriptions-item label="有效期结束时间">
+                {{orderList.expiredTime}}
             </a-descriptions-item>
             <a-descriptions-item label="Order time">
                 2018-04-24 18:00:00
@@ -19,18 +19,18 @@
             <a-descriptions-item label="Status" :span="3">
                 <a-badge status="processing" text="Running" />
             </a-descriptions-item>
-            <a-descriptions-item label="Negotiated Amount">
-                $80.00
+            <a-descriptions-item label="订单状态">
+                {{orderList.type == '100' ? '已创建待支付': orderList.type == '200' ? '待使用': orderList.type == '201' ? '部分使用':orderList.type == '202'?'已使用':orderList.type == '300'? '已取消':'已过期' }}
             </a-descriptions-item>
-            <a-descriptions-item label="Discount">
-                $20.00
+            <a-descriptions-item label="总数">
+                {{orderList.total}}
             </a-descriptions-item>
-            <a-descriptions-item label="Official Receipts">
-                $60.00
+            <a-descriptions-item label="服务开始时间">
+                {{orderList.createTime}}
             </a-descriptions-item>
-            <a-descriptions-item label="Config Info">
-                Data disk type: MongoDB
-                <br />
+            <a-descriptions-item label="服务结束时间">
+                {{orderList.updateTime}}
+                <!--<br />
                 Database version: 3.4
                 <br />
                 Package: dds.mongo.mid
@@ -39,22 +39,14 @@
                 <br />
                 Replication factor: 3
                 <br />
-                Region: East China 1<br />
+                Region: East China 1<br />-->
             </a-descriptions-item>
         </a-descriptions>
         <div>
             <van-steps direction="vertical" :active="0">
-                <van-step>
-                    <h3>【城市】物流状态1</h3>
+                <van-step v-for="(item,index) in orderList.orderLines" :key="index">
+                    <h3>消费次数：{{item.quantity}}</h3>
                     <p>2016-07-12 12:40</p>
-                </van-step>
-                <van-step>
-                    <h3>【城市】物流状态2</h3>
-                    <p>2016-07-11 10:00</p>
-                </van-step>
-                <van-step>
-                    <h3>快件已发货</h3>
-                    <p>2016-07-10 09:30</p>
                 </van-step>
             </van-steps>
         </div>

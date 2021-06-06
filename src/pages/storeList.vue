@@ -34,33 +34,40 @@
                 finished-text="没有更多了"
                 @load="load_more"
         >
-        <div @click="ClickStore(product)" v-for="(product, key) in products" :key="key" style="margin-top: 5%">
-            <van-card
-                    desc="￥170/人"
-                    :title="product.title"
-                    :thumb="product.image"
-            >
-                <template #tags>
-                    <van-tag plain type="danger">烧烤</van-tag>
-                    <van-tag plain type="danger">曹家渡</van-tag>
-                </template>
-                <template #num>
-                    <span style="position: absolute;    right: 2%;top: 21%;">{{product.location}}</span>
-                </template>
-                <template #footer>
-                    <div style="width: 100%;height: 100px;display: flex;">
-                        <div style="width: 20%;height: 100%;"></div>
-                        <div style="width: 20%;height: 100%;white-space: nowrap;overflow: hidden;margin: 1%" v-for="(item,index) in 4" :key="index">
-                            <img style="height: 60%;width: 100%;border-radius:5%;" src="../image/image-plp-recommend.jpg" alt="">
-                            <div style="height: 40%;width: 100%;text-align: center">
-                                <div style="width: 100%;height: 50%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;  ">
-                                    [人气单品]爆款</div>
-                                <div style="width: 100%;height: 50%;color: #ffd01e">￥999</div>
+        <div @click="ClickStore(product)" v-for="(product, key) in products" :key="key" style="margin-top: 5%;">
+            <div style="width: 90%;
+    margin: auto;
+    ">
+                <van-card
+                        style="border-radius: 10px;"
+                        desc="￥170/人"
+                        :title="product.title"
+                        :thumb="product.image"
+                >
+                    <template #tags>
+                        营业时间：
+                        <van-tag plain type="danger">{{product.openTime}}</van-tag>
+                        <van-tag plain type="danger">{{product.closeTime}}</van-tag>
+                    </template>
+                    <template #num>
+                        <span style="position: absolute;    right: 2%;top: 21%;">{{product.location}}</span>
+                    </template>
+                    <template #footer>
+                        <div style="width: 100%;height: 100px;display: flex;">
+                            <div style="width: 20%;height: 100%;"></div>
+                            <div style="width: 20%;height: 100%;white-space: nowrap;overflow: hidden;margin: 1%" v-for="(item,index) in 4" :key="index">
+                                <img style="height: 60%;width: 100%;border-radius:5%;" src="../image/image-plp-recommend.jpg" alt="">
+                                <div style="height: 40%;width: 100%;text-align: center">
+                                    <div style="width: 100%;height: 50%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;  ">
+                                        [人气单品]爆款</div>
+                                    <div style="width: 100%;height: 50%;color: #ffd01e">￥999</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </template>
-            </van-card>
+                    </template>
+                </van-card>
+            </div>
+
 
         </div>
         </van-list>

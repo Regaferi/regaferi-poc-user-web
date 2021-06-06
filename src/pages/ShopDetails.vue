@@ -76,47 +76,56 @@
                                 offset-sm="3"
                         >
                             <v-card>
-                                <v-list two-line>
-                                    <template v-for="(item, index) in items">
-                                        <v-subheader
-                                                v-if="item.header"
-                                                :key="item.header"
+                                    <div v-for="(item, index) in items" :key="index" :class=" dividers == true ? '' : 'divader'">
+                                        <van-field
+                                                rows="2"
+                                                autosize
+                                                label="评论"
+                                                readonly
+                                                type="textarea"
+                                                :placeholder="item.comment"
+                                                show-word-limit
+                                        />
+                                        <van-field
+                                                rows="2"
+                                                autosize
+                                                readonly
+                                                label="回复"
+                                                type="textarea"
+                                                :placeholder="item.reply"
+                                                show-word-limit
+                                        />
+                                        <van-divider
+                                                :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
                                         >
-                                            {{ item.header }}
-                                        </v-subheader>
-                                        <v-divider
-                                                v-else-if="item.divider"
-                                                :key="index"
-                                                :inset="item.inset"
-                                        ></v-divider>
-                                        <v-list-item
-                                                v-else
-                                                :key="item.title"
-                                        >
-<!--                                            <v-list-item-avatar>-->
-<!--                                                <img :src="item.avatar">-->
-<!--                                            </v-list-item-avatar>-->
-                                            <v-list-item-content>
-                                                <v-list-item-title v-html="item.title"></v-list-item-title>
-                                                <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
-                                            </v-list-item-content>
-                                        </v-list-item>
-                                    </template>
-                                </v-list>
+                                        </van-divider>
+                                    </div>
+                                <div v-if="items.length > 2">
+                                    <van-divider v-show="dividers" @click="dividers = false"><van-icon name="arrow-up" />隐藏评论</van-divider>
+                                    <van-divider v-show="!dividers" @click="dividers = true"><van-icon name="arrow-down" />更多评论</van-divider>
+                                </div>
                             </v-card>
                         </v-col>
+
                     </v-row>
-                    <van-field
-                            v-model="message"
-                            rows="2"
-                            autosize
-                            label="评论"
-                            type="textarea"
-                            maxlength="50"
-                            placeholder="请输入评论"
-                            show-word-limit
-                    />
-                    <van-button style="float: right" @click="pinLun" round type="info">发送</van-button>
+                   <div v-if="token" style="margin: auto;width: 90%">
+                           <van-field
+                                   v-model="message"
+                                   rows="2"
+                                   autosize
+                                   label="评论"
+                                   type="textarea"
+                                   maxlength="100"
+
+                                   placeholder="请输入评论"
+                                   show-word-limit
+                           >
+                               <template #button>
+                                   <van-button style="float: right" @click="pinLun" round type="info">发送</van-button>
+                               </template>
+                           </van-field>
+
+                       </div>
                 </van-tab>
             </van-tabs>
         </div>
@@ -136,6 +145,7 @@
             message:'',
             show:true,
             divider:false,
+            dividers:false,
             ifOver: false, // 文本是否超出三行，默认否
             unfold: false, // 文本是否是展开状态 默认为收起
             active: '服务',
@@ -144,10 +154,14 @@
             items: [],
             products : [],
             details:{},
+            token:''
         }),
+
         mounted() {
+
         },
         created() {
+            this.token = this.$store.state.token
             var that = this
             comment({
                 serviceId:that.$route.query.id,
@@ -194,7 +208,7 @@
                     return
                 }
                 var that = this
-                that.message = ''
+
                 commentPinlun({
                     serviceId:that.$route.query.id,
                     star:5,
@@ -202,11 +216,13 @@
                 })
                     .then((res)=> {
                         console.log(res)
+                        that.message = ''
                         comment({
                             serviceId:that.$route.query.id,
                         })
                             .then(function (response) {
                                 that.items = response.data
+
                             })
                             .catch(function (error) {
                                 that.$notify({ type: 'warning', message: error.errMessage });

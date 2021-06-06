@@ -51,74 +51,107 @@
             </v-chip-group>
             <v-divider/>
             <!--  售卖规格   -->
-            <v-card-subtitle>販売仕様.</v-card-subtitle>
+            <v-card-subtitle>使用说明</v-card-subtitle>
             <v-card-text>
                 <v-card outlined>
                     <v-row>
                         <v-col cols="8">
                             <v-list-item two-line>
                                 <v-list-item-content>
-                                    <v-list-item-title>セットメニュー. A</v-list-item-title>
+                                    <v-list-item-title>{{product.subTitle}}</v-list-item-title>
                                     <v-list-item-subtitle>
-                                        ABCDE
+                                       总次数： {{product.totalCount}}
+                                    </v-list-item-subtitle> <v-list-item-subtitle>
+                                       单次使用次数： {{product.serviceTimeDay}}
                                     </v-list-item-subtitle>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-col>
                         <v-col cols="4">
-                            <h4 class="pt-5">$500</h4>
+                            <h4 class="pt-5">${{product.prices}}</h4>
                         </v-col>
                     </v-row>
                 </v-card>
                 <div class="pt-2"/>
-                <v-card outlined>
-                    <v-row>
-                        <v-col cols="8">
-                            <v-list-item two-line>
-                                <v-list-item-content>
-                                    <v-list-item-title>セットメニュー. A</v-list-item-title>
-                                    <v-list-item-subtitle>
-                                        ABCDE
-                                    </v-list-item-subtitle>
-                                </v-list-item-content>
-                            </v-list-item>
-                        </v-col>
-                        <v-col cols="4">
-                            <h4 class="pt-5">$500</h4>
-                        </v-col>
-                    </v-row>
-                </v-card>
+
             </v-card-text>
 
             <v-divider/>
             <!--  商品评价   -->
             <v-card-subtitle>服务評価</v-card-subtitle>
 
-            <v-list-item v-for="(item , index) in commentJson" :key="index">
-                <v-list-item-avatar>
-                    <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"/>
-                </v-list-item-avatar>
-                <v-list-item-content>
-                    <v-list-item-title>客.客 A</v-list-item-title>
-                    <v-list-item-subtitle>
-                        {{item.comment}}
-                    </v-list-item-subtitle>
-                    <span style="width: 100%;border: thin solid rgba(0, 0, 0, 0.12);border-radius: 4px;padding: 5px;height: 10%">
-                        {{item.reply}}
-                    </span>
-                </v-list-item-content>
-            </v-list-item>
-            <van-field
-                    v-model="message"
-                    rows="2"
-                    autosize
-                    label="评论"
-                    type="textarea"
-                    maxlength="50"
-                    placeholder="请输入评论"
-                    show-word-limit
-            />
-            <van-button @click="pinLun"  style="float: right" round type="info">发送</van-button>
+
+            <v-card>
+                <v-list two-line :class=" dividers == true ? '' : 'divader'">
+                    <template v-for="(item, index) in commentJson">
+                        <v-subheader
+                                v-if="item.header"
+                                :key="item.header"
+                        >
+                            {{ item.header }}
+                        </v-subheader>
+                        <v-divider
+                                v-else-if="item.divider"
+                                :key="index"
+                                :inset="item.inset"
+                        ></v-divider>
+                        <v-list-item
+                                v-else
+                                :key="item.title"
+                        >
+                            <!--                                            <v-list-item-avatar>-->
+                            <!--                                                <img :src="item.avatar">-->
+                            <!--                                            </v-list-item-avatar>-->
+                            <v-list-item-content>
+                                <van-field
+                                        rows="2"
+                                        autosize
+                                        label="评论"
+                                        readonly
+                                        type="textarea"
+                                        :placeholder="item.comment"
+                                        show-word-limit
+                                />
+                                <van-field
+                                        rows="2"
+                                        autosize
+                                        readonly
+                                        label="回复"
+                                        type="textarea"
+                                        :placeholder="item.reply"
+                                        show-word-limit
+                                />
+                                <van-divider
+                                        :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
+                                >
+                                </van-divider>
+                            </v-list-item-content>
+                        </v-list-item>
+                    </template>
+                </v-list>
+                <div v-if="commentJson.length > 2">
+                    <van-divider v-show="dividers" @click="dividers = false"><van-icon name="arrow-up" />隐藏评论</van-divider>
+                    <van-divider v-show="!dividers" @click="dividers = true"><van-icon name="arrow-down" />更多评论</van-divider>
+                </div>
+            </v-card>
+            <div v-if="token" style="margin-top: 10px;">
+                <van-field
+                        v-model="message"
+                        rows="2"
+                        autosize
+                        label="评论"
+                        type="textarea"
+                        maxlength="100"
+
+                        placeholder="请输入评论"
+                        show-word-limit
+                >
+                    <template #button>
+                        <van-button style="float: right" @click="pinLun" round type="info">发送</van-button>
+                    </template>
+                </van-field>
+
+            </div>
             <v-card-text style="color: blue">もっと見る</v-card-text>
             <v-divider/>
             <!--  商品描述   -->
@@ -157,6 +190,7 @@
             return {
                 message:'',
                 show:true,
+                dividers:false,
                 product : '',
                 colors: [
                     'indigo',
@@ -173,6 +207,7 @@
                     'Fifth',
                 ],
                 commentJson:[],
+                token:''
             }
         },
         mounted() {
@@ -180,7 +215,7 @@
             this.commentAdd()
         },
         created() {
-
+            this.token = this.$store.state.token
         },
         methods : {
             pinLun(){
@@ -231,7 +266,8 @@
                     });
             },
             navigateTo : function (){
-                this.$router.push({name : 'order-confirm', query: {'code': this.$route.query.id}})
+                let data = JSON.stringify(this.product)
+                this.$router.push({name : 'order-confirm', query: {'code': this.$route.query.id,'data':data}})
 
 
             }
@@ -245,5 +281,8 @@
         align-items: center;
         justify-content: center;
         height: 100%;
+    }
+    .divader{
+        height: 150px;overflow: hidden
     }
 </style>

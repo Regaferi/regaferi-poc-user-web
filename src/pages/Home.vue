@@ -9,7 +9,7 @@
 <!--          <img style="width: 100%;height: 250px" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" alt="">-->
           <v-img max-height="200px" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
 
-          <div v-show="isMobile" style="position: absolute;bottom: -13%;;left: 2%;width: 96%;border-radius: 6px;">
+          <div style="position: absolute;bottom: -13%;;left: 2%;width: 96%;border-radius: 6px;">
             <div style="    z-index: 1;
     border-radius: 6px;
     width: 100%;
@@ -126,11 +126,13 @@
                   <div style="color: red;padding-left:16px;font-size: 13px">  </div>
                   <v-card-text style="padding-top: 0">
                       <h6>营业时间</h6>
-                      <van-badge content="20：00" />
+                      <van-badge :content="product.openTime" />
+                      <van-badge :content="product.closeTime" />
                   </v-card-text>
                   <div style="display: flex;justify-content: space-between;font-size: 6px;padding: 5px">
                       <div>烧烤</div>
-                      <div><van-icon name="location-o" />东京</div>
+                      <div><van-icon name="location-o" />
+                          {{product.location}}</div>
                   </div>
               </v-card>
           </v-col>
@@ -158,14 +160,17 @@
       <div   v-show="!isMobile" class="PcMind">
           <div class="PcMindOne">
               <v-row style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-                  <v-col>热门服务</v-col>
+                  <v-col>热门商铺</v-col>
               </v-row>
               <div style="width: 100%;padding: 12px;display: flex;flex-wrap: wrap">
-              <div style="width: 25%;padding: 12px;" v-for="(product, key) in 6" :key="key" @click="serveWeb">
+              <div style="width: 25%;padding: 12px;" v-for="(product, key) in products" :key="key" @click="serveWeb">
                   <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'100%'"  >
-                      <v-img lazy-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" max-height=80% max-width=100% src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" ></v-img>
+                      <v-img v-if="product.logoImage" height="130" :src="product.logoImage.target"/>
+                      <van-image v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
+                          <template v-slot:error>加载失败</template>
+                      </van-image>
                       <v-row class="navigator-row"  >
-                          <v-card-subtitle  class="font-weight-black">商品名称</v-card-subtitle>
+                          <v-card-subtitle  class="font-weight-black">{{product.title}}</v-card-subtitle>
 
                       </v-row>
                       <div style="display: flex;justify-content: space-around">
@@ -186,27 +191,23 @@
       <div  v-show="!isMobile" class="PcMind">
           <div class="PcMindOne">
               <v-row style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-                  <v-col>推荐店铺</v-col>
+                  <v-col>热门行业</v-col>
               </v-row>
               <div style="width: 100%;padding: 12px;display: flex;flex-wrap: wrap;">
-                  <div style="width: 25%;padding: 12px;" v-for="(product, key) in 6" :key="key" @click="navigateToPDP(product.code)">
-                      <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'100%'"  >
-                          <v-img lazy-src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" max-height=80% max-width=100% src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" ></v-img>
-                          <v-row class="navigator-row"  >
-                              <v-card-subtitle  class="font-weight-black">商品名称</v-card-subtitle>
-
-                          </v-row>
-                          <v-card-text style="padding-top: 0">
-                              <h6>subTitle }}</h6>
-                          </v-card-text>
-                          <v-card-text>
-                              <v-row align="center" class="mx-0" >
-                                  <v-rating :value="product.rating" color="amber" dense half-increments readonly size="14"/>
+                  <v-col :cols="isMobile?'6':'2'"
+                         v-for="(navigator, i) in navigators"
+                         :key="i"
+                         @click="navigateTo(navigator)"
+                  >
+                      <v-banner elevation="3" style="margin:auto;padding: auto; background: #f3f0e9;">
+                          <v-card width="100%">
+                              <!--                      <v-img :lazy-src="navigator.imageurl" max-height=100% max-width=100% :src="navigator.imageurl" ></v-img>-->
+                              <v-row class="navigator-row"  >
+                                  <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; ">{{navigator.name}}</v-card-subtitle>
                               </v-row>
-                          </v-card-text>
-                      </v-card>
-
-                  </div>
+                          </v-card>
+                      </v-banner>
+                  </v-col>
               </div>
 
           </div>
