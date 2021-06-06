@@ -130,7 +130,6 @@
                       <van-badge :content="product.closeTime" />
                   </v-card-text>
                   <div style="display: flex;justify-content: space-between;font-size: 6px;padding: 5px">
-                      <div>烧烤</div>
                       <div><van-icon name="location-o" />
                           {{product.location}}</div>
                   </div>
@@ -173,14 +172,16 @@
                           <v-card-subtitle  class="font-weight-black">{{product.title}}</v-card-subtitle>
 
                       </v-row>
-                      <div style="display: flex;justify-content: space-around">
-                          <span>月卡</span>
-                          <span>699</span>
+                      <div style="    font-size: 10px;    margin-left: 5px;">
+                          <span>营业时间：</span>
+                          <span>{{product.openTime}}</span>
                       </div>
-                      <div style="display: flex;justify-content: space-around">
-                          <span>月卡</span>
-                          <span>699</span>
+                      <div style="    font-size: 10px;    margin-left: 5px;">
+                          <span>闭店时间：</span>
+                          <span>{{product.closeTime}}</span>
                       </div>
+                      <div style="font-size: 10px;margin-left: 5px;"><van-icon name="location-o" />
+                          {{product.location}}</div>
                   </v-card>
 
                  </div>
