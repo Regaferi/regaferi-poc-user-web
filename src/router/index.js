@@ -10,7 +10,7 @@ import LoginCallback from "@/pages/LoginCallback";
 import OrderDetail from "@/pages/order/OrderDetail";
 import resume from "@/pages/resume";
 import firstLogin from "@/pages/firstLogin";
-import orderDetails from "@/pages/orderDetails";
+import details from "@/pages/orderDetails";
 Vue.use(VueRouter)
 
 const routes = [
@@ -61,9 +61,9 @@ const routes = [
     })
   },
   {
-    path: '/orderDetails',
-    name: 'orderDetails',
-    component: orderDetails,
+    path: '/details',
+    name: 'details',
+    component: details,
     children : [],
     props: route => ({
       category: route.query.category,

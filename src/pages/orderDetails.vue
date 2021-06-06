@@ -1,8 +1,8 @@
 <template>
     <div style="margin-top: 20%;">
         <a-descriptions bordered>
-            <a-descriptions-item label="Product">
-                Cloud Database
+            <a-descriptions-item label="orderCode">
+                {{orderList.code}}
             </a-descriptions-item>
             <a-descriptions-item label="Billing Mode">
                 Prepaid
@@ -58,18 +58,39 @@
                 </van-step>
             </van-steps>
         </div>
+        <van-overlay :show="show">
+            <div class="wrapper">
+                <van-loading color="#1989fa" />
+            </div>
+        </van-overlay>
     </div>
 </template>
 
 <script>
-
+import {orderDetail,serviceOrder} from '@api'
     export default {
         data() {
             return {
+                show:true,
                 size: 'default',
+                orderList:{}
             };
         },
+        created() {
+            var thas = this
+            orderDetail(thas.$route.query.id).then((res)=> {
+                thas.show = false
+                thas.orderList = res.data
+            })
+            serviceOrder({
+                orderId:thas.$route.query.id
+            }).then((res)=> {
+                thas.show = false
+                thas.orderList = res.data
+            })
+        },
         methods: {
+
             onChange(e) {
                 console.log('size checked', e.target.value);
                 this.size = e.target.value;
@@ -82,5 +103,11 @@
     .van-cell-group{
         background-color: #f7f8fa;
 
+    }
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
     }
 </style>

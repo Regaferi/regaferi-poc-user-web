@@ -30,6 +30,10 @@ export const  commentPinlun= (commentPinlun)=>post('/comment',commentPinlun)
 export const  order= (order)=>post('/order',order)
 //订单列表
 export const  orderList=(orderList)=>get('/order',orderList)
+//订单详情
+export const  orderDetail=(orderDetail)=>get('/order/'+orderDetail)
+//订单详情历史
+export const  serviceOrder=(serviceOrder)=>get(`/service-order/log-info?orderId=${serviceOrder.orderId}`)
 
 //服务补偿
 export const  compensation=(compensation)=>put('/service-order/compensation',compensation)

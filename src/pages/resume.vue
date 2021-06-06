@@ -71,7 +71,7 @@
             <v-card-text>
                 <h4 class="pb-3">私のカード券</h4>
                 <v-list height="450" class="overflow-y-auto">
-                    <div v-for="(item,index) in orderList" :key="index">
+                    <div v-for="(item,index) in orderList" :key="index" @click="Details(item)">
                         <v-card outlined>
                             <v-list-item>
                                 <v-list-item-title>会員カード A</v-list-item-title>
@@ -144,6 +144,9 @@ import {memberDetail,orderList} from "@api";
                 });
         },
         methods : {
+            Details(val){
+                this.$router.push({name:'details',query:{id:val.id}})
+            },
             tuiChu(){
                 this.$router.push({name:'home'})
                 this.$store.commit('COMMIT_TOKEN','')

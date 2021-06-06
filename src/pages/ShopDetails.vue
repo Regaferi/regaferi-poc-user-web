@@ -32,7 +32,7 @@
         <!--  商铺详情  -->
         <v-divider class="mx-4"></v-divider>
         <!--轮播图-->
-        <div style="    margin-top: 12rem;">
+        <div v-if="images" style="    margin-top: 12rem;">
             <van-swipe height="250" class="my-swipe" style="border-radius: 10px;width: 95%;margin-left: 2%" :autoplay="3000" indicator-color="white">
                 <van-swipe-item v-for="(img ,index) in images" :key="index">
                     <img style="height: 100%" v-lazy="img" />
@@ -57,12 +57,12 @@
                             >
                                 <template #desc>
                                     <div>{{item.subTitle}}</div>
-                                    <div>{{item.description}}</div>
+                                    <textarea style="    width: 100%;" readonly :placeholder="item.description"></textarea>
                                 </template>
                             </van-card>
 
                         </div>
-                    <div v-if="products.length > 4">
+                    <div v-if="products.length > 2">
                         <van-divider v-show="divider" @click="divider = false"><van-icon name="arrow-up" />折叠</van-divider>
                         <van-divider v-show="!divider" @click="divider = true"><van-icon name="arrow-down" />展开</van-divider>
                     </div>
@@ -140,10 +140,7 @@
             unfold: false, // 文本是否是展开状态 默认为收起
             active: '服务',
             value:3,
-            images: [
-                'https://cdn.vuetifyjs.com/images/cards/cooking.png',
-                'https://cdn.vuetifyjs.com/images/cards/cooking.png',
-            ],
+            images: [],
             items: [],
             products : [],
             details:{},
@@ -167,6 +164,7 @@
             })
                 .then(function (response) {
                     that.products = response.data
+
                     that.show = false
                 })
                 .catch(function (error) {
@@ -177,6 +175,11 @@
             })
                 .then(function (response) {
                     that.details = response.data
+                    response.data.imageUrls.forEach(ele=>{
+                        if(ele.type == 'BANNER'){
+                            that.images.push(ele.target)
+                        }
+                    })
                     that.show = false
                 })
                 .catch(function (error) {
@@ -185,7 +188,13 @@
         },
         methods: {
             pinLun(){
+
+                // console.log(this.$store.state.token)
+                if(this.message == ''){
+                    return
+                }
                 var that = this
+                that.message = ''
                 commentPinlun({
                     serviceId:that.$route.query.id,
                     star:5,

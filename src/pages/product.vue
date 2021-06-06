@@ -34,13 +34,13 @@
             <!--  商品基本信息   -->
             <v-row>
                 <v-col cols="10"><v-card-title>{{ product.name }}</v-card-title></v-col>
-                <v-col cols="2"><v-icon class="pt-5">mdi-heart</v-icon></v-col>
+<!--                <v-col cols="2"><v-icon class="pt-5">mdi-heart</v-icon></v-col>-->
             </v-row>
 
             <v-card-text>
-                <v-row align="center" class="mx-0 pb-3">
-                    <v-rating :value="product.rating" color="amber" dense half-increments readonly size="14"/>
-                </v-row>
+<!--                <v-row align="center" class="mx-0 pb-3">-->
+<!--                    <v-rating :value="product.rating" color="amber" dense half-increments readonly size="14"/>-->
+<!--                </v-row>-->
                 <h6>{{ product.subTitle }}</h6>
             </v-card-text>
             <v-divider/>
@@ -184,6 +184,9 @@
         },
         methods : {
             pinLun(){
+                if(this.message == ''){
+                    return
+                }
                 var that = this
                 commentPinlun({
                     serviceId:that.$route.query.id,

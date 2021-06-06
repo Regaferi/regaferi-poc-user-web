@@ -51,12 +51,11 @@ axios.interceptors.response.use(
                 loading.close();
             }*/
 
-            if (res.currency == "JPY") {
-
-                resolve(res)
-            } else{
-                Notify('失败');
+            if (res.errCode != 'SHOP_MEMBER_0009' || res.errCode != 'SHOP_MEMBER_0007') {
                 reject(res)
+
+            } else{
+                resolve(res)
             }
         })
     },
@@ -81,6 +80,7 @@ axios.interceptors.response.use(
             return;
         }
         const status = error.response.status;
+        console.log(status,'ppppppppppppppppppppppppp')
         switch (status) {
             case 500:
                 Notify('服务器内部错误');
@@ -113,6 +113,7 @@ axios.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
 /*
  *get方法，对应get请求
  *@param {String} url [请求的url地址]
