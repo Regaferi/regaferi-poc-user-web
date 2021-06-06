@@ -18,8 +18,12 @@ axios.interceptors.request.use(
             text: "正在加载中......",
             fullscreen: true
         });*/
+        console.log(store.state,'headers')
+
         if (store.state.token) {
             config.headers["authority-token"] = store.state.token;
+            config.headers["Authorization"] = store.state.Authorization;
+            config.headers["Content-Length"] = store.state.Content_length;
         }
         return config;
     },
@@ -39,6 +43,7 @@ axios.interceptors.response.use(
             if(res.code == '200' || res.success == true){
                 resolve(res)
             }else{
+                reject(res)
                 Notify(res.errMessage);
             }
             //请求成功后关闭加载框
@@ -46,10 +51,11 @@ axios.interceptors.response.use(
                 loading.close();
             }*/
 
-            if (res.code == '0') {
+            if (res.currency == "JPY") {
 
                 resolve(res)
             } else{
+                Notify('失败');
                 reject(res)
             }
         })

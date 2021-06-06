@@ -7,11 +7,14 @@ export const  login= (login)=>post('/member/login',login)
 export const  memberDetail=(memberDetail)=>get('/member/detail',memberDetail)
 // 补充信息
 export const  signUp= (signUp)=>post('/member/sign-up',signUp)
-
+//注册
+export const  memberRegister= (memberRegister)=>post('/member/register',memberRegister)
+//普通登录
+export const  memberLogin= (memberLogin)=>post('/member/login',memberLogin)
 
             /*店铺模块*/
 //店铺查询
-export const  shopIndex=(shopIndex)=>get(`/shop/index?keyword=${shopIndex.keyword}&type=${shopIndex.type}&pageIndex=${shopIndex.pageIndex}&pageSize=${shopIndex.pageSize}`)
+export const  shopIndex=(shopIndex)=>get(`/shop/index?keyword=${shopIndex.keyword}&type=${shopIndex.type}&pageIndex=${shopIndex.pageIndex}&pageSize=${shopIndex.pageSize}&location=${shopIndex.location}`)
 //店铺详情
 export const  shopId=(shopId)=>get(`/shop?id=${shopId.id}`)
 //店铺服务
@@ -19,15 +22,22 @@ export const  serviceShop=(serviceShop)=>get(`/service/shop?shopId=${serviceShop
 //服务详情
 export const  service=(service)=>get(`/service?id=${service.id}`)
 
-
 //评论查询
 export const  comment=(comment)=>get(`/comment?serviceId=${comment.serviceId}`)
-
+//评论
 export const  commentPinlun= (commentPinlun)=>post('/comment',commentPinlun)
 //创单
 export const  order= (order)=>post('/order',order)
 //订单列表
-export const  orderList=(orderList)=>get('/order/list',orderList)
+export const  orderList=(orderList)=>get('/order',orderList)
 
 //服务补偿
 export const  compensation=(compensation)=>put('/service-order/compensation',compensation)
+
+//行业全查
+export const  industryAll=(industryAll)=>get('/industry/all',industryAll)
+//行业搜索服务
+export const  servicePage=(servicePage)=>get(`/service/page?industryId=${servicePage.industryId}&pageIndex=${servicePage.pageIndex}&pageSize=${servicePage.pageSize}`)
+
+//第三方
+export const  sessions= (sessions)=>post('/api/v1/sessions',sessions)

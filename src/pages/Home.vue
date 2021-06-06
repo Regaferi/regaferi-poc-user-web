@@ -118,7 +118,10 @@
       <v-row v-show="isMobile" class="pl-2 pr-2">
           <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product)">
               <v-card>
-                  <v-img height="130" :src="product.image"/>
+                  <v-img v-if="product.logoImage" height="130" :src="product.logoImage.target"/>
+                  <van-image v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
+                      <template v-slot:error>加载失败</template>
+                  </van-image>
                   <v-card-title style="font-size: 13px;padding-top: 0px;padding-bottom: 0px">{{ product.title }}</v-card-title>
                   <div style="color: red;padding-left:16px;font-size: 13px"><span><van-icon name="star-o" /></span> <span>4.6</span>  <span style="margin-left: 10px"><van-icon name="chat-o" color="#ee0a24" /></span> <span>168</span></div>
                   <v-card-text style="padding-top: 0">
@@ -133,19 +136,19 @@
           </v-col>
       </v-row>
       <v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-          <v-col>热门主题</v-col>
+          <v-col>热门行业</v-col>
       </v-row>
       <v-row v-show="isMobile" style="width: 100%; margin: auto; left: 0; right: 0;">
           <v-col :cols="isMobile?'6':'2'"
                  v-for="(navigator, i) in navigators"
                  :key="i"
-                 @click="navigateTo(navigator.navigator.name, navigator.navigator.category, navigator.navigator.property)"
+                 @click="navigateTo(navigator)"
           >
               <v-banner elevation="3" style="margin:auto;padding: auto; background: #f3f0e9;">
                   <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'300px'"  >
-                      <v-img :lazy-src="navigator.imageurl" max-height=100% max-width=100% :src="navigator.imageurl" ></v-img>
+<!--                      <v-img :lazy-src="navigator.imageurl" max-height=100% max-width=100% :src="navigator.imageurl" ></v-img>-->
                       <v-row class="navigator-row"  >
-                          <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; ">{{navigator.title}}</v-card-subtitle>
+                          <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; ">{{navigator.name}}</v-card-subtitle>
                       </v-row>
                   </v-card>
               </v-banner>
@@ -262,7 +265,8 @@
 
 // import GoogleMap from "@/components/GoogleMap";
 // import Introduction from "@/pages/Introduction";
-import { shopIndex } from "@api";
+import { shopIndex,industryAll } from "@api";
+import store from "../store";
 export default {
   name: "Home",
   data () {
@@ -281,62 +285,7 @@ export default {
         topWidth:'',
         products : [],
       navigators : [
-        {
-          title : '推荐',
-          icon: 'mdi-dialpad',
-          navigator : {
-            name: 'product-list',
-            url: '/list',
-            category : 'recommend',
-            property : ''
-          },
-           imageurl : 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg',
-        },
-        {
-          title : '美食',
-          icon: 'mdi-dialpad',
-          navigator : {
-            name: 'product-list',
-            url: '/list',
-          },
-          imageurl : 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1992102675,2090288480&fm=26&gp=0.jpg',
-        },
-        {
-          title : '饮品',
-          icon: 'mdi-dialpad',
-          imageurl : 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=4276895145,1303738748&fm=26&gp=0.jpg',
-          navigator : {
-            name: 'product-list',
-            url: '/list',
-          }
-        },
-        {
-          title : '娱乐',
-          icon: 'mdi-dialpad',
-           imageurl : 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=8018056,954128737&fm=26&gp=0.jpg',
-          navigator : {
-            name: 'product-list',
-            url: '/list',
-          }
-        },
-        {
-          title : '温泉',
-          icon: 'mdi-dialpad',
-           imageurl : 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg',
-          navigator : {
-            name: 'product-list',
-            url: '/list',
-          }
-        },
-        {
-          title : '旅馆',
-          icon: 'mdi-dialpad',
-          imageurl : 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=220512769,876056645&fm=224&gp=0.jpg',
-          navigator : {
-            name: 'product-list',
-            url: '/list',
-          }
-        },
+
       ],
       isMobile : false,
       colors: [
@@ -361,11 +310,7 @@ export default {
     // Introduction
   },
   created() {
-
-     /*product({
-            pageSize:10,
-            pageIndex:1,
-        }).then(res => {
+     /*industryAll().then(res => {
                 this.tableData = res.data
             this.loading = false
             this.total = res.totalCount
@@ -381,9 +326,10 @@ export default {
       var that = this
       shopIndex({
           keyword:'',
-          type:2,
+          type:1,
           pageIndex:0,
-          pageSize:6
+          pageSize:6,
+          location:'',
       })
           .then(function (response) {
               that.products = response.data
@@ -391,6 +337,12 @@ export default {
           })
           .catch(function (error) {
               that.$notify({ type: 'warning', message: error.errMessage });
+          });
+      industryAll().then(res => {
+          this.navigators = res.data
+      })
+          .catch(err => {
+              console.log(err.data,'失败')
           });
   },
   methods : {
@@ -404,18 +356,17 @@ export default {
           console.log(this.$route.path)
           if(this.value1 == '店铺'){
               if (this.$route.path !== '/storeList') { //判断当前路由和跳转路由是否一致（防止路由复用产生的报错）
-                  this.$router.push({name : 'storeList',query:{input:this.input}})
+                  this.$router.push({name : 'storeList',query:{input:this.input,location:this.input1}})
               }
           }else{
               if (this.$route.path !== '/product-list') { //判断当前路由和跳转路由是否一致（防止路由复用产生的报错）
-                  this.$router.push({name : 'product-list',query:{input:this.input}})
+                  this.$router.push({name : 'product-list',query:{input:this.input,location:this.input1,name:'souSuo'}})
               }
           }
 
       },
-    navigateTo : function (name, category, property){
-          console.log(name)
-      this.$router.push({name : name, params: {'category': category, 'property' : property}})
+    navigateTo : function (val){
+      this.$router.push({name : 'product-list',query:{id:val.id,name:'hangYe'}})
     },
   }
 

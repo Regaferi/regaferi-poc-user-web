@@ -125,6 +125,22 @@
                   E-Mail
                 </v-btn>
                 <v-btn
+                        color="red"
+                        small
+                        outlined
+                        @click="revealZhuce = true"
+                >
+                  注册
+                </v-btn>
+                <v-btn
+                        color="red"
+                        small
+                        outlined
+                        @click="revealDenlu = true"
+                >
+                  登录
+                </v-btn>
+                <v-btn
                     color="brown"
                     small
                     outlined
@@ -192,6 +208,108 @@
                   </v-card-actions>
                 </v-card>
               </v-expand-transition>
+              <v-expand-transition>
+                <v-card
+                        v-if="revealZhuce"
+                        class="transition-fast-in-fast-out v-card--reveal"
+                        style="height: 100%;"
+                >
+                  <v-card-text class="pb-0">
+                    <p class="text--primary">迅速な登録/登録
+                      <v-btn
+                              text
+                              x-small
+                              @click="revealZhuce = false"
+                      >
+                        <v-icon small>mdi-chevron-up</v-icon>
+                      </v-btn>
+                    </p>
+                    <v-form
+                            ref="form"
+                            v-model="valid"
+                            lazy-validation
+                    >
+                      <v-text-field
+                              v-model="formData.email"
+                              :rules="email"
+                              label="Email"
+                              required
+                      ></v-text-field>
+                      <v-text-field
+                              v-model="formData.password"
+                              :rules="password"
+                              label="请输入密码"
+                              required
+                      ></v-text-field>
+                      <v-text-field
+                              v-model="formData.repeatPassword"
+                              :rules="repeatPassword"
+                              label="请再次输入密码"
+                              required
+                      ></v-text-field>
+                    </v-form>
+                  </v-card-text>
+                  <v-card-actions class="pt-3">
+                    <v-btn
+                            outlined
+                            small
+                            color="teal accent-4"
+                            @click="register"
+                    >
+                      注册 |
+                      <v-icon small class="pl-1">mdi-check-underline</v-icon>
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-expand-transition>
+              <v-expand-transition>
+                <v-card
+                        v-if="revealDenlu"
+                        class="transition-fast-in-fast-out v-card--reveal"
+                        style="height: 100%;"
+                >
+                  <v-card-text class="pb-0">
+                    <p class="text--primary">登録/登録
+                      <v-btn
+                              text
+                              x-small
+                              @click="revealDenlu = false"
+                      >
+                        <v-icon small>mdi-chevron-up</v-icon>
+                      </v-btn>
+                    </p>
+                    <v-form
+                            ref="form"
+                            v-model="valid"
+                            lazy-validation
+                    >
+                      <v-text-field
+                              v-model="formData1.email"
+                              :rules="email"
+                              label="Email"
+                              required
+                      ></v-text-field>
+                      <v-text-field
+                              v-model="formData1.password"
+                              :rules="password"
+                              label="请输入密码"
+                              required
+                      ></v-text-field>
+                    </v-form>
+                  </v-card-text>
+                  <v-card-actions class="pt-3">
+                    <v-btn
+                            outlined
+                            small
+                            color="teal accent-4"
+                            @click="member"
+                    >
+                      登录 |
+                      <v-icon small class="pl-1">mdi-check-underline</v-icon>
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-expand-transition>
             </div>
           </v-card>
         </v-sheet>
@@ -202,7 +320,7 @@
 
 <script>
 
-import { verify,login} from "@api";
+import { verify,login,memberRegister,memberLogin} from "@api";
 export default {
 
   name: "Account",
@@ -215,12 +333,31 @@ export default {
       isLogin : false,
       dialog: false,
       reveal: false,
+      revealZhuce: false,
+      revealDenlu: false,
       valid: true,
       account: '',
       code:'',
       show: false,
       count: '',
       timer: null,
+      formData:{
+        email:'',
+        password:'',
+        repeatPassword:'',
+      },
+      formData1:{
+        email:'',
+        password:'',
+        source:100,
+      },
+      email: [
+        v => !!v || '请输入邮箱',
+      ],password: [
+        v => !!v || '请输入密码',
+      ],repeatPassword: [
+        v => !!v || '请再次输入密码',
+      ],
       accountRules: [
         v => !!v || '请输入邮箱/手机号',
       ],
@@ -234,6 +371,41 @@ export default {
     this.isMobile = this.$store.state.isMobile;
   },
   methods: {
+    member(){
+      let that = this;
+      memberLogin(that.formData1)
+              .then(function (response) {
+                that.$notify({ type: 'success', message: "登录成功!" });
+                if(response.data.firstLogin == true){
+                  that.$router.push({name:'firstLogin'})
+                }else {
+                  that.$router.push({name:'resume'})
+                }
+                that.$store.commit("COMMIT_TOKEN", response.data);
+              })
+              .catch(function (error) {
+                that.$notify({ type: 'warning', message: error.errMessage });
+              });
+    },
+    register(){
+      let that = this;
+      if(that.formData.password != that.formData.repeatPassword){
+        that.$notify({ type: 'warning', message: "两次密码不一致，请重新输入" });
+      }else{
+        memberRegister(that.formData)
+                .then(function (response) {
+                  console.log(response)
+                  that.$notify({ type: 'success', message: "注册成功,请重新登录!" });
+                  that.revealDenlu = false
+                  that.reveal = true
+                })
+                .catch(function (error) {
+                  that.$notify({ type: 'warning', message: error.errMessage });
+                });
+      }
+
+
+    },
     login (){
 
       let that = this;
@@ -254,7 +426,7 @@ export default {
           "verifyCode": this.code
         })
                 .then(function (response) {
-                  if(response.data.firstLogin == false){
+                  if(response.data.firstLogin == true){
                     that.$router.push({name:'firstLogin'})
                   }else {
                     that.$router.push({name:'resume'})

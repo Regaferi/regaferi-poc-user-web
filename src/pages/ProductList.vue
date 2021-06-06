@@ -125,7 +125,7 @@
 </template>
 
 <script>
-  import {shopIndex} from "@api"
+  import {shopIndex,servicePage} from "@api"
 export default {
   name: "ProductList",
   data: () => ({
@@ -187,19 +187,39 @@ export default {
   }),
   created() {
     var that = this
-    shopIndex({
-      keyword:that.$route.query.input,
-      type:1,
-      pageIndex:0,
-      pageSize:10
-    })
-            .then(function (response) {
-              that.products = response.data
-              that.show = false
-            })
-            .catch(function (error) {
-              that.$notify({ type: 'warning', message: error.errMessage });
-            });
+    console.log(that.$route.query.name,'------------------------------------------')
+    if(that.$route.query.name == 'hangYe'){
+      servicePage({
+        industryId:that.$route.query.id,
+        pageIndex:0,
+        pageSize:10,
+      })
+              .then(function (response) {
+                that.products = response.data
+                that.show = false
+              })
+              .catch(function (error) {
+                that.$notify({ type: 'warning', message: error.errMessage });
+              });
+    }
+    if(that.$route.query.name == 'souSuo'){
+      shopIndex({
+        keyword:that.$route.query.input,
+        type:1,
+        pageIndex:0,
+        pageSize:10,
+        location:that.$route.query.location
+      })
+              .then(function (response) {
+                that.products = response.data
+                that.show = false
+              })
+              .catch(function (error) {
+                that.$notify({ type: 'warning', message: error.errMessage });
+              });
+    }
+
+
   },
   methods: {
     load_more: function() {
@@ -208,24 +228,51 @@ export default {
     },
     onLoad() {
       var that = this
+      if(that.$route.query.name == 'hangYe'){
+        servicePage({
+          industryId:that.$route.query.id,
+          pageIndex:that.page,
+          pageSize:that.limit,
+        })
+                .then(function (response) {
+                  that.show = false
+                  // 加载状态结束
+                  that.loading = false;
+                  that.products = that.products.concat(response.data);//追加数据
+                  if (response.data.length == 0) {  //数据全部加载完成
+                    that.finished = true;
+                  }else{
+                    that.finished = false;
+                  }
+                })
+                .catch(function (error) {
+                  that.$notify({ type: 'warning', message: error.errMessage });
+                });
+      }
+      if(that.$route.query.name == 'souSuo'){
+        shopIndex({
+          keyword:that.$route.query.input,
+          type:2,
+          pageIndex:that.page,
+          pageSize:that.limit,
+          location:that.$route.query.location,
+        })
+                .then(function (response) {
+                  that.show = false
+                  // 加载状态结束
+                  that.loading = false;
+                  that.products = that.products.concat(response.data);//追加数据
+                  if (response.data.length == 0) {  //数据全部加载完成
+                    that.finished = true;
+                  }else{
+                    that.finished = false;
+                  }
+                })
+                .catch(function (error) {
+                  that.$notify({ type: 'warning', message: error.errMessage });
+                });
+      }
 
-      shopIndex({
-        keyword:that.$route.query.input,
-        type:2,
-        pageIndex:that.page,
-        pageSize:that.limit
-      })
-              .then(function (response){
-                that.show = false
-                // 加载状态结束
-                that.loading = false;
-                that.products = that.products.concat(response.data);//追加数据
-                if (response.data.length == 0) {  //数据全部加载完成
-                  that.finished = true;
-                }else{
-                  that.finished = false;
-                }
-              })
     },
     reserve () {
       this.loading = true

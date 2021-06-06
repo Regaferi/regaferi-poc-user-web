@@ -25,11 +25,11 @@ export default {
   },
   created() {
     // 自适配夜间模式
-    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches){
+    /*if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches){
       this.$vuetify.theme.dark = true;
     }else {
       this.$vuetify.theme.dark = false;
-    }
+    }*/
   },
   mounted () {
     window.addEventListener('resize', this.onResize, { passive: true })

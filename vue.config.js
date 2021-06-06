@@ -14,7 +14,15 @@ module.exports = {
   ]
 }
 */
-
+//对一些不经常改动的库，可以通过cdn引入，webpack不对他们打包
+let externals = {
+    vue: "Vue",
+    axios: "axios",
+    "element-ui": "ELEMENT",
+    "vue-router": "VueRouter",
+    vuex: "Vuex",
+    "vue2-editor": "VueEditor"
+};
 // Vue.config.js 配置选项
 let path = require("path");
 function resolve(dir) {
@@ -97,6 +105,14 @@ module.exports = {
             errors: true
         },
         proxy: {
+            '/apis/api': {    //将www.exaple.com印射为/apis
+                target: "https://komoju.com",  // 接口域名
+                secure: true,  // 如果是https接口，需要配置这个参数
+                changeOrigin: true,  //是否跨域
+                pathRewrite: {
+                    '^/apis': ''   //需要rewrite的,
+                }
+            },
             '/apis': {    //将www.exaple.com印射为/apis
                 target: process.env.VUE_APP_LOGOUT_URL,  // 接口域名
                 secure: false,  // 如果是https接口，需要配置这个参数

@@ -196,12 +196,13 @@
         }),
         created() {
             var that = this
-            console.log(that.$route.query.input)
+            console.log(that.$route.query.location,'55555555555555555555')
             shopIndex({
                 keyword:that.$route.query.input,
                 type:2,
                 pageIndex:0,
-                pageSize:10
+                pageSize:10,
+                location:that.$route.query.location
             })
                 .then(function (response) {
                     that.products = response.data
@@ -223,7 +224,8 @@
                         keyword:that.$route.query.input,
                         type:2,
                         pageIndex:that.page,
-                        pageSize:that.limit
+                        pageSize:that.limit,
+                        location:that.$route.query.location,
                     })
                         .then(function (response){
                             that.show = false

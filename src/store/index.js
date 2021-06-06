@@ -9,6 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: '',
+    Authorization: '',
+    Content_length: '',
     roles: [], //用户角色
     tagsList: [], //打开的标签页个数,
     isCollapse: true, //侧边导航是否折叠
@@ -24,7 +26,17 @@ export default new Vuex.Store({
     COMMIT_TOKEN(state, object) {
 
       state.token = object.authorityToken;
-      console.log(state.token,99999999999999)
+    },
+    //保存支付
+    COMMIT_ZHIFU(state, object) {
+      console.log(object,'vuex')
+      state.Authorization = object
+
+    },//保存支付
+    COMMIT_Content(state, object) {
+      console.log(object,'vuex')
+      state.Content_length = object
+
     },
     //保存标签
     TAGES_LIST(state, arr) {

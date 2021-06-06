@@ -6,7 +6,7 @@
             <div style="position: absolute;margin:0 auto;width:95%;top: 80%;left: 2%;    z-index: 1;">
                 <div style="border-radius: 10px;position: relative;background:#F5F5F5;padding: 10px;box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);">
                     <div style="width: 100%;height: 100%;margin-bottom: 2%;border-bottom: 2px solid #676a6c;display: flex">
-                        <h2 style="font-size: 25px;width: 100%;letter-spacing:5px;">{{StoreEllipsis(details.title)}}</h2>
+                        <h2 style="font-size: 25px;width: 100%;">{{StoreEllipsis(details.title)}}</h2>
                     </div>
 
                     <div style="width: 100%;height: 59%">
@@ -116,7 +116,7 @@
                             placeholder="请输入评论"
                             show-word-limit
                     />
-                    <van-button @click="pinLun" round type="info">发送</van-button>
+                    <van-button style="float: right" @click="pinLun" round type="info">发送</van-button>
                 </van-tab>
             </van-tabs>
         </div>

@@ -3,7 +3,13 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 import router from './router'
 import i18n from './i18n/vue-i18n'
+import Antd from 'ant-design-vue';
 import store from './store'
+
+import 'ant-design-vue/dist/antd.css';
+Vue.config.productionTip = false;
+
+Vue.use(Antd)
 
 import message from './components/message/message.js'
 Vue.prototype.$message = message

@@ -118,7 +118,7 @@
                     placeholder="请输入评论"
                     show-word-limit
             />
-            <van-button @click="pinLun" round type="info">发送</van-button>
+            <van-button @click="pinLun"  style="float: right" round type="info">发送</van-button>
             <v-card-text style="color: blue">もっと見る</v-card-text>
             <v-divider/>
             <!--  商品描述   -->

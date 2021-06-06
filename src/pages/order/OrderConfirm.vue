@@ -6,7 +6,6 @@
       <div class="pt-5"/>
       <div style="padding-left: 6%">
         <v-card width="96%" style="padding-left: 3%" >
-          <v-card-title>{{product.total}}</v-card-title>
           <v-card-text>
             <v-row>
               <v-col cols="6">
@@ -14,7 +13,7 @@
               </v-col>
               <v-col cols="6" style="font-size: xx-small">
                 <h4 class="pt-3">今日のバーベキュー屋</h4>
-                <h5 style="color: red">${{product.payment}} / Monthly</h5>
+                <h5 style="color: red">${{product.total}} / JPY</h5>
                 <v-divider class="pt-3 pb-5"/>
                 <h6>回数制限.：2 Times / Per Day</h6>
                 <h6>利用可能な時間：2021.01.01 - 2021.04.15</h6>
@@ -53,8 +52,8 @@
 
 <script>
 
-import axios from "axios";
-import {order} from '@api'
+// import axios from "axios";
+import {order,sessions} from '@api'
 export default {
   name: "OrderConfirm",
   data () {
@@ -81,6 +80,7 @@ export default {
 
               that.product = res.data
               that.show = false
+      that.orderCode = res.data.code;
             })
             .catch(function (error) {
               that.$notify({ type: 'warning', message: error.errMessage });
@@ -92,36 +92,35 @@ export default {
     },
     payNow(){
       let _this = this;
-      axios.post('http://127.0.0.1:8051/order/create', {
-        "memberId": _this.$store.memberId,
-        "serviceId" : _this.product.serviceId,
-        "orderType" : 100,
-        "payType" : 100
-      })
-      .then(function (res){
-         console.log(res.data.orderCode);
-        _this.orderCode = res.data.orderCode;
         let querystring = require('querystring');
-        let https = require('https');
+        // let https = require('https');
         let secret_key = 'sk_test_4ojcudizab8oes13yqzuer6a'
         let auth = 'Basic ' + Buffer.from(secret_key + ':').toString('base64');
         let post_data = querystring.stringify({
           'default_locale': 'ja',
           'email': 'regaferi@2021gmail.com',
-          'amount': '8888',
+          'amount': _this.product.total,
           'currency': 'JPY',
           'payment_data[external_order_num]': _this.orderCode,
           'return_url': 'https://regaferi-api.cn.utools.club/orderDetail'
         });
 
-        let post_options = {
+        _this.$store.commit('COMMIT_ZHIFU',auth)
+        _this.$store.commit('COMMIT_Content',Buffer.byteLength(post_data))
+        sessions(post_data).then(function (res){
+          console.log(res,'支付')
+          window.open(res.session_url)
+        }).catch(function (error) {
+          window.open(error.session_url)
+          console.log(error)
+        });
+        /*let post_options = {
           host: 'komoju.com',
           port: '443',
           path: '/api/v1/sessions',
           method: 'POST',
           headers: {
             'Authorization': auth,
-            'Access-Control-Allow-Origin':'*',
             'Content-Length': Buffer.byteLength(post_data)
           }
         };
@@ -133,9 +132,8 @@ export default {
         });
          console.log(post_data);
         post_req.write(post_data);
-        post_req.end();
+        post_req.end();*/
       // window.location.href = post_data['session_url'];
-      })
     }
   }
 }

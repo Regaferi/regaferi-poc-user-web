@@ -124,7 +124,7 @@
                             <v-slide-x-reverse-transition>
                                 <v-tooltip
                                         v-if="formHasErrors"
-                                        left
+
                                 >
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-btn
