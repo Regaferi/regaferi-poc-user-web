@@ -90,7 +90,7 @@
     <!-- CMS 轮播结束 -->
 
       <!--<v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-          <v-col>热门商品</v-col>
+          <v-col>新规商品</v-col>
       </v-row>
       <v-row class="pl-2 pr-2" v-show="isMobile">
           <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product.code)">
@@ -113,7 +113,7 @@
 
 
       <v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-          <v-col>热门店铺</v-col>
+          <v-col>新规店铺</v-col>
       </v-row>
       <v-row v-show="isMobile" class="pl-2 pr-2">
           <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product)">
@@ -123,7 +123,7 @@
                       <template v-slot:error>加载失败</template>
                   </van-image>
                   <v-card-title style="font-size: 13px;padding-top: 0px;padding-bottom: 0px">{{ product.title }}</v-card-title>
-                  <div style="color: red;padding-left:16px;font-size: 13px"><span><van-icon name="star-o" /></span> <span>4.6</span>  <span style="margin-left: 10px"><van-icon name="chat-o" color="#ee0a24" /></span> <span>168</span></div>
+                  <div style="color: red;padding-left:16px;font-size: 13px">  </div>
                   <v-card-text style="padding-top: 0">
                       <h6>营业时间</h6>
                       <van-badge content="20：00" />
@@ -266,7 +266,7 @@
 // import GoogleMap from "@/components/GoogleMap";
 // import Introduction from "@/pages/Introduction";
 import { shopIndex,industryAll } from "@api";
-import store from "../store";
+//import store from "../store";
 export default {
   name: "Home",
   data () {
@@ -479,5 +479,10 @@ export default {
     align-items: center;
     justify-content: center;
     height: 100%;
+}
+
+.row + .row {
+    margin-top: 12px;
+    padding: 10px;
 }
 </style>

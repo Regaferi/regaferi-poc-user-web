@@ -199,7 +199,7 @@
             console.log(that.$route.query.location,'55555555555555555555')
             shopIndex({
                 keyword:that.$route.query.input,
-                type:2,
+                type:1,
                 pageIndex:0,
                 pageSize:10,
                 location:that.$route.query.location

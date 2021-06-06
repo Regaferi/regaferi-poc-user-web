@@ -2,7 +2,7 @@
   <v-app-bar app>
     <!--  PC 模式  -->
     <v-container ref="backTop" class="py-0 fill-height" v-show="!isMobile">
-      <h3 class="pl-8 pr-12" ref="gaoBian" style="height: 30px;color: rgba(0, 0, 0, 0.54)" @click="backToHome()">Regaferi</h3>
+      <h3 class="pl-8 pr-12" ref="gaoBian" style="height: 30px;color: rgba(0, 0, 0, 0.54)" @click="backToHome()">Regaferiβ</h3>
       <v-spacer></v-spacer>
       <div class="header-right">
         <div class="header-right-search">
@@ -36,7 +36,7 @@
     <!--  Mobile 模式  -->
     <v-container class="text-center align-center" v-show="isMobile">
       <!--      <v-icon style="position:fixed; margin:auto; left: 5%; top:28%;">mdi-magnify</v-icon>-->
-      <h3 style="height: 30px; position: absolute;top:13px;color: rgba(0, 0, 0, 0.54)" @click="backToHome()">Regaferi</h3>
+      <h3 style="height: 30px; position: absolute;top:13px;color: rgba(0, 0, 0, 0.54)" @click="backToHome()">Regaferiβ</h3>
       <Account v-if="!this.$store.state.token"/>
 
         <van-icon @click="resume" style="float: right" size="25" v-if="this.$store.state.token" name="manager-o" />
