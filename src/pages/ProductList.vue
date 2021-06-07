@@ -34,6 +34,7 @@
             finished-text="没有更多了"
             @load="load_more"
     >
+      <van-empty v-if="products.length <= 0" description="暂无数据" />
     <div style="padding-left: 4%;margin-top: 10px" v-for="(item, index) in products" :key="index"  @click="naviga(item)">
       <v-card width="96%">
         <v-card-text>

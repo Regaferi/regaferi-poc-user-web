@@ -46,7 +46,7 @@
 
                     </li>
                     <li style="position: absolute;top: 30%;right: 2%;">
-                        <van-button type="info" size="small" @click="searchStore">搜索</van-button>
+                        <van-button type="info" size="small" @click="searchStore">GO</van-button>
 <!--                            <span @click="searchStore" style="color: #1989fa;    margin-top: 36%;display: block">搜索</span>-->
                     </li>
                 </ul>

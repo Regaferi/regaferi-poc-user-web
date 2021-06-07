@@ -15,14 +15,6 @@ module.exports = {
 }
 */
 //对一些不经常改动的库，可以通过cdn引入，webpack不对他们打包
-let externals = {
-    vue: "Vue",
-    axios: "axios",
-    "element-ui": "ELEMENT",
-    "vue-router": "VueRouter",
-    vuex: "Vuex",
-    "vue2-editor": "VueEditor"
-};
 // Vue.config.js 配置选项
 let path = require("path");
 function resolve(dir) {
@@ -68,8 +60,6 @@ module.exports = {
 
         //只在生产环境生效
         if (process.env.VUE_APP_CURRENTMODE === "production") {
-            // eslint-disable-next-line no-undef
-            config.externals(externals);
             config.optimization.minimize(true);
             config.optimization.splitChunks({
                 chunks: "all",

@@ -34,6 +34,7 @@
                 finished-text="没有更多了"
                 @load="load_more"
         >
+            <van-empty v-if="products.length <= 0" description="暂无数据" />
         <div @click="ClickStore(product)" v-for="(product, key) in products" :key="key" style="margin-top: 5%;">
             <div style="width: 90%;
     margin: auto;

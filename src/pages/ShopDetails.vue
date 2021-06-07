@@ -3,7 +3,9 @@
         <!--  Banner  -->
         <div style="position: relative">
             <v-img max-height="200px" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
+
             <div style="position: absolute;margin:0 auto;width:95%;top: 80%;left: 2%;    z-index: 1;">
+
                 <div style="border-radius: 10px;position: relative;background:#F5F5F5;padding: 10px;box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);">
                     <div style="width: 100%;height: 100%;margin-bottom: 2%;border-bottom: 2px solid #676a6c;display: flex">
                         <h2 style="font-size: 25px;width: 100%;">{{StoreEllipsis(details.title)}}</h2>
@@ -31,9 +33,11 @@
         </div>
         <!--  商铺详情  -->
         <v-divider class="mx-4"></v-divider>
+
         <!--轮播图-->
-        <div v-if="images" style="    margin-top: 12rem;">
-            <van-swipe height="250" class="my-swipe" style="border-radius: 10px;width: 95%;margin-left: 2%" :autoplay="3000" indicator-color="white">
+        <div style="margin-top: 12rem;">
+            <van-empty v-if="images.length <= 0" description="暂无数据" />
+            <van-swipe v-if="images.length > 0" height="250" class="my-swipe" style="border-radius: 10px;width: 95%;margin-left: 2%" :autoplay="3000" indicator-color="white">
                 <van-swipe-item v-for="(img ,index) in images" :key="index">
                     <img style="height: 100%" v-lazy="img" />
                 </van-swipe-item>
@@ -43,8 +47,7 @@
         <div style="margin-top: 0">
             <van-tabs v-model="active">
                 <van-tab title="服务">
-                    <van-empty v-if="products.length < 0" image="error" description="暂无数据" />
-                        <div :class=" divider == true ? '' : 'divader'" style="margin-bottom: 3%;">
+                        <div v-if="products.length > 0" :class=" divider == true ? '' : 'divader'" style="margin-bottom: 3%;">
                             <van-card
                                     style="border-radius: 10px;box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);width: 95%;margin-left: 2%"
                                     @click="navigateToPDP(item)"
@@ -68,15 +71,17 @@
                     </div>
                 </van-tab>
                 <van-tab title="评论">
-                    <van-empty v-if="items.length < 0 " image="error" description="暂无数据" />
+
                     <v-row>
                         <v-col
                                 cols="12"
                                 sm="6"
                                 offset-sm="3"
+
                         >
                             <v-card>
-                                    <div v-for="(item, index) in items" :key="index" :class=" dividers == true ? '' : 'divader'">
+                                <div :class=" dividers == true ? '' : 'divader'">
+                                    <div v-for="(item, index) in items" :key="index">
                                         <van-field
                                                 rows="2"
                                                 autosize
@@ -100,9 +105,12 @@
                                         >
                                         </van-divider>
                                     </div>
+                                </div>
+
                                 <div v-if="items.length > 2">
                                     <van-divider v-show="dividers" @click="dividers = false"><van-icon name="arrow-up" />隐藏评论</van-divider>
-                                    <van-divider v-show="!dividers" @click="dividers = true"><van-icon name="arrow-down" />更多评论</van-divider>
+                                    <van-divider v-show="!dividers" @click="dividers = true"><van-icon name="arrow-down" />
+                                        {{items.length}}条评论</van-divider>
                                 </div>
                             </v-card>
                         </v-col>
