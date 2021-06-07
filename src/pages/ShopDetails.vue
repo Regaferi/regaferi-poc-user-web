@@ -56,7 +56,7 @@
                                     :price="item.prices"
                                     :desc="item.title"
                                     :title="item.name"
-                                    thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"
+                                    :thumb="item.logoImage.target"
                             >
                                 <template #desc>
                                     <div>{{item.subTitle}}</div>

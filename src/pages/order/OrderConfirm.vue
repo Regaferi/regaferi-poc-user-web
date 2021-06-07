@@ -16,10 +16,10 @@
               </v-col>
               <v-col cols="6" style="font-size: xx-small">
                 <h4 class="pt-3">{{products.title}}</h4>
-                <h5 style="color: red">$500 / Monthly</h5>
+                <h5 style="color: red">{{products.prices}}</h5>
                 <v-divider class="pt-3 pb-5"/>
-                <h6>回数制限.：2 Times / Per Day</h6>
-                <h6>利用可能な時間：{{products.createTime}} - {{products.updateTime}}</h6>
+                <h6>回数制限.：{{products.totalCount}} Times</h6>
+                <h6>利用可能な時間：{{product.serviceOrder.startTime}} - {{product.serviceOrder.endTime}}</h6>
 
               </v-col>
             </v-row>

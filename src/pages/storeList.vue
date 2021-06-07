@@ -56,11 +56,11 @@
                     <template #footer>
                         <div style="width: 100%;height: 100px;display: flex;">
                             <div style="width: 20%;height: 100%;"></div>
-                            <div style="width: 20%;height: 100%;white-space: nowrap;overflow: hidden;margin: 1%" v-for="(item,index) in 4" :key="index">
-                                <img style="height: 60%;width: 100%;border-radius:5%;" src="../image/image-plp-recommend.jpg" alt="">
+                            <div style="width: 20%;height: 100%;white-space: nowrap;overflow: hidden;margin: 1%" v-for="(item,index) in product.serviceResponses" :key="index">
+                                <img style="height: 60%;width: 100%;border-radius:5%;" :src="item.logoImage.target" alt="">
                                 <div style="height: 40%;width: 100%;text-align: center">
                                     <div style="width: 100%;height: 50%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;  ">
-                                        [人气单品]爆款</div>
+                                        {{item.name}}</div>
                                     <div style="width: 100%;height: 50%;color: #ffd01e">￥999</div>
                                 </div>
                             </div>

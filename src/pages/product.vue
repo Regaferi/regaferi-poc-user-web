@@ -15,20 +15,7 @@
                         reverse-transition="fade-transition"
                         transition="fade-transition"
                 >
-                    <v-sheet
-                            :color="colors[i]"
-                            height="100%"
-                    >
-                        <v-row
-                                class="fill-height"
-                                align="center"
-                                justify="center"
-                        >
-                            <div class="display-3">
-                                {{ slide }} Slide
-                            </div>
-                        </v-row>
-                    </v-sheet>
+                    <img style="height: 100%;width: 100%;" v-lazy="slide" />
                 </v-carousel-item>
             </v-carousel>
             <!--  商品基本信息   -->
@@ -60,15 +47,15 @@
                                 <v-list-item-content>
                                     <v-list-item-title>{{product.subTitle}}</v-list-item-title>
                                     <v-list-item-subtitle>
-                                       总次数： {{product.totalCount}}
+                                       总次数： {{product.totalCount}}次
                                     </v-list-item-subtitle> <v-list-item-subtitle>
-                                       单次使用次数： {{product.serviceTimeDay}}
+                                       服务时长： {{product.serviceTimeDay}}天
                                     </v-list-item-subtitle>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-col>
                         <v-col cols="4">
-                            <h4 class="pt-5">${{product.prices}}</h4>
+                            <h4 class="pt-5">{{product.prices}}</h4>
                         </v-col>
                     </v-row>
                 </v-card>
@@ -113,6 +100,7 @@
                                         show-word-limit
                                 />
                                 <van-field
+                                        v-if="item.reply"
                                         rows="2"
                                         autosize
                                         readonly
@@ -199,13 +187,7 @@
                     'red lighten-1',
                     'deep-purple accent-4',
                 ],
-                slides: [
-                    'First',
-                    'Second',
-                    'Third',
-                    'Fourth',
-                    'Fifth',
-                ],
+                slides: [],
                 commentJson:[],
                 token:''
             }
@@ -260,6 +242,12 @@
                     .then((res)=> {
                         that.show = false
                         that.product = res.data
+                        res.data.imageUrls.forEach(ele=>{
+                            if(ele.type == 'BANNER' ){
+                                that.slides.push(ele.target)
+                            }
+                        })
+
                     })
                     .catch(function (error) {
                         that.$notify({ type: 'warning', message: error.errMessage });

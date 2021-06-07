@@ -236,12 +236,14 @@
                               required
                       ></v-text-field>
                       <v-text-field
+                              :type="'password'"
                               v-model="formData.password"
                               :rules="password"
                               label="请输入密码"
                               required
                       ></v-text-field>
                       <v-text-field
+                              :type="'password'"
                               v-model="formData.repeatPassword"
                               :rules="repeatPassword"
                               label="请再次输入密码"
@@ -290,7 +292,9 @@
                               required
                       ></v-text-field>
                       <v-text-field
+                              :type="'password'"
                               v-model="formData1.password"
+
                               :rules="password"
                               label="请输入密码"
                               required

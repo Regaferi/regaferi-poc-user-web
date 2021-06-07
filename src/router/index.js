@@ -11,6 +11,10 @@ import OrderDetail from "@/pages/order/OrderDetail";
 import resume from "@/pages/resume";
 import firstLogin from "@/pages/firstLogin";
 import details from "@/pages/orderDetails";
+import footer1 from "@/pages/footer/footer1";
+import footer2 from "@/pages/footer/footer2";
+import footer3 from "@/pages/footer/footer3";
+import footer4 from "@/pages/footer/footer4";
 Vue.use(VueRouter)
 
 const routes = [
@@ -74,6 +78,42 @@ const routes = [
     path: '/product',
     name: 'product',
     component: product,
+    children : [],
+    props: route => ({
+      category: route.query.category,
+      property: route.query.property
+    })
+  },{
+    path: '/footer1',
+    name: 'footer1',
+    component: footer1,
+    children : [],
+    props: route => ({
+      category: route.query.category,
+      property: route.query.property
+    })
+  },{
+    path: '/footer2',
+    name: 'footer2',
+    component: footer2,
+    children : [],
+    props: route => ({
+      category: route.query.category,
+      property: route.query.property
+    })
+  },{
+    path: '/footer3',
+    name: 'footer3',
+    component: footer3,
+    children : [],
+    props: route => ({
+      category: route.query.category,
+      property: route.query.property
+    })
+  },{
+    path: '/footer4',
+    name: 'footer4',
+    component: footer4,
     children : [],
     props: route => ({
       category: route.query.category,

@@ -9,13 +9,15 @@
 <!--          <img style="width: 100%;height: 250px" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" alt="">-->
           <v-img max-height="200px" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
 
-          <div style="position: absolute;bottom: -13%;;left: 2%;width: 96%;border-radius: 6px;">
+          <div style="width: 96%;border-radius: 6px;margin: auto;">
             <div style="    z-index: 1;
     border-radius: 6px;
     width: 100%;
     box-sizing: border-box;
     box-shadow: 0 1px 5px 0 rgb(0 0 0 / 25%);
-    background: #fff;">
+    background: #fff;
+
+    margin-top: 10px;">
                 <ul style="
                     height: 90px;
     position: relative;
@@ -23,11 +25,11 @@
     width: 100%;
     box-sizing: border-box;
     font-size: 10px;
-    background-color: #f4f4f4;">
+    background-color: rgb(255, 231, 138);">
                     <li class="rsttop-container__search-area" style="height: 47px">
                         <div class="rsttop-container__search-area-inner" style="    width: 91%;">
 <!--                            <van-icon style="font-size: 20px;" name="search" />-->
-                            <el-input placeholder="エリア・駅" style="padding-left: 10px;width:90%" v-model="input1"></el-input>
+                            <el-input placeholder="エリア・駅" style="padding-left: 10px;width:90%;background-color: rgb(255, 231, 138);" v-model="input1"></el-input>
 <!--                            <input placeholder="エリア・駅" type="text">-->
                         </div>
                     </li>
@@ -147,8 +149,7 @@
           >
               <v-banner elevation="3" style="margin:auto;padding: auto; background: #f3f0e9;">
                   <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'300px'"  >
-<!--                      <v-img :lazy-src="navigator.imageurl" max-height=100% max-width=100% :src="navigator.imageurl" ></v-img>-->
-                      <v-row class="navigator-row"  >
+                      <v-img max-height=100% max-width=100% :src="navigator.url" ></v-img>                      <v-row class="navigator-row"  >
                           <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; ">{{navigator.name}}</v-card-subtitle>
                       </v-row>
                   </v-card>
@@ -202,7 +203,7 @@
                   >
                       <v-banner elevation="3" style="margin:auto;padding: auto; background: #f3f0e9;">
                           <v-card width="100%">
-                              <!--                      <v-img :lazy-src="navigator.imageurl" max-height=100% max-width=100% :src="navigator.imageurl" ></v-img>-->
+                              <v-img max-height=100% max-width=100% :src="navigator.url" ></v-img>
                               <v-row class="navigator-row"  >
                                   <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; ">{{navigator.name}}</v-card-subtitle>
                               </v-row>
@@ -487,4 +488,14 @@ export default {
     margin-top: 12px;
     padding: 10px;
 }
+/deep/.el-input__inner{
+    background: rgb(255, 231, 138);
+}
+/deep/.el-input-group__prepend {
+    border-right: 0;
+    width: 30%;
+    border: none;
+    background: rgb(255, 231, 138);
+}
+
 </style>
