@@ -171,6 +171,7 @@
 </template>
 
 <script>
+    import { Notify } from 'vant';
     import {service,comment,commentPinlun} from "@api"
     export default {
         name: "PDP",
@@ -215,7 +216,7 @@
                         that.commentAdd()
                     })
                     .catch(function (error) {
-                        that.$notify({ type: 'warning', message: error.errMessage });
+                        Notify({ type: 'warning', message: error.errMessage });
                     });
             },
             naviTo(){
@@ -231,7 +232,7 @@
                         that.commentJson = res.data
                     })
                     .catch(function (error) {
-                        that.$notify({ type: 'warning', message: error.errMessage });
+                        Notify({ type: 'warning', message: error.errMessage });
                     });
             },
             add(){
@@ -250,12 +251,11 @@
 
                     })
                     .catch(function (error) {
-                        that.$notify({ type: 'warning', message: error.errMessage });
+                        Notify({ type: 'warning', message: error.errMessage });
                     });
             },
             navigateTo : function (){
-                let data = JSON.stringify(this.product)
-                this.$router.push({name : 'order-confirm', query: {'code': this.$route.query.id,'data':data}})
+                this.$router.push({name : 'order-confirm', query: {'code': this.$route.query.id,}})
 
 
             }

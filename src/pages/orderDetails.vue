@@ -22,7 +22,7 @@
             <a-descriptions-item label="订单状态">
                 {{orderList.type == '100' ? '已创建待支付': orderList.type == '200' ? '待使用': orderList.type == '201' ? '部分使用':orderList.type == '202'?'已使用':orderList.type == '300'? '已取消':'已过期' }}
             </a-descriptions-item>
-            <a-descriptions-item label="总数">
+            <a-descriptions-item label="金额">
                 {{orderList.total}}
             </a-descriptions-item>
             <a-descriptions-item label="服务开始时间">

@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app>
+  <v-app-bar app style="background: rgb(255, 231, 138);">
     <!--  PC 模式  -->
     <!--<v-container ref="backTop" class="py-0 fill-height" v-show="!isMobile">
       <h3 class="pl-8 pr-12" ref="gaoBian" style="height: 30px;color: rgba(0, 0, 0, 0.54)" @click="backToHome()">Regaferiβ</h3>
@@ -11,7 +11,7 @@
     <!--  Mobile 模式  -->
     <v-container class="text-center align-center">
       <!--      <v-icon style="position:fixed; margin:auto; left: 5%; top:28%;">mdi-magnify</v-icon>-->
-      <h3 style="height: 30px; position: absolute;top:13px;color: rgba(0, 0, 0, 0.54)" @click="backToHome()">Regaferiβ</h3>
+      <h3 style="height: 30px; position: absolute;top:13px;color: rgb(131, 161, 251)" @click="backToHome()">Regaferiβ</h3>
       <Account v-if="!this.$store.state.token"/>
 
         <van-icon @click="resume" style="float: right" size="25" v-if="this.$store.state.token" name="manager-o" />
@@ -42,9 +42,10 @@ export default {
       label: '服务'
     }],
     isMobile: false,
-      input1:''
+      input1:'',
   }),
   created() {
+
   },
   mounted () {
     this.isMobile = this.$store.state.isMobile;

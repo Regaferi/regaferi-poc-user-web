@@ -14,10 +14,11 @@ export default new Vuex.Store({
     roles: [], //用户角色
     tagsList: [], //打开的标签页个数,s
     isCollapse: true, //侧边导航是否折叠
-    lang:'zh',//默认语言
+    lang:'ja',//默认语言
     breadList:['home'],//面包屑导航
     googleMapLoader : new Loader('AIzaSyB9E3oa8d364apiXxwe3vYa7kfaIq1ww1A', {}),
     isMobile: false,
+    // loginIs: false,
     isLogin: false,
     memberId: null,
   },
@@ -27,6 +28,10 @@ export default new Vuex.Store({
 
       state.token = object.authorityToken;
     },
+ /*   LOGIN_IS(state, object){
+      console.log(object)
+      state.loginIs = object
+    },*/
     //保存支付
     COMMIT_ZHIFU(state, object) {
       console.log(object,'vuex')

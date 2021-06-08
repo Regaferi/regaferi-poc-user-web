@@ -45,3 +45,6 @@ export const  servicePage=(servicePage)=>get(`/service/page?industryId=${service
 
 //第三方
 export const  sessions= (sessions)=>post('/api/v1/sessions',sessions)
+
+//结算码
+export const  settlement= (settlement)=>post('/order/settlement',settlement)

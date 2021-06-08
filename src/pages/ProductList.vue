@@ -67,6 +67,7 @@
 </template>
 
 <script>
+  import { Notify } from 'vant';
   import {shopIndex,servicePage} from "@api"
 export default {
   name: "ProductList",
@@ -141,7 +142,7 @@ export default {
                 that.show = false
               })
               .catch(function (error) {
-                that.$notify({ type: 'warning', message: error.errMessage });
+                Notify({ type: 'warning', message: error.errMessage });
               });
     }
     if(that.$route.query.name == 'souSuo'){
@@ -157,7 +158,7 @@ export default {
                 that.show = false
               })
               .catch(function (error) {
-                that.$notify({ type: 'warning', message: error.errMessage });
+                Notify({ type: 'warning', message: error.errMessage });
               });
     }
 
@@ -188,7 +189,7 @@ export default {
                   }
                 })
                 .catch(function (error) {
-                  that.$notify({ type: 'warning', message: error.errMessage });
+                  Notify({ type: 'warning', message: error.errMessage });
                 });
       }
       if(that.$route.query.name == 'souSuo'){
@@ -211,7 +212,7 @@ export default {
                   }
                 })
                 .catch(function (error) {
-                  that.$notify({ type: 'warning', message: error.errMessage });
+                  Notify({ type: 'warning', message: error.errMessage });
                 });
       }
 

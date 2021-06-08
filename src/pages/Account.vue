@@ -92,7 +92,7 @@
     </v-row>-->
     <!--  Mobile 页面  -->
     <div class="text-center">
-      <v-bottom-sheet v-model="sheet" inset>
+      <v-bottom-sheet  v-model="sheet" inset>
         <template v-slot:activator="{ on, attrs }">
           <div
               v-bind="attrs"
@@ -323,7 +323,7 @@
 </template>
 
 <script>
-
+  import { Notify } from 'vant';
 import { verify,login,memberRegister,memberLogin} from "@api";
 export default {
 
@@ -371,6 +371,10 @@ export default {
       anonymousShared: true,
     }
   },
+  created() {
+
+
+  },
   mounted() {
     this.isMobile = this.$store.state.isMobile;
   },
@@ -379,7 +383,7 @@ export default {
       let that = this;
       memberLogin(that.formData1)
               .then(function (response) {
-                that.$notify({ type: 'success', message: "登录成功!" });
+                Notify({ type: 'success', message: "登录成功!" });
                 if(response.data.firstLogin == true){
                   that.$router.push({name:'firstLogin'})
                 }else {
@@ -388,23 +392,23 @@ export default {
                 that.$store.commit("COMMIT_TOKEN", response.data);
               })
               .catch(function (error) {
-                that.$notify({ type: 'warning', message: error.errMessage });
+                Notify({ type: 'warning', message: error.errMessage });
               });
     },
     register(){
       let that = this;
       if(that.formData.password != that.formData.repeatPassword){
-        that.$notify({ type: 'warning', message: "两次密码不一致，请重新输入" });
+        Notify({ type: 'warning', message: "两次密码不一致，请重新输入" });
       }else{
         memberRegister(that.formData)
                 .then(function (response) {
                   console.log(response)
-                  that.$notify({ type: 'success', message: "注册成功,请重新登录!" });
+                  Notify({ type: 'success', message: "注册成功,请重新登录!" });
                   that.revealDenlu = false
                   that.reveal = true
                 })
                 .catch(function (error) {
-                  that.$notify({ type: 'warning', message: error.errMessage });
+                  Notify({ type: 'warning', message: error.errMessage });
                 });
       }
 
@@ -438,7 +442,7 @@ export default {
                   that.$store.commit("COMMIT_TOKEN", response.data);
                 })
                 .catch(function (error) {
-                  that.$notify({ type: 'warning', message: error.errMessage });
+                  Notify({ type: 'warning', message: error.errMessage });
                 });
 
       }
@@ -468,7 +472,7 @@ export default {
           "email": thas.account,
         })
                 .then(function (response) {
-                  thas.$notify({ type: 'success', message: '邮件发送成功' });
+                  Notify({ type: 'success', message: '邮件发送成功' });
                   console.log(response);
 
                 })
@@ -477,7 +481,7 @@ export default {
                   thas.timer = null;
                   thas.count = "";
                   thas.show = false;
-                  thas.$notify({ type: 'warning', message: error.errMessage });
+                  Notify({ type: 'warning', message: error.errMessage });
                 });
       }
       /*axios.post('http://frontend-api.regaferi.jp/member/verify', {

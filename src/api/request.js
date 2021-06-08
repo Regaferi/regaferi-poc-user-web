@@ -5,6 +5,7 @@ import { Notify } from 'vant';
 
 axios.defaults.timeout = 60000;
 axios.defaults.baseURL = '/apis';
+console.log(axios.defaults.baseURL,'7777777777777777777777')
 axios.defaults.headers.post["Content-Type"] =
     "application/x-www-form-urlencoded;charset=UTF-8";
 let loading = null;

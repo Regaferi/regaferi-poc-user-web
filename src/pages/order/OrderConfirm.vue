@@ -4,22 +4,25 @@
     <div class="order-confirm-mobile">
       <!--   确认商品详情   -->
       <div class="pt-5"/>
+
       <div style="padding-left: 6%">
         <v-card width="96%" style="padding-left: 3%" >
+
           <v-card-text>
             <v-row>
+
               <v-col cols="6">
-                <v-img v-if="products.logoImage" height="130" :src="products.logoImage.target"/>
+                <v-img v-if="product.logoImage" height="130" :src="product.logoImage.target"/>
                 <van-image v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
                   <template v-slot:error>加载失败</template>
                 </van-image>
               </v-col>
               <v-col cols="6" style="font-size: xx-small">
-                <h4 class="pt-3">{{products.title}}</h4>
-                <h5 style="color: red">{{products.prices}}</h5>
+                <h4 class="pt-3">{{product.title}}</h4>
+                <h5 style="color: red">{{product.prices}}</h5>
                 <v-divider class="pt-3 pb-5"/>
-                <h6>回数制限.：{{products.totalCount}} Times</h6>
-                <h6>利用可能な時間：{{product.serviceOrder.startTime}} - {{product.serviceOrder.endTime}}</h6>
+                <h6>回数制限.：{{product.totalCount}} Times</h6>
+                <h6>利用可能な時間：{{product.serviceOrder.startTime.slice(0,10)}} - {{product.serviceOrder.endTime.slice(0,10)}}</h6>
 
               </v-col>
             </v-row>
@@ -50,6 +53,11 @@
         <van-loading color="#1989fa" />
       </div>
     </van-overlay>
+    <van-overlay :show="showSess">
+      <div class="wrapper">
+        <van-loading color="#1989fa" size="24px">正在拉取支付页面...</van-loading>
+      </div>
+    </van-overlay>
   </v-main>
 </template>
 
@@ -62,6 +70,7 @@ export default {
   data () {
     return {
       show:true,
+      showSess:false,
       payToken :null,
       orderCode: null,
       form : {
@@ -69,23 +78,22 @@ export default {
         creditNum : null
       },
       product: {},
-      products:{}
     }
   },
   created() {
+
     var that = this
-    let data = JSON.parse(this.$route.query.data)
-    that.products = Object.assign({}, data)
     order({
       serviceId:that.$route.query.code,
     }).then((res)=> {
-
               that.product = res.data
               that.show = false
       that.orderCode = res.data.code;
             })
             .catch(function (error) {
-              that.$notify({ type: 'warning', message: error.errMessage });
+              // that.$notify({ type: 'warning', message: error.errMessage });
+              console.log(error)
+              that.$router.go(-1)
             });
   },
   methods : {
@@ -94,9 +102,10 @@ export default {
     },
     payNow(){
       let _this = this;
+      _this.showSess = true
         let querystring = require('querystring');
         // let https = require('https');
-        let secret_key = 'sk_test_4ojcudizab8oes13yqzuer6a'
+        let secret_key = 'sk_test_2u2m1usd757y38rmar9cqsxi'
         let auth = 'Basic ' + Buffer.from(secret_key + ':').toString('base64');
         let post_data = querystring.stringify({
           'default_locale': 'ja',
@@ -113,6 +122,7 @@ export default {
           console.log(res,'支付')
           window.open(res.session_url)
         }).catch(function (error) {
+          _this.showSess = false
           window.open(error.session_url)
           console.log(error)
         });

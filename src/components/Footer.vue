@@ -32,6 +32,19 @@
             2021 - {{ new Date().getFullYear() }} © Regaferi.jp <div v-show="!isMobile">All Right Reserved.</div>
           </v-col>
         </v-container>
+        <v-container>
+          <v-col class="text-center text-sm-subtitle-2">
+            <v-btn
+                    color="white"
+                    text
+                    rounded
+                    class="my-2"
+            >
+              商定刊登方法
+            </v-btn>
+
+          </v-col>
+        </v-container>
       </v-card>
     </v-footer>
 
@@ -46,7 +59,7 @@ export default {
   data: () => ({
     isMobile: Boolean,
     links: [
-      'よくある質問',
+      '会社概要',
       '利用規約',
       '特定商取引法に基づく表記',
       'プライバシーポリシー',

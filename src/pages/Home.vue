@@ -25,11 +25,11 @@
     width: 100%;
     box-sizing: border-box;
     font-size: 10px;
-    background-color: rgb(255, 231, 138);">
+    ;">
                     <li class="rsttop-container__search-area" style="height: 47px">
                         <div class="rsttop-container__search-area-inner" style="    width: 91%;">
 <!--                            <van-icon style="font-size: 20px;" name="search" />-->
-                            <el-input placeholder="エリア・駅" style="padding-left: 10px;width:90%;background-color: rgb(255, 231, 138);" v-model="input1"></el-input>
+                            <el-input placeholder="エリア・駅" style="padding-left: 10px;width:90%;" v-model="input1"></el-input>
 <!--                            <input placeholder="エリア・駅" type="text">-->
                         </div>
                     </li>
@@ -114,30 +114,7 @@
       <!-- 引导菜单开始 -->
 
 
-      <v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-          <v-col>新规店铺</v-col>
-      </v-row>
-      <v-row v-show="isMobile" class="pl-2 pr-2">
-          <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product)">
-              <v-card>
-                  <v-img v-if="product.logoImage" height="130" :src="product.logoImage.target"/>
-                  <van-image v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
-                      <template v-slot:error>加载失败</template>
-                  </van-image>
-                  <v-card-title style="font-size: 13px;padding-top: 0px;padding-bottom: 0px">{{ product.title }}</v-card-title>
-                  <div style="color: red;padding-left:16px;font-size: 13px">  </div>
-                  <v-card-text style="padding-top: 0">
-                      <h6>营业时间</h6>
-                      <van-badge :content="product.openTime" />
-                      <van-badge :content="product.closeTime" />
-                  </v-card-text>
-                  <div style="display: flex;justify-content: space-between;font-size: 6px;padding: 5px">
-                      <div><van-icon name="location-o" />
-                          {{product.location}}</div>
-                  </div>
-              </v-card>
-          </v-col>
-      </v-row>
+
       <v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
           <v-col>热门行业</v-col>
       </v-row>
@@ -156,40 +133,34 @@
               </v-banner>
           </v-col>
       </v-row>
-<!--      pc页面-->
-      <div   v-show="!isMobile" class="PcMind">
-          <div class="PcMindOne">
-              <v-row style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-                  <v-col>热门商铺</v-col>
-              </v-row>
-              <div style="width: 100%;padding: 12px;display: flex;flex-wrap: wrap">
-              <div style="width: 25%;padding: 12px;" v-for="(product, key) in products" :key="key" @click="serveWeb">
-                  <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'100%'"  >
-                      <v-img v-if="product.logoImage" height="130" :src="product.logoImage.target"/>
-                      <van-image v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
-                          <template v-slot:error>加载失败</template>
-                      </van-image>
-                      <v-row class="navigator-row"  >
-                          <v-card-subtitle  class="font-weight-black">{{product.title}}</v-card-subtitle>
 
-                      </v-row>
-                      <div style="    font-size: 10px;    margin-left: 5px;">
-                          <span>营业时间：</span>
-                          <span>{{product.openTime}}</span>
-                      </div>
-                      <div style="    font-size: 10px;    margin-left: 5px;">
-                          <span>闭店时间：</span>
-                          <span>{{product.closeTime}}</span>
-                      </div>
-                      <div style="font-size: 10px;margin-left: 5px;"><van-icon name="location-o" />
+
+      <v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
+          <v-col>新规店铺</v-col>
+      </v-row>
+      <v-row v-show="isMobile" class="pl-2 pr-2">
+          <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product)">
+              <v-card>
+                  <v-img v-if="product.logoImage" height="148" :src="product.logoImage.target"/>
+                  <van-image style="height: 148px" v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
+                      <template v-slot:error>加载失败</template>
+                  </van-image>
+                  <v-card-title style="font-size: 13px;padding-top: 0px;padding-bottom: 0px">{{ product.title }}</v-card-title>
+                  <div style="color: red;padding-left:16px;font-size: 13px">  </div>
+                  <v-card-text style="padding-top: 0">
+                      <h6>营业时间</h6>
+                      <van-badge style="background: rgb(20, 155, 244)" :content="product.openTime.slice(0,5)" />
+                      <van-badge style="background: rgb(20, 155, 244)" :content="product.closeTime.slice(0,5)" />
+                  </v-card-text>
+                  <div style="display: flex;justify-content: space-between;font-size: 6px;padding: 5px">
+                      <div><van-icon name="location-o" />
                           {{product.location}}</div>
-                  </v-card>
+                  </div>
+              </v-card>
+          </v-col>
+      </v-row>
+<!--      pc页面-->
 
-                 </div>
-              </div>
-
-          </div>
-      </div>
       <div  v-show="!isMobile" class="PcMind">
           <div class="PcMindOne">
               <v-row style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
@@ -210,6 +181,35 @@
                           </v-card>
                       </v-banner>
                   </v-col>
+              </div>
+
+          </div>
+      </div>
+      <div   v-show="!isMobile" class="PcMind">
+          <div class="PcMindOne">
+              <v-row style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
+                  <v-col>热门商铺</v-col>
+              </v-row>
+              <div style="width: 100%;padding: 12px;display: flex;flex-wrap: wrap">
+                  <div style="width: 25%;padding: 12px;" v-for="(product, key) in products" :key="key" @click="serveWeb">
+                      <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'100%'"  >
+                          <v-img v-if="product.logoImage" height="148" :src="product.logoImage.target"/>
+                          <van-image style="height: 148px" v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
+                              <template v-slot:error>加载失败</template>
+                          </van-image>
+                          <v-row class="navigator-row"  >
+                              <v-card-subtitle  class="font-weight-black">{{product.title}}</v-card-subtitle>
+
+                          </v-row>
+                          <div style="    font-size: 10px;    margin-left: 5px;">
+                              <van-badge style="background: rgb(20, 155, 244)" :content="product.openTime.slice(0,5)" />
+                              <van-badge style="background: rgb(20, 155, 244)" :content="product.closeTime.slice(0,5)" />
+                          </div>
+                          <div style="font-size: 10px;margin-left: 5px;"><van-icon name="location-o" />
+                              {{product.location}}</div>
+                      </v-card>
+
+                  </div>
               </div>
 
           </div>
@@ -265,7 +265,7 @@
 </template>
 
 <script>
-
+    import { Notify } from 'vant';
 // import GoogleMap from "@/components/GoogleMap";
 // import Introduction from "@/pages/Introduction";
 import { shopIndex,industryAll } from "@api";
@@ -339,7 +339,7 @@ export default {
               that.show = false
           })
           .catch(function (error) {
-              that.$notify({ type: 'warning', message: error.errMessage });
+              Notify({ type: 'warning', message: error.errMessage });
           });
       industryAll().then(res => {
           this.navigators = res.data
@@ -489,13 +489,14 @@ export default {
     padding: 10px;
 }
 /deep/.el-input__inner{
-    background: rgb(255, 231, 138);
+
+    background: #ffffff;
 }
 /deep/.el-input-group__prepend {
     border-right: 0;
     width: 30%;
     border: none;
-    background: rgb(255, 231, 138);
+    background: #ffffff;
 }
 
 </style>

@@ -1,53 +1,19 @@
-/*
-module.exports = {
-  devServer: {
-    port: 8080,   // 开启服务器的端口 // 端口
-    open: true, // 自动开启浏览器
-    compress: false, // 开启压缩
-    overlay: {
-      warnings: true,
-      errors: true
-    }
-  },
-  transpileDependencies: [
-    'vuetify'
-  ]
-}
-*/
-//对一些不经常改动的库，可以通过cdn引入，webpack不对他们打包
-// Vue.config.js 配置选项
 let path = require("path");
+
 function resolve(dir) {
     return path.join(__dirname, dir);
 }
+
 module.exports = {
 
-    // 选项
-
-    // eslint-disable-next-line no-irregular-whitespace
-    //  基本路径
-
-    publicPath: "./",
-
-    // eslint-disable-next-line no-irregular-whitespace
-    //  构建时的输出目录
-
-    outputDir: "dist",
-
-    // eslint-disable-next-line no-irregular-whitespace
-    //  放置静态资源的目录
-
+    //基本路径
+    publicPath: './',
+    //输出文件目录
+    outputDir: 'dist',
+    //放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
     assetsDir: "static",
-
-    // eslint-disable-next-line no-irregular-whitespace
-    //  html 的输出路径
-
-    indexPath: "index.html",
-
-    //文件名哈希
-
-    filenameHashing: true,
-
+    //生产环境不需要生产map文件
+    productionSourceMap: false,
     chainWebpack: config => {
         //这里是对环境的配置，不同的环境对应不同的BASE_URL
         config.plugin("define").tap(args => {
@@ -55,6 +21,7 @@ module.exports = {
                 process.env.VUE_APP_LOGOUT_URL
             );
             console.log(args[0]);
+
             return args;
         });
 
@@ -86,6 +53,7 @@ module.exports = {
             .set("@assets", resolve("src/assets"));
     },
 
+
     devServer: {
         port: 8080,   // 开启服务器的端口 // 端口
         open: true, // 自动开启浏览器
@@ -111,10 +79,6 @@ module.exports = {
                     '^/apis': ''   //需要rewrite的,
                 }
             }
-        }
+        },
     },
-    transpileDependencies: [
-        'vuetify'
-    ]
-
-}
+};

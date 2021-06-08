@@ -61,7 +61,7 @@
                                 <div style="height: 40%;width: 100%;text-align: center">
                                     <div style="width: 100%;height: 50%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;  ">
                                         {{item.name}}</div>
-                                    <div style="width: 100%;height: 50%;color: #ffd01e">￥999</div>
+                                    <div style="width: 100%;height: 50%;color: #ffd01e">{{item.prices}}</div>
                                 </div>
                             </div>
                         </div>
@@ -81,6 +81,7 @@
 </template>
 
 <script>
+    import { Notify } from 'vant';
     import { shopIndex } from "@api";
     export default {
         name: "ProductList",
@@ -155,7 +156,7 @@
                     that.show = false
                 })
                 .catch(function (error) {
-                    that.$notify({ type: 'warning', message: error.errMessage });
+                    Notify({ type: 'warning', message: error.errMessage });
                 });
         },
         methods: {

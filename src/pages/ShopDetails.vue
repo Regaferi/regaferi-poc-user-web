@@ -146,6 +146,7 @@
 </template>
 
 <script>
+    import { Notify } from 'vant';
     import {shopId,serviceShop,comment,commentPinlun} from "@api"
     export default {
         name: "ProductList",
@@ -179,7 +180,7 @@
                     that.show = false
                 })
                 .catch(function (error) {
-                    that.$notify({ type: 'warning', message: error.errMessage });
+                    Notify({ type: 'warning', message: error.errMessage });
                 });
             serviceShop({
                 shopId:that.$route.query.id,
@@ -190,7 +191,7 @@
                     that.show = false
                 })
                 .catch(function (error) {
-                    that.$notify({ type: 'warning', message: error.errMessage });
+                    Notify({ type: 'warning', message: error.errMessage });
                 });
             shopId({
                 id:that.$route.query.id,
@@ -205,7 +206,7 @@
                     that.show = false
                 })
                 .catch(function (error) {
-                    that.$notify({ type: 'warning', message: error.errMessage });
+                    Notify({ type: 'warning', message: error.errMessage });
                 });
         },
         methods: {
@@ -233,11 +234,11 @@
 
                             })
                             .catch(function (error) {
-                                that.$notify({ type: 'warning', message: error.errMessage });
+                                Notify({ type: 'warning', message: error.errMessage });
                             });
                     })
                     .catch(function (error) {
-                        that.$notify({ type: 'warning', message: error.errMessage });
+                        Notify({ type: 'warning', message: error.errMessage });
                     });
             },
             navigateToPDP (val) {

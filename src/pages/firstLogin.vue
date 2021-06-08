@@ -158,6 +158,7 @@
 </template>
 
 <script>
+    import { Notify } from 'vant';
 import {signUp} from '@api';
     export default {
         name: "MemberCenter",
@@ -221,7 +222,7 @@ import {signUp} from '@api';
                         that.$router.push({name:'home'})
                     })
                     .catch(function (error) {
-                        that.$notify({ type: 'warning', message: error.errMessage });
+                        Notify({ type: 'warning', message: error.errMessage });
                     });
             },
 
