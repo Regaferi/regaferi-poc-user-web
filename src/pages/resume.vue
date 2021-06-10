@@ -31,7 +31,7 @@
                         </v-col>
                         <v-col cols="6" style="font-size: xx-small">
                             <h4 class="pt-3">{{item.serviceName}}</h4>
-                            <h5 style="color: red">{{item.payment}}</h5>
+                            <h5 style="color: red">{{item.total}}</h5>
                             <v-divider class="pt-3 pb-5"/>
                             <h6>回数制限.：{{item.orderCounter}} Times</h6>
                             <h6>利用可能な時間：{{item.effectiveTime.slice(0,10)}} - {{item.expiredTime.slice(0,10)}}</h6>
@@ -49,7 +49,7 @@
                 <van-loading color="#1989fa" />
             </div>
         </van-overlay>
-        <van-dialog v-model="showCancel" title="校验码">
+        <van-dialog v-model="showCancel" v-if="!time == 0" title="校验码">
 <div style="text-align: center;">
     <van-count-down :time="time" format="mm 分 ss 秒" />
 </div>
@@ -119,7 +119,7 @@ import {memberDetail,orderList,settlement} from "@api";
                         that.time = response.data.ttl * 1000
                         that.code = response.data.code
                         Notify({ type: 'warning', message: '校验码有效期10分钟！' });
-                        this.showCancel = true
+                        that.showCancel = true
                     })
                     .catch(function (error) {
                         // this.$notify({ type: 'warning', message: '查询失败' });

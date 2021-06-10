@@ -1,52 +1,45 @@
 <template>
-    <div style="margin-top: 20%;">
+    <div style="margin-top: 20%;height: 100%">
         <a-descriptions bordered>
-            <a-descriptions-item label="orderCode">
-                {{orderList.code}}
+            <a-descriptions-item label="服务名">
+                {{orderList.serviceName}}
             </a-descriptions-item>
-            <a-descriptions-item label="有效期开始时间">
-                {{orderList.effectiveTime}}
+            <a-descriptions-item label="营业时间">
+                {{orderList.serviceOrder.openTime}}
             </a-descriptions-item>
-            <a-descriptions-item label="有效期结束时间">
-                {{orderList.expiredTime}}
+            <a-descriptions-item label="闭店时间">
+                {{orderList.serviceOrder.closeTime}}
             </a-descriptions-item>
-            <a-descriptions-item label="Order time">
+            <a-descriptions-item label="有效开始时间">
+                {{orderList.serviceOrder.startTime}}
+
+            </a-descriptions-item>
+            <a-descriptions-item label="失效结束时间" :span="2">
+                {{orderList.serviceOrder.endTime}}
+            </a-descriptions-item>
+
+            <a-descriptions-item label="天数">
                 2018-04-24 18:00:00
             </a-descriptions-item>
-            <a-descriptions-item label="Usage Time" :span="2">
-                2019-04-24 18:00:00
-            </a-descriptions-item>
+
             <a-descriptions-item label="Status" :span="3">
-                <a-badge status="processing" text="Running" />
-            </a-descriptions-item>
-            <a-descriptions-item label="订单状态">
-                {{orderList.type == '100' ? '已创建待支付': orderList.type == '200' ? '待使用': orderList.type == '201' ? '部分使用':orderList.type == '202'?'已使用':orderList.type == '300'? '已取消':'已过期' }}
+                <a-badge status="processing" :text="orderList.serviceResponse.location" />
             </a-descriptions-item>
             <a-descriptions-item label="金额">
                 {{orderList.total}}
             </a-descriptions-item>
-            <a-descriptions-item label="服务开始时间">
-                {{orderList.createTime}}
-            </a-descriptions-item>
-            <a-descriptions-item label="服务结束时间">
-                {{orderList.updateTime}}
-                <!--<br />
-                Database version: 3.4
-                <br />
-                Package: dds.mongo.mid
-                <br />
-                Storage space: 10 GB
-                <br />
-                Replication factor: 3
-                <br />
-                Region: East China 1<br />-->
+            <a-descriptions-item label="剩余次数">
+                {{orderList.serviceOrder.remCount}}
+
             </a-descriptions-item>
         </a-descriptions>
         <div>
             <van-steps direction="vertical" :active="0">
-                <van-step v-for="(item,index) in orderList.orderLines" :key="index">
-                    <h3>消费次数：{{item.quantity}}</h3>
-                    <p>2016-07-12 12:40</p>
+                <van-step v-for="(item,index) in orderList.serviceOrderLogInfoResponses" :key="index">
+                    <h3>时间：{{item.createTime}}</h3>
+                    <h3>剩余次数：{{index + 1}} 次</h3>
+                    <h3>剩余天数：{{index + 1}} 次</h3>
+                    <h3>类型：{{item.operationType == '1'? '下单' : item.operationType == '2'? '消费' : '补偿'}}</h3>
                 </van-step>
             </van-steps>
         </div>

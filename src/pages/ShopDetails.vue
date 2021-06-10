@@ -1,5 +1,5 @@
 <template>
-    <v-main style="overflow: hidden;position: relative">
+    <v-main style="overflow: hidden;position: relative" >
         <!--  Banner  -->
         <div style="position: relative">
             <v-img max-height="200px" width="100%" src="../image/image-plp-recommend.jpg"></v-img>

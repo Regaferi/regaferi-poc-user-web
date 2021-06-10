@@ -5,7 +5,6 @@ import { Notify } from 'vant';
 
 axios.defaults.timeout = 60000;
 axios.defaults.baseURL = '/apis';
-console.log(axios.defaults.baseURL,'7777777777777777777777')
 axios.defaults.headers.post["Content-Type"] =
     "application/x-www-form-urlencoded;charset=UTF-8";
 let loading = null;
@@ -40,10 +39,13 @@ axios.interceptors.response.use(
     response => {
         return new Promise((resolve, reject) => {
             const res = response.data;
-            console.log(res,'配置')
+            console.log(loading,'配置')
             if(res.code == '200' || res.success == true){
                 resolve(res)
             }else{
+                /*if(){
+
+                }*/
                 reject(res)
                 Notify(res.errMessage);
             }
@@ -62,11 +64,6 @@ axios.interceptors.response.use(
     },
 
     error => {
-        console.log(error,999999)
-        //请求成功后关闭加载框
-        if (loading) {
-            loading.close();
-        }
         //断网处理或者请求超时
         if (!error.response) {
             //请求超时
@@ -81,6 +78,7 @@ axios.interceptors.response.use(
             return;
         }
         const status = error.response.status;
+        loading = status
         console.log(status,'ppppppppppppppppppppppppp')
         switch (status) {
             case 500:

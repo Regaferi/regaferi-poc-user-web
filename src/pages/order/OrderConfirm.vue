@@ -6,7 +6,7 @@
       <div class="pt-5"/>
 
       <div style="padding-left: 6%">
-        <v-card width="96%" style="padding-left: 3%" >
+        <v-card width="96%" height="100%" style="padding-left: 3%" >
 
           <v-card-text>
             <v-row>
@@ -18,8 +18,9 @@
                 </van-image>
               </v-col>
               <v-col cols="6" style="font-size: xx-small">
-                <h4 class="pt-3">{{product.title}}</h4>
-                <h5 style="color: red">{{product.prices}}</h5>
+                <h4 class="pt-3"> 服务名： {{product.serviceOrder.name}}</h4>
+                <h4 class="pt-3"> 金额： {{product.total}}</h4>
+                <h5 style="color: red"> 总次数： {{product.serviceOrder.totalCount}}</h5>
                 <v-divider class="pt-3 pb-5"/>
                 <h6>回数制限.：{{product.totalCount}} Times</h6>
                 <h6>利用可能な時間：{{product.serviceOrder.startTime.slice(0,10)}} - {{product.serviceOrder.endTime.slice(0,10)}}</h6>
