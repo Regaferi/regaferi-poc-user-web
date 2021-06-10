@@ -19,14 +19,11 @@
                                 </van-image>
                             </v-col>
                             <v-col cols="6" style="font-size: xx-small">
-                                <h4 class="pt-3"> 服务名： {{product.serviceOrder.name}}</h4>
-                                <h4 class="pt-3"> 金额： {{product.total}}</h4>
-                                <h5 style="color: red"> 总次数： {{product.serviceOrder.totalCount}}</h5>
-                                <v-divider class="pt-3 pb-5"/>
-                                <h6>回数制限.：{{product.totalCount}} Times</h6>
-                                <h6>利用可能な時間：{{product.serviceOrder.startTime.slice(0,10)}} -
-                                    {{product.serviceOrder.endTime.slice(0,10)}}</h6>
-
+                                <h6 class="pt-3"> 服务名： {{product.name}}</h6>
+                                <h6 > 回数制限： {{product.totalCount}}</h6>
+                                <h6 >利用時間：{{product.serviceTimeDay}}日</h6>
+                               <v-divider class="pt-1 pb-1"/>
+                               <h6 style="color: red"> 合计： {{product.prices}}元</h6>
                             </v-col>
                         </v-row>
                     </v-card-text>
@@ -120,13 +117,14 @@
                     // let https = require('https');
                     let secret_key = 'sk_test_2u2m1usd757y38rmar9cqsxi'
                     let auth = 'Basic ' + Buffer.from(secret_key + ':').toString('base64');
+                    let href =window.location.href
                     let post_data = querystring.stringify({
                         'default_locale': 'ja',
                         'email': 'regaferi@2021gmail.com',
-                        'amount': _this.product.total,
+                        'amount': _this.product.prices,
                         'currency': 'JPY',
-                        'payment_data[external_order_num]': res.data.code,
-                        'return_url': 'https://regaferi-api.cn.utools.club/orderDetail'
+                        'payment_data[external_order_num]': res.data.order.code,
+                        'return_url': href + "/resume"
                     });
 
                     _this.$store.commit('COMMIT_ZHIFU', auth)

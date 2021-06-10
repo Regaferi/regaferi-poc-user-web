@@ -18,17 +18,16 @@
             <a-descriptions-item label="失效结束时间" :span="2">
                 {{orderList.serviceOrder.endTime}}
             </a-descriptions-item>
-
+            <a-descriptions-item label="位置">
+                {{orderList.serviceResponse.location}}
+            </a-descriptions-item>
             <a-descriptions-item label="天数">
                 2018-04-24 18:00:00
             </a-descriptions-item>
-
             <a-descriptions-item label="Status" :span="3">
                 <a-badge status="processing" :text="orderList.serviceResponse.location" />
             </a-descriptions-item>
-            <a-descriptions-item label="金额">
-                {{orderList.total}}
-            </a-descriptions-item>
+
             <a-descriptions-item label="剩余次数">
                 {{orderList.serviceOrder.remCount}}
 
@@ -38,8 +37,8 @@
             <van-steps direction="vertical" :active="0">
                 <van-step v-for="(item,index) in orderList.serviceOrderLogInfoResponses" :key="index">
                     <h3>时间：{{item.createTime}}</h3>
-                    <h3>剩余次数：{{index + 1}} 次</h3>
-                    <h3>剩余天数：{{index + 1}} 次</h3>
+                    <h3>剩余次数：{{item.remCount}} 次</h3>
+                    <h3>剩余天数：{{item.serviceTimeDay}} 天</h3>
                     <h3>类型：{{item.operationType == '1'? '下单' : item.operationType == '2'? '消费' : '补偿'}}</h3>
                 </van-step>
             </van-steps>
@@ -59,7 +58,7 @@ import {orderDetail,serviceOrder} from '@api'
             return {
                 show:true,
                 size: 'default',
-                orderList:{}
+                orderList:{},
             };
         },
         created() {

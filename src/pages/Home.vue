@@ -119,18 +119,15 @@
           <v-col>热门行业</v-col>
       </v-row>
       <v-row v-show="isMobile" style="width: 100%; margin: auto; left: 0; right: 0;">
-          <v-col :cols="isMobile?'6':'2'"
+          <v-col :cols="isMobile?'3':'2'"
                  v-for="(navigator, i) in navigators"
                  :key="i"
                  @click="navigateTo(navigator)"
           >
-              <v-banner elevation="3" style="margin:auto;padding: auto; background: #f3f0e9;">
                   <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'300px'"  >
-                      <v-img max-height=100% max-width=100% :src="navigator.url" ></v-img>                      <v-row class="navigator-row"  >
-                          <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; ">{{navigator.name}}</v-card-subtitle>
-                      </v-row>
+                      <v-img max-height=100% max-width=100% :src="navigator.url" ></v-img>                      
+                          <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; font-size: 1px; text-align: center;">{{navigator.name}}</v-card-subtitle>
                   </v-card>
-              </v-banner>
           </v-col>
       </v-row>
 
