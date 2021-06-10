@@ -1,162 +1,181 @@
 <template>
-  <v-main>
-    <div class="order-confirm-pc"></div>
-    <div class="order-confirm-mobile">
-      <!--   确认商品详情   -->
-      <div class="pt-5"/>
+    <v-main>
+        <div class="order-confirm-pc"></div>
+        <div class="order-confirm-mobile">
+            <!--   确认商品详情   -->
+            <div class="pt-5"/>
 
-      <div style="padding-left: 6%">
-        <v-card width="96%" height="100%" style="padding-left: 3%" >
+            <div style="padding-left: 6%">
+                <v-card width="96%" height="100%" style="padding-left: 3%">
 
-          <v-card-text>
-            <v-row>
+                    <v-card-text>
+                        <v-row>
 
-              <v-col cols="6">
-                <v-img v-if="product.logoImage" height="130" :src="product.logoImage.target"/>
-                <van-image v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
-                  <template v-slot:error>加载失败</template>
-                </van-image>
-              </v-col>
-              <v-col cols="6" style="font-size: xx-small">
-                <h4 class="pt-3"> 服务名： {{product.serviceOrder.name}}</h4>
-                <h4 class="pt-3"> 金额： {{product.total}}</h4>
-                <h5 style="color: red"> 总次数： {{product.serviceOrder.totalCount}}</h5>
-                <v-divider class="pt-3 pb-5"/>
-                <h6>回数制限.：{{product.totalCount}} Times</h6>
-                <h6>利用可能な時間：{{product.serviceOrder.startTime.slice(0,10)}} - {{product.serviceOrder.endTime.slice(0,10)}}</h6>
+                            <v-col cols="6">
+                                <v-img v-if="slides" height="130" :src="slides"/>
+                                <van-image v-else
+                                           src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
+                                    <template v-slot:error>加载失败</template>
+                                </van-image>
+                            </v-col>
+                            <v-col cols="6" style="font-size: xx-small">
+                                <h4 class="pt-3"> 服务名： {{product.serviceOrder.name}}</h4>
+                                <h4 class="pt-3"> 金额： {{product.total}}</h4>
+                                <h5 style="color: red"> 总次数： {{product.serviceOrder.totalCount}}</h5>
+                                <v-divider class="pt-3 pb-5"/>
+                                <h6>回数制限.：{{product.totalCount}} Times</h6>
+                                <h6>利用可能な時間：{{product.serviceOrder.startTime.slice(0,10)}} -
+                                    {{product.serviceOrder.endTime.slice(0,10)}}</h6>
 
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
-      </div>
-      <div class="pt-5"/>
-      <input type="hidden" class="product-name" :value="product.serviceName">
-      <input type="hidden" class="order-amount" :value="product.orderAmount ">
-      <!--   支付按钮   -->
-      <v-bottom-navigation color="primary" horizontal app>
-        <v-btn @click="fanHui">
-          <span>Back</span>
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
-        <v-divider
-            class="mx-4"
-            vertical
-        ></v-divider>
-        <v-btn @click="payNow">
-          <v-icon style="padding-left: 12px">mdi-arrow-right</v-icon>
-          <span>Pay Now</span>
-        </v-btn>
-      </v-bottom-navigation>
-    </div>
-    <van-overlay :show="show">
-      <div class="wrapper">
-        <van-loading color="#1989fa" />
-      </div>
-    </van-overlay>
-    <van-overlay :show="showSess">
-      <div class="wrapper">
-        <van-loading color="#1989fa" size="24px">正在拉取支付页面...</van-loading>
-      </div>
-    </van-overlay>
-  </v-main>
+                            </v-col>
+                        </v-row>
+                    </v-card-text>
+                </v-card>
+            </div>
+            <div class="pt-5"/>
+            <input type="hidden" class="product-name" :value="product.serviceName">
+            <input type="hidden" class="order-amount" :value="product.orderAmount ">
+            <!--   支付按钮   -->
+            <v-bottom-navigation color="primary" horizontal app>
+                <v-btn @click="fanHui">
+                    <span>Back</span>
+                    <v-icon>mdi-arrow-left</v-icon>
+                </v-btn>
+                <v-divider
+                        class="mx-4"
+                        vertical
+                ></v-divider>
+                <v-btn @click="payNow">
+                    <v-icon style="padding-left: 12px">mdi-arrow-right</v-icon>
+                    <span>Pay Now</span>
+                </v-btn>
+            </v-bottom-navigation>
+        </div>
+        <van-overlay :show="show">
+            <div class="wrapper">
+                <van-loading color="#1989fa"/>
+            </div>
+        </van-overlay>
+        <van-overlay :show="showSess">
+            <div class="wrapper">
+                <van-loading color="#1989fa" size="24px">正在拉取支付页面...</van-loading>
+            </div>
+        </van-overlay>
+    </v-main>
 </template>
 
 <script>
 
-// import axios from "axios";
-import {order,sessions} from '@api'
-export default {
-  name: "OrderConfirm",
-  data () {
-    return {
-      show:true,
-      showSess:false,
-      payToken :null,
-      orderCode: null,
-      form : {
-        creditVerify : null,
-        creditNum : null
-      },
-      product: {},
-    }
-  },
-  created() {
+    // import axios from "axios";
+    import {order, sessions, service} from '@api'
+    import {Notify} from "vant";
 
-    var that = this
-    order({
-      serviceId:that.$route.query.code,
-    }).then((res)=> {
-              that.product = res.data
-              that.show = false
-      that.orderCode = res.data.code;
+    export default {
+        name: "OrderConfirm",
+        data() {
+            return {
+                show: true,
+                showSess: false,
+                payToken: null,
+                form: {
+                    creditVerify: null,
+                    creditNum: null
+                },
+                product: {},
+                slides: ''
+            }
+        },
+        created() {
+            var that = this
+            service({
+                id: that.$route.query.id,
             })
-            .catch(function (error) {
-              // that.$notify({ type: 'warning', message: error.errMessage });
-              console.log(error)
-              that.$router.go(-1)
-            });
-  },
-  methods : {
-    fanHui(){
-      this.$router.go(-1)
-    },
-    payNow(){
-      let _this = this;
-      _this.showSess = true
-        let querystring = require('querystring');
-        // let https = require('https');
-        let secret_key = 'sk_test_2u2m1usd757y38rmar9cqsxi'
-        let auth = 'Basic ' + Buffer.from(secret_key + ':').toString('base64');
-        let post_data = querystring.stringify({
-          'default_locale': 'ja',
-          'email': 'regaferi@2021gmail.com',
-          'amount': _this.product.total,
-          'currency': 'JPY',
-          'payment_data[external_order_num]': _this.orderCode,
-          'return_url': 'https://regaferi-api.cn.utools.club/orderDetail'
-        });
+                .then((res) => {
+                    that.show = false
+                    that.product = res.data
+                    res.data.imageUrls.forEach(ele => {
+                        if (ele.type == 'LOGO') {
+                            that.slides = ele.target
+                            that.show = false
+                        }
+                    })
 
-        _this.$store.commit('COMMIT_ZHIFU',auth)
-        _this.$store.commit('COMMIT_Content',Buffer.byteLength(post_data))
-        sessions(post_data).then(function (res){
-          console.log(res,'支付')
-          window.open(res.session_url)
-        }).catch(function (error) {
-          _this.showSess = false
-          window.open(error.session_url)
-          console.log(error)
-        });
-        /*let post_options = {
-          host: 'komoju.com',
-          port: '443',
-          path: '/api/v1/sessions',
-          method: 'POST',
-          headers: {
-            'Authorization': auth,
-            'Content-Length': Buffer.byteLength(post_data)
-          }
-        };
-        let post_req = https.request(post_options, function(res) {
-          res.setEncoding('utf8');
-          res.on('data', function (chunk) {
-            console.log(chunk);
-          });
-        });
-         console.log(post_data);
-        post_req.write(post_data);
-        post_req.end();*/
-      // window.location.href = post_data['session_url'];
+                })
+                .catch(function (error) {
+                    Notify({type: 'warning', message: error.errMessage});
+                });
+
+        },
+        methods: {
+            fanHui() {
+                this.$router.go(-1)
+            },
+            payNow() {
+                let _this = this;
+                order({
+                    serviceId: _this.$route.query.id,
+                }).then((res) => {
+                    _this.showSess = true
+                    let querystring = require('querystring');
+                    // let https = require('https');
+                    let secret_key = 'sk_test_2u2m1usd757y38rmar9cqsxi'
+                    let auth = 'Basic ' + Buffer.from(secret_key + ':').toString('base64');
+                    let post_data = querystring.stringify({
+                        'default_locale': 'ja',
+                        'email': 'regaferi@2021gmail.com',
+                        'amount': _this.product.total,
+                        'currency': 'JPY',
+                        'payment_data[external_order_num]': res.data.code,
+                        'return_url': 'https://regaferi-api.cn.utools.club/orderDetail'
+                    });
+
+                    _this.$store.commit('COMMIT_ZHIFU', auth)
+                    _this.$store.commit('COMMIT_Content', Buffer.byteLength(post_data))
+                    sessions(post_data).then(function (res) {
+                        console.log(res, '支付')
+                        window.open(res.session_url)
+                    }).catch(function (error) {
+                        _this.showSess = false
+                        window.open(error.session_url)
+                        console.log(error)
+                    });
+                })
+                    .catch(function (error) {
+                        // that.$notify({ type: 'warning', message: error.errMessage });
+                        console.log(error)
+                        _this.$router.go(-1)
+                    });
+
+                /*let post_options = {
+                  host: 'komoju.com',
+                  port: '443',
+                  path: '/api/v1/sessions',
+                  method: 'POST',
+                  headers: {
+                    'Authorization': auth,
+                    'Content-Length': Buffer.byteLength(post_data)
+                  }
+                };
+                let post_req = https.request(post_options, function(res) {
+                  res.setEncoding('utf8');
+                  res.on('data', function (chunk) {
+                    console.log(chunk);
+                  });
+                });
+                 console.log(post_data);
+                post_req.write(post_data);
+                post_req.end();*/
+                // window.location.href = post_data['session_url'];
+            }
+        }
     }
-  }
-}
 </script>
 
 <style scoped>
-  .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
 </style>

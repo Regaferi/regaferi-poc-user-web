@@ -255,7 +255,7 @@
                     });
             },
             navigateTo : function (){
-                this.$router.push({name : 'order-confirm', query: {'code': this.$route.query.id,}})
+                this.$router.push({name : 'order-confirm', query: {'id': this.$route.query.id,}})
 
 
             }

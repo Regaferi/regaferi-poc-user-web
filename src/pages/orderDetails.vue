@@ -1,5 +1,6 @@
 <template>
-    <div style="margin-top: 20%;height: 100%">
+
+    <div style="margin-top: 20%;">
         <a-descriptions bordered>
             <a-descriptions-item label="服务名">
                 {{orderList.serviceName}}
@@ -64,7 +65,6 @@ import {orderDetail,serviceOrder} from '@api'
         created() {
             var thas = this
             orderDetail(thas.$route.query.id).then((res)=> {
-                thas.show = false
                 thas.orderList = res.data
             })
             serviceOrder({
