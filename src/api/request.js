@@ -7,7 +7,6 @@ axios.defaults.timeout = 60000;
 axios.defaults.baseURL = '/apis';
 axios.defaults.headers.post["Content-Type"] =
     "application/x-www-form-urlencoded;charset=UTF-8";
-let loading = null;
 /*
  *请求前拦截
  *用于处理需要请求前的操作
@@ -39,7 +38,6 @@ axios.interceptors.response.use(
     response => {
         return new Promise((resolve, reject) => {
             const res = response.data;
-            console.log(loading,'配置')
             if(res.code == '200' || res.success == true){
                 resolve(res)
             }else{
@@ -48,6 +46,13 @@ axios.interceptors.response.use(
                 }*/
                 reject(res)
                 Notify(res.errMessage);
+            }
+            if(res.errMessage == "用户登录信息过期"){
+                console.log(store.state.token ,"用户登录信息过期")
+                store.state.token = ''
+                router.push({
+                    path: "/home"
+                });
             }
             //请求成功后关闭加载框
            /* if (loading) {
@@ -78,8 +83,6 @@ axios.interceptors.response.use(
             return;
         }
         const status = error.response.status;
-        loading = status
-        console.log(status,'ppppppppppppppppppppppppp')
         switch (status) {
             case 500:
                 Notify('服务器内部错误');

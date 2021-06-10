@@ -235,6 +235,7 @@
                               label="Email"
                               required
                       ></v-text-field>
+
                       <v-text-field
                               :type="'password'"
                               v-model="formData.password"
@@ -249,6 +250,13 @@
                               label="请再次输入密码"
                               required
                       ></v-text-field>
+                      <v-text-field
+
+                              v-model="formData.verifyCode"
+                              :rules="codeRules"
+                              label="検証コード."
+                              required
+                      ></v-text-field>
                     </v-form>
                   </v-card-text>
                   <v-card-actions class="pt-3">
@@ -260,6 +268,16 @@
                     >
                       注册 |
                       <v-icon small class="pl-1">mdi-check-underline</v-icon>
+                    </v-btn>
+                    <v-btn
+                            outlined
+                            small
+                            color="orange accent-4"
+                            @click="sendVerifyCodeTwo"
+                            :disabled="show"
+                    >
+                      検証コードを送る |{{count}}
+                      <v-icon small class="pl-1">mdi-send</v-icon>
                     </v-btn>
                   </v-card-actions>
                 </v-card>
@@ -345,11 +363,7 @@ export default {
       show: false,
       count: '',
       timer: null,
-      formData:{
-        email:'',
-        password:'',
-        repeatPassword:'',
-      },
+      formData:{},
       formData1:{
         email:'',
         password:'',
@@ -396,21 +410,25 @@ export default {
               });
     },
     register(){
-      let that = this;
-      if(that.formData.password != that.formData.repeatPassword){
-        Notify({ type: 'warning', message: "两次密码不一致，请重新输入" });
-      }else{
-        memberRegister(that.formData)
-                .then(function (response) {
-                  console.log(response)
-                  Notify({ type: 'success', message: "注册成功,请重新登录!" });
-                  that.revealDenlu = false
-                  that.reveal = true
-                })
-                .catch(function (error) {
-                  Notify({ type: 'warning', message: error.errMessage });
-                });
+      console.log(this.formData)
+      if(this.formData.verifyCode){
+        let that = this;
+        if(that.formData.password != that.formData.repeatPassword){
+          Notify({ type: 'warning', message: "两次密码不一致，请重新输入" });
+        }else{
+          memberRegister(that.formData)
+                  .then(function (response) {
+                    console.log(response)
+                    Notify({ type: 'success', message: "注册成功,请重新登录!" });
+                    that.revealZhuce = false
+                    that.revealDenlu = true
+                  })
+                  .catch(function (error) {
+                    Notify({ type: 'warning', message: error.errMessage });
+                  });
+        }
       }
+
 
 
     },
@@ -436,6 +454,7 @@ export default {
                 .then(function (response) {
                   if(response.data.firstLogin == true){
                     that.$router.push({name:'firstLogin'})
+
                   }else {
                     that.$router.push({name:'resume'})
                   }
@@ -464,6 +483,8 @@ export default {
               this.count = "";
             }
           }, 1000)
+        }else{
+          Notify({ type: 'warning', message: '请输入邮箱！' });
         }
       }
       var thas = this
@@ -483,6 +504,56 @@ export default {
                   thas.show = false;
                   Notify({ type: 'warning', message: error.errMessage });
                 });
+      }
+      /*axios.post('http://frontend-api.regaferi.jp/member/verify', {
+        'email' : this.account,
+        'mobile' : null
+      })
+      .then(function (response) {
+        if (response.data.isSuccess){
+          console.log("success")
+        }
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });*/
+    },
+    sendVerifyCodeTwo (){
+      const TIME_COUNT = 60;
+      if (!this.timer) {
+          this.show = true;
+          this.count = TIME_COUNT;
+          this.timer = setInterval(() => {
+            if (this.count > 0 && this.count <= TIME_COUNT) {
+              this.count--;
+            } else {
+              this.show = false;
+              clearInterval(this.timer);
+              this.timer = null;
+              this.count = "";
+            }
+          }, 1000)
+      }
+      var thas = this
+      if(thas.formData.email){
+        verify({
+          "email": thas.formData.email,
+        })
+                .then(function (response) {
+                  Notify({ type: 'success', message: '邮件发送成功' });
+                  console.log(response);
+
+                })
+                .catch(function (error) {
+                  clearInterval(thas.timer);
+                  thas.timer = null;
+                  thas.count = "";
+                  thas.show = false;
+                  Notify({ type: 'warning', message: error.errMessage });
+                });
+      }else{
+        Notify({ type: 'warning', message: '请输入邮箱！' });
       }
       /*axios.post('http://frontend-api.regaferi.jp/member/verify', {
         'email' : this.account,

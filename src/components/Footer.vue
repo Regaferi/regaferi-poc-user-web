@@ -1,10 +1,12 @@
 <template>
   <div>
     <v-footer
+
             dark
             padless
     >
       <v-card
+              style="    width: 100%;"
               flat
               tile
               class="indigo lighten-1 white--text text-center"

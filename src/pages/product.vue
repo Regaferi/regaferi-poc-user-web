@@ -117,7 +117,7 @@
                         </v-list-item>
                     </template>
                 </v-list>
-                <div v-if="commentJson.length > 2">
+                <div v-if="commentJson.length > 1">
                     <van-divider v-show="dividers" @click="dividers = false"><van-icon name="arrow-up" />隐藏评论</van-divider>
                     <van-divider v-show="!dividers" @click="dividers = true"><van-icon name="arrow-down" />更多评论</van-divider>
                 </div>
@@ -213,6 +213,7 @@
                 })
                     .then((res)=> {
                         console.log(res)
+                        that.message = ''
                         that.commentAdd()
                     })
                     .catch(function (error) {
@@ -255,7 +256,7 @@
                     });
             },
             navigateTo : function (){
-                
+
                 this.$router.push({name : 'order-confirm', query: {'id': this.$route.query.id,}})
 
 

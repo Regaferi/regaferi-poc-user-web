@@ -21,11 +21,13 @@ export default new Vuex.Store({
     // loginIs: false,
     isLogin: false,
     memberId: null,
+    signUpMember:{}
   },
   mutations: {
     //保存token
     COMMIT_TOKEN(state, object) {
-
+      console.log(object,'vuex')
+      state.signUpMember = object.signUpMember;
       state.token = object.authorityToken;
     },
  /*   LOGIN_IS(state, object){
@@ -82,7 +84,8 @@ export default new Vuex.Store({
         roles: val.roles,
         tagsList: val.tagsList,
         lang:val.lang,
-        breadList:val.breadList
+        breadList:val.breadList,
+        signUpMember:val.signUpMember
       }
     }
   })]

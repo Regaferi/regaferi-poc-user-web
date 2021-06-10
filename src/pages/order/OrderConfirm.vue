@@ -105,44 +105,48 @@
         },
         methods: {
             fanHui() {
+
                 this.$router.go(-1)
             },
             payNow() {
-                let _this = this;
-                order({
-                    serviceId: _this.$route.query.id,
-                }).then((res) => {
-                    _this.showSess = true
-                    let querystring = require('querystring');
-                    // let https = require('https');
-                    let secret_key = 'sk_test_2u2m1usd757y38rmar9cqsxi'
-                    let auth = 'Basic ' + Buffer.from(secret_key + ':').toString('base64');
-                    let href =window.location.href
-                    let post_data = querystring.stringify({
-                        'default_locale': 'ja',
-                        'email': 'regaferi@2021gmail.com',
-                        'amount': _this.product.prices,
-                        'currency': 'JPY',
-                        'payment_data[external_order_num]': res.data.order.code,
-                        'return_url': href + "/resume"
-                    });
+                if(this.$store.state.token){
+                    let _this = this;
+                    order({
+                        serviceId: _this.$route.query.id,
+                    }).then((res) => {
+                        _this.showSess = true
+                        let querystring = require('querystring');
+                        // let https = require('https');
+                        let secret_key = 'sk_test_2u2m1usd757y38rmar9cqsxi'
+                        let auth = 'Basic ' + Buffer.from(secret_key + ':').toString('base64');
+                        let href =window.location.host
+                        let post_data = querystring.stringify({
+                            'default_locale': 'ja',
+                            'email': 'regaferi@2021gmail.com',
+                            'amount': _this.product.prices,
+                            'currency': 'JPY',
+                            'payment_data[external_order_num]': res.data.code,
+                            'return_url': 'https://' +href + "/resume"
+                        });
+                        console.log(post_data)
+                        _this.$store.commit('COMMIT_ZHIFU', auth)
+                        _this.$store.commit('COMMIT_Content', Buffer.byteLength(post_data))
+                        sessions(post_data).then(function (res) {
+                            console.log(res, '支付')
+                            window.open(res.session_url)
+                        }).catch(function (error) {
+                            _this.showSess = false
+                            window.open(error.session_url)
+                            console.log(error)
+                        });
+                    })
+                        .catch(function (error) {
+                            Notify({ type: 'warning', message: error.errMessage });
+                        });
+                }else{
+                    Notify({type: 'warning', message: '您还未登录！'});
+                }
 
-                    _this.$store.commit('COMMIT_ZHIFU', auth)
-                    _this.$store.commit('COMMIT_Content', Buffer.byteLength(post_data))
-                    sessions(post_data).then(function (res) {
-                        console.log(res, '支付')
-                        window.open(res.session_url)
-                    }).catch(function (error) {
-                        _this.showSess = false
-                        window.open(error.session_url)
-                        console.log(error)
-                    });
-                })
-                    .catch(function (error) {
-                        // that.$notify({ type: 'warning', message: error.errMessage });
-                        console.log(error)
-                        _this.$router.go(-1)
-                    });
 
                 /*let post_options = {
                   host: 'komoju.com',

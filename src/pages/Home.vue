@@ -125,7 +125,7 @@
                  @click="navigateTo(navigator)"
           >
                   <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'300px'"  >
-                      <v-img max-height=100% max-width=100% :src="navigator.url" ></v-img>                      
+                      <v-img max-height=100% max-width=100% :src="navigator.url" ></v-img>
                           <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; font-size: 1px; text-align: center;">{{navigator.name}}</v-card-subtitle>
                   </v-card>
           </v-col>
@@ -169,14 +169,12 @@
                          :key="i"
                          @click="navigateTo(navigator)"
                   >
-                      <v-banner elevation="3" style="margin:auto;padding: auto; background: #f3f0e9;">
-                          <v-card width="100%">
-                              <v-img max-height=100% max-width=100% :src="navigator.url" ></v-img>
-                              <v-row class="navigator-row"  >
-                                  <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; ">{{navigator.name}}</v-card-subtitle>
-                              </v-row>
-                          </v-card>
-                      </v-banner>
+                      <v-card width="100%">
+                          <v-img max-height=100% max-width=100% :src="navigator.url" ></v-img>
+                          <v-row class="navigator-row"  >
+                              <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; ">{{navigator.name}}</v-card-subtitle>
+                          </v-row>
+                      </v-card>
                   </v-col>
               </div>
 
@@ -495,5 +493,7 @@ export default {
     border: none;
     background: #ffffff;
 }
-
+.col-2{
+    max-width: 12.5%;
+}
 </style>

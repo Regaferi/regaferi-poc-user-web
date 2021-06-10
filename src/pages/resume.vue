@@ -41,7 +41,7 @@
                     </v-row>
                 <van-button @click.stop="checkCode(item)" round type="info">查看校验码</van-button>
             </v-card-text>
-            <van-button @click="tuiChu" type="danger">退出登录</van-button>
+            <van-button style="margin-bottom: 5%" @click="tuiChu" type="danger">退出登录</van-button>
             <!--   我的订单   -->
         </div>
         <van-overlay :show="show">
@@ -109,9 +109,10 @@ import {memberDetail,orderList,settlement} from "@api";
         },
         methods : {
             checkCode(val){
+                this.time = 0
                 var that = this
                 settlement({
-                    code:val.code,
+                    code:that.code,
                     orderId:val.id
                 })
                     .then(function (response) {

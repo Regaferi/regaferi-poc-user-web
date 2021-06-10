@@ -1,6 +1,8 @@
 import {get,post,put} from './request';
 //登陆(发送验证码)
 export const  verify= (verify)=>post('/member/verify',verify)
+
+
 // 会员登录
 export const  login= (login)=>post('/member/login',login)
 /// 会员详情

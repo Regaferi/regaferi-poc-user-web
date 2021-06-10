@@ -19,13 +19,10 @@
                 {{orderList.serviceOrder.endTime}}
             </a-descriptions-item>
             <a-descriptions-item label="位置">
-                {{orderList.serviceResponse.location}}
+                <a-badge status="processing" :text="orderList.serviceResponse.location" />
             </a-descriptions-item>
             <a-descriptions-item label="天数">
-                2018-04-24 18:00:00
-            </a-descriptions-item>
-            <a-descriptions-item label="Status" :span="3">
-                <a-badge status="processing" :text="orderList.serviceResponse.location" />
+                {{orderList.serviceOrder.serviceTimeDay}}
             </a-descriptions-item>
 
             <a-descriptions-item label="剩余次数">
@@ -52,25 +49,24 @@
 </template>
 
 <script>
-import {orderDetail,serviceOrder} from '@api'
+import {orderDetail} from '@api'
     export default {
         data() {
             return {
                 show:true,
                 size: 'default',
-                orderList:{},
+                orderList:{
+                    serviceOrder:{},
+                    serviceResponse:{}
+
+                },
             };
         },
         created() {
             var thas = this
             orderDetail(thas.$route.query.id).then((res)=> {
                 thas.orderList = res.data
-            })
-            serviceOrder({
-                orderId:thas.$route.query.id
-            }).then((res)=> {
                 thas.show = false
-                thas.orderList = res.data
             })
         },
         methods: {

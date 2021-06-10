@@ -92,6 +92,7 @@
                                                 show-word-limit
                                         />
                                         <van-field
+                                                v-if="item.reply"
                                                 rows="2"
                                                 autosize
                                                 readonly
@@ -107,7 +108,7 @@
                                     </div>
                                 </div>
 
-                                <div v-if="items.length > 2">
+                                <div v-if="items.length > 1">
                                     <van-divider v-show="dividers" @click="dividers = false"><van-icon name="arrow-up" />隐藏评论</van-divider>
                                     <van-divider v-show="!dividers" @click="dividers = true"><van-icon name="arrow-down" />
                                         {{items.length}}条评论</van-divider>
@@ -246,8 +247,8 @@
             },
             ellipsis (value) {
                 if (!value) return ''
-                if (value.length >40) {
-                    return value.slice(0,40) + '...'
+                if (value.length >120) {
+                    return value.slice(0,120) + '...'
                 }
                 return value
             },
