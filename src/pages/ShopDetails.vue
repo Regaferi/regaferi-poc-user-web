@@ -36,7 +36,7 @@
 
         <!--轮播图-->
         <div style="margin-top: 12rem;">
-            <van-empty v-if="images.length <= 0" description="暂无数据" />
+            <van-empty v-if="images.length <= 0" description="別のキーワードを試すか、検索フィルターを削除してください" />
             <van-swipe v-if="images.length > 0" height="250" class="my-swipe" style="border-radius: 10px;width: 95%;margin-left: 2%" :autoplay="3000" indicator-color="white">
                 <van-swipe-item v-for="(img ,index) in images" :key="index">
                     <img style="height: 100%" v-lazy="img" />

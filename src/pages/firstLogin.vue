@@ -2,8 +2,10 @@
     <div style="margin-top: 12%;">
         <!-- PC -->
         <v-card v-show="!isMobile">
-            <v-card-title>补全信息</v-card-title>
+            <v-card-title >アカウント情報入力</v-card-title>
+          <h4>※登録された名前は後から変更できませんのでご注意ください</h4>
             <v-card-text>
+              
                 <v-tabs vertical>
                     <v-tab>
                         <v-icon left>
@@ -25,7 +27,7 @@
                                             v-model="name"
                                             :rules="[() => !!name || 'This field is required']"
                                             :error-messages="errorMessages"
-                                            label="名字"
+                                            label="名前"
                                             placeholder="John Doe"
                                             required
                                     ></v-text-field>
@@ -37,7 +39,7 @@
               () => !!address && address.length <= 25 || 'Address must be less than 25 characters',
               addressCheck
             ]"
-                                            label="电话"
+                                            label="電話番号"
                                             placeholder="Snowy Rock Pl"
                                             counter="11"
                                             required
@@ -73,7 +75,7 @@
                                             text
                                             @click="submit"
                                     >
-                                        提交
+                                        確定
                                     </v-btn>
                                 </v-card-actions>
                             </v-card>
@@ -85,25 +87,26 @@
         <div v-show="isMobile" class="pt-8 text-center align-center">
             <!--   基本信息   -->
             <v-card-subtitle>
-                <h3>信息补全</h3>
+                <h1 >アカウント情報入力</h1>
+                 <h4>※登録された名前は後から変更できませんのでご注意ください</h4>
             </v-card-subtitle>
             <v-divider/>
             <van-form @submit="submit" style="padding: 5%">
                 <van-field
                         v-if="formData.name == null || formData.name == ''"
                         v-model="formJson.name"
-                        name="真名"
-                        label="真名"
-                        placeholder="真名"
-                        :rules="[{ required: true, message: '请填写真名' }]"
+                        name="名前"
+                        label="名前"
+                        placeholder="姓と名の間にスペースを入力"
+                        :rules="[{ required: true, message: '名前を入力してください' }]"
                 />
                 <van-field
                         v-if="formData.pseudonym == null || formData.pseudonym == ''"
                         v-model="formJson.pseudonym"
-                        name="假名"
-                        label="假名"
-                        placeholder="假名"
-                        :rules="[{ required: true, message: '请填写假名' }]"
+                        name="フリガナ"
+                        label="フリガナ"
+                        placeholder="カタカナで入力"
+                        :rules="[{ required: true, message: 'フリガナを入力してください' }]"
                 />
                 <van-field
                         v-if="formData.email == null || formData.email == ''"
@@ -117,10 +120,10 @@
                         v-if="formData.mobile == null || formData.mobile == ''"
                         type="tel"
                         v-model="formJson.mobile"
-                        name="手机号"
-                        label="手机号"
-                        placeholder="手机号"
-                        :rules="[{ required: true, message: '请填写手机号' }]" />
+                        name="電話番号"
+                        label="電話番号"
+                        placeholder="(例:01234567890)"
+                        :rules="[{ required: true, message: '電話番号を入力してください' }]" />
                 <van-field
                         v-if="formData.password == null || formData.password == ''"
                         v-model="formJson.password"
@@ -140,7 +143,7 @@
                         :rules="[{ required: true, message: '请再次输入密码' }]"
                 />
                 <div style="margin: 16px;">
-                    <van-button round block type="info" native-type="submit">提交</van-button>
+                    <van-button style="font-size:20px;" round block type="info" native-type="submit">確定</van-button>
                 </div>
             </van-form>
             <!--   我的订单   -->
@@ -223,6 +226,7 @@ import {signUp} from '@api';
     }
 </script>
 
-<style scoped>
+<style >
+
 
 </style>

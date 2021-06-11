@@ -16,7 +16,7 @@
                 <van-empty
                         class="custom-image"
                         image="https://img01.yzcdn.cn/vant/custom-empty-image.png"
-                        description="暂无数据"
+                        description="検索結果は見つかりませんでした"
                 />
             </div>
             <v-card-text v-for="(item,index) in orderList" :key="index" @click="Details(item)" style="box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%) !important;

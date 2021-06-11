@@ -251,8 +251,9 @@
 
 <script>
     export default {
-        name: "footer2"
+        name: "footer2",
     }
+    
 </script>
 
 <style scoped>

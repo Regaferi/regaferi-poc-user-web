@@ -12,7 +12,7 @@
         </template>
         <v-card v-show="!isLogin">
 &lt;!&ndash;          <v-card-title>{{ $t('i18n.member.basic.title') }}</v-card-title>&ndash;&gt;
-          <v-card-title>個人センター.</v-card-title>
+          <v-card-title>アカウント</v-card-title>
           <v-card class="mx-auto" max-width="344" height="350" flat>
             <v-card-text>
               <p class="display-1 text&#45;&#45;primary">
@@ -32,7 +32,7 @@
                   style="height: 100%;"
               >
                 <v-card-text class="pb-0">
-                  <p class="text&#45;&#45;primary">迅速な登録/登録
+                  <p class="text&#45;&#45;primary"> パスワードを忘れた場合
                     <v-btn
                         text
                         x-small
@@ -52,10 +52,20 @@
                         label="Email/Mobile"
                         required
                     ></v-text-field>
+           <v-btn
+                      outlined
+                      small
+                      color="orange accent-4"
+                      @click="sendVerifyCode"
+                      :disabled="show"
+                  >
+                    検証コードを送る |{{count}}
+                    <v-icon small class="pl-1">mdi-send</v-icon>
+                  </v-btn>    
                     <v-text-field
                         v-model="code"
                         :rules="codeRules"
-                        label="验证码"
+                        label="検証コード"
                         required
                     ></v-text-field>
                   </v-form>
@@ -67,18 +77,8 @@
                       color="teal accent-4"
                       @click="login"
                   >
-                    登録/登録 |
+                    ログイン |
                     <v-icon small class="pl-1">mdi-check-underline</v-icon>
-                  </v-btn>
-                  <v-btn
-                      outlined
-                      small
-                      color="orange accent-4"
-                      @click="sendVerifyCode"
-                      :disabled="show"
-                  >
-                    検証コードを送る |{{count}}
-                    <v-icon small class="pl-1">mdi-send</v-icon>
                   </v-btn>
 
                 </v-card-actions>
@@ -106,50 +106,58 @@
             height="800px"
         >
           <v-card outlined height="100%" v-show="!isLogin">
-            <v-card-title>個人センター.</v-card-title>
+            <v-card-title>アカウント</v-card-title>
             <div class="pt-12">
               <v-card-text>
-                <p class="display-1 text--primary">
+                <p class="p-text-class">
                   まだ登録されていない
                 </p>
-                <p>ようこそご利用ください Regaferi</p>
-                <p class="text--primary">会員登録は当ステーション関連サービス契約にご同意いただきます</p>
               </v-card-text>
-              <v-card-actions style="display: block">
+              <p class="text--primary">アカウントにログインする方法を選んでください</p>
+               <v-card-actions style="display: block"> 
+            <div class="padding-text">
+               <v-btn
+                       style="width: 220px;"
+                        color="red"
+                        small
+                        outlined
+                        @click="revealDenlu = true"
+                >
+                
+                      ログイン
+                </v-btn>
+            </div>
+            <div class="padding-text">
                 <v-btn
+                 style="width: 220px;"
                     color="red"
                     small
                     outlined
                     @click="reveal = true"
                 >
-                  E-Mail
-                </v-btn>
+                          パスワードを忘れた場合
+                </v-btn>  
+            </div>
+
+             <div class="padding-text">
+                 <i class="el-icon-view el-icon--right"></i> <el-link href="https://regaferi.jp/footer2" target="_blank" >※利用規約</el-link>
+                                  と<el-link href="https://regaferi.jp/footer4" target="_blank" >プライバシー</el-link>ポリシーが適用されます
+              </div>
+                 </v-card-actions>
+                 
+                 <p style="padding-top:50px" class="p-text-class" >新規登録はこちら</p>
+                           <v-card-actions style="display: block">
                 <v-btn
                         color="red"
                         small
                         outlined
                         @click="revealZhuce = true"
                 >
-                  注册
+                 新規登録
                 </v-btn>
-                <v-btn
-                        color="red"
-                        small
-                        outlined
-                        @click="revealDenlu = true"
-                >
-                  登录
-                </v-btn>
-                <v-btn
-                    color="brown"
-                    small
-                    outlined
-                    @click="reveal = true"
-                    class="text-center align-center"
-                >
-                  LINE
-                </v-btn>
-              </v-card-actions>
+
+
+              </v-card-actions>    
               <v-expand-transition>
                 <v-card
                     v-if="reveal"
@@ -157,7 +165,7 @@
                     style="height: 100%;"
                 >
                   <v-card-text class="pb-0">
-                    <p class="text--primary">迅速な登録/登録
+                    <p class="text--primary"> パスワードを忘れた場合
                       <v-btn
                           text
                           x-small
@@ -177,24 +185,7 @@
                           label="Email"
                           required
                       ></v-text-field>
-                      <v-text-field
-                          v-model="code"
-                          :rules="codeRules"
-                          label="検証コード."
-                          required
-                      ></v-text-field>
-                    </v-form>
-                  </v-card-text>
-                  <v-card-actions class="pt-3">
-                    <v-btn
-                        outlined
-                        small
-                        color="teal accent-4"
-                        @click="login"
-                    >
-                      登録/登録 |
-                      <v-icon small class="pl-1">mdi-check-underline</v-icon>
-                    </v-btn>
+                 <div class="padding-text">
                     <v-btn
                         outlined
                         small
@@ -202,10 +193,29 @@
                         @click="sendVerifyCode"
                         :disabled="show"
                     >
-                      検証コードを送る |{{count}}
+                     ①検証コードを取得する |{{count}}
                       <v-icon small class="pl-1">mdi-send</v-icon>
                     </v-btn>
-                  </v-card-actions>
+                    </div>
+                      <v-text-field
+                          v-model="code"
+                          :rules="codeRules"
+                          label="検証コード"
+                          required
+                      ></v-text-field>
+                    </v-form>
+                  </v-card-text>
+                  <div class="padding-text">
+                    <v-btn
+                        outlined
+                        small
+                        color="teal accent-4"
+                        @click="login"
+                    >
+               ②ログイン |
+                      <v-icon small class="pl-1">mdi-check-underline</v-icon>
+                    </v-btn>
+                    </div>
                 </v-card>
               </v-expand-transition>
               <v-expand-transition>
@@ -215,7 +225,7 @@
                         style="height: 100%;"
                 >
                   <v-card-text class="pb-0">
-                    <p class="text--primary">迅速な登録/登録
+                    <p class="text--primary"> 新規登録
                       <v-btn
                               text
                               x-small
@@ -240,36 +250,27 @@
                               :type="'password'"
                               v-model="formData.password"
                               :rules="password"
-                              label="请输入密码"
+                              label="パスワード"
                               required
                       ></v-text-field>
                       <v-text-field
                               :type="'password'"
                               v-model="formData.repeatPassword"
                               :rules="repeatPassword"
-                              label="请再次输入密码"
+                              label="確認のためパスワードを再入力してください"
                               required
                       ></v-text-field>
                       <v-text-field
 
                               v-model="formData.verifyCode"
                               :rules="codeRules"
-                              label="検証コード."
+                              label="ワンタイムパスワード."
                               required
                       ></v-text-field>
                     </v-form>
                   </v-card-text>
                   <v-card-actions class="pt-3">
-                    <v-btn
-                            outlined
-                            small
-                            color="teal accent-4"
-                            @click="register"
-                    >
-                      注册 |
-                      <v-icon small class="pl-1">mdi-check-underline</v-icon>
-                    </v-btn>
-                    <v-btn
+                  <v-btn
                             outlined
                             small
                             color="orange accent-4"
@@ -278,6 +279,15 @@
                     >
                       検証コードを送る |{{count}}
                       <v-icon small class="pl-1">mdi-send</v-icon>
+                    </v-btn>
+                    <v-btn
+                            outlined
+                            small
+                            color="teal accent-4"
+                            @click="register"
+                    >
+                     新規登録 |
+                      <v-icon small class="pl-1">mdi-check-underline</v-icon>
                     </v-btn>
                   </v-card-actions>
                 </v-card>
@@ -289,7 +299,7 @@
                         style="height: 100%;"
                 >
                   <v-card-text class="pb-0">
-                    <p class="text--primary">登録/登録
+                    <p class="text--primary">ログイン
                       <v-btn
                               text
                               x-small
@@ -314,7 +324,7 @@
                               v-model="formData1.password"
 
                               :rules="password"
-                              label="请输入密码"
+                              label="パスワード"
                               required
                       ></v-text-field>
                     </v-form>
@@ -326,7 +336,7 @@
                             color="teal accent-4"
                             @click="member"
                     >
-                      登录 |
+                ログイン       |
                       <v-icon small class="pl-1">mdi-check-underline</v-icon>
                     </v-btn>
                   </v-card-actions>
@@ -370,17 +380,17 @@ export default {
         source:100,
       },
       email: [
-        v => !!v || '请输入邮箱',
+        v => !!v || 'Emailが入力されていません！',
       ],password: [
-        v => !!v || '请输入密码',
+        v => !!v || 'パスワードが入力されていません！',
       ],repeatPassword: [
-        v => !!v || '请再次输入密码',
+        v => !!v || 'パスワードが入力されていません！',
       ],
       accountRules: [
-        v => !!v || '请输入邮箱/手机号',
+        v => !!v || 'Emailが入力されていません！',
       ],
       codeRules: [
-        v => !!v || '请输入验证码',
+        v => !!v || '検証コードが入力されていません！',
       ],
       anonymousShared: true,
     }
@@ -582,5 +592,19 @@ export default {
   opacity: 1 !important;
   position: absolute;
   width: 100%;
+}
+.p-text-class{
+  font-size: 25px;
+  color:#5d63ff;
+}
+.p-text-2{
+ padding-top: 25px;
+}
+.padding-text{
+font-size: 0.75rem;
+ padding-top: 25px;
+}
+.el-link.el-link--default {
+   color: #1976d2;
 }
 </style>

@@ -35,10 +35,10 @@
                     </li>
                     <li class="rsttop-container__search-area" style="height: 40px">
                         <div class="rsttop-container__search-area-inner">
-<!--                            <input placeholder="店名・ジャンル" style="padding-left: 10px;width:90%" type="text">-->
-                            <el-input :placeholder=" '请输入' + value1 + '名称' " v-model="input" class="input-with-select">
-                                <el-select v-model="value1" slot="prepend" placeholder="请选择">
-                                    <el-option  v-for="item in valueLabel"
+<!--                            <input placeholder="店名・ジャンル" style="padding-left: 10px;width:100%" type="text">-->
+                            <el-input   :placeholder=" 'フリーワード' " v-model="input"  class="input-with-select" >
+                                <el-select style="100px;" v-model="value1" slot="prepend" placeholder="请选择">
+                                    <el-option    v-for="item in valueLabel"
                                                 :key="item.value1"
                                                 :label="item.label"
                                                 :value="item.value1"></el-option>
@@ -116,7 +116,7 @@
 
 
       <v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-          <v-col>热门行业</v-col>
+          <v-col>カテゴリーから選ぶ</v-col>
       </v-row>
       <v-row v-show="isMobile" style="width: 100%; margin: auto; left: 0; right: 0;">
           <v-col :cols="isMobile?'3':'2'"
@@ -133,7 +133,7 @@
 
 
       <v-row v-show="isMobile" style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-          <v-col>新规店铺</v-col>
+          <v-col>新着一覧</v-col>
       </v-row>
       <v-row v-show="isMobile" class="pl-2 pr-2">
           <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product)">
@@ -161,7 +161,7 @@
       <div  v-show="!isMobile" class="PcMind">
           <div class="PcMindOne">
               <v-row style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-                  <v-col>热门行业</v-col>
+                  <v-col>カテゴリーから選ぶ</v-col>
               </v-row>
               <div style="width: 100%;padding: 12px;display: flex;flex-wrap: wrap;">
                   <v-col :cols="isMobile?'6':'2'"
@@ -273,13 +273,13 @@ export default {
         input1:'',
         input:'',
         valueLabel: [{
-            value1: '店铺',
-            label: '店铺'
+            value1: 'ショップ',
+            label: 'ショップ'
         }, {
-            value1: '服务',
-            label: '服务'
+            value1: 'サービス',
+            label: 'サービス'
         }],
-        value1:'店铺',
+        value1:'選択',
         topWidth:'',
         products : [],
       navigators : [
@@ -352,7 +352,7 @@ export default {
       },
       searchStore(){
           console.log(this.$route.path)
-          if(this.value1 == '店铺'){
+          if(this.value1 == 'ショップ'){
               if (this.$route.path !== '/storeList') { //判断当前路由和跳转路由是否一致（防止路由复用产生的报错）
                   this.$router.push({name : 'storeList',query:{input:this.input,location:this.input1}})
               }
@@ -450,7 +450,7 @@ export default {
     /deep/.el-input-group--prepend .el-input__inner, .el-input-group__append {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        width: 80%;
+        width: 100%;
 
     }
     /deep/.el-input__inner {
@@ -489,11 +489,17 @@ export default {
 }
 /deep/.el-input-group__prepend {
     border-right: 0;
-    width: 30%;
+    width: 35%;
     border: none;
     background: #ffffff;
 }
 .col-2{
     max-width: 12.5%;
+}
+.el-input-group__prepend {
+    border-right: 0;
+    width: 40%;
+    border: none;
+    background: #ffffff;
 }
 </style>
