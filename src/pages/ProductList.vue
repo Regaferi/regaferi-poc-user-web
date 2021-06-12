@@ -42,7 +42,7 @@
             <v-col cols="6">
               <v-img v-if="item.logoImage" height="130" :src="item.logoImage.target"/>
               <van-image v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
-                <template v-slot:error>加载失败</template>
+                <template v-slot:error>読み込みに失敗しました</template>
               </van-image>
             </v-col>
             <v-col cols="6" style="font-size: xx-small">

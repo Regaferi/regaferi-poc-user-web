@@ -31,14 +31,14 @@
                 <h6>{{ product.subTitle }}</h6>
             </v-card-text>
             <v-divider/>
-            <v-card-subtitle>営業時間.</v-card-subtitle>
+            <v-card-subtitle>営業時間</v-card-subtitle>
             <v-chip-group column class="pl-5 pb-3">
-                <v-chip x-small>{{product.openTime}}PM</v-chip>
+                <v-chip x-small>{{product.openTime}}AM</v-chip>
                 <v-chip x-small>{{product.closeTime}}PM</v-chip>
             </v-chip-group>
             <v-divider/>
             <!--  售卖规格   -->
-            <v-card-subtitle>使用说明</v-card-subtitle>
+            <v-card-subtitle>使用説明</v-card-subtitle>
             <v-card-text>
                 <v-card outlined>
                     <v-row>
@@ -46,16 +46,16 @@
                             <v-list-item two-line>
                                 <v-list-item-content>
                                     <v-list-item-title>{{product.subTitle}}</v-list-item-title>
-                                    <v-list-item-subtitle>
-                                       总次数： {{product.totalCount}}次
-                                    </v-list-item-subtitle> <v-list-item-subtitle>
-                                       服务时长： {{product.serviceTimeDay}}天
+                                    <v-list-item-subtitle style="padding-top: 5px;">
+                                       合計数： {{product.totalCount}}回
+                                    </v-list-item-subtitle> <v-list-item-subtitle style="padding-top: 5px;">
+                                       サービス時間： {{product.serviceTimeDay}}日
                                     </v-list-item-subtitle>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-col>
                         <v-col cols="4">
-                            <h4 class="pt-5">{{product.prices}}</h4>
+                            <h4 class="pt-5">{{product.prices}}円</h4>
                         </v-col>
                     </v-row>
                 </v-card>
@@ -65,7 +65,7 @@
 
             <v-divider/>
             <!--  商品评价   -->
-            <v-card-subtitle>服务評価</v-card-subtitle>
+            <v-card-subtitle>サービス評価</v-card-subtitle>
 
 
             <v-card>
@@ -93,7 +93,7 @@
                                 <van-field
                                         rows="2"
                                         autosize
-                                        label="评论"
+                                        label="コメント"
                                         readonly
                                         type="textarea"
                                         :placeholder="item.comment"
@@ -104,7 +104,7 @@
                                         rows="2"
                                         autosize
                                         readonly
-                                        label="回复"
+                                        label="応答"
                                         type="textarea"
                                         :placeholder="item.reply"
                                         show-word-limit
@@ -118,8 +118,8 @@
                     </template>
                 </v-list>
                 <div v-if="commentJson.length > 1">
-                    <van-divider v-show="dividers" @click="dividers = false"><van-icon name="arrow-up" />隐藏评论</van-divider>
-                    <van-divider v-show="!dividers" @click="dividers = true"><van-icon name="arrow-down" />更多评论</van-divider>
+                    <van-divider v-show="dividers" @click="dividers = false"><van-icon name="arrow-up" />コメントを隠す</van-divider>
+                    <van-divider v-show="!dividers" @click="dividers = true"><van-icon name="arrow-down" />その他のコメント</van-divider>
                 </div>
             </v-card>
             <div v-if="token" style="margin-top: 10px;">
@@ -127,15 +127,15 @@
                         v-model="message"
                         rows="2"
                         autosize
-                        label="评论"
+                        label="コメント"
                         type="textarea"
                         maxlength="100"
 
-                        placeholder="请输入评论"
+                        placeholder="コメントを入力してください"
                         show-word-limit
                 >
                     <template #button>
-                        <van-button style="float: right" @click="pinLun" round type="info">发送</van-button>
+                        <van-button style="float: right" @click="pinLun" round type="info">送信</van-button>
                     </template>
                 </van-field>
 
@@ -150,7 +150,7 @@
 
         <v-bottom-navigation color="primary" horizontal app>
             <v-btn @click="naviTo()">
-                <span>返回</span>
+                <span>戻る</span>
 <!--                <v-icon>mdi-face-agent</v-icon>-->
             </v-btn>
             <v-divider
@@ -158,7 +158,7 @@
                     vertical
             ></v-divider>
             <v-btn @click="navigateTo()">
-                <span>下单</span>
+                <span>注文する</span>
                 <v-icon>mdi-check-outline</v-icon>
             </v-btn>
         </v-bottom-navigation>

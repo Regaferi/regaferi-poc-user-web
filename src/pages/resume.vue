@@ -39,9 +39,9 @@
                         </v-col>
 
                     </v-row>
-                <van-button @click.stop="checkCode(item)" round type="info">查看校验码</van-button>
+                <van-button @click.stop="checkCode(item)" round type="info">検証コード</van-button>
             </v-card-text>
-            <van-button style="margin-bottom: 5%" @click="tuiChu" type="danger">退出登录</van-button>
+            <van-button style="margin-bottom: 5%" @click="tuiChu" type="danger">サインアウト</van-button>
             <!--   我的订单   -->
         </div>
         <van-overlay :show="show">
@@ -49,7 +49,7 @@
                 <van-loading color="#1989fa" />
             </div>
         </van-overlay>
-        <van-dialog v-model="showCancel" v-if="!time == 0" title="校验码">
+        <van-dialog v-model="showCancel" v-if="!time == 0" title="検証コード">
 <div style="text-align: center;">
     <van-count-down :time="time" format="mm 分 ss 秒" />
 </div>
@@ -93,7 +93,7 @@ import {memberDetail,orderList,settlement} from "@api";
                     console.log(that.orderList,9999)
                 })
                 .catch(function (error) {
-                    // this.$notify({ type: 'warning', message: '查询失败' });
+                    // this.$notify({ type: 'warning', message: 'クエリが失敗しました' });
                     console.log(error)
                 });
             memberDetail({
@@ -103,7 +103,7 @@ import {memberDetail,orderList,settlement} from "@api";
                     that.userName = response.data
                 })
                 .catch(function (error) {
-                    // this.$notify({ type: 'warning', message: '查询失败' });
+                    // this.$notify({ type: 'warning', message: 'クエリが失敗しました' });
                     console.log(error)
                 });
         },
@@ -119,11 +119,11 @@ import {memberDetail,orderList,settlement} from "@api";
 
                         that.time = response.data.ttl * 1000
                         that.code = response.data.code
-                        Notify({ type: 'warning', message: '校验码有效期10分钟！' });
+                        Notify({ type: 'warning', message: '10分間有効！' });
                         that.showCancel = true
                     })
                     .catch(function (error) {
-                        // this.$notify({ type: 'warning', message: '查询失败' });
+                        // this.$notify({ type: 'warning', message: 'クエリが失敗しました' });
                         console.log(error)
                     });
 

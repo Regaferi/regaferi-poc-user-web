@@ -15,15 +15,15 @@
                                 <v-img v-if="slides" height="130" :src="slides"/>
                                 <van-image v-else
                                            src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
-                                    <template v-slot:error>加载失败</template>
+                                    <template v-slot:error>読み込みに失敗しました</template>
                                 </van-image>
                             </v-col>
                             <v-col cols="6" style="font-size: xx-small">
-                                <h6 class="pt-3"> 服务名： {{product.name}}</h6>
+                                <h6 class="pt-3"> サービス名： {{product.name}}</h6>
                                 <h6 > 回数制限： {{product.totalCount}}</h6>
                                 <h6 >利用時間：{{product.serviceTimeDay}}日</h6>
                                <v-divider class="pt-1 pb-1"/>
-                               <h6 style="color: red"> 合计： {{product.prices}}元</h6>
+                               <h6 style="color: red"> 合計： {{product.prices}}元</h6>
                             </v-col>
                         </v-row>
                     </v-card-text>
@@ -125,7 +125,7 @@
                             'email': 'regaferi@2021gmail.com',
                             'amount': _this.product.prices,
                             'currency': 'JPY',
-                            'payment_data[external_order_num]': res.data.code,
+                            'payment_data[external_order_num]':res.data.order.code,
                             'return_url': 'https://' +href + "/resume"
                         });
                         console.log(post_data)
@@ -144,7 +144,7 @@
                             Notify({ type: 'warning', message: error.errMessage });
                         });
                 }else{
-                    Notify({type: 'warning', message: '您还未登录！'});
+                    Notify({type: 'warning', message: 'ログインしていません！'});
                 }
 
 

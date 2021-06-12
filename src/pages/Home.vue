@@ -37,7 +37,7 @@
                         <div class="rsttop-container__search-area-inner">
 <!--                            <input placeholder="店名・ジャンル" style="padding-left: 10px;width:100%" type="text">-->
                             <el-input   :placeholder=" 'フリーワード' " v-model="input"  class="input-with-select" >
-                                <el-select style="100px;" v-model="value1" slot="prepend" placeholder="请选择">
+                                <el-select style="100px;" v-model="value1" slot="prepend" placeholder="選んでください">
                                     <el-option    v-for="item in valueLabel"
                                                 :key="item.value1"
                                                 :label="item.label"
@@ -49,7 +49,7 @@
                     </li>
                     <li style="position: absolute;top: 30%;right: 2%;">
                         <van-button type="info" size="small" @click="searchStore">GO</van-button>
-<!--                            <span @click="searchStore" style="color: #1989fa;    margin-top: 36%;display: block">搜索</span>-->
+<!--                            <span @click="searchStore" style="color: #1989fa;    margin-top: 36%;display: block">検索する</span>-->
                     </li>
                 </ul>
             </div>
@@ -140,12 +140,12 @@
               <v-card>
                   <v-img v-if="product.logoImage" height="148" :src="product.logoImage.target"/>
                   <van-image style="height: 148px" v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
-                      <template v-slot:error>加载失败</template>
+                      <template v-slot:error>読み込みに失敗しました</template>
                   </van-image>
                   <v-card-title style="font-size: 13px;padding-top: 0px;padding-bottom: 0px">{{ product.title }}</v-card-title>
                   <div style="color: red;padding-left:16px;font-size: 13px">  </div>
                   <v-card-text style="padding-top: 0">
-                      <h6>营业时间</h6>
+                      <h6>営業時間</h6>
                       <van-badge style="background: rgb(20, 155, 244)" :content="product.openTime.slice(0,5)" />
                       <van-badge style="background: rgb(20, 155, 244)" :content="product.closeTime.slice(0,5)" />
                   </v-card-text>
@@ -183,7 +183,7 @@
       <div   v-show="!isMobile" class="PcMind">
           <div class="PcMindOne">
               <v-row style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-                  <v-col>热门商铺</v-col>
+                  <v-col>人気のお店</v-col>
               </v-row>
               <div style="width: 100%;padding: 12px;display: flex;flex-wrap: wrap">
                   <div style="width: 25%;padding: 12px;" v-for="(product, key) in products" :key="key" @click="serveWeb">
@@ -314,7 +314,7 @@ export default {
             this.total = res.totalCount
             })
             .catch(err => {
-                console.log(err.data,'失败')
+                console.log(err.data,'失敗')
             });*/
 
 
@@ -340,7 +340,7 @@ export default {
           this.navigators = res.data
       })
           .catch(err => {
-              console.log(err.data,'失败')
+              console.log(err.data,'失敗')
           });
   },
   methods : {

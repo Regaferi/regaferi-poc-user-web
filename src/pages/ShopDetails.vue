@@ -4,7 +4,7 @@
         <div style="position: relative">
             <v-img max-height="200px" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
 
-            <div style="position: absolute;margin:0 auto;width:95%;top: 80%;left: 2%;    z-index: 1;">
+            <div style="position: absolute;margin:0 auto;width:95%;padding-top: 3%;left: 2%;    z-index: 1;">
 
                 <div style="border-radius: 10px;position: relative;background:#F5F5F5;padding: 10px;box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);">
                     <div style="width: 100%;height: 100%;margin-bottom: 2%;border-bottom: 2px solid #676a6c;display: flex">
@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div style="font-size: 2%;margin-bottom: 2%"> <van-icon name="clock-o" />
-                            营业时间
+                            営業時間
                             <span style="margin : 0 2%">{{details.openTime}} ~~ {{details.closeTime}}</span>
 <!--                            <span style="margin-right: 1%">更多信息</span>-->
 <!--                            <van-icon name="arrow" />-->
@@ -37,7 +37,7 @@
         <!--轮播图-->
         <div style="margin-top: 12rem;">
             <van-empty v-if="images.length <= 0" description="別のキーワードを試すか、検索フィルターを削除してください" />
-            <van-swipe v-if="images.length > 0" height="250" class="my-swipe" style="border-radius: 10px;width: 95%;margin-left: 2%" :autoplay="3000" indicator-color="white">
+            <van-swipe v-if="images.length > 0" height="250" class="my-swipe" style="border-radius: 10px;width: 95%; padding-top: 5%;margin-left: 2%" :autoplay="3000" indicator-color="white">
                 <van-swipe-item v-for="(img ,index) in images" :key="index">
                     <img style="height: 100%" v-lazy="img" />
                 </van-swipe-item>
@@ -46,7 +46,7 @@
         <!--  List Detail  -->
         <div style="margin-top: 0">
             <van-tabs v-model="active">
-                <van-tab title="服务">
+                <van-tab title="メニュー">
                         <div v-if="products.length > 0" :class=" divider == true ? '' : 'divader'" style="margin-bottom: 3%;">
                             <van-card
                                     style="border-radius: 10px;box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);width: 95%;margin-left: 2%"
@@ -66,11 +66,11 @@
 
                         </div>
                     <div v-if="products.length > 2">
-                        <van-divider v-show="divider" @click="divider = false"><van-icon name="arrow-up" />折叠</van-divider>
-                        <van-divider v-show="!divider" @click="divider = true"><van-icon name="arrow-down" />展开</van-divider>
+                        <van-divider v-show="divider" @click="divider = false"><van-icon name="arrow-up" />折りたたむ</van-divider>
+                        <van-divider v-show="!divider" @click="divider = true"><van-icon name="arrow-down" />展開する</van-divider>
                     </div>
                 </van-tab>
-                <van-tab title="评论">
+                <van-tab title="ストアレビュー">
 
                     <v-row>
                         <v-col
@@ -85,7 +85,7 @@
                                         <van-field
                                                 rows="2"
                                                 autosize
-                                                label="评论"
+                                                label="レビュー"
                                                 readonly
                                                 type="textarea"
                                                 :placeholder="item.comment"
@@ -96,7 +96,7 @@
                                                 rows="2"
                                                 autosize
                                                 readonly
-                                                label="回复"
+                                                label="応答"
                                                 type="textarea"
                                                 :placeholder="item.reply"
                                                 show-word-limit
@@ -109,9 +109,9 @@
                                 </div>
 
                                 <div v-if="items.length > 1">
-                                    <van-divider v-show="dividers" @click="dividers = false"><van-icon name="arrow-up" />隐藏评论</van-divider>
+                                    <van-divider v-show="dividers" @click="dividers = false"><van-icon name="arrow-up" />コメントを隠す</van-divider>
                                     <van-divider v-show="!dividers" @click="dividers = true"><van-icon name="arrow-down" />
-                                        {{items.length}}条评论</van-divider>
+                                        {{items.length}}コメント</van-divider>
                                 </div>
                             </v-card>
                         </v-col>
@@ -122,15 +122,15 @@
                                    v-model="message"
                                    rows="2"
                                    autosize
-                                   label="评论"
+                                   label="コメント"
                                    type="textarea"
                                    maxlength="100"
 
-                                   placeholder="请输入评论"
+                                   placeholder="コメントを入力してください"
                                    show-word-limit
                            >
                                <template #button>
-                                   <van-button style="float: right" @click="pinLun" round type="info">发送</van-button>
+                                   <van-button style="float: right" @click="pinLun" round type="info">送信</van-button>
                                </template>
                            </van-field>
 
@@ -158,7 +158,7 @@
             dividers:false,
             ifOver: false, // 文本是否超出三行，默认否
             unfold: false, // 文本是否是展开状态 默认为收起
-            active: '服务',
+            active: 'サービス',
             value:3,
             images: [],
             items: [],

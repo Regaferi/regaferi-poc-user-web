@@ -41,12 +41,11 @@
     ">
                 <van-card
                         style="border-radius: 10px;"
-                        desc="￥170/人"
                         :title="product.title"
                         :thumb="product.image"
                 >
                     <template #tags>
-                        营业时间：
+                        営業時間：
                         <van-tag plain type="danger">{{product.openTime}}</van-tag>
                         <van-tag plain type="danger">{{product.closeTime}}</van-tag>
                     </template>

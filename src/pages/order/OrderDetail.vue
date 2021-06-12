@@ -1,5 +1,5 @@
 <template>
-  <div>正在验证支付结果...</div>
+  <div>支払い結果の確認...</div>
 </template>
 
 <script>
@@ -34,10 +34,10 @@ export default {
     get_req.end();
 
     if (get_req['status'] === 'completed'){
-      alert("支付成功！")
+      alert("支払い完了！")
       this.$router.push({name: 'home'});
     }else {
-      alert("支付失败！")
+      alert("支払いに失敗しました！")
       this.$router.push({name: 'home'});
     }
   }
