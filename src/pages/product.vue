@@ -70,6 +70,9 @@
             <v-card-text>
                 <h6>{{ product.description }}</h6>
             </v-card-text>
+            <v-card-text>
+                <h6>{{ product.address }}</h6>
+            </v-card-text>
         </div>
 
         <v-bottom-navigation color="primary" horizontal app>
