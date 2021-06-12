@@ -8,7 +8,7 @@
             <!--      background-size: 100%;"-->
             <!--      />-->
             <!--          <img style="width: 100%;height: 250px" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" alt="">-->
-            <v-img max-height="200px" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
+            <v-img max-height="20%" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
         </div>
         <!--  Filter  -->
         <v-divider class="mx-4"></v-divider>
@@ -50,13 +50,13 @@
                         <van-tag plain type="danger">{{product.closeTime}}</van-tag>
                     </template>
                     <template #num>
-                        <span style="position: absolute;    right: 2%;top: 21%;">{{product.location}}</span>
+                        <span style="position: absolute;    right: 2%;top: 21%;"><van-icon name="location-o" /> {{product.location}}</span>
                     </template>
                     <template #footer>
-                        <div style="width: 100%;height: 100px;display: flex;">
+                        <div style="width: 100%;display: flex;">
                             <div style="width: 20%;height: 100%;"></div>
-                            <div style="width: 20%;height: 100%;white-space: nowrap;overflow: hidden;margin: 1%" v-for="(item,index) in product.serviceResponses" :key="index">
-                                <img style="height: 60%;width: 100%;border-radius:5%;" :src="item.logoImage.target" alt="">
+                            <div style="width: 20%;height: 100%;white-space: nowrap;overflow: hidden;margin-right: 1%" v-for="(item,index) in product.serviceResponses" :key="index">
+                                <van-image style="height: 60%;width: 100%;border-radius:5%;" :src="item.logoImage.target" alt=""/>
                                 <div style="height: 40%;width: 100%;text-align: center">
                                     <div style="width: 100%;height: 50%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;  ">
                                         {{item.name}}</div>
@@ -168,7 +168,7 @@
 
                     shopIndex({
                         keyword:that.$route.query.input,
-                        type:2,
+                        type:1,
                         pageIndex:that.page,
                         pageSize:that.limit,
                         location:that.$route.query.location,

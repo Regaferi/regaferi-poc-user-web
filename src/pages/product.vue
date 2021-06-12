@@ -64,82 +64,6 @@
             </v-card-text>
 
             <v-divider/>
-            <!--  商品评价   -->
-            <v-card-subtitle>サービス評価</v-card-subtitle>
-
-
-            <v-card>
-                <v-list two-line :class=" dividers == true ? '' : 'divader'">
-                    <template v-for="(item, index) in commentJson">
-                        <v-subheader
-                                v-if="item.header"
-                                :key="item.header"
-                        >
-                            {{ item.header }}
-                        </v-subheader>
-                        <v-divider
-                                v-else-if="item.divider"
-                                :key="index"
-                                :inset="item.inset"
-                        ></v-divider>
-                        <v-list-item
-                                v-else
-                                :key="item.title"
-                        >
-                            <!--                                            <v-list-item-avatar>-->
-                            <!--                                                <img :src="item.avatar">-->
-                            <!--                                            </v-list-item-avatar>-->
-                            <v-list-item-content>
-                                <van-field
-                                        rows="2"
-                                        autosize
-                                        label="コメント"
-                                        readonly
-                                        type="textarea"
-                                        :placeholder="item.comment"
-                                        show-word-limit
-                                />
-                                <van-field
-                                        v-if="item.reply"
-                                        rows="2"
-                                        autosize
-                                        readonly
-                                        label="応答"
-                                        type="textarea"
-                                        :placeholder="item.reply"
-                                        show-word-limit
-                                />
-                                <van-divider
-                                        :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
-                                >
-                                </van-divider>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </template>
-                </v-list>
-                <div v-if="commentJson.length > 1">
-                    <van-divider v-show="dividers" @click="dividers = false"><van-icon name="arrow-up" />コメントを隠す</van-divider>
-                    <van-divider v-show="!dividers" @click="dividers = true"><van-icon name="arrow-down" />その他のコメント</van-divider>
-                </div>
-            </v-card>
-            <div v-if="token" style="margin-top: 10px;">
-                <van-field
-                        v-model="message"
-                        rows="2"
-                        autosize
-                        label="コメント"
-                        type="textarea"
-                        maxlength="100"
-
-                        placeholder="コメントを入力してください"
-                        show-word-limit
-                >
-                    <template #button>
-                        <van-button style="float: right" @click="pinLun" round type="info">送信</van-button>
-                    </template>
-                </van-field>
-
-            </div>
             <v-card-text style="color: blue">もっと見る</v-card-text>
             <v-divider/>
             <!--  商品描述   -->
@@ -172,7 +96,7 @@
 
 <script>
     import { Notify } from 'vant';
-    import {service,comment,commentPinlun} from "@api"
+    import {service,} from "@api"
     export default {
         name: "PDP",
         data() {
@@ -201,40 +125,8 @@
             this.token = this.$store.state.token
         },
         methods : {
-            pinLun(){
-                if(this.message == ''){
-                    return
-                }
-                var that = this
-                commentPinlun({
-                    serviceId:that.$route.query.id,
-                    star:5,
-                    comment:that.message
-                })
-                    .then((res)=> {
-                        console.log(res)
-                        that.message = ''
-                        that.commentAdd()
-                    })
-                    .catch(function (error) {
-                        Notify({ type: 'warning', message: error.errMessage });
-                    });
-            },
             naviTo(){
                 this.$router.go(-1)
-            },
-            commentAdd(){
-                var that = this
-                comment({
-                    serviceId:that.$route.query.id,
-                })
-                    .then((res)=> {
-                        console.log(res)
-                        that.commentJson = res.data
-                    })
-                    .catch(function (error) {
-                        Notify({ type: 'warning', message: error.errMessage });
-                    });
             },
             add(){
                 var that = this

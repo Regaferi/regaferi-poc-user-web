@@ -135,6 +135,7 @@ export function get(url, params) {
             });
     });
 }
+
 /*
  *post方法，对应post请求
  *@param {String} url [请求的url地址]
@@ -168,4 +169,15 @@ export function put(url, params) {
                 reject(err);
             });
     });
+}
+export function del(url,params){
+    return new Promise((resolve,reject)=>{
+        axios.delete(url,params).then(response=>{  //这里传递的参数不做处理
+            resolve(response);
+        },err=>{
+            reject(err);
+        }).catch((error)=>{
+            reject(error);
+        })
+    })
 }

@@ -7,7 +7,7 @@
           <!--      background-size: 100%;"-->
           <!--      />-->
 <!--          <img style="width: 100%;height: 250px" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" alt="">-->
-          <v-img max-height="200px" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
+          <v-img max-height="20%" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
 
           <div style="width: 96%;border-radius: 6px;margin: auto;">
             <div style="    z-index: 1;
@@ -188,19 +188,19 @@
               <div style="width: 100%;padding: 12px;display: flex;flex-wrap: wrap">
                   <div style="width: 25%;padding: 12px;" v-for="(product, key) in products" :key="key" @click="serveWeb">
                       <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'100%'"  >
-                          <v-img v-if="product.logoImage" height="148" :src="product.logoImage.target"/>
+                          <v-img v-if="product.logoImage" :src="product.logoImage.target"/>
                           <van-image style="height: 148px" v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
                               <template v-slot:error>加载失败</template>
                           </van-image>
-                          <v-row class="navigator-row"  >
+                          <v-row class="navigator-row"  style="padding: 2%;">
                               <v-card-subtitle  class="font-weight-black">{{product.title}}</v-card-subtitle>
 
                           </v-row>
-                          <div style="    font-size: 10px;    margin-left: 5px;">
+                          <div style="    font-size: 10px;    margin-left: 5px;padding: 2%;">
                               <van-badge style="background: rgb(20, 155, 244)" :content="product.openTime.slice(0,5)" />
                               <van-badge style="background: rgb(20, 155, 244)" :content="product.closeTime.slice(0,5)" />
                           </div>
-                          <div style="font-size: 10px;margin-left: 5px;"><van-icon name="location-o" />
+                          <div style="font-size: 10px;margin-left: 5px;padding: 2%;"><van-icon name="location-o" />
                               {{product.location}}</div>
                       </v-card>
 

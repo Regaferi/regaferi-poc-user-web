@@ -2,7 +2,7 @@
     <v-main style="overflow: hidden;position: relative" >
         <!--  Banner  -->
         <div style="position: relative">
-            <v-img max-height="200px" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
+            <v-img max-height="20%" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
 
             <div style="position: absolute;margin:0 auto;width:95%;padding-top: 3%;left: 2%;    z-index: 1;">
 
@@ -65,7 +65,7 @@
                             </van-card>
 
                         </div>
-                    <div v-if="products.length > 2">
+                    <div v-if="products.length > 1">
                         <van-divider v-show="divider" @click="divider = false"><van-icon name="arrow-up" />折りたたむ</van-divider>
                         <van-divider v-show="!divider" @click="divider = true"><van-icon name="arrow-down" />展開する</van-divider>
                     </div>
@@ -85,12 +85,14 @@
                                         <van-field
                                                 rows="2"
                                                 autosize
-                                                label="レビュー"
                                                 readonly
                                                 type="textarea"
                                                 :placeholder="item.comment"
                                                 show-word-limit
                                         />
+                                        <div v-if="item.delete == true" @click="commDel(item.id)" style="color: red;float: right;margin-right: 5%;">
+                                            削除
+                                        </div>
                                         <van-field
                                                 v-if="item.reply"
                                                 rows="2"
@@ -100,6 +102,13 @@
                                                 type="textarea"
                                                 :placeholder="item.reply"
                                                 show-word-limit
+                                        />
+                                        <van-rate v-model="item.star"
+                                                  style="float: right;margin-right: 5%;"
+                                                  :size="10"
+                                                  color="#ffd21e"
+                                                  void-icon="star"
+                                                  void-color="#eee"
                                         />
                                         <van-divider
                                                 :style="{ color: '#1989fa', borderColor: '#1989fa', padding: '0 16px' }"
@@ -117,7 +126,7 @@
                         </v-col>
 
                     </v-row>
-                   <div v-if="token" style="margin: auto;width: 90%">
+                   <div v-if="idcomment" style="margin: auto;width: 90%">
                            <van-field
                                    v-model="message"
                                    rows="2"
@@ -133,9 +142,16 @@
                                    <van-button style="float: right" @click="pinLun" round type="info">送信</van-button>
                                </template>
                            </van-field>
+                       <van-rate v-model="value"
+                                 :size="25"
+                                 color="#ffd21e"
+                                 void-icon="star"
+                                 void-color="#eee"
+                       />
 
                        </div>
                 </van-tab>
+
             </van-tabs>
         </div>
         <van-overlay :show="show">
@@ -148,7 +164,7 @@
 
 <script>
     import { Notify } from 'vant';
-    import {shopId,serviceShop,comment,commentPinlun} from "@api"
+    import {shopId,serviceShop,comment,commentPinlun,commentDel,isComment} from "@api"
     export default {
         name: "ProductList",
         data: () => ({
@@ -159,20 +175,28 @@
             ifOver: false, // 文本是否超出三行，默认否
             unfold: false, // 文本是否是展开状态 默认为收起
             active: 'サービス',
-            value:3,
+            value:0,
             images: [],
             items: [],
             products : [],
             details:{},
-            token:''
+            idcomment:false
         }),
 
         mounted() {
 
         },
         created() {
-            this.token = this.$store.state.token
             var that = this
+            isComment({
+                shopId:that.$route.query.id,
+            })
+                .then(function (response) {
+                    that.idcomment = response.data
+                })
+                .catch(function (error) {
+                    Notify({ type: 'warning', message: error.errMessage });
+                });
             comment({
                 serviceId:that.$route.query.id,
             })
@@ -211,6 +235,26 @@
                 });
         },
         methods: {
+            commDel(id){
+                var that = this
+                commentDel(id)
+                    .then((res)=> {
+                        Notify({ type: 'success', message: '删除成功！' });
+                        comment({
+                            serviceId:that.$route.query.id,
+                        })
+                            .then(function (response) {
+                                that.items = response.data
+                                that.show = false
+                            })
+                            .catch(function (error) {
+                                Notify({ type: 'warning', message: error.errMessage });
+                            });
+                        console.log(res)
+                    }).catch(function (error) {
+                    Notify({ type: 'warning', message: error.errMessage });
+                });
+            },
             pinLun(){
 
                 // console.log(this.$store.state.token)
@@ -221,7 +265,7 @@
 
                 commentPinlun({
                     serviceId:that.$route.query.id,
-                    star:5,
+                    star:that.value,
                     comment:that.message
                 })
                     .then((res)=> {

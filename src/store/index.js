@@ -9,8 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     token: '',
-    Authorization: '111',
-    Content_length: '111',
+    Authorization: '',
+    Content_length: '',
     roles: [], //用户角色
     tagsList: [], //打开的标签页个数,s
     isCollapse: true, //侧边导航是否折叠

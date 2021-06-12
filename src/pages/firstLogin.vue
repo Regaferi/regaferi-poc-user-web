@@ -1,90 +1,8 @@
 <template>
     <div style="margin-top: 12%;">
         <!-- PC -->
-        <v-card v-show="!isMobile">
-            <v-card-title >アカウント情報入力</v-card-title>
-          <h4>※登録された名前は後から変更できませんのでご注意ください</h4>
-            <v-card-text>
-              
-                <v-tabs vertical>
-                    <v-tab>
-                        <v-icon left>
-                            mdi-account
-                        </v-icon>
-                        {{$t('i18n.account.basic.title')}}
-                    </v-tab>
-                    <v-row justify="center">
-                        <v-col
-                                cols="12"
-                                sm="10"
-                                md="8"
-                                lg="6"
-                        >
-                            <v-card ref="form">
-                                <v-card-text>
-                                    <v-text-field
-                                            ref="name"
-                                            v-model="name"
-                                            :rules="[() => !!name || 'This field is required']"
-                                            :error-messages="errorMessages"
-                                            label="名前"
-                                            placeholder="John Doe"
-                                            required
-                                    ></v-text-field>
-                                    <v-text-field
-                                            ref="address"
-                                            v-model="address"
-                                            :rules="[
-              () => !!address || 'This field is required',
-              () => !!address && address.length <= 25 || 'Address must be less than 25 characters',
-              addressCheck
-            ]"
-                                            label="電話番号"
-                                            placeholder="Snowy Rock Pl"
-                                            counter="11"
-                                            required
-                                    ></v-text-field>
-                                </v-card-text>
-                                <v-divider class="mt-12"></v-divider>
-                                <v-card-actions>
-                                    <!--<v-btn text>
-                                        取消
-                                    </v-btn>
-                                    <v-spacer></v-spacer>-->
-                                    <v-slide-x-reverse-transition>
-                                        <v-tooltip
-                                                v-if="formHasErrors"
 
-                                        >
-                                            <template v-slot:activator="{ on, attrs }">
-                                                <v-btn
-                                                        icon
-                                                        class="my-0"
-                                                        v-bind="attrs"
-                                                        @click="resetForm"
-                                                        v-on="on"
-                                                >
-                                                    <v-icon>mdi-refresh</v-icon>
-                                                </v-btn>
-                                            </template>
-                                            <span>Refresh form</span>
-                                        </v-tooltip>
-                                    </v-slide-x-reverse-transition>
-                                    <v-btn
-                                            color="primary"
-                                            text
-                                            @click="submit"
-                                    >
-                                        確定
-                                    </v-btn>
-                                </v-card-actions>
-                            </v-card>
-                        </v-col>
-                    </v-row>
-                </v-tabs>
-            </v-card-text>
-        </v-card>
-        <div v-show="isMobile" class="pt-8 text-center align-center">
+        <div class="pt-8 text-center align-center">
             <!--   基本信息   -->
             <v-card-subtitle>
                 <h1 >アカウント情報入力</h1>
@@ -143,7 +61,7 @@
                         :rules="[{ required: true, message: '请再次输入密码' }]"
                 />
                 <div style="margin: 16px;">
-                    <van-button style="font-size:20px;" round block type="info" native-type="submit">確定</van-button>
+                    <van-button style="font-size:20px;width: 50%;margin: auto" round block type="info" native-type="submit">確定</van-button>
                 </div>
             </van-form>
             <!--   我的订单   -->

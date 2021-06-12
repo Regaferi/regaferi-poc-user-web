@@ -8,7 +8,7 @@
       <!--      background-size: 100%;"-->
       <!--      />-->
       <!--          <img style="width: 100%;height: 250px" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" alt="">-->
-      <v-img max-height="200px" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
+      <v-img max-height="20%" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
     </div>
     <!--  Filter  -->
     <v-divider class="mx-4"></v-divider>
@@ -35,7 +35,7 @@
             @load="load_more"
     >
       <van-empty v-if="products.length <= 0" description="検索結果は見つかりませんでした" />
-    <div style="padding-left: 4%;margin-top: 10px" v-for="(item, index) in products" :key="index"  @click="naviga(item)">
+    <div  v-show="isMobile" style="padding-left: 4%;margin-top: 10px" v-for="(item, index) in products" :key="index"  @click="naviga(item)">
       <v-card width="96%">
         <v-card-text>
           <v-row>
@@ -47,10 +47,32 @@
             </v-col>
             <v-col cols="6" style="font-size: xx-small">
               <h4 class="pt-3">{{item.title}}</h4>
-              <h5 style="color: red">$500 / Monthly</h5>
-              <v-divider class="pt-3 pb-5"/>
-              <h6>回数制限.：2 Times / Per Day</h6>
-              <h6>利用可能な時間：{{item.createTime}} - {{item.updateTime}}</h6>
+              <h5 style="color: red">{{item.prices}}</h5>
+              <h6><van-icon name="location-o" />{{item.location}}</h6>
+              <h6>回数制限：{{item.totalCount}}</h6>
+              <h6>利用可能な時間：{{item.createTime.slice(0,10)}} - {{item.updateTime.slice(0,10)}}</h6>
+
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </div>
+      <div v-show="!isMobile" style="padding-left: 4%;display: flex" v-for="(item, index) in products" :key="index"  @click="naviga(item)">
+      <v-card width="40%" style="margin-top: 10px;">
+        <v-card-text>
+          <v-row>
+            <v-col cols="6">
+              <v-img v-if="item.logoImage" height="130" :src="item.logoImage.target"/>
+              <van-image v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
+                <template v-slot:error>読み込みに失敗しました</template>
+              </van-image>
+            </v-col>
+            <v-col cols="6" style="font-size: xx-small">
+              <h4 class="pt-3">{{item.title}}</h4>
+              <h5 style="color: red">{{item.prices}}</h5>
+              <h6><van-icon name="location-o" />{{item.location}}</h6>
+              <h6>回数制限：{{item.totalCount}}</h6>
+              <h6>利用可能な時間：{{item.createTime.slice(0,10)}} - {{item.updateTime.slice(0,10)}}</h6>
 
             </v-col>
           </v-row>
@@ -68,7 +90,7 @@
 
 <script>
   import { Notify } from 'vant';
-  import {shopIndex,servicePage} from "@api"
+  import {servicePageIndex,servicePage} from "@api"
 export default {
   name: "ProductList",
   data: () => ({
@@ -127,6 +149,7 @@ export default {
     products : [
     ],
     radioGroup: 1,
+    isMobile:false
   }),
   created() {
     var that = this
@@ -146,9 +169,8 @@ export default {
               });
     }
     if(that.$route.query.name == 'souSuo'){
-      shopIndex({
+      servicePageIndex({
         keyword:that.$route.query.input,
-        type:1,
         pageIndex:0,
         pageSize:10,
         location:that.$route.query.location
@@ -163,6 +185,9 @@ export default {
     }
 
 
+  },
+  mounted() {
+    this.isMobile = this.$store.state.isMobile;
   },
   methods: {
     load_more: function() {
@@ -193,9 +218,8 @@ export default {
                 });
       }
       if(that.$route.query.name == 'souSuo'){
-        shopIndex({
+        servicePageIndex({
           keyword:that.$route.query.input,
-          type:2,
           pageIndex:that.page,
           pageSize:that.limit,
           location:that.$route.query.location,

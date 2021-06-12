@@ -1,4 +1,4 @@
-import {get,post,put} from './request';
+import {get,post,put,del} from './request';
 //登陆(发送验证码)
 export const  verify= (verify)=>post('/member/verify',verify)
 
@@ -26,6 +26,10 @@ export const  service=(service)=>get(`/service?id=${service.id}`)
 
 //评论查询
 export const  comment=(comment)=>get(`/comment?serviceId=${comment.serviceId}`)
+//评论权限查询
+export const  isComment=(isComment)=>get(`/comment/is-comment?shopId=${isComment.shopId}`)
+//评论删除
+export const  commentDel=(commentDel)=>del('/comment/'+commentDel)
 //评论
 export const  commentPinlun= (commentPinlun)=>post('/comment',commentPinlun)
 //创单
@@ -44,6 +48,7 @@ export const  compensation=(compensation)=>put('/service-order/compensation',com
 export const  industryAll=(industryAll)=>get('/industry/all',industryAll)
 //行业搜索服务
 export const  servicePage=(servicePage)=>get(`/service/page?industryId=${servicePage.industryId}&pageIndex=${servicePage.pageIndex}&pageSize=${servicePage.pageSize}`)
+export const  servicePageIndex=(servicePageIndex)=>get(`/service/page?keyword=${servicePageIndex.keyword}&pageIndex=${servicePageIndex.pageIndex}&pageSize=${servicePageIndex.pageSize}&location=${servicePageIndex.location}`)
 
 //第三方
 export const  sessions= (sessions)=>post('/api/v1/sessions',sessions)
