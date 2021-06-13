@@ -119,7 +119,6 @@
         },
         mounted() {
             this.add()
-            this.commentAdd()
         },
         created() {
             this.token = this.$store.state.token

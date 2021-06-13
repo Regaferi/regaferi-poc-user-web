@@ -133,10 +133,11 @@
                         _this.$store.commit('COMMIT_Content', Buffer.byteLength(post_data))
                         sessions(post_data).then(function (res) {
                             console.log(res, '支付')
-                            window.open(res.session_url)
+
                         }).catch(function (error) {
+                            alert(error.session_url)
                             _this.showSess = false
-                            window.open(error.session_url)
+                            window.location.href = error.session_url;
                             console.log(error)
                         });
                     })
