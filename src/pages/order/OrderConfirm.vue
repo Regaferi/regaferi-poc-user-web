@@ -135,7 +135,6 @@
                             console.log(res, '支付')
 
                         }).catch(function (error) {
-                            alert(error.session_url)
                             _this.showSess = false
                             window.location.href = error.session_url;
                             console.log(error)

@@ -62,7 +62,7 @@
 
 <script>
     export default {
-        name: "footer1"
+        name: "footer1",
     }
 </script>
 

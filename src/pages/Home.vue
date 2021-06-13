@@ -126,7 +126,7 @@
           >
                   <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'300px'"  >
                       <v-img max-height=100% max-width=100% :src="navigator.url" ></v-img>
-                          <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; font-size: 1px; text-align: center;">{{navigator.name}}</v-card-subtitle>
+                          <v-card-subtitle  class="font-weight-black" style="margin:auto;padding:auto; text-align: center;">{{navigator.name}}</v-card-subtitle>
                   </v-card>
           </v-col>
       </v-row>

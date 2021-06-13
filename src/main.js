@@ -31,7 +31,13 @@ Vue.directive('title', {
     document.title = el.dataset.title
   }
 })
+router.afterEach((to,from,next) => {
+  console.log(to,from,next)
+  document.body.scrollTop =0;
 
+  document.documentElement.scrollTop = 0;
+
+});
 new Vue({
   vuetify,
   router,
