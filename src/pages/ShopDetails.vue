@@ -24,7 +24,11 @@
 <!--                            <van-icon name="arrow" />-->
                         </div>
                         <div style="font-size: 2%;margin-bottom: 2%;letter-spacing:2px"> <van-icon name="location-o" />
-                            {{Dzellip(details.location)}}
+                            {{(details.location)}}
+<!--                            <div style="margin-left: 5%;letter-spacing:2px">上海浦东新区世博大道1102号</div>-->
+                        </div>
+                                                <div style="font-size: 2%;margin-bottom: 2%;letter-spacing:2px"> <van-icon name="location-o" />
+                            {{Dzellip(details.address)}}
 <!--                            <div style="margin-left: 5%;letter-spacing:2px">上海浦东新区世博大道1102号</div>-->
                         </div>
                     </div>
