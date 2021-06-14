@@ -29,10 +29,10 @@
                 <van-field
                         v-if="formData.email == null || formData.email == ''"
                         v-model="formJson.email"
-                        name="邮箱"
-                        label="邮箱"
-                        placeholder="邮箱"
-                        :rules="[{ required: true, message: '请填写邮箱' }]"
+                        name="Email"
+                        label="Email"
+                        placeholder="Email"
+                        :rules="[{ required: true, message: 'メールアドレスを入力してください' }]"
                 />
                 <van-field
                         v-if="formData.mobile == null || formData.mobile == ''"
@@ -46,19 +46,19 @@
                         v-if="formData.password == null || formData.password == ''"
                         v-model="formJson.password"
                         type="password"
-                        name="密码"
-                        label="密码"
-                        placeholder="密码"
-                        :rules="[{ required: true, message: '请填写密码' }]"
+                        name="パスワード"
+                        label="パスワード"
+                        placeholder="パスワード"
+                        :rules="[{ required: true, message: 'パスワードを入力してください' }]"
                 />
                 <van-field
                         v-if="formData.password == null || formData.password == ''"
                         v-model="formJson.repeatPassword"
                         type="password"
-                        name="再次输入密码"
-                        label="再次输入密码"
-                        placeholder="再次输入密码"
-                        :rules="[{ required: true, message: '请再次输入密码' }]"
+                        name="パスワードをもう一度入力してください"
+                        label="パスワードをもう一度入力してください"
+                        placeholder="パスワードをもう一度入力してください"
+                        :rules="[{ required: true, message: 'パスワードをもう一度入力してください' }]"
                 />
                 <div style="margin: 16px;">
                     <van-button style="font-size:20px;width: 50%;margin: auto" round block type="info" native-type="submit">確定</van-button>
@@ -135,7 +135,7 @@ import {signUp} from '@api';
                                 Notify({ type: 'warning', message: error.errMessage });
                             });
                     }else{
-                        Notify({ type: 'warning', message: '密码不一致' });
+                        Notify({ type: 'warning', message: 'パスワードを確認してください' });
                     }
 
             },

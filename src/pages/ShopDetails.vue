@@ -20,7 +20,7 @@
                         <div style="font-size: 2%;margin-bottom: 2%"> <van-icon name="clock-o" />
                             営業時間
                             <span style="margin : 0 2%">{{details.openTime}} ~~ {{details.closeTime}}</span>
-<!--                            <span style="margin-right: 1%">更多信息</span>-->
+<!--                            <span style="margin-right: 1%">詳しくは</span>-->
 <!--                            <van-icon name="arrow" />-->
                         </div>
                         <div style="font-size: 2%;margin-bottom: 2%;letter-spacing:2px"> <van-icon name="location-o" />
@@ -243,7 +243,7 @@
                 var that = this
                 commentDel(id)
                     .then((res)=> {
-                        Notify({ type: 'success', message: '删除成功！' });
+                        Notify({ type: 'success', message: '削除されました！' });
                         comment({
                             serviceId:that.$route.query.id,
                         })

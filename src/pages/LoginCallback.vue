@@ -1,6 +1,6 @@
 <template>
   <div style="padding-top: 200px">
-    <p>我们正在处理您的登录请求...</p>
+    <p>処理中、お待ちください</p>
     <p>{{ code }}</p>
     <p>{{ state }}</p>
   </div>

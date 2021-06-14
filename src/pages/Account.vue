@@ -407,7 +407,7 @@ export default {
       let that = this;
       memberLogin(that.formData1)
               .then(function (response) {
-                Notify({ type: 'success', message: "登录成功!" });
+                Notify({ type: 'success', message: "ログイン成功!" });
                 if(response.data.firstLogin == true){
                   that.$router.push({name:'firstLogin'})
                 }else {
@@ -424,12 +424,12 @@ export default {
       if(this.formData.verifyCode){
         let that = this;
         if(that.formData.password != that.formData.repeatPassword){
-          Notify({ type: 'warning', message: "两次密码不一致，请重新输入" });
+          Notify({ type: 'warning', message: "パスワードを確認して、再入力してください" });
         }else{
           memberRegister(that.formData)
                   .then(function (response) {
                     console.log(response)
-                    Notify({ type: 'success', message: "注册成功,请重新登录!" });
+                    Notify({ type: 'success', message: "成功したアカウント申請!" });
                     that.revealZhuce = false
                     that.revealDenlu = true
                   })
@@ -494,7 +494,7 @@ export default {
             }
           }, 1000)
         }else{
-          Notify({ type: 'warning', message: '请输入邮箱！' });
+          Notify({ type: 'warning', message: 'メールアドレスを入力してください！' });
         }
       }
       var thas = this
@@ -503,7 +503,7 @@ export default {
           "email": thas.account,
         })
                 .then(function (response) {
-                  Notify({ type: 'success', message: '邮件发送成功' });
+                  Notify({ type: 'success', message: 'メールで送信' });
                   console.log(response);
 
                 })
@@ -551,7 +551,7 @@ export default {
           "email": thas.formData.email,
         })
                 .then(function (response) {
-                  Notify({ type: 'success', message: '邮件发送成功' });
+                  Notify({ type: 'success', message: 'メールで送信' });
                   console.log(response);
 
                 })
@@ -563,7 +563,7 @@ export default {
                   Notify({ type: 'warning', message: error.errMessage });
                 });
       }else{
-        Notify({ type: 'warning', message: '请输入邮箱！' });
+        Notify({ type: 'warning', message: 'メールアドレスを入力してください！' });
       }
       /*axios.post('http://frontend-api.regaferi.jp/member/verify', {
         'email' : this.account,

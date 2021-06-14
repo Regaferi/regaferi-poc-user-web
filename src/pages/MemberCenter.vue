@@ -2,7 +2,7 @@
   <div>
     <!-- PC -->
     <v-card v-show="!isMobile">
-      <v-card-title>个人中心</v-card-title>
+      <v-card-title>ユーザーセンター</v-card-title>
       <v-card-text>
         <v-tabs vertical>
           <v-tab>
@@ -15,7 +15,7 @@
             <v-icon left>
               mdi-lock
             </v-icon>
-            我的订单
+            注文管理
           </v-tab>
           <v-tab-item>
             <v-card
@@ -40,10 +40,10 @@
                   <v-col cols="12">
                     <v-card outlined>
                       <v-card-text>
-                        <p>会员卡 A</p>
+                        <p>会員カード A</p>
                         <p>2021.01.01-2021.06.30</p>
-                        <p>限定期限使用</p>
-                        <p>使用详情</p>
+                        <p>期間限定使用</p>
+                        <p>使用詳細</p>
                       </v-card-text>
                     </v-card>
                   </v-col>
@@ -52,8 +52,8 @@
                       <v-card-text>
                         <p>会员卡 A</p>
                         <p>2021.01.01-2021.06.30</p>
-                        <p>限定期限使用</p>
-                        <p>使用详情</p>
+                        <p>期間限定使用</p>
+                        <p>使用詳細</p>
                       </v-card-text>
                     </v-card>
                   </v-col>
@@ -62,8 +62,8 @@
                       <v-card-text>
                         <p>会员卡 A</p>
                         <p>2021.01.01-2021.06.30</p>
-                        <p>限定期限使用</p>
-                        <p>使用详情</p>
+                        <p>期間限定使用</p>
+                        <p>使用詳細</p>
                       </v-card-text>
                     </v-card>
                   </v-col>

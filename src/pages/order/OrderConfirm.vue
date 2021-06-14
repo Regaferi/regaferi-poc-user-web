@@ -55,7 +55,7 @@
         </van-overlay>
         <van-overlay :show="showSess">
             <div class="wrapper">
-                <van-loading color="#1989fa" size="24px">正在拉取支付页面...</van-loading>
+                <van-loading color="#1989fa" size="24px">支払う準備...</van-loading>
             </div>
         </van-overlay>
     </v-main>
