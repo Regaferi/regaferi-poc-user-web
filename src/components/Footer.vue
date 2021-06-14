@@ -41,6 +41,7 @@
                     text
                     rounded
                     class="my-2"
+                    @click="backgroundLink"
             >
               商定刊登方法
             </v-btn>
@@ -80,6 +81,9 @@ export default {
     window.addEventListener('resize', this.onResize, { passive: true })
   },
   methods : {
+    backgroundLink(){
+      window.location.href = "http://manager-web.regaferi-japan.com";
+    },
     footerList(index){
       console.log(index)
       if(index == 0){
