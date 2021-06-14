@@ -4,7 +4,7 @@
         <div style="position: relative">
             <v-img max-height="20%" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
 
-            <div style="position: absolute;margin:0 auto;width:95%;padding-top: 3%;left: 2%;    z-index: 1;">
+            <div style="margin:0 auto;width:95%;padding-top: 3%;">
 
                 <div style="border-radius: 10px;position: relative;background:#F5F5F5;padding: 10px;box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);">
                     <div style="width: 100%;height: 100%;margin-bottom: 2%;border-bottom: 2px solid #676a6c;display: flex">
@@ -23,13 +23,13 @@
 <!--                            <span style="margin-right: 1%">詳しくは</span>-->
 <!--                            <van-icon name="arrow" />-->
                         </div>
-                        <div style="font-size: 2%;margin-bottom: 2%;letter-spacing:2px"> <van-icon name="location-o" />
-                            {{(details.location)}}
-<!--                            <div style="margin-left: 5%;letter-spacing:2px">上海浦东新区世博大道1102号</div>-->
+                        <div style="font-size: 2%;margin-bottom: 2%;letter-spacing:2px">
+
+                            <div style="letter-spacing:2px"> <van-icon name="location-o" /> {{(details.location)}}</div>
                         </div>
-                                                <div style="font-size: 2%;margin-bottom: 2%;letter-spacing:2px"> <van-icon name="location-o" />
-                            {{Dzellip(details.address)}}
-<!--                            <div style="margin-left: 5%;letter-spacing:2px">上海浦东新区世博大道1102号</div>-->
+                                                <div style="font-size: 2%;margin-bottom: 2%;letter-spacing:2px">
+
+                            <div style="letter-spacing:2px"> <van-icon name="location-o" /> {{Dzellip(details.address)}}</div>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
         <v-divider class="mx-4"></v-divider>
 
         <!--轮播图-->
-        <div style="margin-top: 12rem;">
+        <div>
             <van-empty v-if="images.length <= 0" description="別のキーワードを試すか、検索フィルターを削除してください" />
             <van-swipe v-if="images.length > 0" height="250" class="my-swipe" style="border-radius: 10px;width: 95%; padding-top: 5%;margin-left: 2%" :autoplay="3000" indicator-color="white">
                 <van-swipe-item v-for="(img ,index) in images" :key="index">

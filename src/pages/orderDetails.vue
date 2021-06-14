@@ -25,8 +25,7 @@
             </a-descriptions-item>
 
             <a-descriptions-item label="残りの有効回数">
-                {{orderList.serviceOrder.remCount}}
-
+                {{orderList.serviceOrder.remCount == null ? '回数無制限':orderList.serviceOrder.remCount + '回'}}
             </a-descriptions-item>
         </a-descriptions>
         <div>

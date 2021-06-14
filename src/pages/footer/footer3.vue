@@ -1,179 +1,100 @@
 <template>
     <div style="padding: 10px; margin-top: 12%;">
-        <p>
-            事業者<br/>
-        </p>
-        <p>
-            株式会社レガフェリ
-        </p>
-        <p>
-            代表者
-        </p>
-        <p>
-            赤松 優馬
-        </p>
-        <p>
-            メールアドレス
-        </p>
-        <p>
-            Support@regaferi.jp
-        </p>
-        <p>
-            所在地
-        </p>
-        <p>
-            〒173-0014東京都板橋区大山東町44-5
-        </p>
-        <p>
-            電話番号
-        </p>
-        <p>
-            070-4340-4105(仮)
-        </p>
-        <p>
-            販売価格
-        </p>
-        <p>
-            ユーザー:各商品名に表記された価格に準じます
-        </p>
-        <p>
-            掲載店:成約時に総決済金額から10％の手数料率を掛けたものが当社への手数料となります。
-        </p>
-        <p>
-            支払い方法
-        </p>
-        <p>
-            KOMOJUの決済代行サービスを使用しています。
-        </p>
-        <p>
-            決済情報はSSLで暗号化され、安全性を確保しております。
-        </p>
-        <p>
-            またKOMOJU社のSSL証明書はベリサインにて発行されております。
-        </p>
-        <p>
-            返金、キャンセル等の対応
-        </p>
-        <p>
-            商品の特性上、お客様都合のご購入後の返品やご注文後のキャンセルは受け付けておりません。
-        </p>
-        <p>
-            返金にかかわる責務
-        </p>
-        <p>
-            返金にかかわる株式会社レガフェリの責務には利息を付しません。
-        </p>
-        <p>
-            解約条件
-        </p>
-        <p>
-            ・サブスクリプション満期になると自動解約となります。
-        </p>
-        <p>
-            ・お客様都合による途中解約には返金をいたしません。
-        </p>
-        <p>
-            ・掲載店都合による途中解約には返金義務が生じます。
-        </p>
-        <p>
-            &nbsp;
-        </p>
-        <p>
-
-        </p>
-        <p>
-            会社案内
-        </p>
-        <p>
-            商号
-        </p>
-        <p>
-            株式会社レガフェリ
-        </p>
-        <p>
-            所在地
-        </p>
-        <p>
-            〒173-0014東京都板橋区大山東町44-5
-        </p>
-        <p>
-            代表者
-        </p>
-        <p>
-            赤松 優馬
-        </p>
-        <p>
-            外部顧問
-        </p>
-        <p>
-            西山 恭孝
-        </p>
-        <p>
-            電話番号
-        </p>
-        <p>
-            070-4340-4105
-        </p>
-        <p>
-            e-mail
-        </p>
-        <p>
-            Support@regaferi.jp
-        </p>
-        <p>
-            設立
-        </p>
-        <p>
-            令和３年6月1日
-        </p>
-        <p>
-            資本金
-        </p>
-        <p>
-            500,000円
-        </p>
-        <p>
-            事業内容
-        </p>
-        <p>
-            ● コンピュータのソフトウェア及びハードウェアの企画、研究、開発、設計、製造、販売、保守、リース、賃貸及び輸出入並びにそれらに関するコンサルティング業務
-        </p>
-        <p>
-            ● インターネット等の通信ネットワーク及び電子技術を利用した各種情報提供サービス及び情報収集サービス
-        </p>
-        <p>
-            ● ＥＣ（電子商取引）サイト、その他各種ウェブサイトの企画、制作、販売、配信、運営及び管理
-        </p>
-        <p>
-            ● 情報の収集、分析、管理及び処理サービス業、情報提供サービス業並びに情報処理に関する研究開発
-        </p>
-        <p>
-            ● その他、附帯関連する一切の事業
-        </p>
-        <p>
-            &nbsp;
-        </p>
-        <p>
-            従業員数
-        </p>
-        <p>
-            8名（業務委託スタッフ含む）
-        </p>
-        <p>
-            &nbsp;
-        </p>
-        <p>
-
-        </p>
-        <p>
-            プライバシーポリシー
-        </p>
-        <p>
-            株式会社レガフェリ（以下「当社」）及びRegaferi（以下「本サイト」）は、以下のとおり個人情報保護方針を定め、個人情報保護の仕組みを構築し、全従業員に個人情報保護の重要性の認識と取組みを徹底させることにより、個人情報の保護を推進致します。
-        </p>
-        <p>
-            <br/>
-        </p>
+        <table cellspacing="0" cellpadding="0" style="border-collapse:collapse; margin-left:0pt">
+            <tbody>
+            <tr>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:116.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">事業者</span></p></td>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:286.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">株式会社レガフェリ</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:116.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">代表者</span></p></td>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:286.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">赤松 優馬</span></p></td>
+            </tr>
+            <tr>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:116.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">メールアドレス</span></p>
+                </td>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:286.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">S</span><span
+                            style="color:#333333; font-family:メイリオ; font-size:9pt">upport@</span><span
+                            style="color:#333333; font-family:メイリオ; font-size:9pt">regaferi.</span><span
+                            style="color:#333333; font-family:メイリオ; font-size:9pt">j</span><span
+                            style="color:#333333; font-family:メイリオ; font-size:9pt">p</span></p></td>
+            </tr>
+            <tr>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:116.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">所在地</span></p></td>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:286.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">〒173-0014東京都板橋区大山東町44-5</span>
+                    </p></td>
+            </tr>
+            <tr>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:116.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">電話番号</span></p></td>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:286.55pt">
+                    <p style="margin:0pt"><span
+                            style="color:#333333; font-family:メイリオ; font-size:9pt">070-4340-4105(仮)</span></p></td>
+            </tr>
+            <tr>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:116.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">販売価格</span></p></td>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:286.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt; font-weight:bold">ユーザー</span><span
+                            style="color:#333333; font-family:メイリオ; font-size:9pt">:各商品名に表記された価格に準じます</span></p>
+                    <p style="margin:0pt"><span
+                            style="color:#333333; font-family:メイリオ; font-size:9pt; font-weight:bold">掲載店</span><span
+                            style="color:#333333; font-family:メイリオ; font-size:9pt">:成約時に総決済金額から10％の手数料率を掛けたものが当社への手数料となります。</span>
+                    </p></td>
+            </tr>
+            <tr>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:116.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">支払い方法</span></p></td>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:286.55pt">
+                    <p style="margin:0pt"><span
+                            style="color:#292b2c; font-family:メイリオ; font-size:9pt; letter-spacing:0.6pt">K</span><span
+                            style="color:#292b2c; font-family:メイリオ; font-size:9pt; letter-spacing:0.6pt">OMOJU</span><span
+                            style="color:#292b2c; font-family:メイリオ; font-size:9pt; letter-spacing:0.6pt">の決済代行サービスを使用しています。</span><br><span
+                            style="color:#292b2c; font-family:メイリオ; font-size:9pt; letter-spacing:0.6pt">決済情報はSSLで暗号化され、安全性を確保しております。</span><br><span
+                            style="color:#292b2c; font-family:メイリオ; font-size:9pt; letter-spacing:0.6pt">またK</span><span
+                            style="color:#292b2c; font-family:メイリオ; font-size:9pt; letter-spacing:0.6pt">OMOJU</span><span
+                            style="color:#292b2c; font-family:メイリオ; font-size:9pt; letter-spacing:0.6pt">社のSSL証明書はベリサインにて発行されております。</span>
+                    </p></td>
+            </tr>
+            <tr>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:116.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">返金、キャンセル等の対応</span>
+                    </p></td>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:286.55pt">
+                    <p style="margin:0pt"><span
+                            style="color:#292b2c; font-family:メイリオ; font-size:9pt; letter-spacing:0.6pt">商品の特性上、お客様都合のご購入後の返品やご注文後のキャンセルは受け付けておりません。</span>
+                    </p></td>
+            </tr>
+            <tr>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:116.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">返金にかかわる責務</span></p>
+                </td>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:286.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">返金にかかわる株式会社レガフェリの責務には利息を付しません。</span>
+                    </p></td>
+            </tr>
+            <tr>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:116.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">解約条件</span></p></td>
+                <td style="border-bottom-color:#000000; border-bottom-style:solid; border-bottom-width:0.75pt; border-left-color:#000000; border-left-style:solid; border-left-width:0.75pt; border-right-color:#000000; border-right-style:solid; border-right-width:0.75pt; border-top-color:#000000; border-top-style:solid; border-top-width:0.75pt; padding-left:5.03pt; padding-right:5.03pt; vertical-align:top; width:286.55pt">
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">・サブスクリプション満期になると自動解約となります。</span>
+                    </p>
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">・お客様都合による途中解約には返金をいたしません。</span>
+                    </p>
+                    <p style="margin:0pt"><span style="color:#333333; font-family:メイリオ; font-size:9pt">・掲載店都合による途中解約には返金義務が生じます。</span>
+                    </p></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 

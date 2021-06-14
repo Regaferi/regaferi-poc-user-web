@@ -47,8 +47,9 @@
                                 <v-list-item-content>
                                     <v-list-item-title>{{product.subTitle}}</v-list-item-title>
                                     <v-list-item-subtitle style="padding-top: 5px;">
-                                       合計数： {{product.totalCount}}回
-                                    </v-list-item-subtitle> <v-list-item-subtitle style="padding-top: 5px;">
+                                       合計数： {{product.totalCount == null ? '回数無制限':product.totalCount + '回'}}
+                                    </v-list-item-subtitle>
+                                    <v-list-item-subtitle style="padding-top: 5px;">
                                        サービス時間： {{product.serviceTimeDay}}日
                                     </v-list-item-subtitle>
                                 </v-list-item-content>

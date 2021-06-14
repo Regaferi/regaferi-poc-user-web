@@ -20,7 +20,7 @@
                             </v-col>
                             <v-col cols="6" style="font-size: xx-small">
                                 <h6 class="pt-3"> サービス名： {{product.name}}</h6>
-                                <h6 > 回数制限： {{product.totalCount}}</h6>
+                                <h6 > 回数制限： {{product.totalCount == null ? '回数無制限':product.totalCount + '回'}}</h6>
                                 <h6 >利用時間：{{product.serviceTimeDay}}日</h6>
                                <v-divider class="pt-1 pb-1"/>
                                <h6 style="color: red"> 合計： {{product.prices}}元</h6>

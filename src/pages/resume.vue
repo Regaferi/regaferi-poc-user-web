@@ -33,7 +33,7 @@
                             <h4 class="pt-3">{{item.serviceName}}</h4>
                             <h5 style="color: red">{{item.total}}</h5>
                             <v-divider class="pt-3 pb-5"/>
-                            <h6>回数制限.：{{item.orderCounter}} Times</h6>
+                            <h6>回数制限.： {{item.orderCounter == null ? '回数無制限':item.orderCounter + '回'}}</h6>
                             <h6>利用可能な時間：{{item.effectiveTime.slice(0,10)}} - {{item.expiredTime.slice(0,10)}}</h6>
 
                         </v-col>
