@@ -16,7 +16,7 @@
           <v-card class="mx-auto" max-width="344" height="350" flat>
             <v-card-text>
               <p class="display-1 text&#45;&#45;primary">
-                まだ登録されていない
+                ログイン
               </p>
             </v-card-text>
             <v-card-actions>
@@ -110,10 +110,10 @@
             <div class="pt-12">
               <v-card-text>
                 <p class="p-text-class">
-                  まだ登録されていない
+                  ログイン
                 </p>
               </v-card-text>
-              <p class="text--primary">アカウントにログインする方法を選んでください</p>
+              <p class="text--primary">登録済みの方はこちら</p>
                <v-card-actions style="display: block"> 
             <div class="padding-text">
                <v-btn
@@ -140,8 +140,8 @@
             </div>
 
              <div class="padding-text">
-                 <i class="el-icon-view el-icon--right"></i> <el-link href="https://regaferi.jp/footer2" target="_blank" >※利用規約</el-link>
-                                  と<el-link href="https://regaferi.jp/footer4" target="_blank" >プライバシー</el-link>ポリシーが適用されます
+                 <i class="el-icon-view el-icon--right"></i> <el-link href="https://www.office-regaferi.com/%E5%88%A9%E7%94%A8%E8%A6%8F%E7%B4%84/" target="_blank" >※利用規約</el-link>
+                                  と<el-link href="https://www.office-regaferi.com/%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%BB%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC/" target="_blank" >プライバシーポリシー</el-link>が適用されます
               </div>
                  </v-card-actions>
                  
@@ -257,14 +257,14 @@
                               :type="'password'"
                               v-model="formData.repeatPassword"
                               :rules="repeatPassword"
-                              label="確認のためパスワードを再入力してください"
+                              label="パスワードを再入力してください"
                               required
                       ></v-text-field>
                       <v-text-field
 
                               v-model="formData.verifyCode"
                               :rules="codeRules"
-                              label="ワンタイムパスワード."
+                              label="検証コードを入力"
                               required
                       ></v-text-field>
                     </v-form>
@@ -277,7 +277,7 @@
                             @click="sendVerifyCodeTwo"
                             :disabled="show"
                     >
-                      検証コードを送る |{{count}}
+                      メールアドレスに検証コードを送る |{{count}}
                       <v-icon small class="pl-1">mdi-send</v-icon>
                     </v-btn>
                     <v-btn
@@ -421,6 +421,14 @@ export default {
     },
     register(){
       console.log(this.formData)
+      if(this.formData.email==undefined){
+       Notify({ type: 'warning', message: "入力内容を確認してください！" });
+       return
+      }
+      if(this.formData.password.length<4){
+       Notify({ type: 'warning', message: "パスワードの文字数が足りていませ！" });
+       return
+      }
       if(this.formData.verifyCode){
         let that = this;
         if(that.formData.password != that.formData.repeatPassword){
@@ -503,7 +511,7 @@ export default {
           "email": thas.account,
         })
                 .then(function (response) {
-                  Notify({ type: 'success', message: 'メールで送信' });
+                  Notify({ type: 'success', message: 'メールを送信しました' });
                   console.log(response);
 
                 })
