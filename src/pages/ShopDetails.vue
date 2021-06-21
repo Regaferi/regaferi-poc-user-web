@@ -14,7 +14,7 @@
                     <div style="width: 100%;height: 59%">
                         <div style="font-size: 2%;display: flex;margin-bottom: 2%">
 
-                            <div style="width: 100%;height: 55px;" v-html="ellipsis(details.description)">
+                            <div style="width: 100%;height: 20%;" v-html="ellipsis(details.description)">
                             </div>
                         </div>
                         <div style="font-size: 2%;margin-bottom: 2%"> <van-icon name="clock-o" />

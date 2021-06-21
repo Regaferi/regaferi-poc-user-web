@@ -38,20 +38,21 @@ axios.interceptors.response.use(
     response => {
         return new Promise((resolve, reject) => {
             const res = response.data;
-            if(res.code == '200' || res.success == true){
+            if(res.errCode == null || res.success == true){
                 resolve(res)
             }else{
-                /*if(){
-
-                }*/
                 reject(res)
                 Notify(res.errMessage);
             }
-            if(res.errMessage == "用户登录信息过期"){
-                console.log(store.state.token ,"用户登录信息过期")
+            if(res.errCode == "MEMBER_0007"){
                 store.state.token = ''
                 router.push({
-                    path: "/home"
+                    path: "/"
+                });
+            }
+            if(res.errCode == "SHOP_0001"){
+                router.push({
+                    path: "/"
                 });
             }
             //请求成功后关闭加载框
