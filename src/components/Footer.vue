@@ -87,21 +87,13 @@ export default {
     footerList(index){
       console.log(index)
       if(index == 0){
-        this.$router.push({
-          name:'footer1'
-        })
+        window.location.href = "https://www.office-regaferi.com/%E4%BC%9A%E7%A4%BE%E6%A6%82%E8%A6%81/";
       }else if(index == 1){
-        this.$router.push({
-          name:'footer2'
-        })
+         window.location.href = "https://www.office-regaferi.com/%E5%88%A9%E7%94%A8%E8%A6%8F%E7%B4%84/";
       }else if(index == 2){
-        this.$router.push({
-          name:'footer3'
-        })
+          window.location.href = "https://www.office-regaferi.com/%E7%89%B9%E5%AE%9A%E5%95%86%E5%8F%96%E5%BC%95%E3%81%AB%E5%9F%BA%E3%81%A5%E3%81%8F%E8%A1%A8%E8%A8%98/";
       }else{
-        this.$router.push({
-          name:'footer4'
-        })
+          window.location.href = "https://www.office-regaferi.com/%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%BB%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC/";
       }
     },
     onResize () {
