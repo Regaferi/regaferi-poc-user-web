@@ -64,4 +64,5 @@ export default {
 #map {
   height: 100%;
 }
+
 </style>

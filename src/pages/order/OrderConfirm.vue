@@ -126,18 +126,19 @@
                             'amount': _this.product.prices,
                             'currency': 'JPY',
                             'payment_data[external_order_num]':res.data.order.code,
-                            'return_url': 'https://' +href + "/resume"
+                            'return_url': 'https://' +href + "/#/resume"
                         });
                         console.log(post_data)
                         _this.$store.commit('COMMIT_ZHIFU', auth)
                         _this.$store.commit('COMMIT_Content', Buffer.byteLength(post_data))
                         sessions(post_data).then(function (res) {
                             console.log(res, '支付')
-
+                            _this.showSess = false
+                            window.location.href = res.session_url;
                         }).catch(function (error) {
+                            console.log(error, '失败')
                             _this.showSess = false
                             window.location.href = error.session_url;
-                            console.log(error)
                         });
                     })
                         .catch(function (error) {

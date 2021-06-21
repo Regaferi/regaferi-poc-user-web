@@ -50,7 +50,7 @@
                                        合計数： {{product.totalCount == null ? '回数無制限':product.totalCount + '回'}}
                                     </v-list-item-subtitle>
                                     <v-list-item-subtitle style="padding-top: 5px;">
-                                       サービス時間： {{product.serviceTimeDay}}日
+                                       有效期间： {{product.serviceTimeDay}}日
                                     </v-list-item-subtitle>
                                 </v-list-item-content>
                             </v-list-item>
@@ -65,14 +65,14 @@
             </v-card-text>
 
             <v-divider/>
-            <v-card-text style="color: blue">もっと見る</v-card-text>
+            <v-card-text style="color: blue;font-size: 18px">もっと見る</v-card-text>
             <v-divider/>
             <!--  商品描述   -->
-            <v-card-text>
-                <h6>{{ product.description }}</h6>
+            <v-card-text style="font-size: 18px">
+                <h5>{{ product.description }}</h5>
             </v-card-text>
-            <v-card-text>
-                <h6>{{ product.address }}</h6>
+            <v-card-text style="font-size: 18px">
+                <h5>{{ product.address }}</h5>
             </v-card-text>
         </div>
 

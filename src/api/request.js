@@ -55,17 +55,6 @@ axios.interceptors.response.use(
                     path: "/"
                 });
             }
-            //请求成功后关闭加载框
-           /* if (loading) {
-                loading.close();
-            }*/
-
-            if (res.errCode != 'SHOP_MEMBER_0009' || res.errCode != 'SHOP_MEMBER_0007') {
-                reject(res)
-
-            } else{
-                resolve(res)
-            }
         })
     },
 
