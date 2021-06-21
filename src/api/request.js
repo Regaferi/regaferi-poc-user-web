@@ -44,7 +44,7 @@ axios.interceptors.response.use(
                 reject(res)
                 Notify(res.errMessage);
             }
-            if(res.errCode == "MEMBER_0007"){
+            if(res.errCode == "MEMBER_0007" || res.errCode == 'MEMBER_0009'){
                 store.state.token = ''
                 router.push({
                     path: "/"
