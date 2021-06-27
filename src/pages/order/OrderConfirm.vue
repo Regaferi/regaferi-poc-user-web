@@ -23,7 +23,7 @@
                                 <h6 > 回数制限： {{product.totalCount == null ? '回数無制限':product.totalCount + '回'}}</h6>
                                 <h6 >有効期間：{{product.serviceTimeDay}}日</h6>
                                <v-divider class="pt-1 pb-1"/>
-                               <h6 style="color: red"> 合計： {{product.prices}}元</h6>
+                               <h6 style="color: red"> 合計： {{product.prices}}円</h6>
                             </v-col>
                         </v-row>
                     </v-card-text>
@@ -50,7 +50,7 @@
         </van-overlay>
         <van-overlay :show="showSess">
             <div class="wrapper">
-                <van-loading color="#1989fa" size="24px">支払う準備...</van-loading>
+                <van-loading color="#1989fa" size="24px">準備中...</van-loading>
             </div>
         </van-overlay>
     </v-main>

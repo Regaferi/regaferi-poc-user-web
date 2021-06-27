@@ -28,24 +28,31 @@
 <!--                <v-row align="center" class="mx-0 pb-3">-->
 <!--                    <v-rating :value="product.rating" color="amber" dense half-increments readonly size="14"/>-->
 <!--                </v-row>-->
-                <h6>{{ product.subTitle }}</h6>
+                <h5>{{ product.subTitle }}</h5>
             </v-card-text>
             <v-divider/>
-            <v-card-subtitle>営業時間</v-card-subtitle>
-            <v-chip-group column class="pl-5 pb-3">
-                <v-chip x-small>{{product.openTime}}AM</v-chip>
-                <v-chip x-small>{{product.closeTime}}PM</v-chip>
-            </v-chip-group>
+         
+
+            <v-card-text style="color: blue;font-size: 18px">メニュー説明</v-card-text>
+            <!--  商品描述   -->
+            <v-card-text style="font-size: 18px">
+                <h5>{{ product.description }}</h5>
+            </v-card-text>
+            <v-card-text style="font-size: 18px">
+            <h5>所在地</h5>
+                <h5>{{ product.address }}</h5>
+            </v-card-text>
+
             <v-divider/>
             <!--  售卖规格   -->
-            <v-card-subtitle>使用説明</v-card-subtitle>
+            <v-card-text style="color: blue;font-size: 18px">メニュー内容</v-card-text>
             <v-card-text>
                 <v-card outlined>
                     <v-row>
                         <v-col cols="8">
                             <v-list-item two-line>
                                 <v-list-item-content>
-                                    <v-list-item-title>{{product.subTitle}}</v-list-item-title>
+                                    <v-list-item-title>{{product.name}}</v-list-item-title>
                                     <v-list-item-subtitle style="padding-top: 5px;">
                                        合計数： {{product.totalCount == null ? '回数無制限':product.totalCount + '回'}}
                                     </v-list-item-subtitle>
@@ -60,20 +67,14 @@
                         </v-col>
                     </v-row>
                 </v-card>
+                               <v-card-subtitle>メニュー提供時間</v-card-subtitle>
+            <v-chip-group column class="pl-5 pb-3">
+                <v-chip x-small>{{product.openTime}}AM</v-chip>
+                                <p style="padding-right:7px;">〜</p>
+                <v-chip x-small >{{product.closeTime}}PM</v-chip>
+            </v-chip-group>
                 <div class="pt-2"/>
 
-            </v-card-text>
-
-            <v-divider/>
-            <v-card-text style="color: blue;font-size: 18px">メニュー説明</v-card-text>
-            <v-divider/>
-            <!--  商品描述   -->
-            <v-card-text style="font-size: 18px">
-                <h5>{{ product.description }}</h5>
-            </v-card-text>
-            <v-card-text style="font-size: 18px">
-            <h5>所在地</h5>
-                <h5>{{ product.address }}</h5>
             </v-card-text>
         </div>
 

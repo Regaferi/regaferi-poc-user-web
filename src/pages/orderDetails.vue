@@ -5,10 +5,10 @@
             <a-descriptions-item label="メニュー名">
                 {{orderList.serviceName}}
             </a-descriptions-item>
-            <a-descriptions-item label="営業開始時間">
+            <a-descriptions-item label="提供開始時間">
                 {{orderList.serviceOrder.openTime}}
             </a-descriptions-item>
-            <a-descriptions-item label="営業終了時間">
+            <a-descriptions-item label="提供終了時間">
                 {{orderList.serviceOrder.closeTime}}
             </a-descriptions-item>
            // <a-descriptions-item label="購入日">
