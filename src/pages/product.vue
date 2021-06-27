@@ -50,7 +50,7 @@
                                        合計数： {{product.totalCount == null ? '回数無制限':product.totalCount + '回'}}
                                     </v-list-item-subtitle>
                                     <v-list-item-subtitle style="padding-top: 5px;">
-                                       有效期间： {{product.serviceTimeDay}}日
+                                       有効期間： {{product.serviceTimeDay}}日
                                     </v-list-item-subtitle>
                                 </v-list-item-content>
                             </v-list-item>
@@ -65,29 +65,22 @@
             </v-card-text>
 
             <v-divider/>
-            <v-card-text style="color: blue;font-size: 18px">もっと見る</v-card-text>
+            <v-card-text style="color: blue;font-size: 18px">メニュー説明</v-card-text>
             <v-divider/>
             <!--  商品描述   -->
             <v-card-text style="font-size: 18px">
                 <h5>{{ product.description }}</h5>
             </v-card-text>
             <v-card-text style="font-size: 18px">
+            <h5>所在地</h5>
                 <h5>{{ product.address }}</h5>
             </v-card-text>
         </div>
 
         <v-bottom-navigation color="primary" horizontal app>
-            <v-btn @click="naviTo()">
-                <span>戻る</span>
-<!--                <v-icon>mdi-face-agent</v-icon>-->
-            </v-btn>
-            <v-divider
-                    class="mx-4"
-                    vertical
-            ></v-divider>
-            <v-btn @click="navigateTo()">
-                <span>注文する</span>
-                <v-icon>mdi-check-outline</v-icon>
+            <v-btn  @click="navigateTo()">
+                <span style="color:green;" >注文する</span>
+                <v-icon style="color:green;">mdi-check-outline</v-icon>
             </v-btn>
         </v-bottom-navigation>
         <van-overlay :show="show">

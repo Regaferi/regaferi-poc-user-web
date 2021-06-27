@@ -34,7 +34,7 @@
             finished-text=""
             @load="load_more"
     >
-      <van-empty v-if="products.length <= 0" description="検索結果は見つかりませんでした" />
+      <van-empty v-if="products.length <= 0" description="現在有効期間中のサブスクはありません" />
     <div  v-show="isMobile" style="padding-left: 4%;margin-top: 10px" v-for="(item, index) in products" :key="index"  @click="naviga(item)">
       <v-card width="96%">
         <v-card-text>

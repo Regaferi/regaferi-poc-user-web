@@ -119,7 +119,7 @@
           <v-col>カテゴリーから選ぶ</v-col>
       </v-row>
       <v-row v-show="isMobile" style="width: 100%; margin: auto; left: 0; right: 0;">
-          <v-col :cols="isMobile?'3':'2'"
+          <v-col :cols="isMobile?'6':'2'"
                  v-for="(navigator, i) in navigators"
                  :key="i"
                  @click="navigateTo(navigator)"
@@ -164,7 +164,7 @@
                   <v-col>カテゴリーから選ぶ</v-col>
               </v-row>
               <div style="width: 100%;padding: 12px;display: flex;flex-wrap: wrap;">
-                  <v-col :cols="isMobile?'6':'2'"
+                  <v-col :cols="isMobile?'6':'3'"
                          v-for="(navigator, i) in navigators"
                          :key="i"
                          @click="navigateTo(navigator)"

@@ -21,32 +21,27 @@
                             <v-col cols="6" style="font-size: xx-small">
                                 <h6 class="pt-3"> サービス名： {{product.name}}</h6>
                                 <h6 > 回数制限： {{product.totalCount == null ? '回数無制限':product.totalCount + '回'}}</h6>
-                                <h6 >利用時間：{{product.serviceTimeDay}}日</h6>
+                                <h6 >有効期間：{{product.serviceTimeDay}}日</h6>
                                <v-divider class="pt-1 pb-1"/>
                                <h6 style="color: red"> 合計： {{product.prices}}元</h6>
                             </v-col>
                         </v-row>
                     </v-card-text>
                 </v-card>
+                <p style="text-align: center;padding-top:50px;font-size:12px;">注文内容にお間違いが無ければ</p>
+                 <p style="text-align: center;font-size:12px;">[支払いに進む]</p>
+                 <p style="text-align: center;font-size:12px;">を押してください</p>
             </div>
             <div class="pt-5"/>
             <input type="hidden" class="product-name" :value="product.serviceName">
             <input type="hidden" class="order-amount" :value="product.orderAmount ">
             <!--   支付按钮   -->
-            <v-bottom-navigation color="primary" horizontal app>
-                <v-btn @click="fanHui">
-                    <span>Back</span>
-                    <v-icon>mdi-arrow-left</v-icon>
+            <v-navigation  color="primary" horizontal app>
+                <v-btn style="width:100%;" @click="payNow">
+                    <v-icon style="padding-left: 12px;color:green">mdi-arrow-right</v-icon>
+                    <span style="color:green">支払いに進む</span>
                 </v-btn>
-                <v-divider
-                        class="mx-4"
-                        vertical
-                ></v-divider>
-                <v-btn @click="payNow">
-                    <v-icon style="padding-left: 12px">mdi-arrow-right</v-icon>
-                    <span>Pay Now</span>
-                </v-btn>
-            </v-bottom-navigation>
+            </v-navigation>
         </div>
         <van-overlay :show="show">
             <div class="wrapper">

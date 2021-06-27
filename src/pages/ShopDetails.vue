@@ -26,23 +26,23 @@
                 <div style="width: 100%;height: 59%">
                     <div style="font-size: 2%;display: flex;margin-bottom: 2%">
 
-                        <div style="width: 100%;height: 20%;font-size: 10px">
+                        <div style="width: 100%;height: 20%;font-size: 15px">
                             {{ellipsis(details.description)}}
                         </div>
                     </div>
-                    <div style="font-size: 2%;margin-bottom: 2%;font-size: 10px"> <van-icon name="clock-o" />
+                    <div style="font-size: 2%;margin-bottom: 2%;font-size: 15px"> <van-icon name="clock-o" />
                         営業時間
-                        <span style="margin : 0 2%;font-size: 10px">{{details.openTime}} ~~ {{details.closeTime}}</span>
+                        <span style="margin : 0 2%;font-size: 15px">{{details.openTime}} ~~ {{details.closeTime}}</span>
                         <!--                            <span style="margin-right: 1%">詳しくは</span>-->
                         <!--                            <van-icon name="arrow" />-->
                     </div>
                     <div style="font-size: 2%;margin-bottom: 2%;letter-spacing:2px">
 
-                        <div style="letter-spacing:2px;font-size: 10px"> <van-icon name="location-o" /> {{(details.location)}}</div>
+                        <div style="letter-spacing:2px;font-size: 15px"> <van-icon name="location-o" /> {{(details.location)}}</div>
                     </div>
                     <div style="font-size: 2%;margin-bottom: 2%;letter-spacing:2px">
 
-                        <div style="letter-spacing:2px;font-size: 10px"> <van-icon name="location-o" /> {{Dzellip(details.address)}}</div>
+                        <div style="letter-spacing:2px;font-size: 15px"> <van-icon name="location-o" /> {{Dzellip(details.address)}}</div>
                     </div>
                 </div>
             </div>

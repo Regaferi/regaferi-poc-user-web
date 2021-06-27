@@ -34,7 +34,7 @@
                 finished-text=""
                 @load="load_more"
         >
-            <van-empty v-if="products.length <= 0" description="検索結果は見つかりませんでした" />
+            <van-empty v-if="products.length <= 0" description="現在有効期間中のサブスクはありません" />
         <div @click="ClickStore(product)" v-for="(product, key) in products" :key="key" style="margin-top: 5%;">
             <div style="width: 90%;
     margin: auto;

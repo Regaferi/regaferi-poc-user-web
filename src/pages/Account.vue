@@ -225,7 +225,7 @@
                         style="height: 100%;"
                 >
                   <v-card-text class="pb-0">
-                    <p class="text--primary"> 新規登録
+                    <p class="text--primary">新規登録
                       <v-btn
                               text
                               x-small
@@ -250,16 +250,26 @@
                               :type="'password'"
                               v-model="formData.password"
                               :rules="password"
-                              label="パスワード"
+                              label="パスワードを設定"
                               required
                       ></v-text-field>
                       <v-text-field
                               :type="'password'"
                               v-model="formData.repeatPassword"
                               :rules="repeatPassword"
-                              label="パスワードを再入力してください"
+                              label="パスワードを再入力"
                               required
                       ></v-text-field>
+                  <v-btn
+                            outlined
+                            small
+                            color="orange accent-4"
+                            @click="sendVerifyCodeTwo"
+                            :disabled="show"
+                    >
+                      ①メールアドレスに検証コードを送る{{count}}
+                      <v-icon small class="pl-1">mdi-send</v-icon>
+                    </v-btn>
                       <v-text-field
 
                               v-model="formData.verifyCode"
@@ -269,27 +279,15 @@
                       ></v-text-field>
                     </v-form>
                   </v-card-text>
-                  <v-card-actions class="pt-3">
-                  <v-btn
-                            outlined
-                            small
-                            color="orange accent-4"
-                            @click="sendVerifyCodeTwo"
-                            :disabled="show"
-                    >
-                      メールアドレスに検証コードを送る |{{count}}
-                      <v-icon small class="pl-1">mdi-send</v-icon>
-                    </v-btn>
                     <v-btn
                             outlined
                             small
                             color="teal accent-4"
                             @click="register"
                     >
-                     新規登録 |
-                      <v-icon small class="pl-1">mdi-check-underline</v-icon>
+                     ②新規登録
+                     
                     </v-btn>
-                  </v-card-actions>
                 </v-card>
               </v-expand-transition>
               <v-expand-transition>
