@@ -31,9 +31,10 @@
                 <h5>{{ product.subTitle }}</h5>
             </v-card-text>
             <v-divider/>
-         
+            <v-card-text @click="backToStore" style="color: blue;font-size: 18px">{{shopName}}</v-card-text>
 
             <v-card-text style="color: blue;font-size: 18px">メニュー説明</v-card-text>
+
             <!--  商品描述   -->
             <v-card-text style="font-size: 18px">
                 <h5>{{ product.description }}</h5>
@@ -77,7 +78,11 @@
 
             </v-card-text>
         </div>
-
+        <div style="padding: 5%">
+            <van-button @click="naviTo" icon="revoke" type="info">
+                戻る
+            </van-button>
+        </div>
         <v-bottom-navigation color="primary" horizontal app>
             <v-btn  @click="navigateTo()">
                 <span style="color:green;" >注文する</span>
@@ -94,7 +99,7 @@
 
 <script>
     import { Notify } from 'vant';
-    import {service,} from "@api"
+    import {service,shopId} from "@api"
     export default {
         name: "PDP",
         data() {
@@ -112,7 +117,8 @@
                 ],
                 slides: [],
                 commentJson:[],
-                token:''
+                token:'',
+                shopName:''
             }
         },
         mounted() {
@@ -122,6 +128,12 @@
             this.token = this.$store.state.token
         },
         methods : {
+            backToStore(){
+                this.$router.push({
+                    name:'ShopDetails',
+                    query:{id:this.product.shopId}
+                })
+            },
             naviTo(){
                 this.$router.go(-1)
             },
@@ -133,6 +145,15 @@
                     .then((res)=> {
                         that.show = false
                         that.product = res.data
+                        shopId({
+                            id: res.data.shopId,
+                        })
+                            .then(function (response) {
+                                that.shopName = response.data.title
+                            })
+                            .catch(function (error) {
+                                Notify({type: 'warning', message: error.errMessage});
+                            });
                         res.data.imageUrls.forEach(ele=>{
                             if(ele.type == 'BANNER' ){
                                 that.slides.push(ele.target)
