@@ -6,16 +6,16 @@
                 {{orderList.serviceName}}
             </a-descriptions-item>
             <a-descriptions-item label="提供開始時間">
-                {{orderList.serviceOrder.openTime}}
+                {{orderList.serviceOrder.openTime.slice(0,5)}}
             </a-descriptions-item>
             <a-descriptions-item label="提供終了時間">
-                {{orderList.serviceOrder.closeTime}}
+                {{orderList.serviceOrder.closeTime.slice(0,5)}}
             </a-descriptions-item>
            // <a-descriptions-item label="購入日">
-               {{orderList.serviceOrder.startTime}}
+               {{orderList.serviceOrder.startTime.slice(0,10)}}
            </a-descriptions-item>
             <a-descriptions-item label="有効期間" :span="2">
-                {{orderList.serviceOrder.endTime}}
+                {{orderList.serviceOrder.endTime.slice(0,10)}}
             </a-descriptions-item>
             <a-descriptions-item label="住所">
                 <a-badge status="processing" :text="orderList.serviceResponse.location" />

@@ -49,7 +49,7 @@
               <h4 class="pt-3">{{item.name}}</h4>
               <h5 style="color: red">{{item.prices}}円</h5>
               <h6><van-icon name="location-o" />{{item.location}}</h6>
-              <h6>回数制限：{{item.totalCount}}</h6>
+              <h6>回数制限：{{item.totalCount == null ? '回数無制限':item.totalCount + '  回'}}</h6>
               <h6>利用可能な時間：{{item.createTime.slice(0,10)}} - {{item.updateTime.slice(0,10)}}</h6>
 
             </v-col>
@@ -57,7 +57,7 @@
         </v-card-text>
       </v-card>
     </div>
-      <div v-show="!isMobile" style="padding-left: 4%;display: flex" v-for="(item, index) in products" :key="index"  @click="naviga(item)">
+      <div v-show="!isMobile" style="padding-left: 4%;display: flex" v-for="(item, index) in products" :key="'info2-'+index"  @click="naviga(item)">
       <v-card width="40%" style="margin-top: 10px;">
         <v-card-text>
           <v-row>
@@ -71,7 +71,7 @@
               <h4 class="pt-3">{{item.name}}</h4>
               <h5 style="color: red">{{item.prices}} 円</h5>
               <h6><van-icon name="location-o" />{{item.location}}</h6>
-              <h6>回数制限：{{item.totalCount}}</h6>
+              <h6>回数制限：{{item.totalCount == null ? '回数無制限':item.totalCount + '  回'}}</h6>
               <h6>利用可能な時間：{{item.createTime.slice(0,10)}} - {{item.updateTime.slice(0,10)}}</h6>
 
             </v-col>

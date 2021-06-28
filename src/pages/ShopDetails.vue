@@ -35,7 +35,7 @@
                     <div style="font-size: 2%;margin-bottom: 2%;font-size: 15px">
                         <van-icon name="clock-o"/>
                         営業時間
-                        <span style="margin : 0 2%;font-size: 15px">{{details.openTime}} ~~ {{details.closeTime}}</span>
+                        <span style="margin : 0 2%;font-size: 15px">{{details.openTime.slice(0,5)}} ~~ {{details.closeTime.slice(0,5)}}</span>
                         <!--                            <span style="margin-right: 1%">詳しくは</span>-->
                         <!--                            <van-icon name="arrow" />-->
                     </div>

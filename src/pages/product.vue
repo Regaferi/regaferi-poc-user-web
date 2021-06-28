@@ -70,9 +70,9 @@
                 </v-card>
                                <v-card-subtitle>メニュー提供時間</v-card-subtitle>
             <v-chip-group column class="pl-5 pb-3">
-                <v-chip x-small>{{product.openTime}}AM</v-chip>
+                <v-chip x-small>{{product.openTime.slice(0,5)}}AM</v-chip>
                                 <p style="padding-right:7px;">〜</p>
-                <v-chip x-small >{{product.closeTime}}PM</v-chip>
+                <v-chip x-small >{{product.closeTime.slice(0,5)}}PM</v-chip>
             </v-chip-group>
                 <div class="pt-2"/>
 
