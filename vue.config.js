@@ -3,7 +3,17 @@ let path = require("path");
 function resolve(dir) {
     return path.join(__dirname, dir);
 }
-
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = ['js', 'css']
+//对一些不经常改动的库，可以通过cdn引入，webpack不对他们打包
+let externals = {
+    vue: "Vue",
+    axios: "axios",
+    "element-ui": "ELEMENT",
+    "vue-router": "VueRouter",
+    vuex: "Vuex",
+    "vue2-editor": "VueEditor",
+};
 module.exports = {
 
     //基本路径
@@ -14,6 +24,17 @@ module.exports = {
     assetsDir: "static",
     //生产环境不需要生产map文件
     productionSourceMap: false,
+    configureWebpack: {
+        plugins: [
+            new CompressionWebpackPlugin({
+                filename: '[path].gz[query]', // 提示 compression-webpack-plugin@3.0.0的话asset改为filename
+                algorithm: 'gzip',
+                test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+                threshold: 10240,
+                minRatio: 0.8
+            })
+        ]
+    },
     chainWebpack: config => {
         //这里是对环境的配置，不同的环境对应不同的BASE_URL
         config.plugin("define").tap(args => {
@@ -27,7 +48,9 @@ module.exports = {
 
         //只在生产环境生效
         if (process.env.VUE_APP_CURRENTMODE === "production") {
+            config.externals(externals);
             config.optimization.minimize(true);
+
             config.optimization.splitChunks({
                 chunks: "all",
                 cacheGroups: {
@@ -45,6 +68,7 @@ module.exports = {
                     }
                 }
             });
+
         }
         //设置别名
         config.resolve.alias

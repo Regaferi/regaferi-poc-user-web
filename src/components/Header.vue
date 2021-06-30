@@ -74,7 +74,10 @@ export default {
       this.$router.push({name : name})
     },
     backToHome : function (){
-      this.$router.push({name: 'home'})
+      if (this.$route.path !== '/') {
+        this.$router.push({name: 'home'})
+      }
+
     }
 
   }

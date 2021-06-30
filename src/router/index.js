@@ -1,34 +1,19 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from "@/pages/Home";
-import ProductList from "@/pages/ProductList";
-import StoreList from "@/pages/storeList";
-import product from "@/pages/product";
-import OrderConfirm from "@/pages/order/OrderConfirm";
-import ShopDetails from '@/pages/ShopDetails';
-import LoginCallback from "@/pages/LoginCallback";
-import OrderDetail from "@/pages/order/OrderDetail";
-import resume from "@/pages/resume";
-import firstLogin from "@/pages/firstLogin";
-import details from "@/pages/orderDetails";
-import footer1 from "@/pages/footer/footer1";
-import footer2 from "@/pages/footer/footer2";
-import footer3 from "@/pages/footer/footer3";
-import footer4 from "@/pages/footer/footer4";
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home,
+    component: () => import('@/pages/Home'),
     children : [],
     props: route => ({ isMobile: route.query.isMobile })
   },
   {
     path: '/list',
     name: 'product-list',
-    component: ProductList,
+    component: () => import('@/pages/ProductList'),
     children : [],
     props: route => ({
       category: route.query.category,
@@ -39,7 +24,7 @@ const routes = [
   {
     path: '/order-confirm',
     name: 'order-confirm',
-    component: OrderConfirm,
+    component: () => import('@/pages/order/OrderConfirm'),
     children : [],
     props: route => ({
       code: route.query.code
@@ -48,7 +33,7 @@ const routes = [
   ,{
     path: '/firstLogin',
     name: 'firstLogin',
-    component: firstLogin,
+    component: () => import('@/pages/firstLogin'),
     children : [],
     props: route => ({
       category: route.query.category,
@@ -57,7 +42,7 @@ const routes = [
   },{
     path: '/resume',
     name: 'resume',
-    component: resume,
+    component: () => import('@/pages/resume'),
     children : [],
     props: route => ({
       category: route.query.category,
@@ -67,7 +52,7 @@ const routes = [
   {
     path: '/details',
     name: 'details',
-    component: details,
+    component: () => import('@/pages/orderDetails'),
     children : [],
     props: route => ({
       category: route.query.category,
@@ -77,7 +62,7 @@ const routes = [
   {
     path: '/product',
     name: 'product',
-    component: product,
+    component: () => import('@/pages/product'),
     children : [],
     props: route => ({
       category: route.query.category,
@@ -86,7 +71,7 @@ const routes = [
   },{
     path: '/footer1',
     name: 'footer1',
-    component: footer1,
+    component: () => import('@/pages/footer/footer1'),
     children : [],
     props: route => ({
       category: route.query.category,
@@ -95,7 +80,7 @@ const routes = [
   },{
     path: '/footer2',
     name: 'footer2',
-    component: footer2,
+    component: () => import('@/pages/footer/footer2'),
     children : [],
     props: route => ({
       category: route.query.category,
@@ -104,7 +89,7 @@ const routes = [
   },{
     path: '/footer3',
     name: 'footer3',
-    component: footer3,
+    component: () => import('@/pages/footer/footer3'),
     children : [],
     props: route => ({
       category: route.query.category,
@@ -113,7 +98,7 @@ const routes = [
   },{
     path: '/footer4',
     name: 'footer4',
-    component: footer4,
+    component: () => import('@/pages/footer/footer4'),
     children : [],
     props: route => ({
       category: route.query.category,
@@ -123,7 +108,7 @@ const routes = [
   {
     path: '/storeList',
     name: 'storeList',
-    component: StoreList,
+    component: () => import('@/pages/storeList'),
     children : [],
     props: route => ({
       category: route.query.category,
@@ -133,7 +118,7 @@ const routes = [
   {
     path: '/ShopDetails',
     name: 'ShopDetails',
-    component: ShopDetails,
+    component: () => import('@/pages/ShopDetails'),
     children : [],
     props: route => ({
       category: route.query.category,
@@ -143,7 +128,7 @@ const routes = [
   {
     path: '/login/callback',
     name: 'LoginCallback',
-    component: LoginCallback,
+    component: () => import('@/pages/LoginCallback'),
     children : [],
     props: route => ({
       code: route.query.code,
@@ -153,7 +138,7 @@ const routes = [
   {
     path: '/order/orderDetail',
     name: 'OrderDetail',
-    component: OrderDetail,
+    component: () => import('@/pages/order/OrderDetail'),
     children : [],
     props: route => ({
       sessionId: route.query.id,
