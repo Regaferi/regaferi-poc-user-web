@@ -5,15 +5,6 @@ function resolve(dir) {
 }
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const productionGzipExtensions = ['js', 'css']
-//对一些不经常改动的库，可以通过cdn引入，webpack不对他们打包
-let externals = {
-    vue: "Vue",
-    axios: "axios",
-    "element-ui": "ELEMENT",
-    "vue-router": "VueRouter",
-    vuex: "Vuex",
-    "vue2-editor": "VueEditor",
-};
 module.exports = {
 
     //基本路径
@@ -48,7 +39,6 @@ module.exports = {
 
         //只在生产环境生效
         if (process.env.VUE_APP_CURRENTMODE === "production") {
-            config.externals(externals);
             config.optimization.minimize(true);
 
             config.optimization.splitChunks({
