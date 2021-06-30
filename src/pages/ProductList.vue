@@ -2,32 +2,10 @@
   <v-main style="overflow: hidden;">
     <!--  Banner  -->
     <div style="position: relative" ref="piediv">
-      <!--      <div style="-->
-      <!--      height: 300px;-->
-      <!--      background-image: url('https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg')-->
-      <!--      background-size: 100%;"-->
-      <!--      />-->
-      <!--          <img style="width: 100%;height: 250px" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" alt="">-->
       <v-img max-height="20%" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
     </div>
     <!--  Filter  -->
     <v-divider class="mx-4"></v-divider>
-
-    <!--  List Detail  -->
-    <!--<v-row class="pl-2 pr-2">
-      <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product.code)">
-          <v-card>
-            <v-img height="180" :src="product.image"/>
-            <v-card-title>{{ product.title }}</v-card-title>
-            <v-card-text>
-              <v-row align="center" class="mx-0 pb-3">
-                <v-rating :value="product.rating" color="amber" dense half-increments readonly size="14"/>
-              </v-row>
-              <h6>{{ product.subTitle }}</h6>
-            </v-card-text>
-          </v-card>
-      </v-col>
-    </v-row>-->
     <van-list
             v-model="loading"
             :finished="finished"
@@ -35,7 +13,7 @@
             @load="load_more"
     >
       <van-empty v-if="products.length <= 0" description="現在有効期間中のサブスクはありません" />
-    <div  v-show="isMobile" style="padding-left: 4%;margin-top: 10px" v-for="(item, index) in products" :key="index"  @click="naviga(item)">
+    <div  v-show="isMobile" style="padding-left: 4%;margin: 2% 0" v-for="(item, index) in products" :key="index"  @click="naviga(item)">
       <v-card width="96%">
         <v-card-text>
           <v-row>

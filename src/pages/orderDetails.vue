@@ -1,24 +1,28 @@
 <template>
 
     <div style="margin-top: 20%;">
+        <div v-show="orderInformation" style="height: 38vh;">
+            <van-empty
+                    class="custom-image"
+                    image="https://img01.yzcdn.cn/vant/custom-empty-image.png"
+                    description="現在有効期間中のサブスクはありません"
+            />
+        </div>
         <a-descriptions bordered>
             <a-descriptions-item label="メニュー名">
                 {{orderList.serviceName}}
             </a-descriptions-item>
             <a-descriptions-item label="提供開始時間">
-                {{orderList.serviceOrder.openTime.slice(0,5)}}
+                {{Tiemllip(orderList.serviceOrder.openTime)}}
             </a-descriptions-item>
             <a-descriptions-item label="提供終了時間">
-                {{orderList.serviceOrder.closeTime.slice(0,5)}}
+                {{Tiemllip(orderList.serviceOrder.closeTime)}}
             </a-descriptions-item>
            // <a-descriptions-item label="購入日">
-               {{orderList.serviceOrder.startTime.slice(0,10)}}
+               {{tenTime(orderList.serviceOrder.startTime)}}
            </a-descriptions-item>
-            <a-descriptions-item label="有効期間" :span="2">
-                {{orderList.serviceOrder.endTime.slice(0,10)}}
-            </a-descriptions-item>
-            <a-descriptions-item label="住所">
-                <a-badge status="processing" :text="orderList.serviceResponse.location" />
+            <a-descriptions-item label="有効期間">
+                {{tenTime(orderList.serviceOrder.endTime)}}
             </a-descriptions-item>
             <a-descriptions-item label="残りの有効日数">
                 {{orderList.serviceOrder.serviceTimeDay}}
@@ -52,6 +56,7 @@ import {orderDetail} from '@api'
         data() {
             return {
                 show:true,
+                orderInformation:true,
                 size: 'default',
                 orderList:{
                     serviceOrder:{},
@@ -64,11 +69,21 @@ import {orderDetail} from '@api'
             var thas = this
             orderDetail(thas.$route.query.id).then((res)=> {
                 thas.orderList = res.data
-                thas.show = false
+                thas.orderInformation = false
+                setTimeout(()=>{
+                    thas.show = false
+                },200)
             })
         },
         methods: {
-
+            Tiemllip(value) {
+                if (!value) return ''
+                return value.slice(0,5)
+            },
+            tenTime(value) {
+                if (!value) return ''
+                return value.slice(0,10)
+            },
             onChange(e) {
                 console.log('size checked', e.target.value);
                 this.size = e.target.value;

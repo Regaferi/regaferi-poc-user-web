@@ -90,7 +90,6 @@ import {memberDetail,orderList,settlement} from "@api";
                 .then(function (response) {
                     that.show = false
                     that.orderList = response.data
-                    console.log(that.orderList,9999)
                 })
                 .catch(function (error) {
                     // this.$notify({ type: 'warning', message: 'クエリが失敗しました' });

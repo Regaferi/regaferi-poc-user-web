@@ -2,32 +2,10 @@
     <v-main style="overflow: hidden;">
         <!--  Banner  -->
         <div style="position: relative" ref="piediv">
-            <!--      <div style="-->
-            <!--      height: 300px;-->
-            <!--      background-image: url('https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg')-->
-            <!--      background-size: 100%;"-->
-            <!--      />-->
-            <!--          <img style="width: 100%;height: 250px" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4253792690,4157255255&fm=224&gp=0.jpg" alt="">-->
             <v-img max-height="20%" width="100%" src="../image/image-plp-recommend.jpg"></v-img>
         </div>
         <!--  Filter  -->
         <v-divider class="mx-4"></v-divider>
-
-        <!--  List Detail  -->
-        <!--<v-row class="pl-2 pr-2">
-            <v-col cols="6" v-for="(product, key) in products" :key="key" @click="navigateToPDP(product.code)">
-                <v-card>
-                    <v-img height="180" :src="product.image"/>
-                    <v-card-title>{{ product.title }}</v-card-title>
-                    <v-card-text>
-                        <v-row align="center" class="mx-0 pb-3">
-                            <v-rating :value="product.rating" color="amber" dense half-increments readonly size="14"/>
-                        </v-row>
-                        <h6>{{ product.subTitle }}</h6>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-        </v-row>-->
         <van-list
                 v-model="loading"
                 :finished="finished"
@@ -35,9 +13,10 @@
                 @load="load_more"
         >
             <van-empty v-if="products.length <= 0" description="現在有効期間中のサブスクはありません" />
-        <div @click="ClickStore(product)" v-for="(product, key) in products" :key="key" style="margin-top: 5%;">
+        <div @click="ClickStore(product)" v-for="(product, key) in products" :key="key" style="margin: 2% 0;">
             <div style="width: 90%;
     margin: auto;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
     ">
                 <van-card
                         style="border-radius: 10px;"
@@ -88,7 +67,7 @@
             loading: false,
             finished: false,
             page: 1,//页数
-            limit: 15,//条数
+            limit: 10,//条数
             show : true,
             areaFilter : false,
             typeFilter : false,
@@ -142,7 +121,6 @@
         }),
         created() {
             var that = this
-            console.log(that.$route.query.location,'55555555555555555555')
             shopIndex({
                 keyword:that.$route.query.input,
                 type:1,
@@ -206,5 +184,29 @@
         align-items: center;
         justify-content: center;
         height: 100%;
+    }
+    .van-card__content {
+        position: relative;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        min-width: 0;
+        min-height: 44px;
+    }
+    .van-card__title {
+        max-height: 32px;
+        font-weight: 500;
+        line-height: 21px;
+        font-size: 17px;
     }
 </style>

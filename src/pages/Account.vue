@@ -1,95 +1,5 @@
 <template>
   <div>
-    <!--  PC 弹窗  -->
-    <!--<v-row v-show="!isMobile">
-      <v-dialog v-model="dialog" max-width="45%">
-        <template v-slot:activator="{ on, attrs }" >
-          <v-btn  class="mx-2" small fab outlined color="primary" v-bind="attrs" v-on="on">
-            <v-icon>
-              mdi-account
-            </v-icon>
-          </v-btn>
-        </template>
-        <v-card v-show="!isLogin">
-&lt;!&ndash;          <v-card-title>{{ $t('i18n.member.basic.title') }}</v-card-title>&ndash;&gt;
-          <v-card-title>アカウント</v-card-title>
-          <v-card class="mx-auto" max-width="344" height="350" flat>
-            <v-card-text>
-              <p class="display-1 text&#45;&#45;primary">
-                ログイン
-              </p>
-            </v-card-text>
-            <v-card-actions>
-              <v-btn color="red" small outlined @click="reveal = true">E Mail</v-btn>
-              <v-btn color="brown" small outlined @click="reveal = true">LINE</v-btn>
-            </v-card-actions>
-
-            <v-expand-transition>
-              <v-card
-                  outlined
-                  v-if="reveal"
-                  class="transition-fast-in-fast-out v-card&#45;&#45;reveal"
-                  style="height: 100%;"
-              >
-                <v-card-text class="pb-0">
-                  <p class="text&#45;&#45;primary"> パスワードを忘れた場合
-                    <v-btn
-                        text
-                        x-small
-                        @click="reveal = false"
-                    >
-                      <v-icon small>mdi-chevron-up</v-icon>
-                    </v-btn>
-                  </p>
-                  <v-form
-                      ref="form"
-                      v-model="valid"
-                      lazy-validation
-                  >
-                    <v-text-field
-                        v-model="account"
-                        :rules="accountRules"
-                        label="Email/Mobile"
-                        required
-                    ></v-text-field>
-           <v-btn
-                      outlined
-                      small
-                      color="orange accent-4"
-                      @click="sendVerifyCode"
-                      :disabled="show"
-                  >
-                    検証コードを送る |{{count}}
-                    <v-icon small class="pl-1">mdi-send</v-icon>
-                  </v-btn>    
-                    <v-text-field
-                        v-model="code"
-                        :rules="codeRules"
-                        label="検証コード"
-                        required
-                    ></v-text-field>
-                  </v-form>
-                </v-card-text>
-                <v-card-actions class="pt-3">
-                  <v-btn
-                      outlined
-                      small
-                      color="teal accent-4"
-                      @click="login"
-                  >
-                    ログイン |
-                    <v-icon small class="pl-1">mdi-check-underline</v-icon>
-                  </v-btn>
-
-                </v-card-actions>
-
-              </v-card>
-            </v-expand-transition>
-          </v-card>
-        </v-card>
-        <MemberCenter v-show="isLogin"/>
-      </v-dialog>
-    </v-row>-->
     <!--  Mobile 页面  -->
     <div class="text-center">
       <v-bottom-sheet  v-model="sheet" inset>
@@ -114,7 +24,7 @@
                 </p>
               </v-card-text>
               <p class="text--primary">登録済みの方はこちら</p>
-               <v-card-actions style="display: block"> 
+               <v-card-actions style="display: block">
             <div class="padding-text">
                <v-btn
                        style="width: 220px;"
@@ -123,7 +33,7 @@
                         outlined
                         @click="revealDenlu = true"
                 >
-                
+
                       ログイン
                 </v-btn>
             </div>
@@ -136,7 +46,7 @@
                     @click="reveal = true"
                 >
                           パスワードを忘れた場合
-                </v-btn>  
+                </v-btn>
             </div>
 
              <div class="padding-text">
@@ -144,7 +54,7 @@
                                   と<el-link href="https://www.office-regaferi.com/%E3%83%97%E3%83%A9%E3%82%A4%E3%83%90%E3%82%B7%E3%83%BC%E3%83%BB%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC/" target="_blank" >プライバシーポリシー</el-link>が適用されます
               </div>
                  </v-card-actions>
-                 
+
                  <p style="padding-top:50px" class="p-text-class" >新規登録はこちら</p>
                            <v-card-actions style="display: block">
                 <v-btn
@@ -157,7 +67,7 @@
                 </v-btn>
 
 
-              </v-card-actions>    
+              </v-card-actions>
               <v-expand-transition>
                 <v-card
                     v-if="reveal"
@@ -286,7 +196,7 @@
                             @click="register"
                     >
                      ②新規登録
-                     
+
                     </v-btn>
                 </v-card>
               </v-expand-transition>
