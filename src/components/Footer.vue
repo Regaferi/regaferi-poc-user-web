@@ -43,7 +43,7 @@
                     class="my-2"
                     @click="backgroundLink"
             >
-              掲載店のログインはこちらからです
+              掲載店ログイン
             </v-btn>
 
           </v-col>
@@ -82,7 +82,7 @@ export default {
   },
   methods : {
     backgroundLink(){
-      window.location.href = "http://manager-web.regaferi-japan.com";
+      window.location.href = "https://manager-web.regaferi-japan.com";
     },
     footerList(index){
       console.log(index)

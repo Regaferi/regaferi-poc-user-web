@@ -25,7 +25,7 @@
                 {{tenTime(orderList.serviceOrder.endTime)}}
             </a-descriptions-item>
             <a-descriptions-item label="残りの有効日数">
-                {{orderList.serviceOrder.serviceTimeDay}}
+                {{orderList.serviceOrder.serviceTimeDay}}日
             </a-descriptions-item>
 
             <a-descriptions-item label="残りの有効回数">

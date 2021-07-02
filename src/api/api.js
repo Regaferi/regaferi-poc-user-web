@@ -25,7 +25,7 @@ export const  serviceShop=(serviceShop)=>get(`/service/shop?shopId=${serviceShop
 export const  service=(service)=>get(`/service?id=${service.id}`)
 
 //评论查询
-export const  comment=(comment)=>get(`/comment?serviceId=${comment.serviceId}`)
+export const  comment=(comment)=>get(`/comment?shopId=${comment.shopId}`)
 //评论权限查询
 export const  isComment=(isComment)=>get(`/comment/is-comment?shopId=${isComment.shopId}`)
 //评论删除

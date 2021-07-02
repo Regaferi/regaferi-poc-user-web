@@ -54,20 +54,25 @@
                             <v-list-item two-line>
                                 <v-list-item-content>
                                     <v-list-item-title>{{product.name}}</v-list-item-title>
-                                    <v-list-item-subtitle style="padding-top: 5px;">
+                                    <v-list-item-subtitle style="padding-top: 7px;">
                                        合計数： {{product.totalCount == null ? '回数無制限':product.totalCount + '回'}}
                                     </v-list-item-subtitle>
-                                    <v-list-item-subtitle style="padding-top: 5px;">
+                                    <v-list-item-subtitle style="padding-top: 7px;">
                                        有効期間： {{product.serviceTimeDay}}日
                                     </v-list-item-subtitle>
                                 </v-list-item-content>
                             </v-list-item>
                         </v-col>
                         <v-col cols="4">
-                            <h4 class="pt-5">{{product.prices}}円</h4>
+                      <v-list-item two-line>
+                                <v-list-item-content>
+                                    <v-list-item-title>{{product.prices}}円</v-list-item-title>
+                                </v-list-item-content>
+                            </v-list-item>
                         </v-col>
                     </v-row>
                 </v-card>
+                                           <p style="text-align: right;">価格は税込み表示です</p>
                                <v-card-subtitle>メニュー提供時間</v-card-subtitle>
             <v-chip-group column class="pl-5 pb-3">
                 <v-chip x-small>{{Tiemllip(product.openTime)}}AM</v-chip>

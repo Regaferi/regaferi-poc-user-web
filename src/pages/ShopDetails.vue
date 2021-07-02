@@ -115,7 +115,7 @@
                                                 rows="2"
                                                 autosize
                                                 readonly
-                                                label="応答"
+                                                label="返信"
                                                 type="textarea"
                                                 :placeholder="item.reply"
                                                 show-word-limit
@@ -223,7 +223,7 @@
                     Notify({type: 'warning', message: error.errMessage});
                 });
             comment({
-                serviceId: that.$route.query.id,
+                shopId: that.$route.query.id,
             })
                 .then(function (response) {
                     that.items = response.data
@@ -266,7 +266,7 @@
                     .then((res) => {
                         Notify({type: 'success', message: '削除されました！'});
                         comment({
-                            serviceId: that.$route.query.id,
+                            shopId: that.$route.query.id,
                         })
                             .then(function (response) {
                                 that.items = response.data
@@ -289,7 +289,7 @@
                 var that = this
 
                 commentPinlun({
-                    serviceId: that.$route.query.id,
+                    shopId: that.$route.query.id,
                     star: that.value,
                     comment: that.message
                 })
@@ -297,7 +297,7 @@
                         console.log(res)
                         that.message = ''
                         comment({
-                            serviceId: that.$route.query.id,
+                            shopId: that.$route.query.id,
                         })
                             .then(function (response) {
                                 that.items = response.data

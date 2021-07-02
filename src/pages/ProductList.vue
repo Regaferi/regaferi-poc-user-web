@@ -29,7 +29,7 @@
               <h6 style="font-size=1px">※価格は税込み表示です</h6>
               <h6><van-icon name="location-o" />{{item.location}}</h6>
               <h6>回数制限：{{item.totalCount == null ? '回数無制限':item.totalCount + '  回'}}</h6>
-              <h6>有効期間：{{item.serviceTimeDay}}</h6>
+              <h6>有効期間：{{item.serviceTimeDay}}日</h6>
 
             </v-col>
           </v-row>
@@ -52,7 +52,7 @@
               <h6 style="font-size=1px">※価格は税込み表示です</h6>
               <h6><van-icon name="location-o" />{{item.location}}</h6>
               <h6>回数制限：{{item.totalCount == null ? '回数無制限':item.totalCount + '  回'}}</h6>
-              <h6>有効期間：{{item.serviceTimeDay}}</h6>
+              <h6>有効期間：{{item.serviceTimeDay}}日</h6>
 
             </v-col>
           </v-row>
