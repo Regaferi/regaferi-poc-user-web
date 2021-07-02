@@ -103,7 +103,7 @@
                                                 autosize
                                                 readonly
                                                 type="textarea"
-                                                :placeholder="item.comment"
+                                                :value="item.comment"
                                                 show-word-limit
                                         />
                                         <div v-if="item.delete == true" @click="commDel(item.id)"
@@ -123,6 +123,7 @@
                                         <van-rate v-model="item.star"
                                                   style="float: right;margin-right: 5%;"
                                                   :size="10"
+                                                  readonly
                                                   color="#ffd21e"
                                                   void-icon="star"
                                                   void-color="#eee"
@@ -148,28 +149,29 @@
                         </v-col>
 
                     </v-row>
-                    <div v-if="idcomment" style="margin: auto;width: 90%">
+
+                    <div v-if="idcomment" style="padding-top:88px;margin: auto;width: 90%">
+                                        <van-rate v-model="value"
+                                  :size="20"
+                                  color="#ffd21e"
+                                  void-icon="star"
+                                  void-color="#eee"
+                        />
                         <van-field
                                 v-model="message"
                                 rows="2"
                                 autosize
-                                label="コメント"
                                 type="textarea"
                                 maxlength="100"
 
-                                placeholder="コメントを入力してください"
+                                placeholder="レビューを入力してください"
                                 show-word-limit
                         >
                             <template #button>
                                 <van-button style="float: right" @click="pinLun" round type="info">送信</van-button>
                             </template>
                         </van-field>
-                        <van-rate v-model="value"
-                                  :size="25"
-                                  color="#ffd21e"
-                                  void-icon="star"
-                                  void-color="#eee"
-                        />
+
 
                     </div>
                 </van-tab>
@@ -198,7 +200,7 @@
             ifOver: false, // 文本是否超出三行，默认否
             unfold: false, // 文本是否是展开状态 默认为收起
             active: 'サービス',
-            value: 0,
+            value: 4,
             images: [],
             items: [],
             products: [],
@@ -361,4 +363,5 @@
         justify-content: center;
         height: 100%;
     }
+ 
 </style>

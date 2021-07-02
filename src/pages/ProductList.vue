@@ -25,10 +25,11 @@
             </v-col>
             <v-col cols="6" style="font-size: xx-small">
               <h4 class="pt-3">{{item.name}}</h4>
-              <h5 style="color: red">{{item.prices}}円</h5>
+              <h5 style="color: red">{{item.prices}}円 </h5>
+              <h6 style="font-size=1px">※価格は税込み表示です</h6>
               <h6><van-icon name="location-o" />{{item.location}}</h6>
               <h6>回数制限：{{item.totalCount == null ? '回数無制限':item.totalCount + '  回'}}</h6>
-              <h6>利用可能な時間：{{item.createTime.slice(0,10)}} - {{item.updateTime.slice(0,10)}}</h6>
+              <h6>有効期間：{{item.serviceTimeDay}}</h6>
 
             </v-col>
           </v-row>
@@ -48,9 +49,10 @@
             <v-col cols="6" style="font-size: xx-small">
               <h4 class="pt-3">{{item.name}}</h4>
               <h5 style="color: red">{{item.prices}} 円</h5>
+              <h6 style="font-size=1px">※価格は税込み表示です</h6>
               <h6><van-icon name="location-o" />{{item.location}}</h6>
               <h6>回数制限：{{item.totalCount == null ? '回数無制限':item.totalCount + '  回'}}</h6>
-              <h6>利用可能な時間：{{item.createTime.slice(0,10)}} - {{item.updateTime.slice(0,10)}}</h6>
+              <h6>有効期間：{{item.serviceTimeDay}}</h6>
 
             </v-col>
           </v-row>

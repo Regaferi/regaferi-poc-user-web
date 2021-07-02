@@ -43,7 +43,7 @@
                     class="my-2"
                     @click="backgroundLink"
             >
-              商定刊登方法
+              掲載店のログインはこちらからです
             </v-btn>
 
           </v-col>
