@@ -82,7 +82,7 @@ export default {
   },
   methods : {
     backgroundLink(){
-      window.location.href = "https://manager-web.regaferi-japan.com";
+      window.location.href = "https://regaferi.jp/manager";
     },
     footerList(index){
       console.log(index)
