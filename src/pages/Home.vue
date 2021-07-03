@@ -126,11 +126,11 @@
         <div v-show="!isMobile" class="PcMind">
             <div class="PcMindOne">
                 <v-row style="margin-top: 5%;padding-left: 12px;margin-bottom: -15px;">
-                    <v-col>人気のお店</v-col>
+                    <v-col>新着一覧</v-col>
                 </v-row>
                 <div style="width: 100%;padding: 12px;display: flex;flex-wrap: wrap">
                     <div style="width: 25%;padding: 12px;" v-for="(product, key) in products" :key="key"
-                         @click="serveWeb">
+                         @click="navigateToPDP(product)">
                         <v-card :width="isMobile?'100%':'100%'" :height="isMobile?'100%':'100%'">
                             <v-img v-if="product.logoImage" :src="product.logoImage.target"/>
                             <van-image style="height: 148px" v-else
