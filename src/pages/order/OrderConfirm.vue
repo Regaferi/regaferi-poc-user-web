@@ -112,16 +112,15 @@
                         _this.showSess = true
                         let querystring = require('querystring');
                         // let https = require('https');
-                        let secret_key = 'sk_test_2u2m1usd757y38rmar9cqsxi'
+                        let secret_key = 'pk_test_dsjoupc9m3jv3ebq6lblivof'
                         let auth = 'Basic ' + Buffer.from(secret_key + ':').toString('base64');
                         let href =window.location.host
                         let post_data = querystring.stringify({
                             'default_locale': 'ja',
-                            'email': 'regaferi@2021gmail.com',
                             'amount': _this.product.prices,
                             'currency': 'JPY',
                             'payment_data[external_order_num]':res.data.order.code,
-                            'return_url': 'https://' +href + "/#/resume"
+                            'return_url': 'https://regaferi.jp/'
                         });
                         console.log(post_data)
                         _this.$store.commit('COMMIT_ZHIFU', auth)
