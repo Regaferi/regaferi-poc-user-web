@@ -48,7 +48,7 @@
                 <van-loading color="#1989fa" />
             </div>
         </van-overlay>
-        <van-dialog v-model="showCancel" v-if="!time == 0" title="検証コード">
+        <van-dialog confirm-button-text="確認" v-model="showCancel" v-if="!time == 0" title="検証コード">
 <div style="text-align: center;">
     <van-count-down :time="time" format="mm 分 ss 秒" />
 </div>

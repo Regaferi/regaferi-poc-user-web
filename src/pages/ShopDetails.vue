@@ -28,7 +28,7 @@
                     <div style="font-size: 2%;display: flex;margin-bottom: 2%">
 
                         <div style="width: 100%;height: 20%;font-size: 15px">
-                            {{ellipsis(details.description)}}
+                            <pre>{{brChange(details.description)}}</pre>
                         </div>
                     </div>
                     <div style="font-size: 2%;margin-bottom: 2%;font-size: 15px">
@@ -234,7 +234,6 @@
             })
                 .then(function (response) {
                     that.products = response.data
-
                     that.show = false
                 })
                 .catch(function (error) {
@@ -311,13 +310,6 @@
             navigateToPDP(val) {
                 this.$router.push({name: 'product', query: {id: val.id}})
             },
-            ellipsis(value) {
-                if (!value) return ''
-                if (value.length > 120) {
-                    return value.slice(0, 120) + '...'
-                }
-                return value
-            },
             StoreEllipsis(value) {
                 if (!value) return ''
                 if (value.length > 12) {
@@ -340,6 +332,10 @@
                 console.log(val)
                 this.$router.push({name: 'ShopDetails'})
             },
+            brChange(val){
+             val= val.replace(/<br>/g , '\n')
+             return val
+            }
         },
     }
 </script>
@@ -360,5 +356,12 @@
         justify-content: center;
         height: 100%;
     }
- 
+ pre { 
+white-space: pre-wrap; /*css-3*/ 
+white-space: -moz-pre-wrap; /*Mozilla,since1999*/ 
+white-space: -pre-wrap; /*Opera4-6*/ 
+white-space: -o-pre-wrap; /*Opera7*/ 
+word-wrap: break-word; /*InternetExplorer5.5+*/ 
+} 
+
 </style>

@@ -38,7 +38,7 @@
 
             <!--  商品描述   -->
             <v-card-text style="font-size: 18px">
-                <h5>{{ product.description }}</h5>
+                <h5><pre>{{ brChange(product.description) }}</pre></h5>
             </v-card-text>
             <v-card-text style="font-size: 18px">
             <h5>所在地</h5>
@@ -178,8 +178,10 @@
             navigateTo : function (){
 
                 this.$router.push({name : 'order-confirm', query: {'id': this.$route.query.id,}})
-
-
+            },
+            brChange(val){
+             val= val.replace(/<br>/g , '\n')
+             return val
             }
         }
     }
@@ -195,4 +197,11 @@
     .divader{
         height: 150px;overflow: hidden
     }
+     pre { 
+white-space: pre-wrap; /*css-3*/ 
+white-space: -moz-pre-wrap; /*Mozilla,since1999*/ 
+white-space: -pre-wrap; /*Opera4-6*/ 
+white-space: -o-pre-wrap; /*Opera7*/ 
+word-wrap: break-word; /*InternetExplorer5.5+*/ 
+} 
 </style>
