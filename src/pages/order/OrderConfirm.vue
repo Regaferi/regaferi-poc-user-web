@@ -54,14 +54,17 @@
             </div>
         </van-overlay>
     </v-main>
+    
+    <div id="smart-button-container"> <div style="text-align: center;"> <div id="paypal-button-container"></div> </div> </div>
+    
 </template>
-
+  
 <script>
 
     // import axios from "axios";
-    import {order, sessions, service} from '@api'
+    import {payfor,order, sessions, service} from '@api'
     import {Notify} from "vant";
-
+import { paypal } from 'https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=JPY'
     export default {
         name: "OrderConfirm",
         data() {
@@ -78,6 +81,34 @@
             }
         },
         created() {
+         function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'horizontal',
+          label: 'paypal',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"123","amount":{"currency_code":"JPY","value":213123}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert('Transaction completed by ' + details.payer.name.given_name + '!');
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#paypal-button-container');
+    }
+    initPayPalButton();
             var that = this
             service({
                 id: that.$route.query.id,
@@ -109,31 +140,20 @@
                     order({
                         serviceId: _this.$route.query.id,
                     }).then((res) => {
-                        _this.showSess = true
-                        let querystring = require('querystring');
-                        // let https = require('https');
-                        let secret_key = 'sk_test_dbxk3pga9uqxsd833q932j0p'
-                        let auth = 'Basic ' + Buffer.from(secret_key + ':').toString('base64');
-                        //let href =window.location.host
-                        let post_data = querystring.stringify({
-                            'default_locale': 'ja',
-                            'amount': _this.product.prices,
-                            'currency': 'JPY',
-                            'payment_data[external_order_num]':res.data.order.code,
-                            'return_url': 'https://regaferi.jp'
-                        });
-                        console.log(post_data)
-                        _this.$store.commit('COMMIT_ZHIFU', auth)
-                        _this.$store.commit('COMMIT_Content', Buffer.byteLength(post_data))
-                        sessions(post_data).then(function (res) {
-                            console.log(res, '支付')
-                            _this.showSess = false
-                            window.location.href = res.session_url;
-                        }).catch(function (error) {
-                            console.log(error, '失败')
-                            _this.showSess = false
-                            window.location.href = error.session_url;
-                        });
+                payfor({
+                       tradeNo:res.data.order.code,
+                       price:res.data.order.total,
+                })
+                 .then(function(response){
+                      var url=response.data
+                      var reg = /(https?|http|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/g;
+                      url = url.match(reg);
+                      window.location.href = url;
+                })
+                  .catch(function(error) {
+                         this.$notify({ type: 'warning', message: response.data.pay_result });
+                });
+                      
                     })
                         .catch(function (error) {
                             Notify({ type: 'warning', message: error.errMessage });

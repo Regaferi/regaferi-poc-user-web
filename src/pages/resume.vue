@@ -38,7 +38,7 @@
 
                     </v-row>
                     <v-divider style="padding-bottom:10px"  />
-                <van-button @click.stop="checkCode(item)" round type="info">検証コード</van-button>
+                <van-button @click.stop="checkCode(item)" round type="info">使用する</van-button>
             </v-card-text>
             <van-button style="margin-bottom: 5%" @click="tuiChu" type="danger">サインアウト</van-button>
             <!--   我的订单   -->
@@ -49,18 +49,18 @@
             </div>
         </van-overlay>
 <!--        v-if="!time == 0"-->
-        <van-dialog :showCancelButton="true" v-model="showCancel" title="消费确认">
+        <van-dialog confirm-button-text="確認" cancel-button-text="キャンセル" :showCancelButton="true" @confirm="payfor()" v-model="showCancel" title="店員確認">
             <!--<div style="text-align: center;">
                 <van-count-down :time="time" format="mm 分 ss 秒" />
             </div>-->
             <!--<div style="text-align: center;line-height: 40px;letter-spacing:25px;font-size: 25px">
-
                 <span>{{code}}</span>
             </div>-->
-<!--            <van-field v-model="consumerToConfirm.serviceName" readonly label="服务名：" />-->
-            <van-field v-model="consumerToConfirm.endTime" readonly label="剩余时间：" />
-<!--            <van-field :v-model="consumerToConfirm.remCount == null ? '回数無制限':consumerToConfirm.remCount + '回'" readonly label="剩余回数：" />-->
-<!--            <van-field v-model="consumerToConfirm" readonly type="number" label="消费时间：" />-->
+            <v-img style="padding-top:10px;" height="100%" :src="imgUrl"/>
+            <van-field v-model="consumerToConfirm.name" readonly label="サービス名：" />
+            <van-field v-model="consumerToConfirm.endTime" readonly label="有効期間：" />
+            <van-field v-model="consumerToConfirm.remCount" readonly label="有効回数：" /> 
+            <p style="font-size:15px;padding:15px;color:red">残り時間：{{day}}日{{hour}}時{{min}}分{{second}}秒</p>
         </van-dialog>
     </div>
 
@@ -69,7 +69,7 @@
 <script>
     // import { Notify } from 'vant';
     // settlement
-import {memberDetail,orderList,} from "@api";
+import {settlement,memberDetail,orderList,} from "@api";
     export default {
         name: "MemberCenter",
         data () {
@@ -82,7 +82,15 @@ import {memberDetail,orderList,} from "@api";
                 isMobile : false,
                 orderList:[],
                 code:'',
-                consumerToConfirm:{}
+                imgUrl:'',
+                consumerToConfirm:{},
+                curStartTime: '2019-07-31 08:00:00',
+                id:'',
+                valdate:{},
+    day: '0',
+    hour: '00',
+    min: '00',
+    second: '00',
             }
         },
         created() {
@@ -115,30 +123,17 @@ import {memberDetail,orderList,} from "@api";
         methods : {
             checkCode(val){
                 this.time = 0
-
                 var that = this
+                this.valdate=val
                 that.consumerToConfirm = {}
                 that.showCancel = true
-                that.consumerToConfirm = val
-                console.log(that.consumerToConfirm)
-
-                /*settlement({
-                    code:that.code,
-                    orderId:val.id
-                })
-                    .then(function (response) {
-
-                        that.time = response.data.ttl * 1000
-                        that.code = response.data.code
-                        Notify({ type: 'warning', message: '10分間有効！' });
-                        that.showCancel = true
-                    })
-                    .catch(function (error) {
-                        // this.$notify({ type: 'warning', message: 'クエリが失敗しました' });
-                        console.log(error)
-                    });*/
-
-
+                that.consumerToConfirm = val.serviceOrderLogInfoResponses[0]
+                if(that.consumerToConfirm.remCount==-1 || that.consumerToConfirm.remCount==null){
+                that.consumerToConfirm.remCount='無制限'
+                }
+                this.curStartTime = that.consumerToConfirm.endTime
+                this.imgUrl=val.serviceLogoImage.target
+                this.countTime()
             },
             Details(val){
                 this.$router.push({name:'details',query:{id:val.id}})
@@ -158,6 +153,59 @@ import {memberDetail,orderList,} from "@api";
       }
       return dayDiff;
     },
+     payfor(){
+     let val=this.valdate
+      this.$router.push('/details/?id='+val.id);
+              settlement({
+                 code:val.code,
+                 orderId:val.id,
+                })
+                 .then(function(response){
+                       if(response.data.pay_result=="00"){
+                           this.$router.push('/details/?id='+val.id);
+                        }
+                })
+                  .catch(function(error) {
+                         this.$notify({ type: 'warning', message: response.data.pay_result });
+                });
+              },
+countTime() {
+  // 获取当前时间
+  let date = new Date()
+  let now = date.getTime()
+  // 设置截止时间
+  let endDate = new Date(this.curStartTime) // this.curStartTime需要倒计时的日期
+let end = endDate.getTime()
+  // 时间差
+let leftTime = end - now
+  // 定义变量 d,h,m,s保存倒计时的时间
+if (leftTime >= 0) {
+    // 天
+this.day = Math.floor(leftTime / 1000 / 60 / 60 / 24)
+    // 时
+let h = Math.floor(leftTime / 1000 / 60 / 60 % 24)
+this.hour = h < 10 ? '0' + h : h
+    // 分
+let m = Math.floor(leftTime / 1000 / 60 % 60)
+this.min = m < 10 ? '0' + m : m
+    // 秒
+let s = Math.floor(leftTime / 1000 % 60)
+  this.second = s < 10 ? '0' + s : s
+  } else {
+    this.day = 0
+    this.hour = '00'
+    this.min = '00'
+    this.second = '00'
+  }
+   
+  // 等于0的时候不调用
+  if (Number(this.hour) === 0 && Number(this.day) === 0 && Number(this.min) === 0 && Number(this.second) === 0) {
+    return
+  } else {
+  // 递归每秒调用countTime方法，显示动态时间效果,
+    setTimeout(this.countTime, 1000)
+  }
+},　
         }
     }
 </script>
