@@ -82,15 +82,14 @@
                     </van-image>
                     <v-card-title style="font-size: 13px;padding-top: 0px;padding-bottom: 0px">{{ product.title }}
                     </v-card-title>
-                    <div style="color: red;padding-left:16px;font-size: 13px"></div>
-                    <v-card-text style="padding-top: 0">
-                        <h6>営業時間</h6>
+                    <span style="font-size:11px;padding-left:8px;">営業時間:</span>
+                    <v-card-text style="font-size:10px;padding-top: 0px;padding-bottom: 0px">
                         <van-badge style="background: rgb(20, 155, 244)" :content="product.openTime.slice(0,5)"/>
                         <van-badge style="background: rgb(20, 155, 244)" :content="product.closeTime.slice(0,5)"/>
                     </v-card-text>
                     <div style="display: flex;justify-content: space-between;font-size: 6px;padding: 5px">
-                        <div>
-                            <van-icon name="location-o"/>
+                        <div style="font-size:10px">
+                            <van-icon  name="location-o"/>
                             {{product.location}}
                         </div>
                     </div>

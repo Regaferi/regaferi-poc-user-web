@@ -30,9 +30,10 @@
 <!--                </v-row>-->
                 <h5>{{ product.subTitle }}</h5>
             </v-card-text>
-            <v-divider/>
-            <v-card-text @click="backToStore" style="color: blue;font-size: 18px">{{shopName}}</v-card-text>
-
+ 
+ <v-divider/>
+            <v-card-text @click="backToStore" style="color: black;font-size: 18px"><u>{{shopName}}</u></v-card-text>
+                       <v-divider/>
             <v-card-text style="color: blue;font-size: 18px">メニュー説明</v-card-text>
 
             <!--  商品描述   -->
@@ -88,10 +89,10 @@
                 戻る
             </van-button>
         </div>
-        <v-bottom-navigation color="primary" horizontal app>
-            <v-btn  @click="navigateTo()">
-                <span style="color:green;" >注文する</span>
-                <v-icon style="color:green;">mdi-check-outline</v-icon>
+        <v-bottom-navigation style="width:100%;background-color: #2196f3 !important;" horizontal app>
+            <v-btn color="info" style="width:100%;"  @click="navigateTo()">
+                <span  style="color:white; font-size:15px">注文する</span>
+                <v-icon style="color:white;" >mdi-check-outline</v-icon>
             </v-btn>
         </v-bottom-navigation>
         <van-overlay :show="show">

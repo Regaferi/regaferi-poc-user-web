@@ -24,7 +24,6 @@
                 <div style="width: 100%;height: 100%;margin-bottom: 2%;border-bottom: 2px solid #676a6c;display: flex">
                     <h2 style="font-size: 25px;width: 100%;">{{StoreEllipsis(details.title)}}</h2>
                 </div>
-
                 <div style="width: 100%;height: 59%">
                     <div style="font-size: 2%;display: flex;margin-bottom: 2%">
 
@@ -36,8 +35,6 @@
                         <van-icon name="clock-o"/>
                         営業時間
                         <span style="margin : 0 2%;font-size: 15px">{{Tiemllip(details.openTime)}} ~~ {{Tiemllip(details.closeTime)}}</span>
-                        <!--                            <span style="margin-right: 1%">詳しくは</span>-->
-                        <!--                            <van-icon name="arrow" />-->
                     </div>
                     <div style="font-size: 2%;margin-bottom: 2%;letter-spacing:2px">
 

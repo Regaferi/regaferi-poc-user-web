@@ -15,6 +15,7 @@
       <van-empty v-if="products.length <= 0" description="現在有効期間中のサブスクはありません" />
     <div  v-show="isMobile" style="padding-left: 4%;margin: 2% 0" v-for="(item, index) in products" :key="index"  @click="naviga(item)">
       <v-card width="96%">
+          <p style="font-size:18px;text-align: center;margin-bottom: 3px;" class="pt-3">{{item.name}}</p>
         <v-card-text>
           <v-row>
             <v-col cols="6">
@@ -24,13 +25,11 @@
               </van-image>
             </v-col>
             <v-col cols="6" style="font-size: xx-small">
-              <h4 class="pt-3">{{item.name}}</h4>
-              <h5 style="color: red">{{item.prices}}円 </h5>
-              <h6 style="font-size=1px">※価格は税込み表示です</h6>
-              <h6><van-icon name="location-o" />{{item.location}}</h6>
-              <h6>回数制限：{{item.totalCount == null ? '回数無制限':item.totalCount + '  回'}}</h6>
-              <h6>有効期間：{{item.serviceTimeDay}}日</h6>
-
+              <p style="color: red;font-size:13px;margin-bottom: 3px;">{{item.prices}} 円</p>
+              <p style="font-size:13px;margin-bottom: 3px;">※価格は税込み表示です</p>
+              <p style="font-size:13px;margin-bottom: 3px;"><van-icon name="location-o" />{{item.location}}</p>
+                    <p style="font-size:13px;margin-bottom: 3px;">回数制限：{{item.totalCount == null ? '回数無制限':item.totalCount + '  回'}}</p>
+              <p style="font-size:13px;margin-bottom: 3px;">有効期間：{{item.serviceTimeDay}}日</p>
             </v-col>
           </v-row>
         </v-card-text>
@@ -38,6 +37,7 @@
     </div>
       <div v-show="!isMobile" style="padding-left: 4%;display: flex" v-for="(item, index) in products" :key="'info2-'+index"  @click="naviga(item)">
       <v-card width="40%" style="margin-top: 10px;">
+      <p style="font-size:18px;text-align: center;margin-bottom: 3px;" class="pt-3">{{item.name}}</p>
         <v-card-text>
           <v-row>
             <v-col cols="6">
@@ -47,13 +47,11 @@
               </van-image>
             </v-col>
             <v-col cols="6" style="font-size: xx-small">
-              <h4 class="pt-3">{{item.name}}</h4>
-              <h5 style="color: red">{{item.prices}} 円</h5>
-              <h6 style="font-size=1px">※価格は税込み表示です</h6>
-              <h6><van-icon name="location-o" />{{item.location}}</h6>
-              <h6>回数制限：{{item.totalCount == null ? '回数無制限':item.totalCount + '  回'}}</h6>
-              <h6>有効期間：{{item.serviceTimeDay}}日</h6>
-
+             <p style="color: red;font-size:13px;margin-bottom: 3px;">{{item.prices}} 円</p>
+              <p style="font-size:13px;margin-bottom: 3px;">※価格は税込み表示です</p>
+              <p style="font-size:13px;margin-bottom: 3px;"><van-icon name="location-o" />{{item.location}}</p>
+                    <p style="font-size:13px;margin-bottom: 3px;">回数制限：{{item.totalCount == null ? '回数無制限':item.totalCount + '  回'}}</p>
+              <p style="font-size:13px;margin-bottom: 3px;">有効期間：{{item.serviceTimeDay}}日</p>
             </v-col>
           </v-row>
         </v-card-text>

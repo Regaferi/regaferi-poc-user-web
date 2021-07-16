@@ -9,8 +9,9 @@
                 <v-card width="96%" height="100%" style="padding-left: 3%">
 
                     <v-card-text>
+                     <p style="font-size:16px;text-align:center;" class="pt-3">{{product.name}}</p>
+                      <v-divider class="pt-1 pb-1"/>
                         <v-row>
-
                             <v-col cols="6">
                                 <v-img v-if="slides" height="130" :src="slides"/>
                                 <van-image v-else
@@ -19,11 +20,10 @@
                                 </van-image>
                             </v-col>
                             <v-col cols="6" style="font-size: xx-small">
-                                <h6 class="pt-3"> サービス名： {{product.name}}</h6>
-                                <h6 > 回数制限： {{product.totalCount == null ? '回数無制限':product.totalCount + '回'}}</h6>
-                                <h6 >有効期間：{{product.serviceTimeDay}}日</h6>
+                                <p style="font-size:13px"> 回数制限： {{product.totalCount == null ? '無制限':product.totalCount + '回'}}</p>
+                                <p style="font-size:13px">有効期間：{{product.serviceTimeDay}}日</p>
                                <v-divider class="pt-1 pb-1"/>
-                               <h6 style="color: red"> 合計： {{product.prices}}円</h6>
+                               <p style="color: red;font-size:13px"> 合計： {{product.prices}}円</p>
                             </v-col>
                         </v-row>
                     </v-card-text>
@@ -36,12 +36,12 @@
             <input type="hidden" class="product-name" :value="product.serviceName">
             <input type="hidden" class="order-amount" :value="product.orderAmount ">
             <!--   支付按钮   -->
-            <v-navigation  color="primary" horizontal app>
+             <v-bottom-navigation @click="payNow" style="width:100%;background-color: #2196f3 !important;" horizontal app>
                 <v-btn style="width:100%;" @click="payNow">
-                    <v-icon style="padding-left: 12px;color:green">mdi-arrow-right</v-icon>
-                    <span style="color:green">支払いに進む</span>
+                    <v-icon style="color:white">mdi-arrow-right</v-icon>
+                    <span  style="color:white; font-size:15px">支払いに進む</span>
                 </v-btn>
-            </v-navigation>
+            </v-bottom-navigation>
         </div>
         <van-overlay :show="show">
             <div class="wrapper">
