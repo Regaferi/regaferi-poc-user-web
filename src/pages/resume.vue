@@ -48,22 +48,28 @@
                 <van-loading color="#1989fa" />
             </div>
         </van-overlay>
-        <van-dialog confirm-button-text="確認" v-model="showCancel" v-if="!time == 0" title="検証コード">
-<div style="text-align: center;">
-    <van-count-down :time="time" format="mm 分 ss 秒" />
-</div>
-            <div style="text-align: center;line-height: 40px;letter-spacing:25px;font-size: 25px">
+<!--        v-if="!time == 0"-->
+        <van-dialog :showCancelButton="true" v-model="showCancel" title="消费确认">
+            <!--<div style="text-align: center;">
+                <van-count-down :time="time" format="mm 分 ss 秒" />
+            </div>-->
+            <!--<div style="text-align: center;line-height: 40px;letter-spacing:25px;font-size: 25px">
 
                 <span>{{code}}</span>
-    </div>
+            </div>-->
+<!--            <van-field v-model="consumerToConfirm.serviceName" readonly label="服务名：" />-->
+            <van-field v-model="consumerToConfirm.endTime" readonly label="剩余时间：" />
+<!--            <van-field :v-model="consumerToConfirm.remCount == null ? '回数無制限':consumerToConfirm.remCount + '回'" readonly label="剩余回数：" />-->
+<!--            <van-field v-model="consumerToConfirm" readonly type="number" label="消费时间：" />-->
         </van-dialog>
     </div>
 
 </template>
 
 <script>
-    import { Notify } from 'vant';
-import {memberDetail,orderList,settlement} from "@api";
+    // import { Notify } from 'vant';
+    // settlement
+import {memberDetail,orderList,} from "@api";
     export default {
         name: "MemberCenter",
         data () {
@@ -75,7 +81,8 @@ import {memberDetail,orderList,settlement} from "@api";
                 userName: {},
                 isMobile : false,
                 orderList:[],
-                code:''
+                code:'',
+                consumerToConfirm:{}
             }
         },
         created() {
@@ -108,8 +115,14 @@ import {memberDetail,orderList,settlement} from "@api";
         methods : {
             checkCode(val){
                 this.time = 0
+
                 var that = this
-                settlement({
+                that.consumerToConfirm = {}
+                that.showCancel = true
+                that.consumerToConfirm = val
+                console.log(that.consumerToConfirm)
+
+                /*settlement({
                     code:that.code,
                     orderId:val.id
                 })
@@ -123,7 +136,7 @@ import {memberDetail,orderList,settlement} from "@api";
                     .catch(function (error) {
                         // this.$notify({ type: 'warning', message: 'クエリが失敗しました' });
                         console.log(error)
-                    });
+                    });*/
 
 
             },

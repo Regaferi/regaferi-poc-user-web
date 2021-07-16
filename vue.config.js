@@ -5,6 +5,11 @@ function resolve(dir) {
 }
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const productionGzipExtensions = ['js', 'css']
+let externals= {
+    'vue': 'Vue',
+    'vue-router': 'VueRouter',
+    'element-ui': 'ELEMENT',
+};
 module.exports = {
 
     //基本路径
@@ -40,7 +45,7 @@ module.exports = {
         //只在生产环境生效
         if (process.env.VUE_APP_CURRENTMODE === "production") {
             config.optimization.minimize(true);
-
+            config.externals(externals);
             config.optimization.splitChunks({
                 chunks: "all",
                 cacheGroups: {
