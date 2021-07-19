@@ -190,11 +190,11 @@ import {settlement,memberDetail,orderList,} from "@api";
               settlement({
                  code:val.code,
                  orderId:val.id,
-                })
-                 .then(function(response){
-                })
-                  .catch(function(error) {
+                }).then(function(response){
+                      this.$notify({ type: 'success', message: 'メニューを利用しました' });
+                }).catch(function(error){
                 });
+                  
               },
 countTime() {
   // 获取当前时间
