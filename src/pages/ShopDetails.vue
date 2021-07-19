@@ -332,7 +332,9 @@
                 this.$router.push({name: 'ShopDetails'})
             },
             brChange(val){
+            if(val!=null){
              val= val.replace(/<br>/g , '\n')
+             }
              return val
             }
         },

@@ -179,8 +179,10 @@
 
                 this.$router.push({name : 'order-confirm', query: {'id': this.$route.query.id,}})
             },
-            brChange(val){
+             brChange(val){
+            if(val!=null){
              val= val.replace(/<br>/g , '\n')
+             }
              return val
             }
         }
