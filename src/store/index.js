@@ -16,7 +16,6 @@ export default new Vuex.Store({
     isCollapse: true, //侧边导航是否折叠
     lang:'ja',//默认语言
     breadList:['home'],//面包屑导航
-    googleMapLoader : new Loader('AIzaSyB9E3oa8d364apiXxwe3vYa7kfaIq1ww1A', {}),
     isMobile: false,
     // loginIs: false,
     isLogin: false,

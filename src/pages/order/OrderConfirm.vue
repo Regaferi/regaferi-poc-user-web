@@ -36,8 +36,8 @@
             <input type="hidden" class="product-name" :value="product.serviceName">
             <input type="hidden" class="order-amount" :value="product.orderAmount ">
             <!--   支付按钮   -->
-             <v-bottom-navigation @click="payNow" style="width:100%;background-color: #2196f3 !important;" horizontal app>
-                <v-btn style="width:100%;" @click="payNow">
+             <v-bottom-navigation @click="payNow" style="width:100%;background-color: #45ae63 !important;" horizontal app>
+                <v-btn  color="#45ae63" style="width:100%;" @click="payNow">
                     <v-icon style="color:white">mdi-arrow-right</v-icon>
                     <span  style="color:white; font-size:15px">支払いに進む</span>
                 </v-btn>

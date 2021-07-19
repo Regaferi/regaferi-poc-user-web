@@ -29,15 +29,18 @@
             </a-descriptions-item>
 
             <a-descriptions-item label="残りの有効回数">
-                {{orderList.serviceOrder.remCount == null ? '回数無制限':orderList.serviceOrder.remCount + '回'}}
+                {{orderList.serviceOrder.remCount == null ? '無制限':orderList.serviceOrder.remCount + '回'}}
             </a-descriptions-item>
         </a-descriptions>
+        <div>
+         <v-btn color="info" style="width:100%;"  @click="$router.push('/shopdetails/?id='+orderList.serviceOrder.shopId)">店舗情報</v-btn>
+        </div>
         <div>
             <van-steps direction="vertical" :active="0">
                 <van-step v-for="(item,index) in orderList.serviceOrderLogInfoResponses" :key="index">
                     <h3>時間：{{item.createTime}}</h3>
-                    <h3>利用可能上限：{{item.remCount}} 回</h3>
-                    <h3>残り利用可能日数：{{difference(item.endTime)}} 日</h3>
+                    <h3>利用可能上限： {{item.remCount == null ? '無制限':item.remCount + '回'}}</h3>
+                    <h3>残り利用可能日数：{{difference(item.endTime)}}</h3>
                     <h3>種類：{{item.operationType == '1'? '注文' : item.operationType == '2'? '消費' : 'ストアギフト'}}</h3>
                 </van-step>
             </van-steps>
@@ -94,7 +97,10 @@ import {orderDetail} from '@api'
       var myDate = new Date();
       var dateDiff =  dateBegin.getTime()-myDate.getTime(); //时间差的毫秒数
       var dayDiff = Math.floor(dateDiff / (24 * 3600 * 1000)); //计算出相差天数
-      return dayDiff;
+      if(dayDiff<0){
+      dayDiff=0;
+      }
+      return dayDiff + "日";
     },
         },
     }

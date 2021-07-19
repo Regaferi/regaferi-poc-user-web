@@ -72,8 +72,7 @@
                                 <div style="font-size: 16px; font-family: Avenir-Heavy,PingFang SC,Helvetica Neue,Arial,sans-serif;">{{item.prices}} 円</div>
                             </template>
                             <template #desc>
-                                <div>{{item.subTitle}}</div>
-                                <textarea style="    width: 100%;" readonly :placeholder="item.description"></textarea>
+                                <div style="padding-top:10px">{{item.subTitle}}</div>
                             </template>
                         </van-card>
 

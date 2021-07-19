@@ -1,5 +1,5 @@
 <template>
-  <v-app class="custom-font" v-title data-title="Regaferi">
+  <v-app class="custom-font" v-title data-title="Regaferi[定額制]見つけた時からいつものお店">
     <Header/>
     <router-view/>
     <Footer/>

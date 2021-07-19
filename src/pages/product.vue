@@ -89,8 +89,8 @@
                 戻る
             </van-button>
         </div>
-        <v-bottom-navigation style="width:100%;background-color: #2196f3 !important;" horizontal app>
-            <v-btn color="info" style="width:100%;"  @click="navigateTo()">
+        <v-bottom-navigation style="width:100%;background-color:  #45ae63 !important;" horizontal app>
+            <v-btn color="#45ae63" style="width:100%;"  @click="navigateTo()">
                 <span  style="color:white; font-size:15px">注文する</span>
                 <v-icon style="color:white;" >mdi-check-outline</v-icon>
             </v-btn>

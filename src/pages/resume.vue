@@ -19,7 +19,10 @@
                         description="現在有効期間中のサブスクはありません"
                 />
             </div>
-            <v-card-text v-for="(item,index) in orderList" :key="index" @click="Details(item)" style="box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%) !important;
+            <el-tabs type="card" stretch  v-model="activeName" >
+             <el-tab-pane  label="使用中で" name="first">
+            <div v-for="(item,index) in orderList" :key="index">
+            <v-card-text  v-if="item.serviceOrderLogInfoResponses[0].flag==true"  @click="Details(item)" style="box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%) !important;
 };width: 90%;margin: auto;margin-bottom: 5%;">
  <p class="pt-3" style="font-size:18px;margin-bottom: 7%;">{{item.serviceName}}</p>
                     <v-row>
@@ -38,8 +41,35 @@
 
                     </v-row>
                     <v-divider style="padding-bottom:10px"  />
-                <van-button @click.stop="checkCode(item)" round type="info">使用する</van-button>
+                <van-button @click.stop="checkCode(item)" round type="primary">使用する</van-button>
             </v-card-text>
+            </div>
+            </el-tab-pane>
+              <el-tab-pane label="期限切れ" name="second">
+            <div v-for="(item,index) in orderList" :key="index">
+                        <v-card-text v-if="item.serviceOrderLogInfoResponses[0].flag==false" @click="Details(item)" style="background: #e4e7ed;box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%) !important;
+};width: 90%;margin: auto;margin-bottom: 5%;">
+ <p class="pt-3" style="font-size:18px;margin-bottom: 7%;">{{item.serviceName}}</p>
+                    <v-row>
+                        <v-col cols="6">
+                            <v-img v-if="item.serviceLogoImage" height="130" :src="item.serviceLogoImage.target"/>
+                            <van-image v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
+                                <template v-slot:error>加载失败</template>
+                            </van-image>
+                        </v-col>
+                        <v-col cols="6" style="font-size: xx-small">
+                            <p style="color: red;font-size:13px">{{item.total}} 円</p>
+                            <p style="font-size:12px">回数制限.： {{item.orderCounter == null ? '無制限':item.serviceOrderLogInfoResponses[0].remCount + '回'}}</p>
+                            <p style="font-size:12px">残りの有効日数：{{difference(item.serviceOrderLogInfoResponses[0].endTime.slice(0,10))}}日</p>
+                            <p style="font-size:12px">終了期間：{{item.serviceOrderLogInfoResponses[0].endTime.slice(0,10)}}</p>
+                        </v-col>
+
+                    </v-row>
+                    <v-divider style="padding-bottom:10px"  />
+            </v-card-text>
+            </div>
+            </el-tab-pane>
+            </el-tabs>
             <van-button style="margin-bottom: 5%" @click="tuiChu" type="danger">サインアウト</van-button>
             <!--   我的订单   -->
         </div>
@@ -74,6 +104,7 @@ import {settlement,memberDetail,orderList,} from "@api";
         name: "MemberCenter",
         data () {
             return {
+                activeName: 'first',
                 time:0,
                 value:'asdasdas',
                 showCancel:false,
@@ -161,12 +192,8 @@ import {settlement,memberDetail,orderList,} from "@api";
                  orderId:val.id,
                 })
                  .then(function(response){
-                       if(response.data.pay_result=="00"){
-                           this.$router.push('/details/?id='+val.id);
-                        }
                 })
                   .catch(function(error) {
-                         this.$notify({ type: 'warning', message: response.data.pay_result });
                 });
               },
 countTime() {
