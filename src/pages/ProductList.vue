@@ -13,7 +13,7 @@
             @load="load_more"
     >
       <van-empty v-if="products.length <= 0" description="現在有効期間中のサブスクはありません" />
-    <div  v-show="isMobile" style="padding-left: 4%;margin: 2% 0" v-for="(item, index) in products" :key="index"  @click="naviga(item)">
+    <div   style="padding-left: 4%;margin: 2% 0" v-for="(item, index) in products" :key="index"  @click="naviga(item)">
       <v-card width="96%">
           <p style="font-size:18px;text-align: center;margin-bottom: 3px;" class="pt-3">{{item.name}}</p>
         <v-card-text>
@@ -26,28 +26,6 @@
             </v-col>
             <v-col cols="6" style="font-size: xx-small">
               <p style="color: red;font-size:13px;margin-bottom: 3px;">{{item.prices}} 円</p>
-              <p style="font-size:13px;margin-bottom: 3px;">※価格は税込み表示です</p>
-              <p style="font-size:13px;margin-bottom: 3px;"><van-icon name="location-o" />{{item.location}}</p>
-                    <p style="font-size:13px;margin-bottom: 3px;">回数制限：{{item.totalCount == null ? '回数無制限':item.totalCount + '  回'}}</p>
-              <p style="font-size:13px;margin-bottom: 3px;">有効期間：{{item.serviceTimeDay}}日</p>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
-    </div>
-      <div v-show="!isMobile" style="padding-left: 4%;display: flex" v-for="(item, index) in products" :key="'info2-'+index"  @click="naviga(item)">
-      <v-card width="40%" style="margin-top: 10px;">
-      <p style="font-size:18px;text-align: center;margin-bottom: 3px;" class="pt-3">{{item.name}}</p>
-        <v-card-text>
-          <v-row>
-            <v-col cols="6">
-              <v-img v-if="item.logoImage" height="130" :src="item.logoImage.target"/>
-              <van-image v-else src="https://regaferi.oss-ap-northeast-1.aliyuncs.com/system/logo-null.jpg">
-                <template v-slot:error>読み込みに失敗しました</template>
-              </van-image>
-            </v-col>
-            <v-col cols="6" style="font-size: xx-small">
-             <p style="color: red;font-size:13px;margin-bottom: 3px;">{{item.prices}} 円</p>
               <p style="font-size:13px;margin-bottom: 3px;">※価格は税込み表示です</p>
               <p style="font-size:13px;margin-bottom: 3px;"><van-icon name="location-o" />{{item.location}}</p>
                     <p style="font-size:13px;margin-bottom: 3px;">回数制限：{{item.totalCount == null ? '回数無制限':item.totalCount + '  回'}}</p>

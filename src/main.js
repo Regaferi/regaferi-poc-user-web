@@ -8,18 +8,18 @@ import store from './store'
 
 import 'ant-design-vue/dist/antd.css';
 Vue.config.productionTip = false;
-Vue.config.devtools = true
+
 Vue.use(Antd)
 
 import message from './components/message/message.js'
 Vue.prototype.$message = message
-// element
+//element
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
 
-// vant组件
+//vant组件
 import Vant,{Lazyload} from 'vant';
 import 'vant/lib/index.css';
 
@@ -45,9 +45,4 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
-
-
-
-
-
 
