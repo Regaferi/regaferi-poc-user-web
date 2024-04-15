@@ -117,10 +117,10 @@
                        price:res.data.order.total,
                 })
                  .then(function(response){
-                      var url=response.data
+                      /*var url=response.data
                       var reg = /(https?|http|ftp|file):\/\/[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/g;
-                      url = url.match(reg);
-                      window.location.href = url;
+                      url = url.match(reg);*/
+                      window.location.href = response;
                 })
                   .catch(function(error) {
                          this.$notify({ type: 'warning', message: response.data.pay_result });
